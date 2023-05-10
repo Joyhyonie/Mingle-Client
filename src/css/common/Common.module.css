@@ -1,0 +1,36 @@
+/* Header, Navbar, Layout을 위한 css */
+
+.flex {
+    display: flex;
+}
+
+/* Header */
+.headerBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid #616161;
+    width: 100vw;
+    height: 6em;
+}
+
+.logo {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 50px;
+}
+
+.logo span {
+    color: #FF9797;
+}
+
+
+/* Navbar */
+.navBarBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 3px solid #616161;
+    width: 15%;
+    height: 100vh;
+}
+
