@@ -10,7 +10,9 @@ function Layout () {
             <Header/>
             <div className={ CommonCSS.flex }>
                 <NavBar/>
-                <Outlet/>
+                <div className={ CommonCSS.outletSize }>
+                    <Outlet/>
+                </div>
             </div>
         </>
     );

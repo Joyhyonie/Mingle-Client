@@ -4,6 +4,11 @@
     display: flex;
 }
 
+.outletSize {
+    margin: 30px;
+    width: 100%;
+}
+
 /* Header */
 .headerBox {
     display: flex;
