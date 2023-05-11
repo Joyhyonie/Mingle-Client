@@ -1,14 +1,7 @@
 /* Do Hyeon, Noto Sans Korean, Paytone One 폰트 */
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@500&family=Paytone+One&display=swap');
 
 /*
 font-family: 'Do Hyeon', sans-serif;
 font-family: 'Noto Sans KR', sans-serif;
 font-family: 'Paytone One', sans-serif;
 */
-
-html {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 20px;
-    color: #343434;
-} 
