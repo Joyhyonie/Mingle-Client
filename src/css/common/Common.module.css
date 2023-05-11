@@ -26,8 +26,8 @@ html {
 
 .logo {
     font-family: 'Paytone One', sans-serif;
-    font-size: 45px;
-    margin: 45px;
+    font-size: 42px;
+    margin: 50px;
     cursor: pointer;
 }
 
@@ -79,10 +79,32 @@ html {
     border-right: 5px solid #F6F6F6;
     width: 15%;
     height: 100vh;
-    font-family: 'Do Hyeon', sans-serif;
     color: #666666;
+    /* font-family: 'Nanum Gothic', sans-serif; */
+    font-family: 'Do Hyeon', sans-serif;
     text-align: center;
     cursor: pointer;
+}
+
+.superMenu {
+    font-size: 27px;
+    padding: 20px;
+}
+
+.navBarBox p {
+    font-size: 22px;
+    margin: 0;
+    padding: 5px;
+}
+
+.closed {
+    display: none;
+}
+
+.active .superMenu,
+.activelist {
+    color: #FF9797;
+    box-shadow: 5px 0 0 #FF9797;
 }
 
 .navBarBox p {

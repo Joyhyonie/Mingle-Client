@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import CommonCSS from '../../css/common/Common.module.css'
-import NavbarItem from '../items/NavbarItem';
+import NavbarForAdminItem from './NavbarForAdminItem';
 
-function NavBar () {
+function NavbarForAdmin ({ activeIndex, setActiveIndex }) {
 
     const MENU_LIST = [
         { title: '공지사항'},
@@ -15,8 +15,6 @@ function NavBar () {
         { title: '학사 일정 관리'}
 
     ];
-
-    const [activeIndex, setActiveIndex] = useState();
     
 
     return (
@@ -27,7 +25,8 @@ function NavBar () {
                         const active = index === activeIndex ? CommonCSS.active : '';
 
                         return (
-                            <NavbarItem
+                            <NavbarForAdminItem
+                                key={index}
                                 title={item.title}
                                 index={index}
                                 list={item.list}
@@ -43,5 +42,5 @@ function NavBar () {
     );
 }
 
-export default NavBar;
+export default NavbarForAdmin;
 

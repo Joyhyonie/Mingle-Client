@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from 'framer-motion';
 import CommonCSS from '../../css/common/Common.module.css'
 
-function NavbarItem ({ title, index, list, active, activeIndex, setActiveIndex }) {
+
+function NavbarForAdminItem ({ title, index, list, active, activeIndex, setActiveIndex }) {
 
     const navigate = useNavigate();
     const [clickedIndex, setClickedIndex] = useState();
+    const [isOpen, setIsOpen] = useState(false);
     
     // 상위 메뉴 클릭 시, activeIndex에 index 저장
     const clickHandler = () => {
+
+        setIsOpen(!isOpen);
+
         if (list) {
             setActiveIndex(index);
             setClickedIndex(null);
@@ -32,6 +38,7 @@ function NavbarItem ({ title, index, list, active, activeIndex, setActiveIndex }
             case '증명서 발급 이력' : return navigate('/certi-doc-mine');
         }
     }
+        
 
     return (
         <>
@@ -40,26 +47,35 @@ function NavbarItem ({ title, index, list, active, activeIndex, setActiveIndex }
                 <div 
                     className={ CommonCSS.superMenu }  
                     onClick={ clickHandler }
+                    transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
                 >
                     { title }
                 </div>
-                <div className={ index === activeIndex ? '' : CommonCSS.closed }>
-                    {list?.map((menu, index) => {
-                        return(
-                            <p
-                                onClick={ (e) => linkHandler(e, index) }
-                                className={ clickedIndex === index ? CommonCSS.activelist : '' }
-                            >
-                                { menu }
-                            </p>
-                        );
-                    })}
-                </div>
-
+                <AnimatePresence>
+                    {isOpen && (
+                    <div className={ index === activeIndex ? '' : CommonCSS.closed }>
+                        {list?.map((menu, index) => {
+                            return(
+                                <motion.p 
+                                    key={index}
+                                    onClick={ (e) => linkHandler(e, index) }
+                                    className={ clickedIndex === index ? CommonCSS.activelist : '' }
+                                    initial={{ y: -10, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+                                >
+                                    { menu }
+                                </motion.p>
+                            );
+                        })}
+                    </div>
+                    )}
+                </AnimatePresence>
             </div>
 
         </>
     );
 }
 
-export default NavbarItem;
+export default NavbarForAdminItem;
