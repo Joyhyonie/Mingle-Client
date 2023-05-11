@@ -1,5 +1,11 @@
 /* Header, Navbar, Layout을 위한 css */
 
+html {
+    /* Mingle 전체 기본 글씨체 */
+    color: #343434;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 .flex {
     display: flex;
 }
@@ -12,29 +18,68 @@
 /* Header */
 .headerBox {
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-bottom: 3px solid #616161;
+    border-bottom: 5px solid #F6F6F6;
     width: 100vw;
     height: 6em;
 }
 
 .logo {
     font-family: 'Paytone One', sans-serif;
-    font-size: 50px;
+    font-size: 45px;
+    margin: 45px;
+    cursor: pointer;
 }
 
 .logo span {
     color: #FF9797;
 }
 
+.hello {
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 0 auto;
+}
+
+.iconBox {
+    margin: 45px;
+}
+
+.iconBox img {
+    margin: 25px;
+    width: 50px;
+}
+
+.iconBox img:hover {
+    cursor: pointer;
+}
+
+.buttonBox button {
+    border: none;
+    border-radius: 20px;
+    background-color: #FFD7D7;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 40px;
+    color: white;
+    padding: 5px 40px;
+    margin-right: 45px;
+}
+
+.buttonBox button:hover {
+    background-color: #FF9797;
+    cursor: pointer;
+}
+
+
+/* -------------------------------------------------------------------------------------- */
 
 /* Navbar */
 .navBarBox {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 3px solid #616161;
+    border-right: 5px solid #F6F6F6;
     width: 15%;
     height: 100vh;
 }
