@@ -4,7 +4,7 @@ function Main () {
 
     return (
         <>
-            Main
+            메인 🧡
         </>
     );
 }

@@ -11,7 +11,7 @@ html {
 }
 
 .outletSize {
-    margin: 30px;
+    margin: 20px;
     width: 100%;
 }
 
@@ -60,7 +60,7 @@ html {
     border-radius: 20px;
     background-color: #FFD7D7;
     font-family: 'Do Hyeon', sans-serif;
-    font-size: 40px;
+    font-size: 35px;
     color: white;
     padding: 5px 40px;
     margin-right: 45px;
@@ -76,11 +76,30 @@ html {
 
 /* Navbar */
 .navBarBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-right: 5px solid #F6F6F6;
     width: 15%;
     height: 100vh;
+    font-family: 'Do Hyeon', sans-serif;
+    color: #666666;
+    text-align: center;
+    cursor: pointer;
 }
 
+.navBarBox p {
+    font-size: 20px;
+}
+
+.closed {
+    display: none;
+}
+
+.active .superMenu,
+.activelist {
+    color: #FF9797;
+    box-shadow: 5px 0 0 #FF9797;
+}
+
+.superMenu {
+    font-size: 25px;
+    padding: 20px;
+}
