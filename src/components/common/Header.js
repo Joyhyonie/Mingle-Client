@@ -38,11 +38,11 @@ function Header ({ setActiveIndex, isDark, setIsDark }) {
                               onMouseLeave={ () => setMpgIsHovered(false) }
                               onClick={ () => {
                                 setActiveIndex('');
-                                navigate('/mypage')
+                                navigate('/mypage');
                               }}
                               whileHover={{ scale: 1.05 }}
                         />)
-                         : (<img src="/images/mypage.png" onMouseEnter={ () => setMpgIsHovered(true) }/>)
+                        : (<img src="/images/mypage.png" onMouseEnter={ () => setMpgIsHovered(true) }/>)
                     }
                     { notiIsHovered? 
                         (<motion.img src="/images/notification-hover.png" 

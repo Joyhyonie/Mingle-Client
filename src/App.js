@@ -15,6 +15,8 @@ import RegistLectureForAdmin from "./pages/lecture/admin/RegistLectureForAdmin";
 import EmployeeManagement from "./pages/academic/EmployeeManagement";
 import StudentManagement from "./pages/academic/StudentManagement";
 import AcademicSchedule from "./pages/schedule/AcademicSchedule";
+import RegistLectureForProf from "./pages/lecture/professor/RegistLectureForProf";
+import StudentAttendanceForProf from "./pages/lecture/professor/StudentAttendanceForProf";
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
 
           <Route path="lecture-student-admin" element={ <StudentAttendanceForAdmin/> }/>
           <Route path="lecture-regist-admin" element={ <RegistLectureForAdmin/> }/>
+          <Route path="lecture-student-prof" element={<StudentAttendanceForProf/>  }/>
+          <Route path="lecture-regist-prof" element={ <RegistLectureForProf/> }/>
 
           <Route path="management-employee" element={ <EmployeeManagement/> }/>
           <Route path="management-student" element={ <StudentManagement/> }/>
