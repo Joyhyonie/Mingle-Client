@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import CommonCSS from '../../css/common/Common.module.css'
-import NavbarForAdminItem from './NavbarForProfessorItem';
+import NavbarForAdminItem from './NavbarForAdminItem';
 
 function NavbarForAdmin ({ activeIndex, setActiveIndex, isDark, setIsDark }) {
 
