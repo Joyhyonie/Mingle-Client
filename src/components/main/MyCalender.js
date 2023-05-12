@@ -1,14 +1,14 @@
 import { motion } from "framer-motion"
 
-function Main () {
+function MyCalender () {
 
     return (
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
-            메인 🧡 우와오아아아ㅗㅇ
+            나의 캘린더!!!! 🧡 우와오아아아ㅗㅇ
         </motion.div>
     );
 }
 
-export default Main;
+export default MyCalender;

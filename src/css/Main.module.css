@@ -1,0 +1,146 @@
+/* 메인 페이지 내부의 요소들의 CSS */
+
+.flex {
+    display: flex;
+}
+
+/* Layout 자리잡기 */
+.changeSchedule {
+    border: 5px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 70px;
+}
+
+.calenderBox {
+    border: 5px solid rgb(255, 229, 101);
+    width: 1100px;
+    height: 730px;
+}
+
+.calenderInfoBox {
+    border: 5px solid rgb(255, 255, 255);
+    width: 490px;
+    height: 300px;
+}
+
+.boardPreview {
+    border: 5px solid rgb(214, 170, 250);
+    width: 490px;
+    height: 300px;
+}
+
+.recordMyAttendance {
+    border: 5px solid rgb(177, 247, 124);
+    width: 490px;
+    height: 200px;
+}
+
+
+/* 나의 일정 & 학사 일정 선택 */
+.selectSchduleBox {
+    cursor: pointer;
+    display: flex;
+}
+
+.selectSchduleBox div {
+    border-radius: 10px 10px 0px 0px;
+    border: 3px solid #FFD7D7;
+    padding: 6px 70px;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.clickedSchedule {
+    background-color: #FFD7D7;
+    color: white;
+}
+
+.unclickedSchedule {
+    background-color: white;
+    color: #868686;
+}
+
+
+/* 나의 일정 목록 & 학사 일정 목록 */
+.myScheduleInfoBox {
+    border: 2px solid #E6E6E6;
+    background-color: #FDFDFD;
+    border-radius: 20px;
+    margin: 10px;
+    height: 275px;
+}
+
+.dateAndAdd {
+    display: flex;
+    justify-content:space-between;
+    border-bottom: 2px solid #E6E6E6;
+    margin: -3px 10px 20px;
+}
+
+.dateAndAdd p {
+    font-size: 23px;
+    font-weight: 600;
+    margin: 15px;
+    color: #FF9797; 
+}
+
+.dateAndAdd div {
+    cursor: pointer;
+    background-color: #E6E6E6;
+    margin: 15px;
+    padding: 3px 30px;
+    border-radius: 10px;
+    color: #666666;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+
+.myScheduleInfoBox {
+    overflow: auto; /* 초과되는 내용은 자동으로 스크롤 처리 */
+}
+
+.myScheduleInfoBox::-webkit-scrollbar {
+    display: none; /* 스크롤바 보이지 않도록 */
+}
+
+.toDoItemBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -25px 5px;
+}
+
+.colorAndToDo {
+    display: flex;
+}
+
+.colorBox {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.toDoItemBox p {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.toDoItemBox img {
+    margin: 20px;
+}
+
+
+/* 공지사항 Preview */
+
+
+
+/* 출퇴근 기록 */
+
+

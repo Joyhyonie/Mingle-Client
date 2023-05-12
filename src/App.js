@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from './layouts/Layout';
-import Main from './pages/main/Main';
 import Mypage from "./pages/employee/Mypage";
 import Organization from "./pages/employee/Organization";
 import AppliedCertidocs from "./pages/certiDoc/AppliedCertidocs";
@@ -17,6 +16,9 @@ import StudentManagement from "./pages/academic/StudentManagement";
 import AcademicSchedule from "./pages/schedule/AcademicSchedule";
 import RegistLectureForProf from "./pages/lecture/professor/RegistLectureForProf";
 import StudentAttendanceForProf from "./pages/lecture/professor/StudentAttendanceForProf";
+import MainPageLayout from "./layouts/MainPageLayout";
+import MyCalender from "./components/main/MyCalender";
+import AcademicCalender from "./components/main/AcademicCalender";
 
 
 function App() {
@@ -24,7 +26,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={ <Layout/> }>
-          <Route index element={ <Main/> }/>
+          <Route element={ <MainPageLayout/> }>
+            <Route index element={ <MyCalender/> }/>
+            <Route element={ <AcademicCalender/> }/>
+          </Route>
+          
           <Route path="mypage" element={ <Mypage/> }/>
 
           <Route path="board" element={ <BoardList/> }/>
