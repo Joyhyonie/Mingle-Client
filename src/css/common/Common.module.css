@@ -16,10 +16,20 @@ html {
 }
 
 /* Header */
-.headerBox {
+.headerBoxLight {
     display: flex;
     align-items: center;
     border-bottom: 5px solid #F6F6F6;
+    width: 100vw;
+    height: 6em;
+}
+
+.headerBoxDark {
+    display: flex;
+    align-items: center;
+    border-bottom: 5px solid #707070;
+    background-color: #4D4D4D;
+    color: #ffffff;
     width: 100vw;
     height: 6em;
 }
@@ -55,7 +65,7 @@ html {
     cursor: pointer;
 }
 
-.buttonBox button {
+.buttonBoxLight button {
     border: none;
     border-radius: 20px;
     background-color: #FFD7D7;
@@ -66,7 +76,19 @@ html {
     margin-right: 45px;
 }
 
-.buttonBox button:hover {
+.buttonBoxDark button {
+    border: none;
+    border-radius: 20px;
+    background-color: #FFD7D7;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 35px;
+    color: #4D4D4D;
+    padding: 5px 40px;
+    margin-right: 45px;
+}
+
+.buttonBoxLight button:hover,
+.buttonBoxDark button:hover {
     background-color: #FF9797;
     cursor: pointer;
 }
@@ -75,12 +97,22 @@ html {
 /* -------------------------------------------------------------------------------------- */
 
 /* Navbar */
-.navBarBox {
+.navBarBoxLight {
     border-right: 5px solid #F6F6F6;
     width: 15%;
     height: 100vh;
     color: #666666;
-    /* font-family: 'Nanum Gothic', sans-serif; */
+    font-family: 'Do Hyeon', sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+
+.navBarBoxDark {
+    border-right: 5px solid #707070;
+    width: 15%;
+    height: 100vh;
+    background-color: #4D4D4D;
+    color: #ffffff;
     font-family: 'Do Hyeon', sans-serif;
     text-align: center;
     cursor: pointer;
@@ -91,7 +123,8 @@ html {
     padding: 20px;
 }
 
-.navBarBox p {
+.navBarBoxLight p,
+.navBarBoxDark p {
     font-size: 22px;
     margin: 0;
     padding: 5px;
@@ -105,10 +138,6 @@ html {
 .activelist {
     color: #FF9797;
     box-shadow: 5px 0 0 #FF9797;
-}
-
-.navBarBox p {
-    font-size: 20px;
 }
 
 .closed {

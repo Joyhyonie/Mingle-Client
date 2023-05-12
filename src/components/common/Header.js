@@ -3,7 +3,7 @@ import CommonCSS from '../../css/common/Common.module.css'
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion"
 
-function Header ({ setActiveIndex }) {
+function Header ({ setActiveIndex, isDark, setIsDark }) {
 
     /*  setActiveIndex : 로고 및 마이페이지 아이콘을 클릭 시, Nav바 활성화 취소 */
 
@@ -11,11 +11,17 @@ function Header ({ setActiveIndex }) {
     const [mpgIsHovered, setMpgIsHovered] = useState(false);
     const [notiIsHovered, setNotiIsHovered] = useState(false);
     const [msgIsHovered, setMsgIsHovered] = useState(false);
-    const [darkIsHovered, setDarkIsHovered] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+
+    /* 다크모드/라이트모드를 제어하기 위한 이벤트 함수 */
+    const darkModeHandler = () => setIsDark(!isDark);
 
     return (
         <>
-            <div className={ CommonCSS.headerBox }>
+            <motion.div className={ isDark ? CommonCSS.headerBoxDark : CommonCSS.headerBoxLight }
+                        animate={{ backgroundColor: isDark ? "#4D4D4D" : "#FFF" }}
+                        transition={{ duration: 0.5 }}
+            >
                 <p
                     className={ CommonCSS.logo }
                     onClick={ () => { 
@@ -54,16 +60,26 @@ function Header ({ setActiveIndex }) {
                         />)
                         : (<img src="/images/message.png" onMouseEnter={ () => setMsgIsHovered(true) }/>)
                     }
-                    { darkIsHovered? 
-                        (<motion.img src="/images/darkmode-hover.png" 
-                              onMouseLeave={ () => setDarkIsHovered(false) }
-                              onClick={ () => navigate('/') }
-                              whileHover={{ scale: 1.05 }}
-                        />)
-                        : (<img src="/images/darkmode.png" onMouseEnter={ () => setDarkIsHovered(true) }/>)
+                    { isDark ? (
+                        <motion.img
+                        src={isHovered ? "/images/whitemode-hover.png" : "/images/whitemode.png"}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        onClick={darkModeHandler}
+                        whileHover={{ scale: 1.05 }}
+                        />
+                    ) : (
+                        <motion.img
+                        src={isHovered ? "/images/darkmode-hover.png" : "/images/darkmode.png"}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        onClick={darkModeHandler}
+                        whileHover={{ scale: 1.05 }}
+                        />
+                    )
                     }
                 </div>
-                <div className={ CommonCSS.buttonBox }>
+                <div className={ isDark ? CommonCSS.buttonBoxDark : CommonCSS.buttonBoxLight }>
                     <motion.button
                         onClick={ () => navigate('/') }
                         whileHover={{ scale: 1.03 }}
@@ -71,7 +87,7 @@ function Header ({ setActiveIndex }) {
                         logout
                     </motion.button>
                 </div>
-            </div>
+            </motion.div>
         </>
     );
 }

@@ -23,8 +23,8 @@ function NavbarForAdminItem ({ title, index, list, active, activeIndex, setActiv
             switch (title) {
                 case '공지사항' : return navigate('/board');
                 case '조직도' : return navigate('/organization');
-                case '과목 관리' : return navigate('/');
-                case '학사 일정 관리' : return navigate('/');
+                case '과목 관리' : return navigate('/subject');
+                case '학사 일정 관리' : return navigate('/schedule-academic');
             }
         }
     }
@@ -36,6 +36,12 @@ function NavbarForAdminItem ({ title, index, list, active, activeIndex, setActiv
             case '증명서 발급 신청 내역' : return navigate('/certi-doc-applied');
             case '증명서 발급 신청' : return navigate('/certi-doc-apply');
             case '증명서 발급 이력' : return navigate('/certi-doc-mine');
+            case '교직원 근태 기록' : return navigate('/attendance-employee');
+            case '휴가 신청 내역' : return navigate('/leave-doc-applied');
+            case '출결 및 성적관리' : return navigate('/lecture-student-admin');
+            case '강의 개설' : return navigate('/lecture-regist-admin');
+            case '교직원' : return navigate('/management-employee');
+            case '학생' : return navigate('/management-student');
         }
     }
         
