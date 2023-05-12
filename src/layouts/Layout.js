@@ -7,14 +7,14 @@ import { motion } from "framer-motion"
 
 function Layout () {
 
-    /* 활성화된 화면을 컨트롤하기 위한 state */
-    const [activeIndex, setActiveIndex] = useState();
+    const [activeIndex, setActiveIndex] = useState();   // 활성화된 화면을 컨트롤하기 위한 state
+    const [isDark, setIsDark] = useState(false);        // 다크모드 설정을 위한 state
 
     return (
         <>
-            <Header setActiveIndex={setActiveIndex}/>
+            <Header setActiveIndex={setActiveIndex} isDark={isDark} setIsDark={setIsDark}/>
             <div className={ CommonCSS.flex }>
-                <NavbarForAdmin activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
+                <NavbarForAdmin activeIndex={activeIndex} setActiveIndex={setActiveIndex} isDark={isDark}/>
                 <div className={ CommonCSS.outletSize }>
                     <Outlet/>
                 </div>

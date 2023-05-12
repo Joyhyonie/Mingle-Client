@@ -2,7 +2,7 @@ import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import CommonCSS from '../../css/common/Common.module.css'
 import NavbarForAdminItem from './NavbarForAdminItem';
 
-function NavbarForAdmin ({ activeIndex, setActiveIndex }) {
+function NavbarForAdmin ({ activeIndex, setActiveIndex, isDark, setIsDark }) {
 
     const MENU_LIST = [
         { title: '공지사항'},
@@ -13,13 +13,15 @@ function NavbarForAdmin ({ activeIndex, setActiveIndex }) {
         { title: '강의 관리', list: ['출결 및 성적관리', '강의 개설'] },
         { title: '학사 관리', list: ['교직원','학생'] },
         { title: '학사 일정 관리'}
-
     ];
     
 
     return (
         <>
-            <div className={ CommonCSS.navBarBox }>
+            <motion.div className={ isDark ? CommonCSS.navBarBoxDark : CommonCSS.navBarBoxLight }
+                        animate={{ backgroundColor: isDark ? "#4D4D4D" : "#FFF" }}
+                        transition={{ duration: 0.5 }}
+            >
                 <div>
                     {MENU_LIST.map((item, index) => {
                         const active = index === activeIndex ? CommonCSS.active : '';
@@ -37,7 +39,7 @@ function NavbarForAdmin ({ activeIndex, setActiveIndex }) {
                         );
                     })}
                 </div>
-            </div>
+            </motion.div>
         </>
     );
 }
