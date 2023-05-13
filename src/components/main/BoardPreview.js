@@ -1,4 +1,3 @@
-/* 메인에서의 공지사항 미리보기 */
 import MainCSS from "../../css/Main.module.css"
 
 function BoardPreview () {
@@ -54,6 +53,12 @@ function BoardPreview () {
                     <p>{formattedDate}</p>
                 </div>
 
+                <div className={ MainCSS.boardItemBox }>
+                    <p>21234</p>
+                    <p style={{fontWeight:'bold'}}>장학</p>
+                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
+                    <p>{formattedDate}</p>
+                </div>
                 <div className={ MainCSS.boardItemBox }>
                     <p>21234</p>
                     <p style={{fontWeight:'bold'}}>장학</p>
