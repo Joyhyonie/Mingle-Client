@@ -91,7 +91,7 @@
 .dateAndAdd div {
     cursor: pointer;
     background-color: #E6E6E6;
-    margin: 15px;
+    margin: 15px 5px;
     padding: 3px 30px;
     border-radius: 10px;
     color: #666666;
@@ -99,12 +99,12 @@
     font-size: 18px;
 }
 
-
-.myScheduleInfoBox {
+.toDoItemList {
+    height: 175px;
     overflow: auto; /* 초과되는 내용은 자동으로 스크롤 처리 */
 }
 
-.myScheduleInfoBox::-webkit-scrollbar {
+.toDoItemList::-webkit-scrollbar {
     display: none; /* 스크롤바 보이지 않도록 */
 }
 
@@ -112,7 +112,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: -25px 5px;
+    margin: -20px 5px;
+}
+
+.toDoItemBox img {
+    cursor: pointer;
 }
 
 .colorAndToDo {
