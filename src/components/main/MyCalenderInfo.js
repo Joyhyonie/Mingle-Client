@@ -34,7 +34,7 @@ function MyCalenderInfo () {
                         <div className={ MainCSS.colorAndToDo }>
                             <div className={ MainCSS.colorBox } style={{background:"#B6E37B"}}></div>
                             <p
-                                style={isDone ? {textDecoration: 'line-through'} : null}
+                                style={isDone ? {textDecoration: 'line-through', color:'#666666'} : null}
                                 onDoubleClick={ toDoItemClickHandler }
                             >
                                 교무처 관련 서류 정리 후 제출
@@ -58,21 +58,21 @@ function MyCalenderInfo () {
                     <div className={ MainCSS.toDoItemBox }>
                         <div className={ MainCSS.colorAndToDo }>
                             <div className={ MainCSS.colorBox } style={{ background:"#FF9B9B" }}></div>
-                            <p style={{textDecoration:'line-through'}}>3층 시설물 안전 점검 신청</p>
+                            <p style={{textDecoration:'line-through', color:'#666666'}}>3층 시설물 안전 점검 신청</p>
                         </div>
                         <img src="./images/checked.png"></img>
                     </div>
                     <div className={ MainCSS.toDoItemBox }>
                         <div className={ MainCSS.colorAndToDo }>
                             <div className={ MainCSS.colorBox } style={{ background:"#FF9B9B" }}></div>
-                            <p style={{textDecoration:'line-through'}}>3층 시설물 안전 점검 신청</p>
+                            <p style={{textDecoration:'line-through', color:'#666666'}}>3층 시설물 안전 점검 신청</p>
                         </div>
                         <img src="./images/checked.png"></img>
                     </div>
                     <div className={ MainCSS.toDoItemBox }>
                         <div className={ MainCSS.colorAndToDo }>
                             <div className={ MainCSS.colorBox } style={{ background:"#FF9B9B" }}></div>
-                            <p style={{textDecoration:'line-through'}}>3층 시설물 안전 점검 신청</p>
+                            <p style={{textDecoration:'line-through', color:'#666666'}}>3층 시설물 안전 점검 신청</p>
                         </div>
                         <img src="./images/checked.png"></img>
                     </div>

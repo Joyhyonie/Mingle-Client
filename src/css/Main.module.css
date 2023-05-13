@@ -4,7 +4,7 @@
     display: flex;
 }
 
-/* Layout 자리잡기 */
+/* Layout 자리잡기 ------------------------------------------------------------ */
 .changeSchedule {
     border: 5px solid #fff;
     display: flex;
@@ -29,17 +29,17 @@
 .boardPreview {
     border: 5px solid rgb(214, 170, 250);
     width: 490px;
-    height: 300px;
+    height: 400px;
 }
 
 .recordMyAttendance {
     border: 5px solid rgb(177, 247, 124);
     width: 490px;
-    height: 200px;
+    height: 90px;
 }
 
 
-/* 나의 일정 & 학사 일정 선택 */
+/* 나의 일정 & 학사 일정 선택 ------------------------------------------------------------ */
 .selectSchduleBox {
     cursor: pointer;
     display: flex;
@@ -168,10 +168,44 @@
 }
 
 
-/* 공지사항 Preview */
+/* 공지사항 Preview ------------------------------------------------------------ */
+.boardBox {
+    border: 2px solid #E6E6E6;
+    background-color: #FDFDFD;
+    border-radius: 20px;
+    margin: 10px;
+    height: 375px;
+}
+
+.boardTitleBox {
+    border-bottom: 2px solid #E6E6E6;
+    margin: -3px 10px 20px;
+}
+
+.boardTitleBox p {
+    font-size: 23px;
+    font-weight: 600;
+    margin: 15px;
+}
+
+.boardListBox {
+    background-color: #ffffff;
+    height: 270px;
+    margin: -10px 20px;
+}
+
+.boardItemBox {
+    display: flex;
+    border-bottom: 2px dotted #E6E6E6;
+    cursor: pointer;
+}
+
+.boardItemBox p {
+    margin: 10px;
+}
 
 
 
-/* 출퇴근 기록 */
+/* 출퇴근 기록 ------------------------------------------------------------ */
 
 

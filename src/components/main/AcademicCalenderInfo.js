@@ -36,6 +36,7 @@ function AcademicCalenderInfo () {
                     </div>
 
                     {/*  ---------------- 아래부터는 dummy data ----------------  */}
+                    
                     <div className={ MainCSS.academicItemBox }>
                         <div>
                             ~ {formattedDate}
