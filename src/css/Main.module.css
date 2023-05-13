@@ -4,7 +4,7 @@
     display: flex;
 }
 
-/* Layout 자리잡기 */
+/* Layout 자리잡기 ------------------------------------------------------------ */
 .changeSchedule {
     border: 5px solid #fff;
     display: flex;
@@ -29,17 +29,17 @@
 .boardPreview {
     border: 5px solid rgb(214, 170, 250);
     width: 490px;
-    height: 300px;
+    height: 400px;
 }
 
 .recordMyAttendance {
     border: 5px solid rgb(177, 247, 124);
     width: 490px;
-    height: 200px;
+    height: 90px;
 }
 
 
-/* 나의 일정 & 학사 일정 선택 */
+/* 나의 일정 & 학사 일정 선택 ------------------------------------------------------------ */
 .selectSchduleBox {
     cursor: pointer;
     display: flex;
@@ -66,7 +66,7 @@
 
 
 /* 나의 일정 목록 & 학사 일정 목록 */
-.myScheduleInfoBox {
+.ScheduleInfoBox {
     border: 2px solid #E6E6E6;
     background-color: #FDFDFD;
     border-radius: 20px;
@@ -74,24 +74,24 @@
     height: 275px;
 }
 
-.dateAndAdd {
+.dateBox {
     display: flex;
     justify-content:space-between;
     border-bottom: 2px solid #E6E6E6;
     margin: -3px 10px 20px;
 }
 
-.dateAndAdd p {
+.dateBox p {
     font-size: 23px;
     font-weight: 600;
     margin: 15px;
     color: #FF9797; 
 }
 
-.dateAndAdd div {
+.dateBox div {
     cursor: pointer;
     background-color: #E6E6E6;
-    margin: 15px;
+    margin: 15px 5px;
     padding: 3px 30px;
     border-radius: 10px;
     color: #666666;
@@ -99,12 +99,14 @@
     font-size: 18px;
 }
 
-
-.myScheduleInfoBox {
+.toDoItemList,
+.academicItemList {
+    height: 175px;
     overflow: auto; /* 초과되는 내용은 자동으로 스크롤 처리 */
 }
 
-.myScheduleInfoBox::-webkit-scrollbar {
+.toDoItemList::-webkit-scrollbar,
+.academicItemList::-webkit-scrollbar {
     display: none; /* 스크롤바 보이지 않도록 */
 }
 
@@ -112,7 +114,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: -25px 5px;
+    margin: -20px 5px;
+}
+
+.toDoItemBox img {
+    cursor: pointer;
 }
 
 .colorAndToDo {
@@ -126,21 +132,80 @@
     margin: 20px;
 }
 
-.toDoItemBox p {
+.toDoItemBox p,
+.academicItemBox p {
+    cursor: pointer;
     margin-top: 20px;
     font-size: 18px;
     font-weight: 600;
+}
+
+.academicItemBox p {
+    margin-top: 17px;
 }
 
 .toDoItemBox img {
     margin: 20px;
 }
 
+.academicItemList {
+    padding: 0px 20px;
+}
 
-/* 공지사항 Preview */
+.academicItemBox {
+    display: flex;
+    align-items: center;
+    margin: -12px 5px;
+}
+
+.academicItemBox div {
+    background-color: #FF9797;
+    padding: 5px 15px;
+    border-radius: 10px;
+    margin-right: 15px;
+    color: white;
+    font-size: 16px;
+}
+
+
+/* 공지사항 Preview ------------------------------------------------------------ */
+.boardBox {
+    border: 2px solid #E6E6E6;
+    background-color: #FDFDFD;
+    border-radius: 20px;
+    margin: 10px;
+    height: 375px;
+}
+
+.boardTitleBox {
+    border-bottom: 2px solid #E6E6E6;
+    margin: -3px 10px 20px;
+}
+
+.boardTitleBox p {
+    font-size: 23px;
+    font-weight: 600;
+    margin: 15px;
+}
+
+.boardListBox {
+    background-color: #ffffff;
+    height: 270px;
+    margin: -10px 20px;
+}
+
+.boardItemBox {
+    display: flex;
+    border-bottom: 2px dotted #E6E6E6;
+    cursor: pointer;
+}
+
+.boardItemBox p {
+    margin: 10px;
+}
 
 
 
-/* 출퇴근 기록 */
+/* 출퇴근 기록 ------------------------------------------------------------ */
 
 
