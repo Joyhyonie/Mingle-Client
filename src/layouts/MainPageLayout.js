@@ -12,8 +12,7 @@ import { useState } from "react";
 
 function MainPageLayout () {
 
-    /* 사용자가 선택한 캘린더를 관리하는 state */
-    const [isMyCalender, setIsMyCalender] = useState(true);
+    const [isMyCalender, setIsMyCalender] = useState(true); // 사용자가 선택한 캘린더를 관리하는 state
 
     return (
         <motion.div
