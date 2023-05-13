@@ -1,4 +1,5 @@
-import MainCSS from "../../css/Main.module.css"
+import { toast } from "react-hot-toast";
+import MainCSS from "../../css/Main.module.css";
 
 function RecordMyAttendance () {
 
@@ -40,7 +41,7 @@ function RecordMyAttendance () {
         if(todayData) { /* 이후에 todayData.empAtdStartTime이 와야함 */
             console.log('퇴근 기록 모달창 오픈!')
         } else {
-            alert('오늘의 출근 시각을 먼저 기록해주세요 :)');
+            toast('오늘의 출근 시각을 먼저 기록해주세요!',{ icon: "🥲" });
         }
 
     }

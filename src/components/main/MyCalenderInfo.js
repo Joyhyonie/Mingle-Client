@@ -64,7 +64,7 @@ function MyCalenderInfo () {
                     </div>
                     <div className={ MainCSS.toDoItemBox }>
                         <div className={ MainCSS.colorAndToDo }>
-                            <div className={ MainCSS.colorBox } style={{ background:"#FF9B9B" }}></div>
+                            <div className={ MainCSS.colorBox } style={{ background:"#7BD1E3" }}></div>
                             <p style={{textDecoration:'line-through', color:'#666666'}}>3층 시설물 안전 점검 신청</p>
                         </div>
                         <img src="./images/checked.png"></img>
