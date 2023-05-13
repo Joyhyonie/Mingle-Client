@@ -66,7 +66,7 @@
 
 
 /* 나의 일정 목록 & 학사 일정 목록 */
-.myScheduleInfoBox {
+.ScheduleInfoBox {
     border: 2px solid #E6E6E6;
     background-color: #FDFDFD;
     border-radius: 20px;
@@ -74,21 +74,21 @@
     height: 275px;
 }
 
-.dateAndAdd {
+.dateBox {
     display: flex;
     justify-content:space-between;
     border-bottom: 2px solid #E6E6E6;
     margin: -3px 10px 20px;
 }
 
-.dateAndAdd p {
+.dateBox p {
     font-size: 23px;
     font-weight: 600;
     margin: 15px;
     color: #FF9797; 
 }
 
-.dateAndAdd div {
+.dateBox div {
     cursor: pointer;
     background-color: #E6E6E6;
     margin: 15px 5px;
@@ -99,12 +99,14 @@
     font-size: 18px;
 }
 
-.toDoItemList {
+.toDoItemList,
+.academicItemList {
     height: 175px;
     overflow: auto; /* 초과되는 내용은 자동으로 스크롤 처리 */
 }
 
-.toDoItemList::-webkit-scrollbar {
+.toDoItemList::-webkit-scrollbar,
+.academicItemList::-webkit-scrollbar {
     display: none; /* 스크롤바 보이지 않도록 */
 }
 
@@ -130,14 +132,39 @@
     margin: 20px;
 }
 
-.toDoItemBox p {
+.toDoItemBox p,
+.academicItemBox p {
+    cursor: pointer;
     margin-top: 20px;
     font-size: 18px;
     font-weight: 600;
 }
 
+.academicItemBox p {
+    margin-top: 17px;
+}
+
 .toDoItemBox img {
     margin: 20px;
+}
+
+.academicItemList {
+    padding: 0px 20px;
+}
+
+.academicItemBox {
+    display: flex;
+    align-items: center;
+    margin: -12px 5px;
+}
+
+.academicItemBox div {
+    background-color: #FF9797;
+    padding: 5px 15px;
+    border-radius: 10px;
+    margin-right: 15px;
+    color: white;
+    font-size: 16px;
 }
 
 

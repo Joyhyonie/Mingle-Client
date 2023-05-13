@@ -20,8 +20,8 @@ function MyCalenderInfo () {
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
-            <div className={ MainCSS.myScheduleInfoBox }>
-                <div className={ MainCSS.dateAndAdd }>
+            <div className={ MainCSS.ScheduleInfoBox }>
+                <div className={ MainCSS.dateBox }>
                     <p>5월 12일 금요일</p>
                     <div
                         onClick={ addToDoHandler }
