@@ -1,0 +1,101 @@
+.acScheContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.acScheRead p {
+  border: 1px solid #FF9797;
+  border-radius: 10px;
+  background-color: white;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.acScheRead img {
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.acScheRegist {
+  width: 590px;
+}
+
+.acScheRegist p {
+  border: 1px solid #FF9797;
+  border-radius: 10px;
+  background-color: white;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.acScheRegist img {
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.acScheInputOne {
+  width: 400px;
+  height: 40px;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+}
+
+.acScheName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.acScheTime {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.acScheInputTwo {
+  width: 132px;
+  height: 40px;
+  border: 1px solid #FF9797;
+  padding: 0 10px 0 10px;
+  border-radius: 5px;
+}
+
+.acScheDetail {
+  margin-top: 5px;
+}
+
+.acScheDetail span {
+  margin-right: 40px;
+}
+
+.acScheDetail textarea {
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  resize: none;
+  margin-top: 15px;
+}
+
+.acScheBtn {
+  display: flex;
+  float: right;
+  margin-right: 80px;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  background-color: #FF9797;
+  width: 100px;
+  height: 36px;
+  color: white;
+  align-items: center;
+  padding-left: 36px;
+}
+
