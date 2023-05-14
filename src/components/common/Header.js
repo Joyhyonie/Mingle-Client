@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CommonCSS from '../../css/common/Common.module.css'
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion"
+import MessageModalLayout from '../../layouts/MessageModalLayout';
 
 function Header ({ setActiveIndex, isDark, setIsDark }) {
 
@@ -12,12 +13,24 @@ function Header ({ setActiveIndex, isDark, setIsDark }) {
     const [notiIsHovered, setNotiIsHovered] = useState(false);
     const [msgIsHovered, setMsgIsHovered] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [notificationModal, setNotificationModal] = useState(false);  // 알림 모달 컨트롤 state
+    const [messageModal, setMessageModal] = useState(false);            // 쪽지 모달 컨트롤 state
 
     /* 다크모드/라이트모드를 제어하기 위한 이벤트 함수 */
     const darkModeHandler = () => setIsDark(!isDark);
 
+    /* 쪽지 모달창 핸들러 함수 */
+    const messageModalHandler = () => setMessageModal(!messageModal);
+
     return (
         <>
+            {/* 쪽지 모달창 */}
+            <motion.div drag dragConstraints={{ left: 0, right: 1200, top: 0, bottom: 200}}>
+            {messageModal? 
+            (<MessageModalLayout setMessageModal={setMessageModal}/>) : null
+            }
+            </motion.div>
+
             <motion.div className={ isDark ? CommonCSS.headerBoxDark : CommonCSS.headerBoxLight }
                         animate={{ backgroundColor: isDark ? "#4D4D4D" : "#FFF" }}
                         transition={{ duration: 0.5 }}
@@ -55,7 +68,7 @@ function Header ({ setActiveIndex, isDark, setIsDark }) {
                     { msgIsHovered? 
                         (<motion.img src="/images/message-hover.png" 
                               onMouseLeave={ () => setMsgIsHovered(false) }
-                              onClick={ () => navigate('/') }
+                              onClick={ messageModalHandler }
                               whileHover={{ scale: 1.05 }}
                         />)
                         : (<img src="/images/message.png" onMouseEnter={ () => setMsgIsHovered(true) }/>)
