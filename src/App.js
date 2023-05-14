@@ -1,4 +1,4 @@
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from './layouts/Layout';
 import Mypage from "./pages/employee/Mypage";
