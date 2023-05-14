@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import MainCSS from "../../css/Main.module.css"
 import { useState } from "react";
 
-function MyCalenderInfo () {
+function MyCalenderInfo ({dateInMyCal}) {
 
     const [isDone, setIsDone] = useState(false); // (임시용) 완료된 toDoItem 여부
 
@@ -16,13 +16,20 @@ function MyCalenderInfo () {
         console.log('To-Do 상세 모달창 띄우는 함수!')
     }
 
+    /* 클릭된 날짜의 월/일/요일을 변경시키는 이벤트 함수 */
+    const clickedDateHandler = () => {
+        const clickedDate = new Date(dateInMyCal);
+        const days = ['일', '월', '화', '수', '목', '금', '토'];
+        return `${clickedDate.getMonth() + 1}월 ${clickedDate.getDate()}일 ${days[clickedDate.getDay()]}요일`;
+    }
+
     return (
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
             <div className={ MainCSS.ScheduleInfoBox }>
                 <div className={ MainCSS.dateBox }>
-                    <p>5월 12일 금요일</p>
+                    <p>{clickedDateHandler()}</p>
                     <div
                         onClick={ addToDoHandler }
                     >
