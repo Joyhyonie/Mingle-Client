@@ -1,0 +1,61 @@
+.ApplyCertiDocCSS {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-family: 'Do Hyeon', sans-serif;
+    align-items: center;
+    width: 1080px;
+    height: 850px;
+    margin: 10px;
+    margin-right: 600px;
+}
+
+.ApplyCertiDocCSSTable {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+
+.ApplyCertiDocCSSTable th, td {
+    height: 10px;    
+    text-align: center;
+    word-break:break-all;
+    padding: 5px;
+    table-layout:fixed;
+}
+
+.ApplyCertiDocCSSTable button {
+    width: 50px;
+    background-color: #FFD7D7;
+    margin-top: 5px;
+    border-radius: 20px;
+    font-family: 'Do Hyeon', sans-serif;
+    color: #4D4D4D;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+}
+
+.ApplyCertiDocCSSTable input {
+    width: 80%;
+    border: 1px solid #FF9797;
+}
+
+.ApplyCertiDocCSSTable input:focus {
+    border-color: #FF9797;
+    outline: none;
+}
+
+.ApplyCertiDocCSSTable select {
+    text-align: center;
+    width: 70%;
+    border: 1px solid #FF9797;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 17px;
+    outline: none;
+}
+
+.ApplyCertiDocCSSTable button:hover{
+    color: white;
+    background-color: #FF9797;
+}
