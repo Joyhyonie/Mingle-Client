@@ -3,10 +3,10 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // interaction 패키지 추가설치 필요
 import { INITIAL_EVENTS, createEventId } from "../../utils/MyCalenderEventUtils"; // 이벤트 셋팅 함수
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from 'styled-components';
 
-function MyCalender () {
+function MyCalender ({dateInMyCal, setDateInMyCal}) {
 
     const [currentEvents, setCurrentEvents] = useState([]);
   
@@ -18,9 +18,9 @@ function MyCalender () {
     const dateSelectHanlder = (selectInfo) => {
       const clickedDate = selectInfo.startStr;
       console.log(`클릭한 날짜 ? ${clickedDate}`)
-    };
 
-    
+      setDateInMyCal(clickedDate);
+    };
 
     const FullCalendarContainer = styled.div`
       display: flex;
@@ -48,6 +48,7 @@ function MyCalender () {
         background-color: #ffd7d7;
         border: none;
         outline: none; /* 버튼 클릭 시 외곽선 제거 */
+        cursor: pointer;
 
         span {
           font-weight: 600;
@@ -88,23 +89,19 @@ function MyCalender () {
 
       // 내부 테두리
       .fc-daygrid-day {
-        border: none;
+        border: 5px solid white;
       }
 
       // 오늘 날짜 색
       .fc .fc-daygrid-day.fc-day-today {
-        background-color: white;
-        font-weight: 900;
-        background: #FFD7D7;
-        border-radius: 12px;
+        background-color: #FF9797;
       }
 
       // 날짜별 그리드
       .fc-daygrid-day-frame {
-        padding: 5px;
-        margin: 3px;
-        height: 100px;
-        border-radius: 10px;
+        padding: 2px;
+        height: 90px;
+        border-radius: 15px;
         background-color: #FDFDFD;
       }
 
@@ -132,6 +129,8 @@ function MyCalender () {
             weekends={true}
             initialEvents={INITIAL_EVENTS}
             select={dateSelectHanlder}
+            selectMirror={true}
+            dayMaxEvents={3}
             eventsSet={eventsHanlder}
             events= {[
               {

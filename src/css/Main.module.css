@@ -50,7 +50,7 @@
 
 .selectSchduleBox div {
     border-radius: 10px 10px 0px 0px;
-    border: 2px solid #FFD7D7;
+    border: 2px solid white;
     padding: 6px 70px;
     font-size: 23px;
     font-weight: 600;
@@ -58,13 +58,13 @@
 }
 
 .clickedSchedule {
-    background-color: #FFD7D7;
+    background-color: #FF9797;
     color: white;
 }
 
 .unclickedSchedule {
-    background-color: white;
-    color: #b0b0b0;
+    background-color: #FFD7D7;
+    color: white;
 }
 
 
