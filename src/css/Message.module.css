@@ -1,0 +1,74 @@
+.modalBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 100px;
+    left: 250px;
+    z-index: 100;
+    width: 400px;
+    height: 600px;
+    background-color: white;
+    border: 2px solid #FFD7D7;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #FFD7D7;
+}
+
+/* 쪽지 Layout ---------------------------------------------- */
+
+.flex {
+    display: flex;
+}
+
+.navBar {
+    background-color: #FFD7D7;
+    border-radius: 18px 0px 0px 18px;
+    width: 90px;
+    height: 600px;
+}
+
+.header {
+    width: 260px;
+    height: 50px;
+}
+
+.closeButton {
+    width: 50px;
+    height: 50px;
+}
+
+.body {
+    /* border: 2px solid #bbabfd; */
+    width: 310px;
+    height: 550px;
+}
+
+/* 쪽지 내부 ---------------------------------------------- */
+
+.navBar img {
+    margin: 10px;
+    width: 60px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.navBar img:hover {
+    transform: scale(1.05);
+}
+
+.header p {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 25px;
+    color: #666666;
+    margin: 8px 15px;
+}
+
+.closeButton img {
+    cursor: pointer;
+    margin: 10px;
+    width: 30px;
+}
+
+.body div {
+    padding: 15px;
+}
