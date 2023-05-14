@@ -6,7 +6,7 @@ import LikeMsgBox from '../pages/message/LikeMsgBox';
 import ReceiveMsgBox from '../pages/message/ReceiveMsgBox';
 import SentMsgBox from '../pages/message/SentMsgBox';
 
-function MessageModalLayout ({setMessageModal}) {
+function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClickedState}) {
     
     const [whichPage, setWhichPage] = useState('receiveMsgBox');
     const [isClickedstate, setIsClickedState] = useState({ // 클릭된 메뉴 컨트롤 state
@@ -23,7 +23,7 @@ function MessageModalLayout ({setMessageModal}) {
     );
 
     /* 클릭된 메뉴를 컨트롤 하기 위한 이벤트 함수 */
-    const handleStateChange = (stateName) => {
+    const stateChangeHandler = (stateName) => {
         setIsClickedState(prevState => ({
           ...prevState,
           [stateName]: true,
@@ -69,7 +69,7 @@ function MessageModalLayout ({setMessageModal}) {
                 ) : (
                     <img
                         src="/images/receive.png"
-                        onClick={() => {setWhichPage('receiveMsgBox'); handleStateChange('receiveIsClicked');}}
+                        onClick={() => {setWhichPage('receiveMsgBox'); stateChangeHandler('receiveIsClicked');}}
                         whileHover={{ scale: 1.05 }}
                     />
                 )}
@@ -81,7 +81,7 @@ function MessageModalLayout ({setMessageModal}) {
                 ) : (
                     <img
                         src="/images/sent.png"
-                        onClick={() => {setWhichPage('sentMsgBox'); handleStateChange('sentIsClicked');}}
+                        onClick={() => {setWhichPage('sentMsgBox'); stateChangeHandler('sentIsClicked');}}
                         whileHover={{ scale: 1.05 }}
                     />
                 )}
@@ -93,7 +93,7 @@ function MessageModalLayout ({setMessageModal}) {
                 ) : (
                     <img
                         src="/images/write.png"
-                        onClick={() => {setWhichPage('writeMsg'); handleStateChange('writeIsClicked');}}
+                        onClick={() => {setWhichPage('writeMsg'); stateChangeHandler('writeIsClicked');}}
                         whileHover={{ scale: 1.05 }}
                     />
                 )}
@@ -105,7 +105,7 @@ function MessageModalLayout ({setMessageModal}) {
                 ) : (
                     <img
                         src="/images/like.png"
-                        onClick={() => {setWhichPage('likeMsgBox'); handleStateChange('likeIsClicked');}}
+                        onClick={() => {setWhichPage('likeMsgBox'); stateChangeHandler('likeIsClicked');}}
                         whileHover={{ scale: 1.05 }}
                     />
                 )}
@@ -118,7 +118,10 @@ function MessageModalLayout ({setMessageModal}) {
                     <div className={ MessageCSS.closeButton }>
                         <img 
                             src="./images/close.png"
-                            onClick={ () => setMessageModal(false)}
+                            onClick={ () => {
+                                setIsIconClickedState(!isIconClickedState.msgIsClicked);
+                                setMessageModal(false);
+                            }}
                         />
                     </div>
                 </div>

@@ -70,10 +70,12 @@ html {
 .iconBox img {
     margin: 25px;
     width: 50px;
+    transition: transform 0.2s ease-in-out;
 }
 
 .iconBox img:hover {
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 .buttonBoxLight button {
