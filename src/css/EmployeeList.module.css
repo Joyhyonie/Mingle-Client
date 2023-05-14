@@ -1,0 +1,23 @@
+.EmployeeList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  width: 1080px;
+  height: 850px;
+  margin: 10px;
+  margin-right: 600px;
+  font-size: 18px;
+}
+
+.EmployeeListTable {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.EmployeeListTable th, td {
+  height: 10px;
+  text-align: center;
+  word-break:break-all;
+  table-layout:fixed;
+}
