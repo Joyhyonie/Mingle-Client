@@ -1,16 +1,15 @@
-
 .basic {
   border: 1px solid none;
   border-radius: 10px;
   background-color: #FFD7D7;
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 17px;
   display: flex;
   align-items: center; 
 }
 
 .selectBox {
-  width: 500px;
+  width: 400px;
   height: 50px;
   font-size: 18px;
   border: 1px solid #FF9797;

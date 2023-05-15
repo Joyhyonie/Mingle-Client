@@ -6,6 +6,10 @@ html {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+input[type="checkbox"] {
+  accent-color: #FFD7D7;
+}
+
 .flex {
     display: flex;
 }
@@ -15,7 +19,6 @@ html {
     margin: 20px;
     width: 100%;
     padding: 0;
-    align-items: center;
     justify-content: center;
     overflow-y: auto;
     overflow-x:hidden
