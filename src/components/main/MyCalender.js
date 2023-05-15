@@ -30,6 +30,7 @@ function MyCalender ({dateInMyCal, setDateInMyCal}) {
       .fc {
         width: 98%;
         height: 720px;
+        z-index: -1;
       }
 
       // 캘린더 Header
