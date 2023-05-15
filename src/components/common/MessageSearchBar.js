@@ -18,6 +18,7 @@ function MessageSearchBar () {
     }
 
     return (
+        <>
         <div className={ MessageCSS.msgSearchBox }>
             <select className={ MessageCSS.msgSearchSelect }>
                 <option value='empName'>교직원명</option>
@@ -33,6 +34,7 @@ function MessageSearchBar () {
                 onKeyPress={ onEnterHandler }
             />
         </div>
+        </>
     );
 }
 

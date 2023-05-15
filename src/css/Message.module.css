@@ -94,8 +94,9 @@
 }
 
 
-/* 검색바 --------------------------------------------------- */
-.msgSearchBox {
+/* 검색바, 교직원 선택바 --------------------------------------------------- */
+.msgSearchBox,
+.selectReceiverBox {
     position: fixed;
     position: absolute;
     border-radius: 5px;
@@ -107,13 +108,29 @@
     margin-top: -10px;
 }
 
-.msgSearchBox img {
+.selectReceiverBox {
+    margin-top: -10px;
+    margin-left: 40px;
+    width: 230px;
+}
+
+.selectReceiverBox p { 
+    margin-left: -45px;
+    margin-bottom: 27px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.msgSearchBox img,
+.selectReceiverBox img {
     margin-left: -22px;
     align-self: center;
     width: 15px;
 }
 
-.msgSearchSelect {
+.msgSearchSelect,
+.selectDepartment,
+.selectEmployee {
     width: 120px;
     height: 30px;
     border: 1px solid #FF9797;
@@ -122,6 +139,13 @@
     -moz-appearance: none;
     appearance: none;
     font-size: 15px;
+}
+
+.selectDepartment,
+.selectEmployee {
+    width: 105px;
+    padding-right: 10px;
+    margin-left: 25.5px;
 }
 
 .msgSearchWord {
@@ -135,7 +159,9 @@
 }
 
 .msgSearchSelect:focus,
-.msgSearchWord:focus {
+.msgSearchWord:focus,
+.selectDepartment:focus,
+.selectEmployee:focus {
     outline: none;
 }
 
@@ -149,6 +175,14 @@
     margin-bottom: -10px;
 }
 
+.msgItemBox h4 {
+    font-weight: 100;
+}
+
+.msgItemBox span {
+    font-weight: 600;
+}
+
 .msgItemHeader {
     display: flex;
     align-items: center;
@@ -157,24 +191,15 @@
     height: 20px;
     margin-left: -19px;
     border: 1px solid #FF9797;
-    border-radius: 10px 10px 0px 0px;
 }
 
 .flex {
     display: flex;
 }
 
-.checkBoxAndName span {
-    font-weight: 600;
-}
-
-.checkBoxAndName h4 {
-    font-weight: 500;
-}
-
 .msgItemHeader input {
     margin: 2px 7px 0px -10px;
-    accent-color: #FFD7D7;
+    border: none;
 }
 
 .msgItemHeader p {
@@ -188,7 +213,7 @@
     margin-left: -19px;
     border: 1px solid #FF9797;
     border-top: none;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 0px 0px 20px 20px;
 }
 
 .msgItemFooterBox {
@@ -215,6 +240,11 @@
     cursor: pointer;
 }
 
+.msgItemBody button:hover {
+    background-color: #FF9797;
+    color: white;
+}
+
 .msgItemBody p {
     margin: 2px -20px -4px 0px;
     color: #666666;
@@ -223,4 +253,49 @@
 
 .msgItemContentBox {
     background-color: #F8F8F8;
+}
+
+.msgItemContentBox pre {
+    background-color: #F8F8F8;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 5px;
+}
+
+/* 쪽지 작성 ------------------------------------------------------------------------------ */
+.textBox {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    width: 229px;
+    height: 370px;
+    resize: none;
+    margin: 50px 10px 0px 10px;
+    border: 1px solid #FF9797;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.textBox::-webkit-scrollbar {
+    display: none;
+}
+
+.textBox:focus {
+    outline: none;
+}
+
+.sendButton {
+    border: none;
+    border-radius: 10px;
+    background-color: #FFD7D7;
+    color: #666666;
+    font-weight: 900;
+    font-size: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 13px 110px;
+}
+
+.sendButton:hover {
+    background-color: #FF9797;
+    color: white;
 }
