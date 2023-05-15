@@ -20,4 +20,39 @@
   text-align: center;
   word-break:break-all;
   table-layout:fixed;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+}
+
+.employeeTable {
+  margin-top: 30px;
+  border-collapse: collapse;
+}
+
+.employeeTable th {
+  font-weight: bold;
+  border-bottom: 1px solid;
+  padding: 20px;
+}
+
+.employeeTable td {
+  padding: 20px;
+}
+
+.employeeBtn {
+  display: flex;
+  float: right;
+  align-items: center;
+}
+
+.employeeBtn button {
+  margin-right: 20px;
+  width: 150px;
+  height: 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FF9797;
+  color: white;
 }

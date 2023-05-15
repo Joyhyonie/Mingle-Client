@@ -54,7 +54,7 @@ function SubjectList() {
   const onCLickInsert = () => {
     setIsInsertModalOpen(true);
   }
-  
+
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
@@ -113,6 +113,17 @@ function SubjectList() {
         <SubjectInsertModal
         setIsInsertModalOpen={setIsInsertModalOpen}/>
       )}
+            <tr>
+              <td><input type="checkbox" /></td>
+              <td>asd</td>
+              <td>asd</td>
+              <td>asd</td>
+              <td>asd</td>
+              <td>1</td>
+              <button>수정</button>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </motion.div>
   );
