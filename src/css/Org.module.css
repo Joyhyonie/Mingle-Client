@@ -1,6 +1,62 @@
-/* orgInform과 orgPhoto를 양끝으로 정렬 */
-.orgInform {
+.OrganizationList {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
+  width: 1080px;
+  height: 2000px;
+  margin: 10px;
+  margin-right: 600px;
+  font-size: 18px;
+}
+
+.orgImage {
+  width: 230px;
+  height: 284px;
+}
+
+.organization {
+  width: 1400px;
+  display: flex;
   justify-content: space-between;
+  margin-top: 100px;
+  border-bottom: 1px solid #666666;
+}
+
+.organization2 {
+  width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 36px;
+}
+
+.orgHeader {
+  font-size: 18px;
+  align-items: center;
+}
+
+.orgDept {
+  color: #FF9797;
+}
+
+.orgName {
+  font-size: 2rem;
+  margin-right: 100px;
+}
+
+.orgDetail {
+  border-left: 5px solid #FFD7D7;
+  padding-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.orgName2 {
+  font-size: 2rem;
+  margin-right: 100px;
+}
+
+.orgPhoto2 {
+  width: 230px;
+  height: 284px;
 }
