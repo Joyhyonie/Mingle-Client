@@ -5,9 +5,7 @@ import AcademicScheduleCss from "../../css/AcademicSchedule.module.css";
 function AcademicSchedule() {
 
   return (
-    <div className={AcademicScheduleCss.acScheContainer}>
-      <div>
-    <div className={AcademicScheduleCss.acScheContainer}>      
+    <div className={AcademicScheduleCss.acScheContainer}>    
       <div className={AcademicScheduleCss.acScheLeft}> 
         <div className={AcademicScheduleCss.acScheRead}>
           <p><img src="/images/cal.png"></img>전체 학사 일정</p>

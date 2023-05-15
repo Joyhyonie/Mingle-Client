@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from "framer-motion"
 import SearchBarCss from '../../css/common/SearchBar.module.css'
 import SearchAndListLayout from '../../layouts/SearchAndListLayout';
+import EmployeeListCss from '../../css/EmployeeList.module.css'
 
 const options = [
   { value: "stdCode", name: "학번" },
@@ -26,22 +27,6 @@ function StudentManagement() {
     </div>
   );
 }
-
-/* 행정직원의 '교직원 관리' */
-import React, { useEffect, useState } from 'react';
-import { motion } from "framer-motion";
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import SearchBarCss from '../../css/common/SearchBar.module.css';
-import SearchAndListLayout from '../../layouts/SearchAndListLayout';
-import EmployeeListCss from '../../css/EmployeeList.module.css';
-import { useNavigate } from 'react-router-dom';
-
-const options = [
-  { value: "empCode", name: "교번" },
-  { value: "empName", name: "직원명" },
-  { value: "deptCode", name: "부서명" },
-];
 
 function EmployeeManagement() {
 
