@@ -1,5 +1,4 @@
 .SubjectList {
-    display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
@@ -8,6 +7,34 @@
     margin: 10px;
     margin-right: 600px;
 }
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .insertButton {
+    margin-left: 10px; /* 버튼 사이의 간격 조정 */
+    margin-right: 600px;
+    cursor: pointer;
+    padding: 10px;
+    width: 120px;
+    background-color: #FF9797;
+    border-radius: 7px;
+    border: none;
+    color: white;
+  }
+  
+  .deleteButton {
+    margin-left: 10px; /* 버튼 사이의 간격 조정 */
+    width: 120px;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    background-color: #FF9797;
+    border-radius: 7px;
+    border: none;
+  }
 
 .SubjectListTable {
     border-collapse: collapse;

@@ -3,6 +3,7 @@ import MessageCSS from '../css/Message.module.css';
 import { motion } from "framer-motion"
 import WriteMsg from '../pages/message/WriteMsg';
 import LikeMsgBox from '../pages/message/LikeMsgBox';
+import ReceiveMsgBox from '../pages/message/ReceiveMsgBox';
 import ReceivedMsgBox from '../pages/message/ReceivedMsgBox';
 import SentMsgBox from '../pages/message/SentMsgBox';
 
@@ -39,6 +40,7 @@ function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClic
 
         if (arg === 'body') {
             const components = {
+                receiveMsgBox: <ReceiveMsgBox />,
                 receiveMsgBox: <ReceivedMsgBox setWhichPage={setWhichPage} stateChangeHandler={stateChangeHandler}/>,
                 sentMsgBox: <SentMsgBox />,
                 writeMsg: <WriteMsg />,

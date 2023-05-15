@@ -38,6 +38,9 @@
 }
 
 .body {
+    /* border: 2px solid #bbabfd; */
+    width: 310px;
+    height: 550px;
     width: 310px;
     height: 550px;
     overflow: scroll;
@@ -74,6 +77,7 @@
 }
 
 .body div {
+    padding: 15px;
     padding: 10px;
 }
 
