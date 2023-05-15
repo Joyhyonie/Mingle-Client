@@ -3,11 +3,10 @@ import { AnimatePresence, motion } from "framer-motion"
 import MessageCSS from '../../css/Message.module.css';
 import { useDispatch } from 'react-redux';
 
-function MessageItem ({setWhichPage, stateChangeHandler}) {  
+function MessageItem ({setWhichPage, stateChangeHandler, checkboxChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode}) {  
 
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
-    const [isChecked, setIsChecked] = useState(false); // check된 쪽지를 관리하기 위한 state
 
     /* (임시용) 현재 로그인한 유저의 정보를 가져옴 (sender/receiver 분별) */
     const currentUser = {
@@ -22,8 +21,8 @@ function MessageItem ({setWhichPage, stateChangeHandler}) {
         msgImpSender: 'N',
         msgImpReceiver: 'Y',
         msgReadYn: 'N',
-        msgSender: { empCode: 202311111, deptName: '교무처', empName: '신짱구' },
-        msgReceiver: { empCode: 202312345, deptName: '학생처', empName: '허치즈' },
+        msgSender: { empCode: 202311111, deptCode: '2', deptName: '교무처', empName: '신짱구' },
+        msgReceiver: { empCode: 202312345, deptCode: '1', deptName: '학생처', empName: '허치즈' },
         msgDelSender: 'N',
         msgDelReveiver: 'N'
     }
@@ -81,7 +80,7 @@ function MessageItem ({setWhichPage, stateChangeHandler}) {
     }
 
     /* 쪽지의 Header를 클릭 시, 쪽지 토글 이벤트 함수 */
-    const msgOpenHandler = (msgCode) => {
+    const msgOpenHandler = () => {
         setIsOpen(!isOpen)
 
         /* 현재 로그인한 유저가 받는 사람일 경우, 쪽지 Header 클릭 시, 읽음 여부 'Y'로 변경 */
@@ -107,27 +106,25 @@ function MessageItem ({setWhichPage, stateChangeHandler}) {
     const moveToReply = () => {
         setWhichPage('writeMsg'); 
         stateChangeHandler('writeIsClicked');
-        /* 정보 넘기는 로직 추가해야함 !! */
+        // content 정보 넘기기
+        setReplyContent(message.msgContent);
+        setSelectedDeptCode(message.msgSender.deptCode);
+        setSelectedEmpCode(message.msgSender.empCode);
     }
-
-    /* checkbox 마다의 checked/unchecked 관리 */
-    const checkboxChangeHandler = (e) => {
-        console.log(e.target.checked) // true/false
-        setIsChecked(e.target.checked);
-    }
+    
 
     return (
         <div className={ MessageCSS.msgItemBox }>
             <motion.div 
                 className={ MessageCSS.msgItemHeader }
                 style={{ border: message.msgReadYn === 'Y' ? '1px solid lightgray' : null }}
-                onClick={ msgOpenHandler(message.msgCode) }
+                onClick={ msgOpenHandler }
                 transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
             >
             <div className={ MessageCSS.flex }>
                 <input 
-                    type='checkbox' 
-                    checked={isChecked} 
+                    type='checkbox'
+                    id={ message.msgCode }
                     onClick={ (e) => e.stopPropagation() } /* 이벤트 버블링 방지 */
                     onChange={ checkboxChangeHandler }
                 /> 
@@ -147,7 +144,7 @@ function MessageItem ({setWhichPage, stateChangeHandler}) {
                         transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
                     >
                         <div className={ MessageCSS.msgItemContentBox }>
-                            {message.msgContent}
+                            <pre>{message.msgContent}</pre>
                         </div>
                         <div className={ MessageCSS.msgItemFooterBox }>
                             {likeIconHandler()}
