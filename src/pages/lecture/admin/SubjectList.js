@@ -113,17 +113,6 @@ function SubjectList() {
         <SubjectInsertModal
         setIsInsertModalOpen={setIsInsertModalOpen}/>
       )}
-            <tr>
-              <td><input type="checkbox" /></td>
-              <td>asd</td>
-              <td>asd</td>
-              <td>asd</td>
-              <td>asd</td>
-              <td>1</td>
-              <button>수정</button>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </motion.div>
   );

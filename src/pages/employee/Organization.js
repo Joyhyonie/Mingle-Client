@@ -16,36 +16,6 @@ const options = [
 function Organization() {
 
   return (
-    <>
-      <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
-      >
-        조직도 🎃
-      </motion.div>
-
-      <div className={SearchBarCss.basic}>
-        <SearchAndListLayout options={options}></SearchAndListLayout>
-      </div>
-
-      {/* <OrganizationItem/> */}
-
-      {/* <div className={OrgCss.organization}>
-          <div className={OrgCss.orgInform}>
-            <div className={OrgCss.orgHeader}><span className={OrgCss.orgName}>고윤정</span> <span>교수</span>
-            <br/>
-            <p>소속 : </p>
-            <p>전공 : </p>
-            <p>e-mail : </p>
-            </div>
-          </div>
-          <div className={OrgCss.orgPhoto}>
-            <img className={OrgCss.orgImage} alt='고윤정' src='/image/goyoonjeong.jpeg'></img>
-          </div>
-          <hr/>
-          
-      </div> */}
-    </>
-
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
     >

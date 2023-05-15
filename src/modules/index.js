@@ -5,10 +5,6 @@ import subjectReducer from "./SubjectModule";
 /* 여러 모듈을 combine 시키기 */
 const rootReducer = combineReducers({
   subjectReducer
-
-/* 여러 모듈을 combine 시키기 */
-const rootReducer = combineReducers({
-  // EmployeeModule
 });
 
 export default rootReducer;
