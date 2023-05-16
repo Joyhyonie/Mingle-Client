@@ -1,5 +1,5 @@
 import { Toaster } from 'react-hot-toast';
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from './layouts/Layout';
 import Mypage from "./pages/employee/Mypage";
 import Organization from "./pages/employee/Organization";
@@ -20,13 +20,15 @@ import StudentAttendanceForProf from "./pages/lecture/professor/StudentAttendanc
 import MainPageLayout from "./layouts/MainPageLayout";
 import MyCalender from "./components/main/MyCalender";
 import AcademicCalender from "./components/main/AcademicCalender";
-
+import BoardDetail from './pages/board/BoardDetail';
+import BoardRegist from './pages/board/BoardRegist';
+import BoardModify from './pages/board/BoardModify';
+import BoardLayout from './layouts/BoardLayout';
 import ProtectedRoute from "./components/router/ProtectedRoute";
 import Login from './pages/login/Login';
 import IdSearch from './pages/login/IdSearch';
 import PwdSearch from './pages/login/PwdSearch';
 import MyPageLayout from './layouts/MypageLayout';
-import BoardListLayout from './components/lists/BoardList';
 
 
 function App() {
@@ -51,21 +53,19 @@ function App() {
               <Route index element={ <MyCalender/> }/>
               <Route element={ <AcademicCalender/> }/>
             </Route>
-          
-
-
-            <Route path="mypage" element={ <MyPageLayout /> }>
-            <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
-            <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
-              </Route>
-
-            <Route path="board" element={ <BoardMain/> }>
-              <Route index element={ <BoardListLayout/> }/>
-              {/* <Route path="" */}
+            
+            <Route path="board" element={ <BoardLayout/> }>
+              <Route index element={ <Navigate to="/board/main" replace/> }/>
+              <Route path="main" element={ <BoardMain/> }/>
+              <Route path="detail" element={ <BoardDetail/> }/>
+              <Route path="modify" element={ <BoardModify/> }/>
+              <Route path="regist" element={ <BoardRegist/> }/>
             </Route>
-
-
-            <Route path="mypage" element={ <Mypage/> }/>
+          
+            <Route path="mypage" element={ <MyPageLayout /> }>
+              <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
+              <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
+            </Route>
 
             <Route path="organization" element={ <Organization/> }/>
 
@@ -87,18 +87,12 @@ function App() {
             <Route path="management-student" element={ <StudentManagement/> }/>
 
             <Route path="schedule-academic" element={ <AcademicSchedule/> }/>
-            
-      
-          
           </Route>
           
-        
           <Route path="/login" element={ <ProtectedRoute loginCheck={false}><Login /></ProtectedRoute> }/>
-            <Route path="/idsearch" element={ <ProtectedRoute loginCheck={false}><IdSearch /></ProtectedRoute>}/>
-            <Route path="/pwdsearch" element={ <ProtectedRoute loginCheck={false}><PwdSearch /></ProtectedRoute>}/>
-
-
-
+          <Route path="/idsearch" element={ <ProtectedRoute loginCheck={false}><IdSearch /></ProtectedRoute>}/>
+          <Route path="/pwdsearch" element={ <ProtectedRoute loginCheck={false}><PwdSearch /></ProtectedRoute>}/>
+              
         </Routes>
       </BrowserRouter>
     </>

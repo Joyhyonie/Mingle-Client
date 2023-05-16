@@ -6,6 +6,10 @@ html {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+html::-webkit-scrollbar {
+    display: none;
+}
+
 input[type="checkbox"] {
   accent-color: #FFD7D7;
 }
