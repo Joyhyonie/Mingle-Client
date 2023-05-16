@@ -48,7 +48,7 @@ function App() {
     />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <ProtectedRoute loginCheck={true}><Layout/></ProtectedRoute> }>
+          <Route path="/" element={ <ProtectedRoute loginCheck={false}><Layout/></ProtectedRoute> }>
             <Route element={ <MainPageLayout/> }>
               <Route index element={ <MyCalender/> }/>
               <Route element={ <AcademicCalender/> }/>
@@ -57,8 +57,8 @@ function App() {
             <Route path="board" element={ <BoardLayout/> }>
               <Route index element={ <Navigate to="/board/main" replace/> }/>
               <Route path="main" element={ <BoardMain/> }/>
-              <Route path="detail" element={ <BoardDetail/> }/>
-              <Route path="modify" element={ <BoardModify/> }/>
+              <Route path=":boardCode" element={ <BoardDetail/> }/>
+              <Route path=":boardCode/modify" element={ <BoardModify/> }/>
               <Route path="regist" element={ <BoardRegist/> }/>
             </Route> {/* <BoardLayout/>의 Route */}
           

@@ -35,7 +35,6 @@ function BoardMain () {
             } 
 
 
-
         },[boardType]
     );
 
