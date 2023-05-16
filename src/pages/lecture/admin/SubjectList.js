@@ -8,6 +8,11 @@ import { useNavigate } from "react-router-dom";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
 import SubjectInsertModal from "../../../components/modal/SubjectInsertModal";
 import { toast } from "react-hot-toast";
+import PagingBar from "../../../components/common/PagingBar";
+import CommonCSS from '../../../css/common/Common.module.css';
+import SearchBar from "../../../components/common/SearchBar";
+import SearchBarCss from "../../../css/common/SearchBar.module.css";
+import SearchAndListLayout from "../../../layouts/SearchAndListLayout";
 
 function SubjectList() {
 
@@ -19,6 +24,12 @@ function SubjectList() {
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
+
+  const options = [
+    { value: "stdCode", name: "학번" },
+    { value: "stdName", name: "학생명" },
+    { value: "deptCode", name: "학과명" },
+  ];
 
   useEffect(
     ()=>{
@@ -48,7 +59,7 @@ function SubjectList() {
 
   const onClickDelete = () => {
     dispatch(callSubjectDelete(checkedItems));
-    toast("과목이 삭제 되었습니다.");
+    toast.success("과목이 삭제 되었습니다.");
   }
 
   const onCLickInsert = () => {
@@ -60,12 +71,20 @@ function SubjectList() {
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
     >
       <div className={SubjectListCSS.container}>
-        <button className={SubjectListCSS.deleteButton}
-         onClick={onClickDelete}>선택 삭제</button>
-        <button className={SubjectListCSS.insertButton}
-         onClick={onCLickInsert}>과목 등록</button>
+      <div>
+      <p className={ CommonCSS.pageDirection }>과목관리 ▸ 과목관리</p>
+      </div>
+        <motion.button className={SubjectListCSS.deleteButton}
+         onClick={onClickDelete}
+         whileHover={{scale:1.05}}>선택 삭제</motion.button>
+        <motion.button className={SubjectListCSS.insertButton}        
+         onClick={onCLickInsert}
+         whileHover={{scale:1.05}}>과목 등록</motion.button>
       </div>
       <div className={SubjectListCSS.SubjectList}>
+      <div className={SearchBarCss.basic}>
+          <SearchAndListLayout options={options}></SearchAndListLayout>
+        </div>
         <table className={SubjectListCSS.SubjectListTable}>
           <colgroup>
             <col width="10%" />
@@ -103,6 +122,9 @@ function SubjectList() {
             ))}    
           </tbody>
         </table>
+        <div>
+                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
+        </div>
         {isModalOpen && (
         <SubjectUpdateModal
           subject={selectedSubject}

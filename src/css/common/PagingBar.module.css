@@ -1,0 +1,16 @@
+.pagingBtn{
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-style: solid;
+    border-color: #E7E7E7;
+    color: black;
+    box-shadow: none;
+}
+
+.pagingBtn:hover{
+    cursor: pointer;
+    background-color: #FF9797;
+    color: white;
+}
