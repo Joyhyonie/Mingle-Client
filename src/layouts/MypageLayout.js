@@ -1,12 +1,13 @@
 import { Outlet } from "react-router-dom";
 import MyPageLayoutCSS from '../css/MyPageLayout.module.css';
 import { useNavigate } from "react-router-dom";
+import MyPageAttendance from "../pages/attendance/MyPageAttendance";
 
 function MyPageLayout() {
     const navigate = useNavigate();
 
     const onClickPwdChangeHandler = () => {
-        navigate("/mypage/pwdchange")
+        navigate("/pwdchange")
     }
     return (
         <div className={ MyPageLayoutCSS.myPageLayoutDiv }>
@@ -25,11 +26,15 @@ function MyPageLayout() {
                         <span>
                               <button>연차신청</button>
                         </span>  
+                        <div>
+                                <div>
+                                  <MyPageAttendance/>
+                                </div>
+                            </div>
                </div>
             </main>
                           
         </div>
-
 
 
 

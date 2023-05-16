@@ -1,0 +1,88 @@
+.backgroundDiv{
+    height: 60vh;
+    display: flex;
+    flex-direction: column; /*수평 정렬*/
+    /* align-items: center; */
+    justify-content: center;
+    margin: 0 23%;
+    padding: 0;
+    
+}
+
+.loginDiv{    
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; /*수평 정렬*/
+    align-items: center;
+    justify-content: center;
+    margin: 0 13px;
+    padding: 0;
+    background-color: white;
+
+
+    border-radius: 25px ;    
+}
+
+.loginDiv input {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    height: 50px;
+    width: 436px;
+    border: 3px solid  #FF9797;
+    text-indent: 20px;
+    border-radius: 31px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    
+}
+
+.loginDiv button {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    width: 154px;
+    height: 49px;
+    border-radius: 50px;
+    background-color: #FFD7D7;
+    font-weight: bold;
+    border: solid rgba(255, 151, 151, 0.79);
+    color: #343434;
+    font-family: 'Paytone One';
+    font-style: normal;
+    font-size: 20px;
+    align-items: center;
+ }
+.loginDiv span  {
+    color: #666666;;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 25px;
+align-items: center;
+}
+
+.loginDiv h1{
+    font-family: 'Do Hyeon', sans-serif;
+    color: #FF9797;
+font-style: normal;
+font-weight: 400;
+font-size: 57px;
+}
+
+.sky{
+text-align: center;
+
+}
+.sky1{
+    margin-left: 10px;
+}
+
+
+h2{
+    font-family: 'Do Hyeon', sans-serif;
+    color: #FF9797;
+font-style: normal;
+font-weight: 400;
+font-size: 57px;
+
+}

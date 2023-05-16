@@ -29,7 +29,7 @@ import Login from './pages/login/Login';
 import IdSearch from './pages/login/IdSearch';
 import PwdSearch from './pages/login/PwdSearch';
 import MyPageLayout from './layouts/MypageLayout';
-
+import PwdChange from './pages/login/Pwdchange';
 
 function App() {
   return (
@@ -48,7 +48,7 @@ function App() {
     />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <Layout/> }>
+          <Route path="/" element={ <ProtectedRoute loginCheck={true}><Layout/></ProtectedRoute> }>
             <Route element={ <MainPageLayout/> }>
               <Route index element={ <MyCalender/> }/>
               <Route element={ <AcademicCalender/> }/>
@@ -65,7 +65,9 @@ function App() {
             <Route path="mypage" element={ <MyPageLayout /> }>
               <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
               <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
+
             </Route>
+            <Route path="pwdchange" element={ <ProtectedRoute loginCheck={true}><PwdChange/></ProtectedRoute> }/>
 
             <Route path="organization" element={ <Organization/> }/>
 
