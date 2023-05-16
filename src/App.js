@@ -6,7 +6,7 @@ import Organization from "./pages/employee/Organization";
 import AppliedCertidocs from "./pages/certiDoc/AppliedCertidocs";
 import ApplyCertiDoc from "./pages/certiDoc/ApplyCertiDoc";
 import MyCertiDoc from "./pages/certiDoc/MyCertiDoc";
-import BoardList from "./pages/board/BoardList";
+import BoardMain from "./pages/board/BoardMain";
 import EmployeeAttendance from "./pages/attendance/EmployeeAttendance";
 import AppliedLeaveList from "./pages/attendance/AppliedLeaveList";
 import SubjectList from "./pages/lecture/admin/SubjectList";
@@ -20,10 +20,14 @@ import StudentAttendanceForProf from "./pages/lecture/professor/StudentAttendanc
 import MainPageLayout from "./layouts/MainPageLayout";
 import MyCalender from "./components/main/MyCalender";
 import AcademicCalender from "./components/main/AcademicCalender";
+
 import ProtectedRoute from "./components/router/ProtectedRoute";
 import Login from './pages/login/Login';
 import IdSearch from './pages/login/IdSearch';
 import PwdSearch from './pages/login/PwdSearch';
+
+import BoardListLayout from './components/lists/BoardList';
+
 
 
 function App() {
@@ -49,9 +53,12 @@ function App() {
               <Route element={ <AcademicCalender/> }/>
             </Route>
             
-            <Route path="mypage" element={ <Mypage/> }/>
+            <Route path="board" element={ <BoardMain/> }>
+              <Route index element={ <BoardListLayout/> }/>
+              {/* <Route path="" */}
+            </Route>
 
-            <Route path="board" element={ <BoardList/> }/>
+            <Route path="mypage" element={ <Mypage/> }/>
 
             <Route path="organization" element={ <Organization/> }/>
 

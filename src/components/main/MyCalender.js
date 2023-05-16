@@ -26,6 +26,7 @@ function MyCalender ({dateInMyCal, setDateInMyCal}) {
       display: flex;
       justify-content: center;
       
+      
       // 캘린더 전체 사이즈 조정
       .fc {
         width: 98%;
@@ -60,6 +61,10 @@ function MyCalender ({dateInMyCal, setDateInMyCal}) {
         }
       }
 
+      .fc thead {
+        border-bottom: none;
+      }
+
       .fc-button-group {
         border: none;
       }
@@ -76,6 +81,7 @@ function MyCalender ({dateInMyCal, setDateInMyCal}) {
         font-size: 23px;
         line-height: 19px;
         color: #ffffff;
+        
       }
 
       // 달력 내부의 스크롤바 숨기기
