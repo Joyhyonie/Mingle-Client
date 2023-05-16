@@ -2,12 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    font-family: 'Do Hyeon', sans-serif;
     align-items: center;
-    width: 1080px;
-    height: 850px;
     margin: 10px;
-    margin-right: 600px;
+    margin-top: 60px;
 }
 
 .ApplyCertiDocCSSTable {
@@ -15,21 +12,11 @@
     table-layout: fixed;
 }
 
-
-.ApplyCertiDocCSSTable th, td {
-    height: 10px;    
-    text-align: center;
-    word-break:break-all;
-    padding: 5px;
-    table-layout:fixed;
-}
-
 .ApplyCertiDocCSSTable button {
     width: 50px;
     background-color: #FFD7D7;
     margin-top: 5px;
     border-radius: 20px;
-    font-family: 'Do Hyeon', sans-serif;
     color: #4D4D4D;
     font-size: 18px;
     cursor: pointer;
@@ -50,7 +37,6 @@
     text-align: center;
     width: 70%;
     border: 1px solid #FF9797;
-    font-family: 'Do Hyeon', sans-serif;
     font-size: 17px;
     outline: none;
 }

@@ -1,5 +1,7 @@
 import { motion } from "framer-motion"
-import MyCertiDocCSS from '../../css/MyCertiDoc.module.css'
+import MyCertiDocCSS from '../../css/MyCertiDoc.module.css';
+import CommonCSS from "../../css/common/Common.module.css";
+import PagingBar from "../../components/common/PagingBar";
 
 /* 모든 교직원의 '증명서 발급 이력' */
 
@@ -9,6 +11,9 @@ function MyCertiDoc () {
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
+            <div>
+                <p className={ CommonCSS.pageDirection }>증명서 ▸ 증명서 발급 신청 이력</p>
+            </div>
             <div className={MyCertiDocCSS.MyCertiDocCSS}>
                 <table className={MyCertiDocCSS.MyCertiDocCSSTable}>
                     <colgroup>
@@ -45,7 +50,9 @@ function MyCertiDoc () {
                     </tbody>
                 </table>
             </div>
-          
+            <div>
+                {/* 페이징바 */}
+            </div>
         </motion.div>
     );
 }
