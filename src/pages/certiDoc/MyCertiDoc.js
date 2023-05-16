@@ -1,14 +1,33 @@
 import { motion } from "framer-motion"
-import MyCertiDocCSS from '../../css/MyCertiDoc.module.css'
+import MyCertiDocCSS from '../../css/MyCertiDoc.module.css';
+import CommonCSS from "../../css/common/Common.module.css";
+import PagingBar from "../../components/common/PagingBar";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { callMyCertiDocListAPI } from "../../apis/CertiDocAPICalls";
 
 /* 모든 교직원의 '증명서 발급 이력' */
 
 function MyCertiDoc () {
 
+    const {data,pageInfo} = useSelector(state => state.CertiReducer);
+    const [currentPage, setCurrentPage] = useState(1);
+    const dispatch = useDispatch();
+
+    useEffect(
+        ()=>{
+            dispatch(callMyCertiDocListAPI({currentPage}));
+        },
+        [currentPage]
+    )
+
     return (
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
+            <div>
+                <p className={ CommonCSS.pageDirection }>증명서 ▸ 증명서 발급 신청 이력</p>
+            </div>
             <div className={MyCertiDocCSS.MyCertiDocCSS}>
                 <table className={MyCertiDocCSS.MyCertiDocCSSTable}>
                     <colgroup>
@@ -33,19 +52,24 @@ function MyCertiDoc () {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>20230001</td>
-                            <td>2023-05-14</td>
-                            <td>재직증명서</td>
-                            <td>은행제출용</td>
-                            <td>어저꾸저쩌구쏼라쏼라</td>
-                            <td>대기</td>
-                            <td><button>보기</button></td>
-                        </tr>
+                        { data && 
+                        data.map((myCerti)=>(
+                            <tr key={myCerti.certiDocCode}>
+                                <td>{myCerti.certiDocCode}</td>
+                                <td>{myCerti.certiApplyDate}</td>
+                                <td>{myCerti.certiForm.certiFormName}</td>
+                                <td>{myCerti.reason}</td>
+                                <td>{myCerti.certiUse}</td>
+                                <td>{myCerti.docStatus}</td>
+                                <td><button>보기</button></td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
-          
+            <div>
+                {/* 페이징바 */}
+            </div>
         </motion.div>
     );
 }

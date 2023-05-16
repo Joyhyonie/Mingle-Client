@@ -11,31 +11,36 @@ function PagingBar({ pageInfo, setCurrentPage }) {
 
     return (
         <div style={ {listStyleType : 'none', display : 'flex', justifyContent: 'center',marginTop: '30px'} }>
-            <button 
-                className={ PagingBarCSS.pagingBtn }
-                onClick={ () => setCurrentPage(pageInfo.currentPage - 1) }
-                disabled={ pageInfo.currentPage <= 1 }
-            >
-                &lt;
-            </button>
+            {pageInfo.currentPage > 1 &&
+                <button 
+                    style={{color: '#666666'}}
+                    className={ PagingBarCSS.pagingBtn }
+                    onClick={ () => setCurrentPage(pageInfo.currentPage - 1) }
+                >
+                    ◀
+                </button>
+            }
             { pageNumber.map(num => (
                 <li key={num} onClick={ () => setCurrentPage(num) }>
                     <button 
                         className={ PagingBarCSS.pagingBtn }
-                        style={ pageInfo.currentPage === num ? { backgroundColor : '#FF9797' } : null }
+                        style={ pageInfo.currentPage === num ? { backgroundColor : '#FF9797', border : '1px solid #FF9797', color: 'white' } : null }
                     >
                         {num}
                     </button>
                 </li>
             ))
             }
-            <button 
-                className={ PagingBarCSS.pagingBtn }
-                onClick={ () => setCurrentPage(pageInfo.currentPage + 1) }
-                disabled={ pageInfo.currentPage >= pageInfo.maxPage }
-            >
-                &gt;
-            </button>
+            {pageInfo.currentPage !== pageInfo.maxPage &&
+                <button 
+                    style={{color: '#666666'}}
+                    className={ PagingBarCSS.pagingBtn }
+                    onClick={ () => setCurrentPage(pageInfo.currentPage + 1) }
+                    disabled={ pageInfo.currentPage >= pageInfo.maxPage }
+                >
+                    ▶
+                </button>
+            }
         </div>
     );
 }

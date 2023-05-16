@@ -19,7 +19,7 @@ export const {
     [DELETE_SUBJECT] : (res) => res
 });
 
-const subjectReducer = handleActions({
+const SubjectReducer = handleActions({
     [GET_SUBJECTS] : (state, {payload}) => payload,
     [GET_SUBJECT] : (state, {payload}) => ({subject:payload}),
     [PUT_SUBJECTS] : (state ,{payload}) => ({modify: payload}),
@@ -27,4 +27,4 @@ const subjectReducer = handleActions({
     [DELETE_SUBJECT] : (state, {payload}) => ({delete: payload})
 },initialState);
 
-export default subjectReducer;
+export default SubjectReducer;

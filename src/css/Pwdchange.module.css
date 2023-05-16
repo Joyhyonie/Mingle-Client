@@ -1,22 +1,21 @@
 .backgroundDiv{
-    height: 80vh;
+    height: 60vh;
     display: flex;
     flex-direction: column; /*수평 정렬*/
     /* align-items: center; */
     justify-content: center;
-    margin: 0 40%;
+    margin: 0 23%;
     padding: 0;
     
 }
 
 .loginDiv{    
-    width: 300px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column; /*수평 정렬*/
     align-items: center;
     justify-content: center;
-    margin: 0;
+    margin: 0 13px;
     padding: 0;
     background-color: white;
 
@@ -30,7 +29,7 @@
     height: 50px;
     width: 436px;
     border: 3px solid  #FF9797;
-    text-indent: 10px;
+    text-indent: 20px;
     border-radius: 31px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     
@@ -39,30 +38,51 @@
 .loginDiv button {
     margin-top: 20px;
     margin-bottom: 5px;
-   height: 58px;
-    width: 436px;
-    border-radius: 12px;
-    background-color: #FF9797;
+    width: 154px;
+    height: 49px;
+    border-radius: 50px;
+    background-color: #FFD7D7;
     font-weight: bold;
     border: solid rgba(255, 151, 151, 0.79);
-    color: white;
+    color: #343434;
     font-family: 'Paytone One';
     font-style: normal;
-    font-size: 29px;
+    font-size: 20px;
+    align-items: center;
  }
 .loginDiv span  {
-    color: #FF9797;
+    color: #666666;;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 25px;
+align-items: center;
 }
 
 .loginDiv h1{
-    font-family: 'Paytone One', sans-serif;
-
+    font-family: 'Do Hyeon', sans-serif;
+    color: #FF9797;
 font-style: normal;
 font-weight: 400;
-font-size: 55px;
+font-size: 57px;
 }
 
-.loginDiv div{
-    float: right;
-    
+.sky{
+text-align: center;
+
+}
+.sky1{
+    margin-left: 10px;
+}
+
+
+h2{
+    font-family: 'Do Hyeon', sans-serif;
+    color: #FF9797;
+font-style: normal;
+font-weight: 400;
+font-size: 57px;
+
 }

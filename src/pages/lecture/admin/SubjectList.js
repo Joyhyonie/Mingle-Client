@@ -4,13 +4,11 @@ import SubjectListCSS from '../../../css/SubjectList.module.css'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callSubjectDelete, callSubjectUpdateAPI, callSubjectsAPI } from "../../../apis/LectureAPICalls";
-import { useNavigate } from "react-router-dom";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
 import SubjectInsertModal from "../../../components/modal/SubjectInsertModal";
 import { toast } from "react-hot-toast";
 import PagingBar from "../../../components/common/PagingBar";
 import CommonCSS from '../../../css/common/Common.module.css';
-import SearchBar from "../../../components/common/SearchBar";
 import SearchBarCss from "../../../css/common/SearchBar.module.css";
 import SearchAndListLayout from "../../../layouts/SearchAndListLayout";
 
@@ -18,24 +16,22 @@ function SubjectList() {
 
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const {data, pageInfo} = useSelector((state) => state.subjectReducer);
-  
+  const {data, pageInfo} = useSelector((state) => state.SubjectReducer);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
 
   const options = [
-    { value: "stdCode", name: "학번" },
-    { value: "stdName", name: "학생명" },
-    { value: "deptCode", name: "학과명" },
+    { value: "sbjName", name: "과목명" },
+    { value: "deptName", name: "학과명" }
   ];
 
   useEffect(
     ()=>{
       dispatch(callSubjectsAPI({currentPage}))
     },
-    [currentPage,isModalOpen,isInsertModalOpen]
+    [currentPage,isModalOpen,isInsertModalOpen,selectedSubject,checkedItems]
   );
 
   const openModal = (subject) => {
@@ -58,8 +54,13 @@ function SubjectList() {
   }
 
   const onClickDelete = () => {
+    if(checkedItems.length === 0){
+      toast.error("과목을 선택해주세요");
+      return;
+    }
     dispatch(callSubjectDelete(checkedItems));
     toast.success("과목이 삭제 되었습니다.");
+    setCheckedItems([]);
   }
 
   const onCLickInsert = () => {

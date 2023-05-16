@@ -6,6 +6,10 @@ html {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+html::-webkit-scrollbar {
+    display: none;
+}
+
 input[type="checkbox"] {
   accent-color: #FFD7D7;
 }
@@ -17,6 +21,28 @@ input[type="checkbox"] {
     font-weight: 900;
     font-size: 20px;
 }
+
+/* 표 공통 속성 ---------------------------*/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead {
+    font-size: 20px;
+    border-bottom: 1px solid #666666;
+    padding: 20px;
+}
+
+th {
+    padding: 15px;
+}
+
+tbody tr:hover {
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+/* -------------------------------------- */
 
 .flex {
     display: flex;

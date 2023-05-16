@@ -50,16 +50,17 @@ export const callSubjectInsertAPI = (formData) => {
     }
 }
 
-export const callSubjectDelete = (sbjCode) => {
+export const callSubjectDelete = (checkedItems) => {
 
-    const requestURL = `${SUBJECT_URL}/delete/${sbjCode}`;
+    const requestURL = `${SUBJECT_URL}/delete`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL,{
             method : 'DELETE',
             headers:{
                 'Content-Type': 'application/json'
-            }
+            },
+            body : JSON.stringify(checkedItems)
         }).then(response => response.json());
 
         if(result.status === 200){
