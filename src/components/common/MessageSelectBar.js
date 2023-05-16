@@ -65,7 +65,7 @@ function MessageSelectBar ({selectedDeptCode, selectedEmpCode}) {
                 </option>
                 ))}
             </select>
-            <img src="./images/down.png"/>
+            <img src={`${process.env.PUBLIC_URL}/images/down.png`}/>
             <select
                 className={ MessageCSS.selectEmployee }
                 value={selectedEmpCode? selectedEmpCode : selectedEmployee}
@@ -81,7 +81,7 @@ function MessageSelectBar ({selectedDeptCode, selectedEmpCode}) {
                 </option>
                 ))}
             </select>
-            <img src="./images/down.png"/>
+            <img src={`${process.env.PUBLIC_URL}/images/down.png`}/>
         </div>
     );
 }

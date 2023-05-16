@@ -24,7 +24,7 @@ function MessageSearchBar () {
                 <option value='empName'>교직원명</option>
                 <option value='msgContent'>내용</option>
             </select>
-            <img src="./images/down.png"/>
+            <img src={`${process.env.PUBLIC_URL}/images/down.png`}/>
             <input 
                 className={ MessageCSS.msgSearchWord }
                 type="text"

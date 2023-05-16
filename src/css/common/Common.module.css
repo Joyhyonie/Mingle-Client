@@ -16,6 +16,7 @@ input[type="checkbox"] {
 
 .pageDirection {
     position: absolute;
+    z-index: -1;
     top: 100px;
     left: 290px;
     font-weight: 900;
