@@ -2,26 +2,15 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    font-family: 'Do Hyeon', sans-serif;
     align-items: center;
-    width: 1080px;
     height: 850px;
     margin: 10px;
-    margin-right: 550px;
+    margin-top: 100px;
 }
 
 .MyCertiDocCSSTable {
     border-collapse: collapse;
     table-layout: fixed;
-}
-
-
-.MyCertiDocCSSTable th, td {
-    height: 10px;    
-    text-align: center;
-    word-break:break-all;
-    padding: 5px;
-    table-layout:fixed;
 }
 
 .MyCertiDocCSSTable button {

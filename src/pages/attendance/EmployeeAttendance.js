@@ -1,6 +1,7 @@
 /* 행정직원의 '교직원 근태 기록' */
 import { motion } from "framer-motion"
 import EmployeeAttendanceCSS from '../../css/EmployeeAttendance.module.css'
+import CommonCSS from "../../css/common/Common.module.css";
 
 
 function EmployeeAttendance () {
@@ -9,6 +10,9 @@ function EmployeeAttendance () {
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
+            <div>
+                <p className={ CommonCSS.pageDirection }>근태관리 ▸ 교직원 근태 기록</p>
+            </div>
             <div className={EmployeeAttendanceCSS.EmployeeAttendanceDiv}><button className={EmployeeAttendanceCSS.EmployeeAttendanceBtn}>교수</button>
             <button className={EmployeeAttendanceCSS.EmployeeAttendanceBtn}>행정직원</button></div>
             <div className={EmployeeAttendanceCSS.EmployeeAttendance}>

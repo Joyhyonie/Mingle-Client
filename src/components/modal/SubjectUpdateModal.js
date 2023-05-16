@@ -35,7 +35,7 @@ function SubjectUpdateModal({subject,closeModal}){
         ()=>{
             if(modify?.status === 200){
                 closeModal(false);
-                toast("과목 수정이 완료 되었습니다.");
+                toast.success("과목 수정이 완료 되었습니다.");
             }
         },[modify]
     );
