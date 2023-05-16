@@ -20,7 +20,14 @@ import StudentAttendanceForProf from "./pages/lecture/professor/StudentAttendanc
 import MainPageLayout from "./layouts/MainPageLayout";
 import MyCalender from "./components/main/MyCalender";
 import AcademicCalender from "./components/main/AcademicCalender";
+
+import ProtectedRoute from "./components/router/ProtectedRoute";
+import Login from './pages/login/Login';
+import IdSearch from './pages/login/IdSearch';
+import PwdSearch from './pages/login/PwdSearch';
+
 import BoardListLayout from './components/lists/BoardList';
+
 
 
 function App() {
@@ -74,8 +81,17 @@ function App() {
 
             <Route path="schedule-academic" element={ <AcademicSchedule/> }/>
             
+      
+          
           </Route>
           
+        
+          <Route path="/login" element={ <ProtectedRoute loginCheck={false}><Login /></ProtectedRoute> }/>
+            <Route path="/idsearch" element={ <ProtectedRoute loginCheck={false}><IdSearch /></ProtectedRoute>}/>
+            <Route path="/pwdsearch" element={ <ProtectedRoute loginCheck={false}><PwdSearch /></ProtectedRoute>}/>
+
+
+
         </Routes>
       </BrowserRouter>
     </>

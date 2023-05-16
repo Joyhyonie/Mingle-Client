@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion"
 import MessageModalLayout from '../../layouts/MessageModalLayout';
 
-function Header ({ setActiveIndex, isDark, setIsDark }) {
+function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
 
     /*  setActiveIndex : 로고 및 마이페이지 아이콘을 클릭 시, Nav바 활성화 취소 */
 
@@ -150,7 +150,7 @@ function Header ({ setActiveIndex, isDark, setIsDark }) {
                 </div>
                 <div className={ isDark ? CommonCSS.buttonBoxDark : CommonCSS.buttonBoxLight }>
                     <motion.button
-                        onClick={ () => navigate('/') }
+                        onClick={ onClickLogoutHandler }
                         whileHover={{ scale: 1.03 }}
                     >
                         logout
