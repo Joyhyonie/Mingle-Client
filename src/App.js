@@ -52,7 +52,7 @@ function App() {
             <Route element={ <MainPageLayout/> }>
               <Route index element={ <MyCalender/> }/>
               <Route element={ <AcademicCalender/> }/>
-            </Route>
+            </Route> {/* <MainPageLayout/>의 Route */}
             
             <Route path="board" element={ <BoardLayout/> }>
               <Route index element={ <Navigate to="/board/main" replace/> }/>
@@ -60,12 +60,12 @@ function App() {
               <Route path="detail" element={ <BoardDetail/> }/>
               <Route path="modify" element={ <BoardModify/> }/>
               <Route path="regist" element={ <BoardRegist/> }/>
-            </Route>
+            </Route> {/* <BoardLayout/>의 Route */}
           
             <Route path="mypage" element={ <MyPageLayout /> }>
               <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
               <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
-            </Route>
+            </Route> {/* <MyPageLayout/>의 Route */}
 
             <Route path="organization" element={ <Organization/> }/>
 
@@ -87,7 +87,7 @@ function App() {
             <Route path="management-student" element={ <StudentManagement/> }/>
 
             <Route path="schedule-academic" element={ <AcademicSchedule/> }/>
-          </Route>
+          </Route> {/* <Layout/>의 Route */}
           
           <Route path="/login" element={ <ProtectedRoute loginCheck={false}><Login /></ProtectedRoute> }/>
           <Route path="/idsearch" element={ <ProtectedRoute loginCheck={false}><IdSearch /></ProtectedRoute>}/>
