@@ -1,0 +1,22 @@
+
+
+
+  .registLectureDiv {
+    text-align: right;
+    margin-right: 200px;
+}
+
+.registLecturebtn {
+  text-align: center;
+  background-color: #FFD7D7;
+  width: 150px;
+  margin-top: 5px;
+  border-radius: 12px;
+  margin-left: 1250px;
+  padding: 13px;
+  font-family: 'Do Hyeon', sans-serif;
+  color: #4D4D4D;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+}

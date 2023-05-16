@@ -3,7 +3,7 @@ import ApplideCertidocCSS from '../../css/ApplyCertiDoc.module.css';
 import CommonCSS from "../../css/common/Common.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callCertiListAPI } from "../../apis/CertiDocAPICalls";
+import { callCertiListAPI, callCertiUpdateAPI } from "../../apis/CertiDocAPICalls";
 import PagingBar from "../../components/common/PagingBar";
 
 /* 행정직원의 '증명서 발급 신청 내역' */
@@ -13,6 +13,8 @@ function AppliedCertidocs () {
     const {data,pageInfo} = useSelector(state => state.CertiReducer);
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
 
     useEffect(
         ()=>{
@@ -22,6 +24,22 @@ function AppliedCertidocs () {
     )
 
     const onClickHandler = (certi) => {
+        console.log(formattedDate);
+        
+        const formData = new FormData();
+        formData.append("certiDocCode" , certi.certiDocCode);
+        formData.append("certiApplyDate" , certi.certiApplyDate);
+        formData.append("signDate" , formattedDate);
+        formData.append("docStatus", "승인");
+        formData.append("reason" , certi.reason);
+        formData.append("applyer.empCode" , certi.applyer.empCode);
+        formData.append("accepter.empCode" , "20231030");
+        formData.append("certiForm.certiFormCode" , certi.certiForm.certiFormCode);
+        formData.append("certiUse" , certi.certiUse);
+        
+        console.log(formData);
+
+        dispatch(callCertiUpdateAPI(formData));
     }
 
     return (
@@ -60,15 +78,15 @@ function AppliedCertidocs () {
                     data.map((certi) => (
                     <tr key={certi.certiDocCode}>
                     <td>{certi.certiDocCode}</td>
-                    <td>{certi.certiApplyDate}</td>
-                    <td>{certi.certiForm.certiFormCode}</td>
+                    <td>{certi.certiApplyDate.split(" ")[0]}</td>
+                    <td>{certi.certiForm.certiFormName}</td>
                     <td>{certi.reason}</td>
                     <td>{certi.applyer.empName}</td>
                     <td>{certi.certiUse}</td>
                     <td>{certi.docStatus}</td>
                     {certi.docStatus !== "승인" ? (
                     <td><button
-                    onClick={onClickHandler(certi)} 
+                    onClick={()=>onClickHandler(certi)} 
                    >승인</button></td>
                    ) : null }
                    </tr>
