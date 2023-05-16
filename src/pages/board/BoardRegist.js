@@ -110,7 +110,7 @@ function BoardRegist () {
                     등록
                 </button>
             </div>
-            <div className={ BoardCSS.InputBox }>
+            <div className={ BoardCSS.inputBox }>
                 <input 
                     type="text" 
                     name="boardTitle"

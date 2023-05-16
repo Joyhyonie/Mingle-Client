@@ -48,13 +48,12 @@ function BoardMain () {
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
-            <motion.button
-                whileHover={{ scale: 1.05 }}
+            <button
                 className={ BoardCSS.goToRegistButton }
                 onClick={ () => navigate('/board/regist') }
             >
                 공지 등록
-            </motion.button>
+            </button>
             <p className={ CommonCSS.pageDirection }>공지사항</p>
             <div className={ SearchBarCSS.basic }>
                 <SearchAndListLayout options={options}/>

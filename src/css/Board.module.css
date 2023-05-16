@@ -62,7 +62,7 @@
     color: white;
 }
 
-.InputBox {
+.inputBox {
     position: relative;
     border-top: 3px solid #FF9797;
     margin-top: 90px;
@@ -72,7 +72,19 @@
     justify-content: center;
 }
 
-.InputBox img {
+.titleBox {
+    display: flex;
+    align-items: center;
+    border-top: 3px solid #FF9797;
+    border-bottom: 1px solid #FF9797;
+    background-color: #f8f8f8;
+    margin-top: 90px;
+    height: 70px;
+    font-size: 20px;
+    padding-left: 30px;
+}
+
+.inputBox img {
     position: absolute;
     width: 20px;
     cursor: pointer;
@@ -120,4 +132,44 @@
     margin: 0 auto;
     width: 1340px;
     margin-top: 20px;
+}
+
+.boardInfoBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -5px 30px;
+    font-size: 18px;
+}
+
+.boardInfoBox div {
+    display: flex;
+    align-items: center;
+}
+
+.boardInfoBox div p+p {
+    margin-left: 20px;
+}
+
+.boardInfoBox span {
+    font-weight: 600;
+}
+
+.detailContentBox {
+    border-bottom: 3px solid #FF9797;
+    width: 1500px;
+    height: 565px;
+}
+
+.boardContent {
+    /* background-color: #f8f8f8; */
+    overflow: scroll;
+    margin: 0 auto;
+    width: 1300px;
+    height: 550px;
+    text-align: center; /* 컨텐츠 내부 모두 가운데 정렬해서 노출 */
+}
+
+.boardContent::-webkit-scrollbar {
+    display: none;
 }
