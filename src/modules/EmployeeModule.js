@@ -20,7 +20,7 @@ export const { employee : { postLogin, resetEmployee, getEmployee }} = createAct
 /* 리듀서 */
 const employeeReducer = handleActions({
     [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
-    [RESET_EMPLOYEE] : (state, action) => initialState,
+    [RESET_EMPLOYEE] : (state, {payload}) => payload,
     [GET_EMPLOYEE] : (state, {payload}) => ({employee : payload})
 
 
