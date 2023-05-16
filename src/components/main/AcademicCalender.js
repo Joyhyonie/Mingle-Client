@@ -65,6 +65,10 @@ function AcademicCalender ({dateInAcCal, setDateInAcCal}) {
         border: none;
       }
 
+      .fc thead {
+        border-bottom: none;
+      }
+
       // 요일 container
       .fc-theme-standard th {
         height: 32px;
