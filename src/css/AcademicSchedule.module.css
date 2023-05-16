@@ -1,20 +1,29 @@
 .acScheContainer {
   display: flex;
-  justify-content: space-between;
-  height: 860px;
+  justify-content: space-around;
   margin: 10px;
-  font-size: 18px;
+  font-size: 20px;
+  width: 100%;
+  height: 800px;
 }
 
-.acScheContainer span {
-  font-size: 20px;
+.acScheRegist {
+  padding: 20px;
+  width: 900px;
+}
+
+.acScheLeft {
+  border: 1px solid none;
+  padding: 20px;
+  overflow: scroll;
+  background-color: #F3F3F3;
+  width: 600px;
 }
 
 .acScheRead p {
   border: 1px solid #FF9797;
   border-radius: 10px;
   background-color: white;
-  width: 500px;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -27,29 +36,10 @@
   margin-left: 20px;
 }
 
-.acScheRegist {
-  width: 590px;
-}
-.acScheRegist img {
-  width: 30px;
-  height: 30px;
-  margin-right: 20px;
-  margin-left: 20px;
-}
-
-.acScheLeft {
-  border: 1px solid none;
-  padding: 20px;
-  height: 800px;
-  overflow: scroll;
-  background-color: #F3F3F3;
-}
-
 .acScheRegist p {
   border: 1px solid #FF9797;
   border-radius: 10px;
   background-color: white;
-  width: 500px;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -62,126 +52,28 @@
   margin-left: 20px;
 }
 
-.acScheInputOne {
-  width: 400px;
-  height: 40px;
-  border: 1px solid #FF9797;
-  border-radius: 5px;
-  width: 750px;
+.acScheRegist span {
   display: flex;
-  align-items: center;
-  padding: 10px;
-  margin-bottom: 30px;
-  margin-top: 38px;
-}
-
-.acScheRegist {
-  margin-left: 100px;
-  width: 800px;
+  float: left;
 }
 
 .acScheName {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  height: 50px;
 }
 
 .acScheName input {
-  width: 600px;
-  margin-right: 30px;
-  height: 50px;
-  border: 1px solid #FF9797;
-  border-radius: 10px;
-  font-size: 18px;
-  padding-left: 10px;
-}
-
-.acScheTime {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.acScheInputTwo {
-  width: 132px;
-  height: 40px;
-  border: 1px solid #FF9797;
-  padding: 0 10px 0 10px;
-  border-radius: 5px;
-}
-
-.acScheDetail {
-  margin-top: 5px;
-}
-
-.acScheDetail span {
-  margin-right: 40px;
-}
-
-.acScheDetail textarea {
-  border: 1px solid #FF9797;
-  border-radius: 5px;
-  resize: none;
-  margin-top: 15px;
-  align-items: center;
-  margin-bottom: 30px;
-  margin-right: 30px;
-}
-
-.acScheTime input {
-  width: 230px;
-  height: 50px;
-  border-radius: 10px;
-  border: 1px solid #FF9797;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 18px;
-}
-
-.acScheDetail {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 30px;
-}
-
-.acScheDetail textarea {
-  width: 590px;
-  height: 400px;
-  resize: none;
-  border: 1px solid #FF9797;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 18px;
-}
-
-textarea:focus, input:focus {
-  /* outline: 2px solid #FFD7D7; */
-}
-
-.acScheBtn {
   display: flex;
   float: right;
-  margin-right: 80px;
   border: 1px solid #FF9797;
-  border-radius: 5px;
-  background-color: #FF9797;
-  width: 100px;
-  height: 36px;
-  color: white;
-  align-items: center;
-  padding-left: 36px;
-  margin-right: 30px;
-  width: 150px;
-  height: 46px;
-  border-radius: 10px;
-  border: none;
-  background-color: #FF9797;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: white;
 }
 
+.acScheDateInput {
+  display: flex;
+  float: right;
+}
+
+.acScheDetail textarea {
+  display: flex;
+  float: right;
+}
