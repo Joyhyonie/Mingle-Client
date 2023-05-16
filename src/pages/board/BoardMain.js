@@ -14,10 +14,10 @@ function BoardMain () {
     const boardList = [{boardCode: 20001, boardType: '학사', boardTitle: '[공지사항] 땡땡땡', boardContent: '우왕앙', boardWriteDate: '2023-05-16', boardCount: 109, empCode:12345, empName: '허멈머', boardModifyDate: '2023-05-19'},
                        {boardCode: 20002, boardType: '장학', boardTitle: '[공지사항] 장학금지원~', boardContent: '우왕앙', boardWriteDate: '2023-05-14', boardCount: 203, empCode:12346, empName: '허꼬순', boardModifyDate: null}
                       ]
-    const pageInfo = {startPage: 1, endPage: 10, currentPage:2, maxPage: 20}
+    const pageInfo = {startPage: 1, endPage: 10, currentPage: 1, maxPage: 10}
 
     const dispatch = useDispatch();
-    const [boardType, setBoardType] = useState('전체');
+    const [boardType, setBoardType] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
 
     const options = [
@@ -37,9 +37,10 @@ function BoardMain () {
         },[boardType]
     );
 
-    /* 클릭된 분류에 따라 boardType이 변경되는 함수 */
-    const boardTypeHandler = (selectedType) => {
-        setBoardType(selectedType);
+    const clikedStyle ={
+        background:'#FF9797', 
+        color:'white', 
+        fontWeight: 'bold'
     }
 
     return (
@@ -51,12 +52,42 @@ function BoardMain () {
                 <SearchAndListLayout options={options}/>
             </div>
             <div className={ BoardCSS.boardButtonBox }>
-                <button onClick={ ()=> boardTypeHandler('전체') }>전체</button>
-                <button onClick={ ()=> boardTypeHandler('학사') }>학사</button>
-                <button onClick={ ()=> boardTypeHandler('장학') }>장학</button>
-                <button onClick={ ()=> boardTypeHandler('행사') }>행사</button>
-                <button onClick={ ()=> boardTypeHandler('취업') }>취업</button>
-                <button onClick={ ()=> boardTypeHandler('기타') }>기타</button>
+                <button 
+                    style={ boardType === ''? clikedStyle : null}
+                    onClick={ (e) => {setBoardType('');} }
+                >
+                    전체
+                </button>
+                <button 
+                    style={ boardType === '학사'? clikedStyle : null}
+                    onClick={ (e) => {setBoardType(e.target.textContent);} }
+                >
+                    학사
+                </button>
+                <button 
+                    style={ boardType === '장학'? clikedStyle : null}
+                    onClick={ (e) => {setBoardType(e.target.textContent);} }
+                >
+                    장학
+                </button>
+                <button 
+                    style={ boardType === '행사'? clikedStyle : null}
+                    onClick={ (e) => {setBoardType(e.target.textContent);} }
+                >
+                    행사
+                </button>
+                <button 
+                    style={ boardType === '취업'? clikedStyle : null}
+                    onClick={ (e) => {setBoardType(e.target.textContent);} }
+                >
+                    취업
+                </button>
+                <button 
+                    style={ boardType === '기타'? clikedStyle : null}
+                    onClick={ (e) => {setBoardType(e.target.textContent);} }
+                >
+                    기타
+                </button>
             </div>
             <div>
                 { boardList && <BoardList boardList={ boardList }/> }
