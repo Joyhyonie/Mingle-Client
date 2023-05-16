@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import EmployeeListCss from '../../css/EmployeeList.module.css';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import PagingBar from '../../components/common/PagingBar';
 import { callEmployeeListAPI } from '../../apis/AcademicAPICalls';
 
@@ -29,13 +29,13 @@ function EmployeeManagement() {
   );
 
   // 테이블 행을 클릭 시 상세 페이지 및 수정 페이지로 라우팅
-  const onClickTableTr = (empCode) => {
-    navigate(`/employee-update/${empCode}`);
-  }
+  // const onClickTableTr = (empCode) => {
+  //   navigate(`/employee-update/${empCode}`);
+  // }
 
-  const onClickEmployeeInsert = () => {
-    navigate("/employee-registration");
-  }
+  // const onClickEmployeeInsert = () => {
+  //   navigate("/employee-registration");
+  // }
 
   return (
     <motion.div
@@ -50,7 +50,7 @@ function EmployeeManagement() {
           <SearchAndListLayout options={options}></SearchAndListLayout>
         </div>
         <div className={EmployeeListCss.employeeBtn}>
-          <button onClick={ onClickEmployeeInsert }>등록</button>
+          <button>등록</button>
           <button>삭제</button>
         </div>
         <div className={EmployeeListCss.employeeBody}>
@@ -81,7 +81,7 @@ function EmployeeManagement() {
               {data && data.map((employee) => (
               <tr
                 key={employee.empCode}
-                onClick={() => onClickTableTr(employee.empCode)}
+                // onClick={() => onClickTableTr(employee.empCode)}
               >
                 <td><input type="checkbox"></input></td>
                 <td>{employee.empCode}</td>
