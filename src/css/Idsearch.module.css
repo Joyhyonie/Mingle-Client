@@ -39,30 +39,35 @@
 .loginDiv button {
     margin-top: 20px;
     margin-bottom: 5px;
-   height: 58px;
-    width: 436px;
-    border-radius: 12px;
-    background-color: #FF9797;
+    width: 154px;
+    height: 49px;
+    border-radius: 50px;
+    background-color: #FFD7D7;
     font-weight: bold;
     border: solid rgba(255, 151, 151, 0.79);
-    color: white;
+    color: #343434;
     font-family: 'Paytone One';
     font-style: normal;
-    font-size: 29px;
+    font-size: 20px;
+    align-items: center;
  }
 .loginDiv span  {
-    color: #FF9797;
+    color: #666666;;
+    text-align: center;
+    font-family: 'Do Hyeon', sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 25px;
 }
 
 .loginDiv h1{
-    font-family: 'Paytone One', sans-serif;
-
+    font-family: 'Do Hyeon', sans-serif;
+    color: #FF9797;
 font-style: normal;
 font-weight: 400;
-font-size: 55px;
+font-size: 57px;
+margin-left: 1px
 }
 
-.loginDiv div{
-    float: right;
-    
-}
+

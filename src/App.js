@@ -20,11 +20,15 @@ import StudentAttendanceForProf from "./pages/lecture/professor/StudentAttendanc
 import MainPageLayout from "./layouts/MainPageLayout";
 import MyCalender from "./components/main/MyCalender";
 import AcademicCalender from "./components/main/AcademicCalender";
-import BoardList from './components/lists/BoardList';
 import BoardDetail from './pages/board/BoardDetail';
 import BoardRegist from './pages/board/BoardRegist';
 import BoardModify from './pages/board/BoardModify';
 import BoardLayout from './layouts/BoardLayout';
+import ProtectedRoute from "./components/router/ProtectedRoute";
+import Login from './pages/login/Login';
+import IdSearch from './pages/login/IdSearch';
+import PwdSearch from './pages/login/PwdSearch';
+import MyPageLayout from './layouts/MypageLayout';
 
 
 function App() {
@@ -57,8 +61,11 @@ function App() {
               <Route path="modify" element={ <BoardModify/> }/>
               <Route path="regist" element={ <BoardRegist/> }/>
             </Route>
-
-            <Route path="mypage" element={ <Mypage/> }/>
+          
+            <Route path="mypage" element={ <MyPageLayout /> }>
+              <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
+              <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
+            </Route>
 
             <Route path="organization" element={ <Organization/> }/>
 
@@ -80,9 +87,12 @@ function App() {
             <Route path="management-student" element={ <StudentManagement/> }/>
 
             <Route path="schedule-academic" element={ <AcademicSchedule/> }/>
-            
           </Route>
           
+          <Route path="/login" element={ <ProtectedRoute loginCheck={false}><Login /></ProtectedRoute> }/>
+          <Route path="/idsearch" element={ <ProtectedRoute loginCheck={false}><IdSearch /></ProtectedRoute>}/>
+          <Route path="/pwdsearch" element={ <ProtectedRoute loginCheck={false}><PwdSearch /></ProtectedRoute>}/>
+              
         </Routes>
       </BrowserRouter>
     </>

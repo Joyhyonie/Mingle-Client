@@ -1,20 +1,29 @@
-// import { createActions } from "redux-actions";
+import { createActions, handleActions } from "redux-actions";
 
-// /* 초기값 */
-// const initialState = [];
+/* 초기값 */
+const initialState = {};
 
-// /* 액션 */
-// const GET_EMPLOYEES = 'employee/GET_EMPLOYEES';
+/* 액션 */
 
-// export const { product : { getEmployees } } = createActions({
-//   [GET_EMPLOYEES] : () => {}
-// });
+const POST_LOGIN = 'employee/POST_LOGIN';
+const RESET_EMPLOYEE = 'employee/RESET_MEMBER';
+const GET_EMPLOYEE = 'employee/GET_EMPLOYEE'
 
-// /* 리듀서 */
-// const employeeReducer = handleActions(
-//   {
-//     [GET_EMPLOYEES] : () => {}
-//   }
-// );
+export const { employee : { postLogin, resetEmployee, getEmployee }} = createActions({
 
-// export default employeeReducer;
+    [POST_LOGIN] : res => res,
+    [RESET_EMPLOYEE] : () => {},
+    [GET_EMPLOYEE] : res => res
+
+});
+
+/* 리듀서 */
+const employeeReducer = handleActions({
+    [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
+    [RESET_EMPLOYEE] : (state, action) => initialState,
+    [GET_EMPLOYEE] : (state, {payload}) => ({employee : payload})
+
+
+}, initialState);
+
+export default employeeReducer;

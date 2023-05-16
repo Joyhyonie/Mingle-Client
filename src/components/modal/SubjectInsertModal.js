@@ -14,7 +14,7 @@ function SubjectInsertModal({setIsInsertModalOpen}){
         ()=>{
             if(regist?.status === 200){
                 setIsInsertModalOpen(false);
-                toast("과목 수정이 완료 되었습니다.");
+                toast.success("과목 등록이 완료 되었습니다.");
             }
         },[regist]
     );
