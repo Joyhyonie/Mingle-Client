@@ -32,7 +32,28 @@ export const callLoginAPI = (form) => {
     }
 }
 
+/* 회원 정보 조회 API  */
+export const callGetEmployeeAPI = () => {
 
+    const requestURL = `${PRE_URL}/employee/employees`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'GET', 
+            headers : {
+                "Content-Type" : "application/json",
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        console.log('[EmployeeAPICalls] callGetEmployeeAPI result : ', result);
+
+        if(result.status === 200 ){
+            dispatch(getEmployee(result));
+        }
+    }
+}
 
 
 

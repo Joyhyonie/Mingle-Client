@@ -1,5 +1,5 @@
 import { Toaster } from 'react-hot-toast';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Layout from './layouts/Layout';
 import Mypage from "./pages/employee/Mypage";
 import Organization from "./pages/employee/Organization";
@@ -25,9 +25,8 @@ import ProtectedRoute from "./components/router/ProtectedRoute";
 import Login from './pages/login/Login';
 import IdSearch from './pages/login/IdSearch';
 import PwdSearch from './pages/login/PwdSearch';
-
+import MyPageLayout from './layouts/MypageLayout';
 import BoardListLayout from './components/lists/BoardList';
-
 
 
 function App() {
@@ -52,11 +51,19 @@ function App() {
               <Route index element={ <MyCalender/> }/>
               <Route element={ <AcademicCalender/> }/>
             </Route>
-            
+          
+
+
+            <Route path="mypage" element={ <MyPageLayout /> }>
+            <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
+            <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
+              </Route>
+
             <Route path="board" element={ <BoardMain/> }>
               <Route index element={ <BoardListLayout/> }/>
               {/* <Route path="" */}
             </Route>
+
 
             <Route path="mypage" element={ <Mypage/> }/>
 
