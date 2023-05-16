@@ -1,5 +1,5 @@
 import { Toaster } from 'react-hot-toast';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from './layouts/Layout';
 import Mypage from "./pages/employee/Mypage";
 import Organization from "./pages/employee/Organization";
@@ -20,7 +20,11 @@ import StudentAttendanceForProf from "./pages/lecture/professor/StudentAttendanc
 import MainPageLayout from "./layouts/MainPageLayout";
 import MyCalender from "./components/main/MyCalender";
 import AcademicCalender from "./components/main/AcademicCalender";
-import BoardListLayout from './components/lists/BoardList';
+import BoardList from './components/lists/BoardList';
+import BoardDetail from './pages/board/BoardDetail';
+import BoardRegist from './pages/board/BoardRegist';
+import BoardModify from './pages/board/BoardModify';
+import BoardLayout from './layouts/BoardLayout';
 
 
 function App() {
@@ -46,9 +50,12 @@ function App() {
               <Route element={ <AcademicCalender/> }/>
             </Route>
             
-            <Route path="board" element={ <BoardMain/> }>
-              <Route index element={ <BoardListLayout/> }/>
-              {/* <Route path="" */}
+            <Route path="board" element={ <BoardLayout/> }>
+              <Route index element={ <Navigate to="/board/main" replace/> }/>
+              <Route path="main" element={ <BoardMain/> }/>
+              <Route path="detail" element={ <BoardDetail/> }/>
+              <Route path="modify" element={ <BoardModify/> }/>
+              <Route path="regist" element={ <BoardRegist/> }/>
             </Route>
 
             <Route path="mypage" element={ <Mypage/> }/>

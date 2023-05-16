@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import PagingBar from "../../components/common/PagingBar";
 import BoardList from "../../components/lists/BoardList";
+import { useNavigate } from "react-router-dom";
 
 function BoardMain () {
 
@@ -16,6 +17,7 @@ function BoardMain () {
                       ]
     const pageInfo = {startPage: 1, endPage: 10, currentPage: 1, maxPage: 10}
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [boardType, setBoardType] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -47,6 +49,13 @@ function BoardMain () {
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
+            <motion.button
+                whileHover={{ scale: 1.05 }}
+                className={ BoardCSS.goToRegistButton }
+                onClick={ () => navigate('/board/regist') }
+            >
+                공지 등록
+            </motion.button>
             <p className={ CommonCSS.pageDirection }>공지사항</p>
             <div className={ SearchBarCSS.basic }>
                 <SearchAndListLayout options={options}/>
