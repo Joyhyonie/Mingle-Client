@@ -11,7 +11,9 @@ input[type="checkbox"] {
 }
 
 .pageDirection {
-    margin: 0px 0px 0px -800px;
+    position: absolute;
+    top: 100px;
+    left: 290px;
     font-weight: 900;
     font-size: 20px;
 }
