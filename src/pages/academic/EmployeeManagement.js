@@ -1,12 +1,11 @@
 /* 행정직원의 '교직원 관리' */
-import React, { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { callEmployeesAPI } from '../../apis/AcademicAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchBarCss from '../../css/common/SearchBar.module.css';
 import SearchAndListLayout from '../../layouts/SearchAndListLayout';
+import SearchBarCss from '../../css/common/SearchBar.module.css';
 import EmployeeListCss from '../../css/EmployeeList.module.css';
-import { useNavigate } from 'react-router-dom';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
 
@@ -20,12 +19,21 @@ const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
 
 function EmployeeManagement() {
 
+  const dispatch = useDispatch();
+
   const [selectAll, setSelectAll] = useState(false);
   const [checkboxes, setCheckboxes] = useState({});
 
+  const {data, pageInfo} = useSelector((state) => state.EmployeeReducer);
+
   const [currentPage, setCurrentPage] = useState(1);
 
-  const employees = ["employee1", "employee2"];
+  useEffect(
+    () => {
+      dispatch(callEmployeesAPI({ currentPage }))
+    },
+    [currentPage]
+  );
 
   const handleSelectAll = () => {
     const newCheckboxes = Object.keys(checkboxes).reduce((prev, curr) => {
@@ -59,7 +67,7 @@ function EmployeeManagement() {
       >
         삭제
       </motion.button>
-      <p className={CommonCSS.pageDirection}>학사관리 {">"} 교직원</p>
+      <p className={CommonCSS.pageDirection}>학사관리 ▸ 교직원</p>
 
 
       <div className={SearchBarCss.basic}>
@@ -84,8 +92,8 @@ function EmployeeManagement() {
                 onChange={handleSelectAll}
               ></input>
             </th>
-            <th>이름</th>
             <th>교번</th>
+            <th>이름</th>
             <th>학과</th>
             <th>이메일</th>
             <th>휴대전화</th>
@@ -94,34 +102,19 @@ function EmployeeManagement() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><input type="checkbox"
-              id="employee1"
-              checked={checkboxes["employee1"] || false}
-              onChange={() => handleCheckboxChange("employee1")}
-            ></input></td>
-            <td>차은우</td>
-            <td>0000000</td>
-            <td>총무처</td>
-            <td>cha123@mingle.ac.kr</td>
-            <td>010-1234-5678</td>
-            <td>2023-05-15</td>
-            <td>재직</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"
-              id="employee2"
-              checked={checkboxes["employee2"] || false}
-              onChange={() => handleCheckboxChange("employee2")}
-            ></input></td>
-            <td>차은우</td>
-            <td>0000000</td>
-            <td>총무처</td>
-            <td>cha123@mingle.ac.kr</td>
-            <td>010-1234-5678</td>
-            <td>2023-05-15</td>
-            <td>재직</td>
-          </tr>
+        {data && 
+            data.map((employee) => (
+              <tr key={employee.empCode}>
+                <td><input type="checkbox" value={employee.empCode}/></td>
+                <td>{employee.empCode}</td>
+                <td>{employee.empName}</td>
+                <td>{employee.department.deptName}</td>
+                <td>{employee.empEmail}</td>
+                <td>{employee.empPhone}</td>
+                <td>{employee.empEntDate}</td>
+                <td>{employee.empStatus}</td>
+              </tr>
+            ))}    
         </tbody>
       </table>
       <div>

@@ -28,7 +28,7 @@ function BoardPreview () {
                 >
                     <p>21234</p>
                     <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
+                    <p>{ text.length > 18 ? text.slice(0, 18) + '...' : text }</p>
                     <p>{formattedDate}</p>
                 </div>
 
