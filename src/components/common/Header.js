@@ -3,6 +3,7 @@ import CommonCSS from '../../css/common/Common.module.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion"
 import MessageModalLayout from '../../layouts/MessageModalLayout';
+import NotificationModal from '../modal/NotificationModal';
 
 function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
 
@@ -36,6 +37,9 @@ function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
     /* 쪽지 모달창 핸들러 함수 */
     const messageModalHandler = () => setMessageModal(!messageModal);
 
+    /* 알림 모달창 핸들러 함수 */
+    const notificationModalHandler = () => setNotificationModal(!notificationModal);
+
     /* mypage에서 다른 페이지로 이동되면 mypage의 아이콘을 다시 기본 아이콘으로 돌려놓기 위한 useEffect */
     useEffect(() => {
         if (location.pathname === "/mypage") { // pathname이 mypage일 때만 true
@@ -55,10 +59,17 @@ function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
         <>
             {/* 쪽지 모달창 */}
             <motion.div drag dragConstraints={{ left: 0, right: 1200, top: 0, bottom: 200}}>
-            {messageModal? 
-            (<MessageModalLayout setMessageModal={setMessageModal} isIconClickedState={isIconClickedState} setIsIconClickedState={setIsIconClickedState}/>) : null
-            }
+                { messageModal ? 
+                    (<MessageModalLayout setMessageModal={setMessageModal} isIconClickedState={isIconClickedState} setIsIconClickedState={setIsIconClickedState}/>) : null
+                }
             </motion.div>
+
+            {/* 알림 모달창 */}
+            <div >
+                { notificationModal ?
+                    (<NotificationModal isDark={isDark}/>) : null
+                }
+            </div>
 
             <motion.div className={ isDark ? CommonCSS.headerBoxDark : CommonCSS.headerBoxLight }
                         animate={{ backgroundColor: isDark ? "#4D4D4D" : "#FFF" }}
@@ -95,7 +106,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
                             src="/images/notification-hover.png"
                             onClick={() => {
                                 setIsIconClickedState(!isIconClickedState.notiIsClicked);
-                                /* 알림창 닫기 기능 추가되어야함 */
+                                setNotificationModal(!notificationModal)
                             }}
                             whileHover={{ scale: 1.05 }}
                         />
@@ -104,7 +115,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
                             src="/images/notification.png"
                             onClick={() => {
                                 stateChangeHandler('notiIsClicked');
-                                /* 알림창 열기 기능 추가되어야함 */
+                                notificationModalHandler();
                             }}
                             whileHover={{ scale: 1.05 }}
                         />
