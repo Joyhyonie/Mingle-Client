@@ -1,17 +1,28 @@
 import { motion } from "framer-motion"
 import MainCSS from "../../css/Main.module.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddScheduleModal from "../modal/AddScheduleModal";
+import ModifyScheduleModal from "../modal/ModifyScheduleModal";
+import { useDispatch } from "react-redux";
 
 function MyCalenderInfo ({dateInMyCal}) {
 
+    const dispatch = useDispatch();
     const [isDone, setIsDone] = useState(false); // (임시용) 완료된 toDoItem 여부
-    const [addScheduleModal, setAddScheduleModal] = useState(false);    // 나의 일정 추가 modal관리용 state
+    const [addScheduleModal, setAddScheduleModal] = useState(false);        // 나의 일정 추가 modal관리용 state
+    const [modifyScheduleModal, setModifyScheduleModal] = useState(false);  // 나의 일정 수정 modal관리용 state
 
-    /* 하나의 toDoItem을 더블 클릭했을 때 해당 toDo의 상세 모달창을 띄우는 이벤트 함수 */
-    const toDoItemClickHandler = () => {
-        console.log('To-Do 상세 모달창 띄우는 함수!')
-    }
+    // (임시용)
+    const schedules = {scheCode: 12345, scheName: '교무처 관련 서류 정리 후 제출', scheStartDate: '2023-05-02', scheEndDate: '2023-05-12', colorCode: '#D2CBFF'}
+
+    
+    useEffect(
+        () => {
+            /* 현재 로그인한 유저의 일정 조회 API */
+            // dispatch(callGetMySchedule());
+            
+        },[]
+    );
 
     /* 클릭된 날짜의 월/일/요일을 변경시키는 이벤트 함수 */
     const clickedDateHandler = () => {
@@ -28,6 +39,14 @@ function MyCalenderInfo ({dateInMyCal}) {
                     (<AddScheduleModal setAddScheduleModal={setAddScheduleModal}/>) : null
                 }
             </div>
+
+            {/* 일정 수정 모달창 */}
+            <div>
+                { modifyScheduleModal ?
+                    (<ModifyScheduleModal schedules={schedules} setModifyScheduleModal={setModifyScheduleModal}/>) : null
+                }
+            </div>
+
             <motion.div
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
             >
@@ -46,7 +65,7 @@ function MyCalenderInfo ({dateInMyCal}) {
                                 <div className={ MainCSS.colorBox } style={{background:"#B6E37B"}}></div>
                                 <p
                                     style={isDone ? {textDecoration: 'line-through', color:'#666666'} : null}
-                                    onDoubleClick={ toDoItemClickHandler }
+                                    onClick={ () => setModifyScheduleModal(true) }
                                 >
                                     교무처 관련 서류 정리 후 제출
                                 </p>
