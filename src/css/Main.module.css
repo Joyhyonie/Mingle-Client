@@ -109,7 +109,8 @@
 }
 
 .toDoItemList::-webkit-scrollbar,
-.academicItemList::-webkit-scrollbar {
+.academicItemList::-webkit-scrollbar,
+.acScheduleModalContainer .content::-webkit-scrollbar {
     display: none; /* 스크롤바 보이지 않도록 */
 }
 
@@ -245,7 +246,8 @@
 }
 
 .scheduleModalContainer,
-.attendanceModalContainer {
+.attendanceModalContainer,
+.acScheduleModalContainer {
     position: absolute;
     top: 50%; 
     left: 50%; 
@@ -258,6 +260,11 @@
 
 .attendanceModalContainer {
     padding: 50px 70px;
+}
+
+.acScheduleModalContainer {
+    width: 600px;
+    height: 400px;
 }
 
 .scheduleModalContainer div {
@@ -312,6 +319,43 @@
     justify-content: center;
     color: #7e7e7e;
     font-weight: 100;
+}
+
+.acScheduleModalContainer .title {
+    border-top: 1px solid #FF9797;
+    border-bottom: 1px solid #FF9797;
+    background: #fff7f7;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.acScheduleModalContainer .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.acScheduleModalContainer .info span {
+    font-weight: bold;
+}
+
+.acScheduleModalContainer .info text {
+    color: #FF9797;
+}
+
+.acScheduleModalContainer .content {
+    border: 1px solid #FF9797;
+    border-radius: 20px;
+    padding: 10px 30px;
+    height: 280px;
+    overflow: scroll;
+}
+
+.acScheduleModalContainer .content pre {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 35px;
 }
 
 .buttonBox {
