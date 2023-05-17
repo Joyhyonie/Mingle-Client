@@ -28,7 +28,7 @@ const EmployeeReducer= handleActions({
     // [RESET_EMPLOYEE] : (state, action) => initialState,
 const EmployeeReducer = handleActions({
     [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
-    [RESET_EMPLOYEE] : (state, {payload}) => initialState,
+    [RESET_EMPLOYEE] : (state, action) => initialState,
     [GET_EMPLOYEES] : (state, {payload}) => payload,
     [GET_EMPLOYEE] : (state, {payload}) => ({employee : payload})
 

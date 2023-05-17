@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MypageCSS from '../../css/Mypage.module.css';
 import { useEffect } from 'react';
 import { callGetEmployeeAPI } from '../../apis/EmployeeAPICalls';
-
+import screenshotImage from "./스크린샷 2023-05-17 103847.png";
 function Mypage () {
 
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function Mypage () {
         >
             {employee && 
                 <div className={MypageCSS.registerDiv}>
-                    <img src="" alt="" />
+                    <img src={screenshotImage} alt="" />
 
                     <div className={MypageCSS.row}>
                         <div className={MypageCSS.column2}>
@@ -122,7 +122,7 @@ function Mypage () {
                                 id="employeeEmail"
                                 type="text"
                                 readOnly={true}
-                                value={employee.data.department}
+                                value={employee.data.department.deptName}
                             />
                         </div>
                         <div className={MypageCSS.column}>
@@ -133,6 +133,7 @@ function Mypage () {
                                 readOnly={true}
                                 value={employee.data.empAnnual}
                             />
+                            
                         </div>
                     </div>
                 </div>
