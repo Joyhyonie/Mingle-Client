@@ -17,13 +17,12 @@ export const { employee : { postLogin, resetEmployee, getEmployee }} = createAct
 });
 
 /* 리듀서 */
-const employeeReducer = handleActions({
+const EmployeeReducer= handleActions({
     [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
-    [RESET_EMPLOYEE] : (state, {payload}) => payload,
     // [RESET_EMPLOYEE] : (state, action) => initialState,
     [GET_EMPLOYEE] : (state, {payload}) => ({employee : payload})
 
 
 }, initialState);
 
-export default employeeReducer;
+export default EmployeeReducer;
