@@ -1,0 +1,67 @@
+.lectureList {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 850px;
+    margin: 10px;
+    margin-right: 580px;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .insertButton {
+    margin-left: 10px; /* 버튼 사이의 간격 조정 */
+    margin-right: 557px;
+    cursor: pointer;
+    padding: 10px;
+    width: 120px;
+    background-color: #FF9797;
+    border-radius: 7px;
+    border: none;
+    color: white;
+  }
+  
+  .deleteButton {
+    margin-left: 10px; /* 버튼 사이의 간격 조정 */
+    width: 120px;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    background-color: #FF9797;
+    border-radius: 7px;
+    border: none;
+  }
+
+.SubjectListTable {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.SubjectListTable th, td {
+    height: 10px;
+    text-align: center;
+    word-break:break-all;
+    table-layout:fixed;
+}
+
+.SubjectListTable button {
+    width: 50px;
+    text-align: center;
+    background-color: #FFD7D7;
+    margin-top: 10px;
+    border-radius: 20px;
+    font-family: 'Do Hyeon', sans-serif;
+    color: #4D4D4D;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+}
+
+.SubjectListTable button:hover{
+    color: white;
+    background-color: #FF9797;
+}
