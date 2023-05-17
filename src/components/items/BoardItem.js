@@ -22,7 +22,7 @@ function BoardItem ({board}) {
         >
             <td>{board.boardCode}</td>
             <td>{board.boardType}</td>
-            <td>{board.boardTitle}</td>
+            <td>{ board.boardTitle.length > 46 ? board.boardTitle.slice(0, 46) + '...' : board.boardTitle }</td>
             <td>{board.empName}</td>
             <td>{board.boardModifyDate ? board.boardModifyDate : board.boardWriteDate}</td>
             <td>{board.boardCount}</td>

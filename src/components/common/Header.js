@@ -4,8 +4,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion"
 import MessageModalLayout from '../../layouts/MessageModalLayout';
 import NotificationModal from '../modal/NotificationModal';
+import LogoutModal from '../modal/LogoutModal';
 
-function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
+function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
 
     /*  setActiveIndex : 로고 및 마이페이지 아이콘을 클릭 시, Nav바 활성화 취소 */
 
@@ -19,6 +20,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
     const [isHovered, setIsHovered] = useState(false);
     const [notificationModal, setNotificationModal] = useState(false);  // 알림 모달 컨트롤 state
     const [messageModal, setMessageModal] = useState(false);            // 쪽지 모달 컨트롤 state
+    const [logoutModal, setLogoutModal] = useState(false);              // 로그아웃 모달 컨트롤 state
 
     /* 클릭된 아이콘을 컨트롤 하기 위한 이벤트 함수 */
     const stateChangeHandler = (stateName) => {
@@ -65,9 +67,16 @@ function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
             </motion.div>
 
             {/* 알림 모달창 */}
-            <div >
+            <div>
                 { notificationModal ?
                     (<NotificationModal isDark={isDark}/>) : null
+                }
+            </div>
+
+            {/* 로그아웃 모달창 */}
+            <div>
+                { logoutModal ?
+                    (<LogoutModal logoutHandler={logoutHandler} setLogoutModal={setLogoutModal}/>) : null
                 }
             </div>
 
@@ -161,7 +170,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, onClickLogoutHandler }) {
                 </div>
                 <div className={ isDark ? CommonCSS.buttonBoxDark : CommonCSS.buttonBoxLight }>
                     <motion.button
-                        onClick={ onClickLogoutHandler }
+                        onClick={ () => setLogoutModal(true) }
                         whileHover={{ scale: 1.03 }}
                     >
                         logout

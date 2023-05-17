@@ -31,8 +31,8 @@ function BoardDeleteModal ({setBoardDeleteModal, boardCode}) {
     }
 
     return (
-        <div className={ BoardCSS.deleteModal }>
-            <div className={ BoardCSS.modalContainer }>
+        <div className={ BoardCSS.deleteModal } onClick={ () => setBoardDeleteModal(false) }>
+            <div className={ BoardCSS.modalContainer } onClick={ (e) => e.stopPropagation() }>
                 <p>삭제 된 공지는 복구할 수 없습니다.<br/>계속 진행하시겠습니까?</p>
                 <div className={ BoardCSS.deleteButtonBox }>
                     <button
