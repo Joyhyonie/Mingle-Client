@@ -48,7 +48,7 @@ function App() {
     />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <ProtectedRoute loginCheck={false}><Layout/></ProtectedRoute> }>
+          <Route path="/" element={ <ProtectedRoute loginCheck={true}><Layout/></ProtectedRoute> }>
             <Route element={ <MainPageLayout/> }>
               <Route index element={ <MyCalender/> }/>
               <Route element={ <AcademicCalender/> }/>
