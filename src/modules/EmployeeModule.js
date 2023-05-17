@@ -32,4 +32,4 @@ const EmployeeReducer = handleActions({
 
 }, initialState);
 
-export default EmployeeReducer;
+export default EmployeeReducer; 
