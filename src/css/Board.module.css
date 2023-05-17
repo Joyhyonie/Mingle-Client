@@ -42,7 +42,8 @@
     right: 70px;
 }
 
-.buttonBox button {
+.buttonBox button,
+.deleteButtonBox button {
     border: 1px solid #FF9797;
     font-size: 18px;
     padding: 7px 35px;
@@ -172,4 +173,36 @@
 
 .boardContent::-webkit-scrollbar {
     display: none;
+}
+
+/* 삭제 모달창 */
+.deleteModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modalContainer {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #FF9797;
+    border-radius: 20px;
+    padding: 50px;
+}
+
+.modalContainer p {
+    text-align: center;
+    font-size: 20px;
+    padding: 10px 30px 20px 30px;
+}
+
+.deleteButtonBox {
+    text-align: center;
 }
