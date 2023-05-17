@@ -6,7 +6,7 @@ import { callGetEmployeeAPI } from '../../apis/EmployeeAPICalls';
 function Mypage () {
 
     const dispatch = useDispatch();
-    const { employee } = useSelector(state => state.employeeReducer);
+    const { employee } = useSelector(state => state.EmployeeReducer);
 
     useEffect(
         () => {

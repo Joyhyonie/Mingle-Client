@@ -5,7 +5,7 @@ import CertiReducer from "./CertiModule";
 
 /* 여러 모듈을 combine 시키기 */
 const rootReducer = combineReducers({
-  SubjectReducer, CertiReducer, EmployeeReducer,
+  SubjectReducer, CertiReducer,EmployeeReducer
 });
 
 export default rootReducer;
