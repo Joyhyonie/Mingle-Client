@@ -56,7 +56,7 @@ function MyCertiDoc () {
                         data.map((myCerti)=>(
                             <tr key={myCerti.certiDocCode}>
                                 <td>{myCerti.certiDocCode}</td>
-                                <td>{myCerti.certiApplyDate}</td>
+                                <td>{myCerti.certiApplyDate.split(" ")[0]}</td>
                                 <td>{myCerti.certiForm.certiFormName}</td>
                                 <td>{myCerti.reason}</td>
                                 <td>{myCerti.certiUse}</td>
