@@ -233,7 +233,7 @@
 }
 
 
-/* 메인페이지 modal */
+/* 메인페이지 modal -------------------------------------------------- */
 .modal {
     position: fixed;
     top: 0;
@@ -244,7 +244,8 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.scheduleModalContainer {
+.scheduleModalContainer,
+.attendanceModalContainer {
     position: absolute;
     top: 50%; 
     left: 50%; 
@@ -255,13 +256,18 @@
     padding: 50px;
 }
 
+.attendanceModalContainer {
+    padding: 50px 70px;
+}
+
 .scheduleModalContainer div {
     display: flex;
     align-items: center;
     margin: -30px 0px -30px -25px;
 }
 
-.scheduleModalContainer p {
+.scheduleModalContainer p,
+.attendanceModalContainer p {
     text-align: center;
     font-size: 20px;
     padding: 10px 30px 20px 30px;
@@ -296,12 +302,30 @@
     outline: none;
 }
 
+.timeNow {
+    margin: 0px 0px -30px 0px;
+    color: #FF9797;
+}
+
+.attendanceModalContainer text {
+    display: flex;
+    justify-content: center;
+    color: #7e7e7e;
+    font-weight: 100;
+}
+
 .buttonBox {
     text-align: center;
     justify-content: right;
 }
 
-.buttonBox button {
+.centerButtonBox {
+    text-align: center;
+    justify-content: center;
+}
+
+.buttonBox button,
+.centerButtonBox button {
     border: 1px solid #FF9797;
     font-size: 18px;
     padding: 5px 39.5px;
@@ -309,6 +333,10 @@
     margin: 30px 0px 20px 10px;
     font-weight: 600;
     cursor: pointer;
+}
+
+.centerButtonBox button {
+    margin-top: -50px;
 }
 
 .whiteButton {
@@ -320,3 +348,4 @@
     background-color: #FF9797;
     color: white;
 }
+
