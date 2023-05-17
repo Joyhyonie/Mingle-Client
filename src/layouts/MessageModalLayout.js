@@ -130,7 +130,7 @@ function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClic
                     </div>
                     <div className={ MessageCSS.closeButton }>
                         <img 
-                            src="./images/close.png"
+                            src={`${process.env.PUBLIC_URL}/images/close.png`}
                             onClick={ () => {
                                 setIsIconClickedState(!isIconClickedState.msgIsClicked);
                                 setMessageModal(false);

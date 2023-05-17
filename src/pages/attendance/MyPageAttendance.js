@@ -30,10 +30,10 @@ function MyPageAttendance() {
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
                     <col width="25%" />
-            <col width="40%" />
-            <col width="40%" />
-            <col width="50%" />
-            <col width="100%" />                   
+                    <col width="40%" />
+                    <col width="40%" />
+                    <col width="50%" />
+                    <col width="100%" />                   
                     </colgroup>
                     <thead>
                         <tr>
@@ -61,7 +61,6 @@ function MyPageAttendance() {
                 ))}   
                     </tbody>
                 </table>
-              
             </div>
         </motion.div>
     );
