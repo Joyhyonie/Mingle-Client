@@ -81,7 +81,7 @@ function App() {
             <Route path="subject" element={ <SubjectList/> }/>
 
             <Route path="lecture-student-admin" element={ <StudentAttendanceForAdmin/> }/>
-            <Route path="lecture-regist-admin" element={ <RegistLectureForAdmin/> }/>
+            <Route path="lecture-regist-admin"n element={ <RegistLectureForAdmin/> }/>
             <Route path="lecture-student-prof" element={<StudentAttendanceForProf/>  }/>
             <Route path="lecture-regist-prof" element={ <RegistLectureForProf/> }/>
 
