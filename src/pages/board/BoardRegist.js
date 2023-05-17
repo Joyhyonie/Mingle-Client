@@ -43,6 +43,7 @@ function BoardRegist () {
     const changeEditorHandler = () => {
         const editorInstance = textRef.current.getInstance();
         setEditorValue(editorInstance.getHTML());
+        console.log(editorValue);
         setForm({
             ...form,
             boardContent: editorInstance.getHTML()
@@ -67,7 +68,7 @@ function BoardRegist () {
     /* '등록' 버튼을 누를 시, 해당 게시글이 등록되는 이벤트 함수 */
     const registBoardHandler = () => {
 
-        if(form.boardTitle === undefined) {
+        if(form.boardTitle === undefined || form.boardTitle === '') {
             toast.error("공지의 제목을 입력해주세요 !");
         } else if(form.boardType === undefined) {
             toast.error("분류를 선택해주세요 !");

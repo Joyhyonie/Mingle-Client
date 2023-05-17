@@ -35,7 +35,7 @@ function BoardDetail () {
                     <>
                     <button 
                         className={ BoardCSS.pinkButton }
-                        onClick={ () => navigate(`/${boardCode}/modify`) }
+                        onClick={ () => navigate(`/board/${boardCode}/modify`) }
                     >
                         수정
                     </button>
