@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Header from './Header';
 import NavbarForAdmin from './NavbarForAdmin';
 import NavbarForAdminItem from './NavbarForAdminItem';
 import SearchBarCss from '../../css/common/SearchBar.module.css'
 
 function SearchBar() {
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = event => {

@@ -18,7 +18,7 @@ function LoginForm() {
     };
     // 폼 데이터를 한 번에 변경 및 state 저장
     const[form, setForm] = useState({
-        empCode: '',
+        empId: '',
         empPwd: ''
     });
 
@@ -47,7 +47,7 @@ function LoginForm() {
             <span>
             <input
                 type="text"
-                name="empCode"
+                name="empId"
                 placeholder="아이디를 입력하세요."
                 autoComplete='off'
                 onChange={ onChangeHandler }

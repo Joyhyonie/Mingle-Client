@@ -2,9 +2,30 @@
 import { motion } from "framer-motion"
 import EmployeeAttendanceCSS from '../../css/EmployeeAttendance.module.css'
 import CommonCSS from "../../css/common/Common.module.css";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { callEmployee } from "../../apis/AttendanceAPICalls";
+import { useNavigate } from "react-router-dom";
 
 
 function EmployeeAttendance () {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [currentPage, setCurrentPage] = useState(1);
+    const {data, pageInfo} = useSelector(state => state.EmployeeReducer);
+
+
+    useEffect(
+        ()=>{
+            dispatch(callEmployee({currentPage}));
+        },
+        [currentPage]
+    )
+
+    const onClickHandler = (empCode) => {
+        navigate(`/attendance-employee/${empCode}`);
+    }
 
     return (
         <motion.div
@@ -30,11 +51,16 @@ function EmployeeAttendance () {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>20230001</td>                            
-                            <td>경영학과</td>
-                            <td>이진호</td>
-                        </tr>
+                            {data && (
+                            data.map((employee)=>(
+                                <tr key={employee.empCode}
+                                    onClick={()=> onClickHandler(employee.empCode) }>
+                                    <td>{employee.empCode}</td>
+                                    <td>{employee.department.deptName}</td>
+                                    <td>{employee.empName}</td>
+                                </tr>
+                            )
+                            ))}
                     </tbody>
                 </table>
             </div>

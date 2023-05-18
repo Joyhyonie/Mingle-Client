@@ -1,5 +1,5 @@
 import { async } from "q";
-import { getCertis, putCerti } from "../modules/CertiModule";
+import { getCertis, patchCerti, postCerti, putCerti } from "../modules/CertiModule";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -19,23 +19,24 @@ export const callCertiListAPI = () => {
     }
 }
 
-export const callCertiUpdateAPI = (formData) => {
-
-    const requestURL = `${CERTI_URL}/update`;
-
+export const callCertiUpdateAPI = (certi) => {
+    const requestURL = `${CERTI_URL}/update/${certi.certiDocCode}`;
+  
     return async (dispatch,getState) => {
         const result = await fetch(requestURL,{
-            method : 'PUT',
-            body : formData
+            method : 'PATCH',
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+            },
+            body: JSON.stringify(certi)
         }).then(response => response.json());
 
         if(result.status === 200){
-            dispatch(putCerti(result));
-            console.log(result);
+            dispatch(patchCerti(result));
         }
     }
-
-}
+};
 
 export const callMyCertiDocListAPI = () => {
 
@@ -56,4 +57,39 @@ export const callMyCertiDocListAPI = () => {
         }
     }
 
+}
+
+export const callDetailCertiDoc = (myCerti) => {
+
+    const requestURL = `${CERTI_URL}/myCerti/${myCerti.certiDocCode}`;
+
+    return async(dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET"
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(getCertis(result));
+            console.log(result);
+        }
+    }
+}
+
+export const callRegistCertiDoc = (formData) => {
+    const requestURL = `${CERTI_URL}/regist`;
+
+    return async(dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "POST",
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+            },
+            body : formData
+        }).then((response)=> response.json());
+
+        if(result.status === 200){
+            console.log(result);
+            dispatch(postCerti(result));
+        }
+    }
 }

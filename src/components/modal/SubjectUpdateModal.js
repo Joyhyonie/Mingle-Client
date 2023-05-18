@@ -3,15 +3,13 @@ import {callSubjectUpdateAPI} from "../../apis/LectureAPICalls";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 function SubjectUpdateModal({subject,closeModal}){
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [form, setForm] = useState(subject);
-    const {modify} = useSelector(state => state.subjectReducer);
+    const {modify} = useSelector(state => state.SubjectReducer);
 
     const onChangeHandler = (e) => {
         setForm({

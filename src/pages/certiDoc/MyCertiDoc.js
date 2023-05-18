@@ -5,6 +5,8 @@ import PagingBar from "../../components/common/PagingBar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyCertiDocListAPI } from "../../apis/CertiDocAPICalls";
+import CareerCerti from "../../components/documents/CareerCerti";
+import { useNavigate } from "react-router";
 
 /* 모든 교직원의 '증명서 발급 이력' */
 
@@ -12,7 +14,10 @@ function MyCertiDoc () {
 
     const {data,pageInfo} = useSelector(state => state.CertiReducer);
     const [currentPage, setCurrentPage] = useState(1);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectCerti, setSelectCerti] = useState();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(
         ()=>{
@@ -20,6 +25,15 @@ function MyCertiDoc () {
         },
         [currentPage]
     )
+
+    const openModal = (myCerti) => {
+        setSelectCerti(myCerti);
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+      };
 
     return (
         <motion.div
@@ -61,11 +75,19 @@ function MyCertiDoc () {
                                 <td>{myCerti.reason}</td>
                                 <td>{myCerti.certiUse}</td>
                                 <td>{myCerti.docStatus}</td>
-                                <td><button>보기</button></td>
+                                {myCerti.docStatus == "승인" ? (
+                                <td><button onClick={()=> openModal(myCerti)}>보기</button></td>
+                                ): null }
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                {isModalOpen && (
+              <CareerCerti
+              closeModal={closeModal}
+              myCerti={selectCerti}
+                  />
+      )}
             </div>
             <div>
                 {/* 페이징바 */}
