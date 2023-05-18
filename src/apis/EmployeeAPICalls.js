@@ -1,4 +1,4 @@
-import { getEmployee, postLogin } from "../modules/EmployeeModule";
+import { getEmployee, postLogin, patchEmployee } from "../modules/EmployeeModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -56,7 +56,26 @@ export const callGetEmployeeAPI = () => {
 }
 
 
+export const callPatchEmployeeAPI = ({ empCode }) => {
 
+    const requestURL = `${PRE_URL}/employee/putmypag/${empCode}`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method : 'PATCH', 
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        console.log('[EmployeeAPICalls] callPatchEmployeeAPI result : ', result);
+
+        if(result.status === 200 ){
+            dispatch(patchEmployee(result));
+        }
+    }
+}
 
 
 
