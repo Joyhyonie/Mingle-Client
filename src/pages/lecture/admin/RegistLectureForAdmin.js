@@ -13,14 +13,6 @@ import PagingBar from "../../../components/common/PagingBar";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
 import LectureInsertModal from "../../../components/modal/LectureInsertModal";
 
-
-
-
-
-
-
-
-
 function RegistLectureForAdmin () {
   const pageInfo = {startPage: 1, endPage: 10, currentPage:2, maxPage: 20}
 

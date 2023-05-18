@@ -30,7 +30,7 @@ import IdSearch from './pages/login/IdSearch';
 import PwdSearch from './pages/login/PwdSearch';
 import MyPageLayout from './layouts/MypageLayout';
 import PwdChange from './pages/login/Pwdchange';
-import AttendanceDetail from './pages/lecture/admin/AttendanceDetail';
+import AttendanceDetail from './components/items/AttendanceDetail';
 
 function App() {
   return (
@@ -77,6 +77,8 @@ function App() {
             <Route path="certi-doc-mine" element={ <MyCertiDoc/> }/>
 
             <Route path="attendance-employee" element={ <EmployeeAttendance/> }/>
+              <Route path="attendance-employee/:empCode" element={<AttendanceDetail/>}/>  
+            
             <Route path="leave-doc-applied" element={ <AppliedLeaveList/> }/>
 
             <Route path="subject" element={ <SubjectList/> }/>

@@ -6,7 +6,7 @@ const initialState = {};
 /* 액션 */
 
 const POST_LOGIN = 'employee/POST_LOGIN';
-const RESET_EMPLOYEE = 'employee/RESET_MEMBER';
+const RESET_EMPLOYEE = 'employee/RESET_EMPLOYEE';
 const GET_EMPLOYEES = 'employee/GET_EMPLOYEES';
 const GET_EMPLOYEE = 'employee/GET_EMPLOYEE';
 const POST_EMPLOYEE = 'employee/POST_EMPLOYEE';
@@ -27,10 +27,7 @@ export const { employee :
 /* 리듀서 */
 const EmployeeReducer= handleActions({
     [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
-    // [RESET_EMPLOYEE] : (state, action) => initialState,
-
-    [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
-    [RESET_EMPLOYEE] : (state, action) => initialState,
+    [RESET_EMPLOYEE] : (state, {payload}) => payload,
     [GET_EMPLOYEES] : (state, {payload}) => payload,
     [GET_EMPLOYEE] : (state, {payload}) => payload,
     [POST_EMPLOYEE] : (state, {payload}) => ({regist : payload}),
