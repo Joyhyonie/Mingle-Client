@@ -75,7 +75,9 @@ function MyCertiDoc () {
                                 <td>{myCerti.reason}</td>
                                 <td>{myCerti.certiUse}</td>
                                 <td>{myCerti.docStatus}</td>
+                                {myCerti.docStatus == "승인" ? (
                                 <td><button onClick={()=> openModal(myCerti)}>보기</button></td>
+                                ): null }
                             </tr>
                         ))}
                     </tbody>

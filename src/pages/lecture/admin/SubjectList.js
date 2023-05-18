@@ -21,6 +21,7 @@ function SubjectList() {
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
+  console.log(data);
 
   const options = [
     { value: "sbjName", name: "과목명" },

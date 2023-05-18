@@ -13,14 +13,6 @@ import PagingBar from "../../../components/common/PagingBar";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
 import SubjectInsertModal from "../../../components/modal/SubjectInsertModal";
 
-
-
-
-
-
-
-
-
 function RegistLectureForAdmin () {
 
     const dispatch = useDispatch();
