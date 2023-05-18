@@ -6,7 +6,7 @@ import screenshotImage from "./스크린샷 2023-05-17 103847.png";
 function Mypage () {
 
     const dispatch = useDispatch();
-    const { employee } = useSelector(state => state.employeeReducer);
+    const { employee } = useSelector(state => state.EmployeeReducer);
 
     useEffect(
         () => {

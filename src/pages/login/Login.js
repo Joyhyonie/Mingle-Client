@@ -10,7 +10,7 @@ function Login(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { login } = useSelector(state => state.employeeReducer);
+    const { login } = useSelector(state => state.EmployeeReducer);
 
    useEffect(
     () => {

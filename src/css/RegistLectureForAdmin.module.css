@@ -1,9 +1,9 @@
 
 
 
-  .registLectureDiv {
+.registLectureDiv {
     text-align: right;
-    margin-right: 200px;
+    margin-right: 35px;
 }
 
 .registLecturebtn {
@@ -12,11 +12,35 @@
   width: 150px;
   margin-top: 5px;
   border-radius: 12px;
-  margin-left: 1250px;
+  margin-left: 1000px;
   padding: 13px;
   font-family: 'Do Hyeon', sans-serif;
   color: #4D4D4D;
   font-size: 18px;
   cursor: pointer;
   border: none;
+}
+.lecturesearchbar{
+  flex-grow: 1;
+  border: 1px solid none;
+  border-radius: 10px;
+  background-color: #FFD7D7;
+  margin-top: 60px;
+  padding: 17px;
+  display: flex;
+  gap: 15px;
+  align-items: center; 
+  
+}
+
+.basic {
+  border: 1px solid none;
+  border-radius: 10px;
+  background-color: #FFD7D7;
+  margin-top: 60px;
+  padding: 17px;
+  display: flex;
+  gap: 100px;
+  align-items: center; 
+
 }

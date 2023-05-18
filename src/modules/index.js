@@ -7,7 +7,11 @@ import employeeReducer from "./EmployeeModule";
 
 /* 여러 모듈을 combine 시키기 */
 const rootReducer = combineReducers({
+
   SubjectReducer, CertiReducer, EmployeeReducer, employeeReducer
+
+
+
 });
 
 export default rootReducer;

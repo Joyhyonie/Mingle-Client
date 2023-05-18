@@ -13,8 +13,6 @@ function AppliedCertidocs () {
     const {data,pageInfo} = useSelector(state => state.CertiReducer);
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString();
 
     useEffect(
         ()=>{
@@ -23,23 +21,9 @@ function AppliedCertidocs () {
         [currentPage]
     )
 
-    const onClickHandler = (certi) => {
-        console.log(formattedDate);
-        
-        const formData = new FormData();
-        formData.append("certiDocCode" , certi.certiDocCode);
-        formData.append("certiApplyDate" , certi.certiApplyDate);
-        formData.append("signDate" , formattedDate);
-        formData.append("docStatus", "승인");
-        formData.append("reason" , certi.reason);
-        formData.append("applyer.empCode" , certi.applyer.empCode);
-        formData.append("accepter.empCode" , "20231030");
-        formData.append("certiForm.certiFormCode" , certi.certiForm.certiFormCode);
-        formData.append("certiUse" , certi.certiUse);
-        
-        console.log(formData);
-
-        dispatch(callCertiUpdateAPI(formData));
+    const onClickHandler = (certi) => {      
+        console.log(certi);
+        dispatch(callCertiUpdateAPI(certi));
     }
 
     return (
