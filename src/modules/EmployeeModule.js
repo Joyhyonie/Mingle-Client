@@ -25,9 +25,12 @@ export const { employee :
 });
 
 /* 리듀서 */
-const EmployeeReducer = handleActions({
+const EmployeeReducer= handleActions({
     [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
-    [RESET_EMPLOYEE] : (state, {payload}) => initialState,
+    // [RESET_EMPLOYEE] : (state, action) => initialState,
+
+    [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
+    [RESET_EMPLOYEE] : (state, action) => initialState,
     [GET_EMPLOYEES] : (state, {payload}) => payload,
     [GET_EMPLOYEE] : (state, {payload}) => payload,
     [POST_EMPLOYEE] : (state, {payload}) => ({regist : payload}),
@@ -35,4 +38,4 @@ const EmployeeReducer = handleActions({
 
 }, initialState);
 
-export default EmployeeReducer;
+export default EmployeeReducer; 

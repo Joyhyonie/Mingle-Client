@@ -1,6 +1,17 @@
+import { useDispatch } from "react-redux";
 import MainCSS from "../../css/Main.module.css"
+import { useEffect } from "react";
 
 function BoardPreview () {
+
+    const dispatch = useDispatch();
+
+    useEffect(
+        () => {
+            /* 공지사항 조회 API */
+            // dispatch(callGetBoardListAPI())
+        },[]
+    );
 
     const boardItemClickHandler = () => {
         console.log('해당 공지사항의 상세 페이지로 이동하는 함수!')
@@ -24,11 +35,11 @@ function BoardPreview () {
             <div className={ MainCSS.boardListBox }>
                 <div 
                     className={ MainCSS.boardItemBox }
-                    onDoubleClick={ boardItemClickHandler }
+                    onClick={ boardItemClickHandler }
                 >
                     <p>21234</p>
                     <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
+                    <p>{ text.length > 18 ? text.slice(0, 18) + '...' : text }</p>
                     <p>{formattedDate}</p>
                 </div>
 

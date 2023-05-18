@@ -30,6 +30,7 @@ import IdSearch from './pages/login/IdSearch';
 import PwdSearch from './pages/login/PwdSearch';
 import MyPageLayout from './layouts/MypageLayout';
 import PwdChange from './pages/login/Pwdchange';
+import AttendanceDetail from './pages/lecture/admin/AttendanceDetail';
 
 function App() {
   return (
@@ -48,7 +49,7 @@ function App() {
     />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <ProtectedRoute loginCheck={false}><Layout/></ProtectedRoute> }>
+          <Route path="/" element={ <ProtectedRoute loginCheck={true}><Layout/></ProtectedRoute> }>
             <Route element={ <MainPageLayout/> }>
               <Route index element={ <MyCalender/> }/>
               <Route element={ <AcademicCalender/> }/>
@@ -81,6 +82,7 @@ function App() {
             <Route path="subject" element={ <SubjectList/> }/>
 
             <Route path="lecture-student-admin" element={ <StudentAttendanceForAdmin/> }/>
+            <Route path="/attendance/:lectureCode" element={<AttendanceDetail/>} />
             <Route path="lecture-regist-admin" element={ <RegistLectureForAdmin/> }/>
             <Route path="lecture-student-prof" element={<StudentAttendanceForProf/>  }/>
             <Route path="lecture-regist-prof" element={ <RegistLectureForProf/> }/>
