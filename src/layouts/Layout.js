@@ -22,7 +22,7 @@ function Layout () {
 
 
     return (
-        <>
+        <div>
             <Header setActiveIndex={setActiveIndex} isDark={isDark} setIsDark={setIsDark} logoutHandler={logoutHandler}/>
             <div className={ CommonCSS.flex }>
                 <div className={ CommonCSS.navbarCustom }>
@@ -35,7 +35,7 @@ function Layout () {
                     <Outlet/>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
