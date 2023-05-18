@@ -7,6 +7,7 @@ import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
 import OrganizationList from '../../components/lists/OrganizationList';
+import OrganizationItemCss from "../../css/OrganizationItemCss.module.css";
 
 /* 조직도 */
 
@@ -42,12 +43,14 @@ function Organization() {
         <SearchAndListLayout options={options}></SearchAndListLayout>
       </div>
 
+      <div className={ OrganizationItemCss.div }>
       <div>
         { employeeList && <OrganizationList employeeList={employeeList} />}
       </div>
 
       <div>
         {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+      </div>
       </div>
     </motion.div>
   );

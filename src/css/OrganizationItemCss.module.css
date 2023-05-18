@@ -1,3 +1,13 @@
+
+.div {
+  overflow: scroll;
+  height: 650px;
+}
+
+.div::-webkit-scrollbar {
+  display: none;
+}
+
 .organizationBox {
   border-bottom: 1px solid #666666;
   margin: 20px 30px 20px 30px; /* 상우하좌 */
