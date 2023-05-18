@@ -8,7 +8,7 @@ function LectureInsertModal({setIsInsertModalOpen}){
 
     const dispatch = useDispatch();
     const [form, setForm] = useState({});
-    const {regist} = useSelector((state) =>state.subjectReducer);
+    const {regist} = useSelector((state) =>state.SubjectReducer);
 
     useEffect(
         ()=>{
