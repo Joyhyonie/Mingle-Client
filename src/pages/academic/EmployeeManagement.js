@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from 'react';
 import { callEmployeesAPI } from '../../apis/AcademicAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
+import EmployeeInsertModal from "../../components/modal/EmployeeInsertModal";
 import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import EmployeeListCss from '../../css/EmployeeList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
+import { useNavigate } from "react-router-dom";
 
 const options = [
   { value: "empCode", name: "교번" },
@@ -20,20 +22,33 @@ const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
 function EmployeeManagement() {
 
   const dispatch = useDispatch();
+  const { data, pageInfo } = useSelector((state) => state.EmployeeReducer);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [selectAll, setSelectAll] = useState(false);
   const [checkboxes, setCheckboxes] = useState({});
 
-  const {data, pageInfo} = useSelector((state) => state.EmployeeReducer);
+  const [isEmployeeUpdateModalOpen, setIsEmployeeUpdateModalOpen] = useState(false);
+  const [isEmployeeInsertModalOpen, setIsEmployeeInsertModalOpen] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-
+  // 아 헷갈려!!! 
+  // isEmployeeInsertModalOpen 추가
   useEffect(
     () => {
       dispatch(callEmployeesAPI({ currentPage }))
     },
-    [currentPage]
+    [currentPage, isEmployeeInsertModalOpen, isEmployeeUpdateModalOpen]
   );
+
+  // onClickTableTr => 테이블 행 클릭시 교직원 상세 조회 및 수정 페이지로 라우팅
+  const onClickTableTr = (employee) => {
+    setIsEmployeeUpdateModalOpen(true);
+  }
+
+  // onCLickInsert => emp인서트모달창 오픈
+  const onCLickInsert = () => {
+    setIsEmployeeInsertModalOpen(true);
+  }
 
   const handleSelectAll = () => {
     const newCheckboxes = Object.keys(checkboxes).reduce((prev, curr) => {
@@ -44,10 +59,6 @@ function EmployeeManagement() {
     setSelectAll(!selectAll);
   };
 
-  // 체크박스 상태를 업데이트하는 함수
-  const handleCheckboxChange = (id) => {
-    setCheckboxes({ ...checkboxes, [id]: !checkboxes[id] });
-  };
 
 
   return (
@@ -58,9 +69,13 @@ function EmployeeManagement() {
       <motion.button
         whileHover={{ scale: 1.05 }}
         className={EmployeeListCss.EmployeeRegistButton}
+        onClick={() => setIsEmployeeInsertModalOpen(true)}
       >
         등록
       </motion.button>
+      {isEmployeeInsertModalOpen && (
+        <EmployeeInsertModal setIsEmployeeInsertModalOpen={setIsEmployeeInsertModalOpen} />
+      )}
       <motion.button
         whileHover={{ scale: 1.05 }}
         className={EmployeeListCss.EmployeeDeleteButton}
@@ -102,19 +117,21 @@ function EmployeeManagement() {
           </tr>
         </thead>
         <tbody>
-        {data && 
+          {data &&
             data.map((employee) => (
-              <tr key={employee.empCode}>
-                <td><input type="checkbox" value={employee.empCode}/></td>
+              <tr
+              key={employee.empCode}
+              onClick={ () => onClickTableTr(employee.empCode)}>
+                <td><input type="checkbox" value={employee.empCode} /></td>
                 <td>{employee.empCode}</td>
                 <td>{employee.empName}</td>
                 <td>{employee.department.deptName}</td>
                 <td>{employee.empEmail}</td>
                 <td>{employee.empPhone}</td>
-                <td>{employee.empEntDate}</td>
+                <td>{new Date(employee.empEntDate).toISOString().split('T')[0]}</td>
                 <td>{employee.empStatus}</td>
               </tr>
-            ))}    
+            ))}
         </tbody>
       </table>
       <div>

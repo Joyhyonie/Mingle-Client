@@ -1,0 +1,247 @@
+.EmployeeInsertModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.EmployeeInsertModalContainer {
+  position: absolute;
+  width: 1400px;
+  height: 520px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  z-index: 1000;
+  display: flex; /* 추가: 수평 배치를 위한 스타일 */
+}
+
+.EmployeeInsertModalProfile {
+  display: flex;
+  flex-direction: column; /* 추가: 수직 배치를 위한 스타일 */
+  align-items: center; /* 추가: 수직 축에서 중앙 정렬을 위한 스타일 */
+}
+
+.EmployeeInsertModalBtn {
+  display: flex; /* 추가: 버튼 수평 배치를 위한 스타일 */
+  justify-content: center; /* 추가: 버튼 사이에 공간을 만들기 위한 스타일 */
+  width: 100%; /* 추가: 버튼이 부모의 너비를 차지하도록 설정 */
+  margin: 50px 0 0 10px; /* 상 우 하 좌 */
+}
+
+.EmployeeInsertModalBtn button {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.EmployeeBtnFirst {
+  border: none;
+  border-radius: 5px;
+  background-color: #FF9797;
+  color: white;
+  width: 100px;
+  height: 40px;
+}
+
+.EmployeeBtnSecond {
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  background-color: white;
+  width: 100px;
+  height: 40px;
+}
+
+.EmployeeInsertModalProfile input {
+  width: 300px;
+  height: 300px;
+  margin: 50px 0 0 30px; /* 상 우 하 좌 */
+}
+
+.EmployeeInsertModalInput {
+  margin: 40px 0 60px 50px; /* 상 우 하 좌 */
+  width: 950px;
+  height: 416px;
+}
+
+.EmployeeInsertModalFirst, .EmployeeInsertModalSecond, .EmployeeInsertModalThird,
+.EmployeeInsertModalFourth, .EmployeeInsertModalFifth, .EmployeeInsertModalSixth {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-top: 25px;
+  align-items: center;
+  font-size: 20px;
+}
+
+.EmployeeInsertModalName {
+  width: 230px;
+  height: 40px;
+  margin-left: 36px;
+  font-size: 20px;
+  padding-left: 12px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEnName {
+  width: 230px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalAnnual {
+  width: 100px;
+  height: 40px;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  margin-right: 20px;
+  outline: none;
+  text-align: center;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.EmployeeInsertModalDeptCode {
+  width: 270px;
+  height: 40px;
+  margin-left: 42px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpSsn {
+  width: 410px;
+  margin-right: 20px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpEmail {
+  width: 370px;
+  height: 40px;
+  margin-left: 22px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpPwd {
+  width: 310px;
+  margin-right: 20px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpPhone {
+  width: 426px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpStatus {
+  width: 310px;
+  margin-right: 20px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpAddress {
+  width: 800px;
+  margin-right: 20px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpEntDate {
+  width: 184px;
+  margin-left: 8px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpAbDate {
+  width: 184px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.EmployeeInsertModalEmpEndDate {
+  width: 184px;
+  margin-right: 20px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid #FF9797;
+  border-radius: 5px;
+  text-align: center;
+}
