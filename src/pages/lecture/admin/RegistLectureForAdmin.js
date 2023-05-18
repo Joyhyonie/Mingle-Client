@@ -26,7 +26,7 @@ function RegistLectureForAdmin () {
 
     const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const {data} = useSelector((state) => state.subjectReducer);
+
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
@@ -121,24 +121,7 @@ function RegistLectureForAdmin () {
             </tr>
           </thead>
           <tbody>
-            {data && 
-            data.map((subject) => (
-              <tr key={subject.sbjCode}>
-                <td>{subject.sbjCode}</td>
-                <td>{subject.department.deptName}</td>
-                <td>{subject.sbjName}</td>
-                <td>{subject.classType}</td>
-                <td>{subject.score}</td>
-                <td>{subject.score}</td>
-                <td>{subject.score}</td>
-                <td>{subject.score}</td>
-                <td>{subject.score}</td>
-
-
-                <td><button 
-                onClick={()=> openModal(subject)}>수정</button></td>
-              </tr>
-            ))}    
+           
           </tbody>
         </table>
         <div>
