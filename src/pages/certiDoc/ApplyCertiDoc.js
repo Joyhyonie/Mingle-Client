@@ -41,8 +41,6 @@ function ApplyCertiDoc () {
             }
         }
         
-      
-
     useEffect(
         ()=>{
             if(regist?.status === 200){

@@ -1,11 +1,14 @@
 /* 행정직원의 '교직원 근태 기록' */
-import { motion } from "framer-motion"
-import EmployeeAttendanceCSS from '../../css/EmployeeAttendance.module.css'
+import { motion } from "framer-motion";
+import ApplideCertidocCSS from '../../css/ApplyCertiDoc.module.css';
+import EmployeeAttendanceCSS from '../../css/EmployeeAttendance.module.css';
 import CommonCSS from "../../css/common/Common.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callEmployee } from "../../apis/AttendanceAPICalls";
 import { useNavigate } from "react-router-dom";
+import PagingBar from "../../components/common/PagingBar";
+
 
 
 function EmployeeAttendance () {
@@ -36,18 +39,22 @@ function EmployeeAttendance () {
             </div>
             <div className={EmployeeAttendanceCSS.EmployeeAttendanceDiv}><button className={EmployeeAttendanceCSS.EmployeeAttendanceBtn}>교수</button>
             <button className={EmployeeAttendanceCSS.EmployeeAttendanceBtn}>행정직원</button></div>
-            <div className={EmployeeAttendanceCSS.EmployeeAttendance}>
-                <table className={EmployeeAttendanceCSS.EmployeeAttendanceTable}>
+            <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
+                <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
                     <col width="15%"/>
                     <col width="15%"/>
-                    <col width="15%"/>                 
+                    <col width="15%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
                     </colgroup>
                     <thead>
                         <tr>
                             <th>교번</th>
                             <th>소속</th>
                             <th>이름</th>
+                            <th>상태</th>
+                            <th>연차 갯수</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,34 +65,16 @@ function EmployeeAttendance () {
                                     <td>{employee.empCode}</td>
                                     <td>{employee.department.deptName}</td>
                                     <td>{employee.empName}</td>
+                                    <td>{employee.empStatus}</td>
+                                    <td>{employee.empAnnual}</td>
                                 </tr>
                             )
                             ))}
                     </tbody>
                 </table>
-            </div>
-            <div className={EmployeeAttendanceCSS.EmployeeAttendance}>
-                <table className={EmployeeAttendanceCSS.EmployeeAttendanceTable}>
-                    <colgroup>
-                    <col width="15%"/>
-                    <col width="15%"/>
-                    <col width="15%"/>                 
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>교번</th>
-                            <th>소속</th>
-                            <th>이름</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>20230001</td>                            
-                            <td>경영학과</td>
-                            <td>이진호</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div>
+                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
+                </div>     
             </div>
         </motion.div>
     );
