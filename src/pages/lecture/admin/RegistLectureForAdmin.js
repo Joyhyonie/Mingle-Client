@@ -11,13 +11,14 @@ import { callSubjectDelete, callSubjectUpdateAPI, callSubjectsAPI } from "../../
 import { toast } from "react-hot-toast";
 import PagingBar from "../../../components/common/PagingBar";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
-import SubjectInsertModal from "../../../components/modal/SubjectInsertModal";
+import LectureInsertModal from "../../../components/modal/LectureInsertModal";
 
 function RegistLectureForAdmin () {
+  const pageInfo = {startPage: 1, endPage: 10, currentPage:2, maxPage: 20}
 
     const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
-  const {data, pageInfo} = useSelector((state) => state.subjectReducer);
+
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
@@ -73,7 +74,10 @@ function RegistLectureForAdmin () {
                     
         <div className={LectureRegist.registLectureDiv}>
             <p className={ CommonCSS.pageDirection }>강의 개설 </p>
-            <button className={LectureRegist.registLecturebtn}>강의개설</button>
+            <motion.button className={LectureListCSS.insertButton}        
+             onClick={onCLickInsert}
+             whileHover={{scale:1.05}}>강의개설</motion.button>
+            
         </div>
         <div className={LectureListCSS.lectureList}>
 
@@ -86,53 +90,43 @@ function RegistLectureForAdmin () {
             <col width="10%" />
             <col width="10%" />
             <col width="10%" />
-            <col width="40%" />
             <col width="20%" />
-            <col width="20%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
           </colgroup>
           <thead>
             <tr>
-              <th><input type="checkbox" /></th>
-              <th>과목코드</th>
-              <th>학과명</th>
-              <th>과목명</th>
-              <th>이수구분</th>
+              <th>강의번호</th>
+              <th>개설학과</th>
+              <th>이수 구분</th>
+              <th>교과목 코드</th>
+              <th>교과목명</th>
               <th>학점</th>
+              <th>학년</th>
+              <th>담당교수</th>
+              <th>상태</th>
               <th></th> <br />
               <br></br>
             </tr>
           </thead>
           <tbody>
-            {data && 
-            data.map((subject) => (
-              <tr key={subject.sbjCode}>
-                <td>{subject.sbjCode}</td>
-                <td>{subject.department.deptName}</td>
-                <td>{subject.sbjName}</td>
-                <td>{subject.classType}</td>
-                <td>{subject.score}</td>
-                <td><button 
-                onClick={()=> openModal(subject)}>수정</button></td>
-              </tr>
-            ))}    
+           
           </tbody>
         </table>
         <div>
                 { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
         </div>
-        {isModalOpen && (
-        <SubjectUpdateModal
-          subject={selectedSubject}
-          closeModal={closeModal}
-        />
-      )}
+   
       {isInsertModalOpen && (
-        <SubjectInsertModal
+        <LectureInsertModal
         setIsInsertModalOpen={setIsInsertModalOpen}/>
       )}
       </div>
 
-        
+      
 
         </motion.div>
     );

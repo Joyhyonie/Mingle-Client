@@ -35,7 +35,7 @@ export const callLoginAPI = (form) => {
 /* 회원 정보 조회 API  */
 export const callGetEmployeeAPI = () => {
 
-    const requestURL = `${PRE_URL}/employee/employees`;
+    const requestURL = `${PRE_URL}/employee/myemployees`;
 
     return async (dispatch, getState) => {
 

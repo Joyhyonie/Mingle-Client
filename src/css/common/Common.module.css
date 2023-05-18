@@ -206,7 +206,7 @@ tbody tr:hover {
     padding: 20px;
 }
 
-/* logout modal */
+/* logout modal --------------------------------------------- */
 .logoutModal {
     position: fixed;
     top: 0;

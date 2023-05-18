@@ -1,0 +1,172 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+
+.modalContainer{
+    position: flex;
+    width: 740px;
+    height: 400px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);    
+    z-index: 1000;
+    border-radius: 25px;
+}
+
+.SubjectModalDiv{    
+    width: 100%;
+    height: 100%;
+    /* display: flex; */
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border: solid 1px #FF9797;
+    border-radius: 25px; 
+}
+
+.SubjectModalDiv input {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 35px;
+    border: 1px solid #FF9797;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.SubjectModalDiv input:focus {
+    outline: none;
+}
+
+
+.SubjectModalDiv button {
+    font-family: 'Do Hyeon', sans-serif;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 40px;
+    width: 100px;
+    border-radius: 8px;
+    color: #666666;
+    background-color: white;
+    font-weight: bold;
+    border: 1px solid #FF9797;
+    margin-left: 20px;
+}
+
+.SubjectModalDiv button:hover {
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #666666;
+    height: 40px;
+    width: 100px;
+    border-radius: 8px;
+    background-color: #FF9797;
+    font-weight: bold;
+}
+
+.SubjectModalDiv .classType{
+    text-align: center;
+    width: 20%;
+    border-color: #FF9797;
+    border-radius: 8px;
+    height: 43px;
+    margin-left: 10px;
+}
+
+.SubjectModalDiv .score{
+    width: 25%;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.SubjectModalDiv .deptName{
+    width: 76%;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.SubjectModalDiv .label {
+    margin-left: 20px;
+}
+
+.SubjectModalDiv .sbjName{
+    width: 15%;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.SubjectModalDiv .deptCode{
+    text-align: center;
+    width: 60%;
+    border-color: #FF9797;
+    border-radius: 8px;
+    height: 43px;
+    margin-left: 10px;
+}
+.SubjectModalDiv .professor{
+    text-align: justify;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+.SubjectModalDiv .subjectName{
+    text-align: justify;
+    margin-left: 15px;
+    margin-top: 20px;
+}
+.SubjectModalDiv .subScore{
+    align-items: center;
+    margin-left: 40px;
+    margin-top: 20px;
+    display: flex;
+}
+.SubjectModalDiv .subScore2{
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 20px;
+    display: flex;
+}
+.SubjectModalDiv .subScore2{
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 20px;
+    display: flex;
+}
+.SubjectModalDiv .buttons{
+    align-items: center;
+    margin-right: 40px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end
+}
+
+.inputbar {
+    flex-grow: 1;
+    border: 1px solid none;
+    border-radius: 10px;
+    background-color: #FFD7D7;
+    margin-top: 20px;
+    padding: 0px;
+    display: flex;
+    gap: 0px;
+    align-items: center; 
+
+}
