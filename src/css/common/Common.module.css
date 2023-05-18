@@ -45,6 +45,17 @@ tbody tr:hover {
 }
 /* -------------------------------------- */
 
+.msgModalDiv {
+    position: relative;
+    z-index: 100; 
+}
+
+.notiModalDiv {
+    position: relative;
+    top: 96px;
+    z-index: 50;
+}
+
 .flex {
     display: flex;
 }
