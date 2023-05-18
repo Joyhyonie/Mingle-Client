@@ -66,8 +66,7 @@ tbody tr:hover {
     width: 100%;
     padding: 0;
     justify-content: center;
-    overflow-y: auto;
-    overflow-x:hidden
+    overflow: scroll;
 }
 
 
