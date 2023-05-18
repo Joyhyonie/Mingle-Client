@@ -4,12 +4,14 @@ import NavbarForAdmin from './NavbarForAdmin';
 import NavbarForAdminItem from './NavbarForAdminItem';
 import SearchBarCss from '../../css/common/SearchBar.module.css'
 
-function SearchBar() {
-
-  const [searchTerm, setSearchTerm] = useState('');
+function SearchBar({ search, setSearch }) {
 
   const handleChange = event => {
-    setSearchTerm(event.target.value);
+    setSearch(event.target.value);
+  };
+
+  const handleSearch = () => {
+    setSearch(search);
   };
 
   return (
@@ -17,10 +19,10 @@ function SearchBar() {
     <input className={SearchBarCss.searchBar}
       type="text"
       placeholder="검색어를 입력해 주세요 :)"
-      value={searchTerm}
+      value={search}
       onChange={handleChange}
     />
-    <button className={SearchBarCss.searchBarBtn}>검색</button>
+    <button className={SearchBarCss.searchBarBtn} onClick={handleSearch}>검색</button>
     </>
   );
 }

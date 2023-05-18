@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from "framer-motion"
-import { callEmployeesAPI } from '../../apis/AcademicAPICalls';
+import { callEmployeesAPI, callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useSearchParams } from "react-router-dom";
 import SearchBarCss from '../../css/common/SearchBar.module.css'
 import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import CommonCSS from '../../css/common/Common.module.css';
@@ -26,11 +27,22 @@ function Organization() {
   const [currentPage, setCurrentPage] = useState(1);
   const employeeList = data;
 
+  /* 검색어 요청시 사용할 값 */
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('value');
+
+
   useEffect(
     () => {
-      dispatch(callEmployeesAPI({ currentPage }))
+      if (search) {
+        /* 검색어에 해당하는 직원에 대한 요청 */
+        dispatch(callEmployeeSearchListAPI({ search, currentPage }));
+      } else {
+        /* 모든 직원 정보에 대한 요청 */
+        dispatch(callEmployeesAPI({ currentPage }))
+      }
     },
-    [currentPage]
+    [currentPage, search]
   );
 
   return (
@@ -40,18 +52,23 @@ function Organization() {
       <p className={CommonCSS.pageDirection}>조직도</p>
 
       <div className={SearchBarCss.basic}>
-        <SearchAndListLayout options={options}></SearchAndListLayout>
+        <SearchAndListLayout
+          options={options}
+          search={search}
+          setSearch={setSearchParams}
+        />
       </div>
 
-      <div className={ OrganizationItemCss.div }>
-      <div>
-        { employeeList && <OrganizationList employeeList={employeeList} />}
+      <div className={OrganizationItemCss.div}>
+        <div>
+          {employeeList && <OrganizationList employeeList={employeeList} />}
+        </div>
+
+        <div>
+          {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+        </div>
       </div>
 
-      <div>
-        {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
-      </div>
-      </div>
     </motion.div>
   );
 }
