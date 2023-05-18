@@ -1,12 +1,10 @@
 .modalBox {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
     top: 100px;
     left: 250px;
-    z-index: 1000;
     width: 400px;
     height: 600px;
     background-color: white;

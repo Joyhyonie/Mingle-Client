@@ -28,7 +28,8 @@ function MyCalender ({dateInMyCal, setDateInMyCal}) {
       
       // 캘린더 전체 사이즈 조정
       .fc {
-        z-index: -1;
+        // position: absolute;
+        // z-index: -1;
         width: 98%;
         height: 720px;
       }
