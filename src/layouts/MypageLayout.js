@@ -16,7 +16,7 @@ function MyPageLayout() {
 
     const onClickPageChange = () => {
         
-      navigate(`/mypage-update/`);
+      navigate(`/mypage-update`);
       
 
     }

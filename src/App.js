@@ -66,10 +66,11 @@ function App() {
             <Route path="mypage" element={ <MyPageLayout /> }>
               <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
               <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
-              <Route path="mypage-update/:empCode" element={ <ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute> }/>
+            
 
             </Route> {/* <MyPageLayout/>의 Route */}
 
+            <Route path="mypage-update" element={ <ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute> }/>
             <Route path="pwdchange" element={ <ProtectedRoute loginCheck={true}><PwdChange/></ProtectedRoute> }/>
 
             <Route path="organization" element={ <Organization/> }/>
