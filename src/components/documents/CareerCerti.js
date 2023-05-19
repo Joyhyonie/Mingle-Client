@@ -12,6 +12,7 @@ function CareerCerti({closeModal,myCerti}){
     useEffect(
         ()=>{
             dispatch(callDetailCertiDoc(myCerti));
+            
         },
         []
     )
@@ -22,13 +23,14 @@ function CareerCerti({closeModal,myCerti}){
       }
 
     return (    
-        <>
+        <>        
         <div className={DocumentsCSS.modal} onClick={(e)=> {closeModal()}}>
             {data.certiDocCode && (
                 <>
             <div className={DocumentsCSS.modalContainer} onClick={(e)=> e.stopPropagation()}>
+            <div className={DocumentsCSS.docCode}>제 {data.certiDocCode}</div>
             <div className={DocumentsCSS.deptName}>{data.certiForm.certiFormName}</div>
-                <table className={DocumentsCSS.CareerCertiModalDiv}>
+                <table className={DocumentsCSS.CareerCertiModalDiv} onClick={()=> window.print()}>
                     <tbody>
                     <tr>
                         <th className={DocumentsCSS.th}>이름</th>

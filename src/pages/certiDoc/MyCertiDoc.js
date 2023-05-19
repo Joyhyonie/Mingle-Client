@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyCertiDocListAPI } from "../../apis/CertiDocAPICalls";
 import CareerCerti from "../../components/documents/CareerCerti";
+import EmploymentCerti from "../../components/documents/EmploymentCerti";
+import LectureExperienceCerti from "../../components/documents/LectureExperienceCerti";
 
 /* 모든 교직원의 '증명서 발급 이력' */
 
@@ -87,11 +89,18 @@ function MyCertiDoc () {
                         ))}
                     </tbody>
                 </table>
-                {isModalOpen && (
-              <CareerCerti
-              closeModal={closeModal}
-              myCerti={selectCerti}
-                  />
+                {isModalOpen && selectCerti &&(
+              <>
+              {selectCerti.certiForm.certiFormCode === 300001 && (
+                <EmploymentCerti closeModal={closeModal} myCerti={selectCerti}/>
+              )}
+              {selectCerti.certiForm.certiFormCode === 300002 &&(
+                <CareerCerti closeModal={closeModal} myCerti={selectCerti}/>
+              )}
+              {selectCerti.certiForm.certiFormCode === 300003 &&(
+                <LectureExperienceCerti closeModal={closeModal} myCerti={selectCerti}/>
+              )}
+              </>
       )}
             </div>
             <div>
