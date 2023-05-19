@@ -1,5 +1,5 @@
 import { getEmployees, getEmployee, postEmployee, putEmployee } from '../modules/EmployeeModule';
-import { getStudents } from '../modules/StudentModule';
+import { getStudents, getStudent, postStudent, putStudent } from '../modules/StudentModule';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -26,12 +26,12 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
 // 교직원(조직도) 서치
 export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
   const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
-  const requestURL = `${EMPLOYEE_URL}/employees/search?search=${encodedSearch}&page=${currentPage}`;
+  const requestURL = `${EMPLOYEE_URL}/employees/search?search=${search}&page=${currentPage}`;
 
   return async (dispatch, getState) => {
     const result = await fetch(requestURL).then(response => response.json());
 
-    if(result.status === 200) {
+    if (result.status === 200) {
       console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
       dispatch(getEmployees(result));
     }
@@ -111,7 +111,68 @@ export const callStudentsAPI = ({ currentPage = 1 }) => {
 
     if (result.status === 200) {
       dispatch(getStudents(result));
-      console.log(result);
+      console.log("[AcademicAPICalls] callStudentsAPI result : ", result);
+    }
+  }
+}
+
+// 학생 상세 조회
+export const callStudentDetailAPI = ({ stdCode }) => {
+
+  const requestURL = `${STUDENT_URL}/students/{stdCode}`;
+
+  return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log("[AcademicAPICalls] callStudentDetailAPI result : ", result);
+      dispatch(getStudent(result));
+
+
+    }
+  }
+
+}
+
+// 학생 신규 등록
+export const callStudentInsertAPI = (formData) => {
+
+  const requestURL = `${STUDENT_URL}/insert`;
+
+  return async (dispatch, getState) => {
+
+    console.log(formData);
+    const result = await fetch(requestURL, {
+      method: "POST",
+      body: formData
+    }).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log('[AcademicAPICalls] : callStudentInsertAPI result : ', result);
+      dispatch(postStudent(result));
+    }
+
+    console.log(result.data);
+  }
+}
+
+// 학생 정보 수정
+export const callStudentUpdateAPI = (formData) => {
+
+  const requestURL = `${STUDENT_URL}/modify`;
+
+  return async (dispatch, getState) => {
+
+    console.log(formData);
+    const result = await fetch(requestURL, {
+      method: "PUT",
+      body: formData
+    }).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log('[AcademicAPICalls] : callStudentUpdateAPI result : ', result);
+      dispatch(putStudent(result));
     }
   }
 }
