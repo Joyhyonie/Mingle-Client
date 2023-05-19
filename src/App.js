@@ -18,8 +18,8 @@ import AcademicSchedule from "./pages/schedule/AcademicSchedule";
 import RegistLectureForProf from "./pages/lecture/professor/RegistLectureForProf";
 import StudentAttendanceForProf from "./pages/lecture/professor/StudentAttendanceForProf";
 import MainPageLayout from "./layouts/MainPageLayout";
-import MyCalender from "./components/main/MyCalender";
-import AcademicCalender from "./components/main/AcademicCalender";
+import MyCalendar from "./components/main/MyCalendar";
+import AcademicCalendar from "./components/main/AcademicCalendar";
 import BoardDetail from './pages/board/BoardDetail';
 import BoardRegist from './pages/board/BoardRegist';
 import BoardModify from './pages/board/BoardModify';
@@ -55,10 +55,11 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
-            <Route element={<MainPageLayout />}>
-              <Route index element={<MyCalender />} />
-              <Route element={<AcademicCalender />} />
+          <Route path="/" element={ <ProtectedRoute loginCheck={true}><Layout/></ProtectedRoute> }>
+            <Route element={ <MainPageLayout/> }>
+              <Route index element={ <MyCalendar/> }/>
+              <Route element={ <AcademicCalendar/> }/>
+                
             </Route> {/* <MainPageLayout/>의 Route */}
 
             <Route path="board" element={<BoardLayout />}>

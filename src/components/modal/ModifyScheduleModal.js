@@ -1,31 +1,40 @@
 import { useEffect, useState } from "react";
 import MainCSS from "../../css/Main.module.css"
 import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { callMyScheduleModifyAPI, callMyScheduleRemoveAPI } from "../../apis/ScheduleAPICalls";
 
 
-function ModifyScheduleModal ({schedules, setModifyScheduleModal}) {
+function ModifyScheduleModal ({selectedSchedule, setModifyScheduleModal}) {
 
     const dispatch = useDispatch();
+    const { modifyMySche, removeMySche } = useSelector(state => state.ScheduleReducer);
     const [form, setForm] = useState({ // 입력된 값을 초기값으로 지정하여 수정된 사항이 없는 항목은 그대로 다시 insert 되도록 함
-        scheName: schedules.scheName,
-        scheStartDate: schedules.scheStartDate,
-        scheEndDate: schedules.scheEndDate,
-        colorCode: schedules.colorCode
+        scheName: selectedSchedule.scheName,
+        scheStartDate: selectedSchedule.scheStartDate,
+        scheEndDate: selectedSchedule.scheEndDate,
+        colorCode: selectedSchedule.colorCode
     });
 
-    /* 등록 성공 시 실행 될 useEffect */
-    // useEffect(
-    //     () => {
-    //         if(modify?.status === 200) {
-    //             toast.success("일정이 등록되었습니다");
-    //             setAddScheduleModal(false);
-    //         } else if(remove?.status === 200) {
-    //             toast.success("일정이 삭제되었습니다");
-    //             setAddScheduleModal(false);
-    //         }
-    //     }, [modify, remove]
-    // );
+
+    /* 수정/삭제 성공 시 실행 될 useEffect */
+    useEffect(
+        () => {
+            if(modifyMySche?.status === 200) {
+                toast.success("일정이 수정되었습니다");
+                setModifyScheduleModal(false);
+            } else if(removeMySche?.status === 200) {
+                toast.success("일정이 삭제되었습니다");
+                setModifyScheduleModal(false);
+            }
+        }, [modifyMySche, removeMySche]
+    );
+
+    /* 시작일/종료일을 기본값으로 노출 시키기 위한 날짜 포맷 함수 */
+    const formatDate = (scheDate) => {
+        const date = new Date(scheDate);
+        return date.toISOString().slice(0, 10);
+    }
 
     /* 입력된 input 요소들을 한번에 처리할 이벤트 함수 */
     const onChangeHandler = (e) => {
@@ -36,18 +45,19 @@ function ModifyScheduleModal ({schedules, setModifyScheduleModal}) {
     }
 
     /* 나의 일정을 수정하는 이벤트 함수 */
-    const modifyMySchedule = (e) => {
+    const modifyMySchedule = (scheCode) => {
 
+        console.log(form.scheCode);
         console.log(form.scheName);
         console.log(form.scheStartDate);
         console.log(form.scheEndDate);
         console.log(form.colorCode);
 
         // 변동 사항이 있고, 정확한 값들이 입력되었는지 검증하는 로직
-        if (form.scheName === schedules.scheName && 
-            form.scheStartDate === schedules.scheStartDate && 
-            form.scheEndDate === schedules.scheEndDate &&
-            form.colorCode === schedules.colorCode) {
+        if (form.scheName === selectedSchedule.scheName && 
+            form.scheStartDate === selectedSchedule.scheStartDate && 
+            form.scheEndDate === selectedSchedule.scheEndDate &&
+            form.colorCode === selectedSchedule.colorCode) {
             toast.error("수정된 항목이 없습니다 !");
         } else if(form.scheName === undefined || form.scheName === ''){
             toast.error("일정명을 입력해주세요 !");
@@ -57,28 +67,22 @@ function ModifyScheduleModal ({schedules, setModifyScheduleModal}) {
 
             // FormData 객체 설정
             const formData = new FormData();
+            formData.append("scheCode", scheCode);
             formData.append("scheName", form.scheName);
             formData.append("scheStartDate", form.scheStartDate);
             formData.append("scheEndDate", form.scheEndDate);
             formData.append("colorCode", form.colorCode);
 
-            // dispatch(callModifyMyScheduleAPI(formData));
-
-            // (임시용)
-            toast.success("일정이 수정되었습니다");
-            setModifyScheduleModal(false);
+            dispatch(callMyScheduleModifyAPI(formData));
         }
 
     }
 
     /* 나의 일정을 삭제하는 이벤트 함수 */
-    const deleteMySchedule = () => {
+    const deleteMySchedule = (scheCode) => {
 
-        // dispatch(callDeleteMyScheduleAPI(schedules.scheCode))
+        dispatch(callMyScheduleRemoveAPI(scheCode));
 
-        // (임시용)
-        toast.success("일정이 삭제되었습니다");
-        setModifyScheduleModal(false);
     }
 
     return (
@@ -90,7 +94,7 @@ function ModifyScheduleModal ({schedules, setModifyScheduleModal}) {
                         type="text" 
                         name="scheName"
                         maxLength={22}
-                        defaultValue={schedules.scheName}
+                        defaultValue={selectedSchedule.scheName}
                         onChange={onChangeHandler}
                     />
                 </div>
@@ -99,14 +103,14 @@ function ModifyScheduleModal ({schedules, setModifyScheduleModal}) {
                     <input 
                         type="date"
                         name="scheStartDate"
-                        defaultValue={schedules.scheStartDate}
+                        defaultValue={formatDate(selectedSchedule.scheStartDate)}
                         onChange={onChangeHandler}
                     />
                     <span>&nbsp;&nbsp;-&nbsp;&nbsp;</span>
                     <input 
                         type="date"
                         name="scheEndDate"
-                        defaultValue={schedules.scheEndDate}
+                        defaultValue={formatDate(selectedSchedule.scheEndDate)}
                         onChange={onChangeHandler}
                     />
                 </div>
@@ -115,7 +119,7 @@ function ModifyScheduleModal ({schedules, setModifyScheduleModal}) {
                     <input
                         type="color"
                         name="colorCode"
-                        defaultValue={schedules.colorCode}
+                        defaultValue={selectedSchedule.colorCode}
                         onChange={onChangeHandler}
                     />
                 </div>
@@ -123,10 +127,10 @@ function ModifyScheduleModal ({schedules, setModifyScheduleModal}) {
                     <button className={ MainCSS.whiteButton } onClick={ () => setModifyScheduleModal(false)}>
                         취소
                     </button>
-                    <button className={ MainCSS.pinkButton } onClick={ modifyMySchedule }>
+                    <button className={ MainCSS.pinkButton } onClick={ () => modifyMySchedule(selectedSchedule.scheCode) }>
                         수정
                     </button>
-                    <button className={ MainCSS.pinkButton } onClick={ deleteMySchedule }>
+                    <button className={ MainCSS.pinkButton } onClick={ () => deleteMySchedule(selectedSchedule.scheCode) }>
                         삭제
                     </button>
                 </div>
