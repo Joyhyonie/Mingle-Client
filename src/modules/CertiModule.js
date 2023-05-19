@@ -15,7 +15,7 @@ export const {
 
 const CertiReducer = handleActions({
     [GET_CERTIS] : (state, {payload}) => payload,
-    [PATCH_CERTI] : (state, {payload}) => payload,
+    [PATCH_CERTI] : (state, {payload}) => ({patch :payload}),
     [POST_CERTI] : (state, {payload}) => ({regist: payload})
 },initialState)
 

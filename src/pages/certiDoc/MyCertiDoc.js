@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyCertiDocListAPI } from "../../apis/CertiDocAPICalls";
 import CareerCerti from "../../components/documents/CareerCerti";
-import { useNavigate } from "react-router";
 
 /* 모든 교직원의 '증명서 발급 이력' */
 
@@ -17,7 +16,6 @@ function MyCertiDoc () {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectCerti, setSelectCerti] = useState();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(
         ()=>{
@@ -34,6 +32,13 @@ function MyCertiDoc () {
     const closeModal = () => {
         setIsModalOpen(false);
       };
+
+    useEffect(() => {
+        if (!isModalOpen) {
+          dispatch(callMyCertiDocListAPI({ currentPage }));
+        }
+    }, [isModalOpen, currentPage]);
+    
 
     return (
         <motion.div
@@ -90,7 +95,7 @@ function MyCertiDoc () {
       )}
             </div>
             <div>
-                {/* 페이징바 */}
+            { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
             </div>
         </motion.div>
     );

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { callEmployeeDetail } from "../../apis/AttendanceAPICalls";
 import ApplideCertidocCSS from '../../css/ApplyCertiDoc.module.css';
 import CommonCSS from "../../css/common/Common.module.css";
+import PagingBar from "../common/PagingBar";
 
 function AttendanceDetail(){
 
@@ -26,18 +27,21 @@ function AttendanceDetail(){
     return (
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
-        >
+        >  
             <div>
-                <p className={ CommonCSS.pageDirection }>근태관리 ▸ 교직원 근태 기록</p>
+                {data && 
+                data.map((attendance) => (
+                <p className={ CommonCSS.pageDirection }>근태관리 ▸ 교직원 근태 기록 ▸ {attendance.employee.empName}</p>
+                ))}
             </div>
-             <div>
-                <table>
+             <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
+                <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
-                    <col width="25px" />
-                    <col width="40px" />
-                    <col width="40px" />
-                    <col width="50px" />
-                    <col width="10px" />                   
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="10%" />                   
                     </colgroup>
                     <thead>
                         <tr>
@@ -56,14 +60,15 @@ function AttendanceDetail(){
                     <td>{attendance.atdStartTime}</td>
                     <td>{attendance.atdEndTime}</td>
                     <td>{attendance.atdStatus}</td>
-                    <td>{attendance.atdEtc}</td>
-                    <td>{attendance.employee.empCode}</td>                  
+                    <td>{attendance.atdEtc}</td>              
                    </tr>
                 ))}   
                     </tbody>
-                </table>
-            </div>
-            
+                </table>       
+                <div>
+                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
+                </div>                       
+            </div>                   
         </motion.div>
     )
 }

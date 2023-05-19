@@ -8,7 +8,7 @@ import ScheduleReducer from "./ScheduleModule";
 
 /* 여러 모듈을 combine 시키기 */
 const rootReducer = combineReducers({
-  SubjectReducer, CertiReducer, EmployeeReducer, StudentReducer, ScheduleReducer
+  SubjectReducer, CertiReducer, EmployeeReducer, StudentReducer, ScheduleReducer, AttendanceReducer
 });
 
 export default rootReducer;

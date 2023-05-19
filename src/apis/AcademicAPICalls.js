@@ -23,6 +23,22 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
   }
 }
 
+// 교직원(조직도) 서치
+export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
+  const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
+  const requestURL = `${EMPLOYEE_URL}/employees/search?search=${encodedSearch}&page=${currentPage}`;
+
+  return async (dispatch, getState) => {
+    const result = await fetch(requestURL).then(response => response.json());
+
+    if(result.status === 200) {
+      console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
+      dispatch(getEmployees(result));
+    }
+  }
+}
+
+
 // 교직원 상세 조회
 export const callEmployeeDetailAPI = ({ empCode }) => {
 

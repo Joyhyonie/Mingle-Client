@@ -16,6 +16,12 @@
   justify-content: space-between;
 }
 
+.organizationBox img {
+  width: 240px;
+  height: 290px;
+  margin-right: 30px;
+}
+
 .organizationItems {
   margin-left: 30px;
   margin-right: 30px;
@@ -26,11 +32,6 @@
   align-items: center;
 }
 
-.orgContentBox {
-  border-left: 4px solid #FFD7D7;
-  padding-left: 30px;
-}
-
 .orgEmpName {
   font-size: 26px;
   margin-right: 30px;
@@ -38,4 +39,14 @@
 .orgEmpNameEn {
   font-size: 14px;
   color: #FF9797;
+}
+
+.orgContentBox {
+  border-left: 4px solid #FFD7D7;
+  padding-left: 30px;
+  margin-right: 10px;
+}
+
+.orgContentBox p {
+  font-size: 18px;
 }
