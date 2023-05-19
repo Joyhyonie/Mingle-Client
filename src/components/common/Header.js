@@ -86,7 +86,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
             </div>
 
             {/* 로그아웃 모달창 */}
-            <div>
+            <div className={ CommonCSS.logoutModalDiv }>
                 { logoutModal ?
                     (<LogoutModal logoutHandler={logoutHandler} setLogoutModal={setLogoutModal}/>) : null
                 }

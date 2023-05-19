@@ -1,64 +1,55 @@
 .backgroundDiv{
-    height: 80vh;
     display: flex;
     flex-direction: column; /*수평 정렬*/
-    /* align-items: center; */
     justify-content: center;
-    margin: 0 40%;
-    padding: 0;
-    
 }
 
 .loginDiv{    
     width: 300px;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column; /*수평 정렬*/
-    align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
+    margin: 0 auto;
+    margin-top: 11%;
     background-color: white;
-
-
-    border-radius: 25px ;    
+    border-radius: 25px ;      
 }
 
 .loginDiv input {
     margin-top: 5px;
     margin-bottom: 10px;
     height: 50px;
-    width: 436px;
+    width: 440px;
     border: 3px solid  #FF9797;
     text-indent: 10px;
-    border-radius: 31px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    
+    border-radius: 25px;
+}
+
+.loginDiv input:focus {
+    outline: none;
 }
 
 .loginDiv button {
     margin-top: 20px;
     margin-bottom: 5px;
-    width: 154px;
-    height: 49px;
-    border-radius: 50px;
-    background-color: #FFD7D7;
-    font-weight: bold;
-    border: solid rgba(255, 151, 151, 0.79);
-    color: #343434;
-    font-family: 'Paytone One';
-    font-style: normal;
+    width: 170px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FF9797;
+    font-weight: 900;
     font-size: 20px;
+    color: white;
     align-items: center;
- }
-.loginDiv span  {
+    cursor: pointer;
+}
+ 
+.loginDiv span {
     color: #666666;;
     text-align: center;
-    font-family: 'Do Hyeon', sans-serif;
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 25px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
 }
 
 .loginDiv h1{
