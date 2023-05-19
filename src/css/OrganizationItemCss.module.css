@@ -1,0 +1,52 @@
+
+.div {
+  overflow: scroll;
+  height: 650px;
+}
+
+.div::-webkit-scrollbar {
+  display: none;
+}
+
+.organizationBox {
+  border-bottom: 1px solid #666666;
+  margin: 20px 30px 20px 30px; /* 상우하좌 */
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.organizationBox img {
+  width: 240px;
+  height: 290px;
+  margin-right: 30px;
+}
+
+.organizationItems {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.orgNameBox {
+  display: flex;
+  align-items: center;
+}
+
+.orgEmpName {
+  font-size: 26px;
+  margin-right: 30px;
+}
+.orgEmpNameEn {
+  font-size: 14px;
+  color: #FF9797;
+}
+
+.orgContentBox {
+  border-left: 4px solid #FFD7D7;
+  padding-left: 30px;
+  margin-right: 10px;
+}
+
+.orgContentBox p {
+  font-size: 18px;
+}

@@ -27,6 +27,7 @@ const SelectBox = (props) => {
               key={option.value}
               value={option.value}
               defaultValue={props.defaultValue === option.value}
+              
             >
               {option.name}
             </option>

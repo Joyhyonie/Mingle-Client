@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from "framer-motion"
+import { callEmployeesAPI, callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useSearchParams } from "react-router-dom";
 import SearchBarCss from '../../css/common/SearchBar.module.css'
 import SearchAndListLayout from '../../layouts/SearchAndListLayout';
-import OrgCss from '../../css/Org.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
-// import OrganizationItem from "../../components/lists/OrganizationItem.js"
+import PagingBar from '../../components/common/PagingBar';
+import OrganizationList from '../../components/lists/OrganizationList';
+import OrganizationItemCss from "../../css/OrganizationItemCss.module.css";
 
 /* 조직도 */
 
@@ -14,56 +18,57 @@ const options = [
   { value: "deptCode", name: "부서명" },
 ];
 
+const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
+
 function Organization() {
+
+  const dispatch = useDispatch();
+  const { data, pageInfo } = useSelector((state) => state.EmployeeReducer);
+  const [currentPage, setCurrentPage] = useState(1);
+  const employeeList = data;
+
+  /* 검색어 요청시 사용할 값 */
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('value');
+
+
+  useEffect(
+    () => {
+      if (search) {
+        /* 검색어에 해당하는 직원에 대한 요청 */
+        dispatch(callEmployeeSearchListAPI({ search, currentPage }));
+      } else {
+        /* 모든 직원 정보에 대한 요청 */
+        dispatch(callEmployeesAPI({ currentPage }))
+      }
+    },
+    [currentPage, search]
+  );
 
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
     >
       <p className={CommonCSS.pageDirection}>조직도</p>
-      <div className={OrgCss.OrganizationList}>
-        <div className={SearchBarCss.basic}>
-          <SearchAndListLayout options={options}></SearchAndListLayout>
+
+      <div className={SearchBarCss.basic}>
+        <SearchAndListLayout
+          options={options}
+          search={search}
+          setSearch={setSearchParams}
+        />
+      </div>
+
+      <div className={OrganizationItemCss.div}>
+        <div>
+          {employeeList && <OrganizationList employeeList={employeeList} />}
         </div>
 
-        <div className={OrgCss.organization}>
-          <div className={OrgCss.orgInform}>
-            <div className={OrgCss.orgHeader}><span className={OrgCss.orgName}>고윤정</span>
-              <span className={OrgCss.orgDept}>교수</span>
-              <div className={OrgCss.orgDetail}>
-                <br />
-                <p>소속 : </p>
-                <p>전공 : </p>
-                <p>e-mail : </p>
-                <br />
-              </div>
-
-            </div>
-          </div>
-          <div className={OrgCss.orgPhoto}>
-            <img className={OrgCss.orgImage} alt='고윤정' src='/images/goyoonjeong.png'></img>
-          </div>
-        </div>
-
-        <div className={OrgCss.organization2}>
-          <div className={OrgCss.orgInform}>
-            <div className={OrgCss.orgHeader2}><span className={OrgCss.orgName2}>차은우</span>
-              <span className={OrgCss.orgDept}>부교수</span>
-              <div className={OrgCss.orgDetail}>
-                <br />
-                <p>소속 : </p>
-                <p>전공 : </p>
-                <p>e-mail : </p>
-                <br />
-              </div>
-
-            </div>
-          </div>
-          <div className={OrgCss.orgPhoto2}>
-            <img className={OrgCss.orgImage} alt='차은우' src='/images/chaeunwoo.png'></img>
-          </div>
+        <div>
+          {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
         </div>
       </div>
+
     </motion.div>
   );
 }

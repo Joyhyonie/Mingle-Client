@@ -16,13 +16,13 @@ function IdSearch(){
         <input
             type="text"
             name="empName"
-            placeholder="이름를 입력하세요."
+            placeholder="이름을 입력하세요."
             autoComplete='off'
         />
         <input
             type="email"
             name="empEmail"
-            placeholder="이메일를 입력하세요."
+            placeholder="이메일을 입력하세요."
             autoComplete='off'
         />
         <div style={style.story}>

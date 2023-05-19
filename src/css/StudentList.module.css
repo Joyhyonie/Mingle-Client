@@ -1,4 +1,4 @@
-.EmployeeList {
+.studentList {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -7,12 +7,12 @@
   font-size: 18px;
 }
 
-.employeeListTable {
+.studentListTable {
   border-collapse: collapse;
   table-layout: fixed;
 }
 
-.employeeListTable th,
+.studentListTable th,
 td {
   height: 10px;
   text-align: center;
@@ -23,24 +23,22 @@ td {
   font-size: 18px;
 }
 
-.employeeTable {
+.studentTable {
   margin-top: 30px;
   border-collapse: collapse;
-  overflow: scroll;
-  height: 650px;
 }
 
-.employeeTable th {
+.studentTable th {
   font-weight: bold;
   border-bottom: 1px solid;
   padding: 20px;
 }
 
-.employeeTable td {
+.studentTable td {
   padding: 20px;
 }
 
-.EmployeeRegistButton {
+.studentRegistButton {
   position: absolute;
   right: 170px;
   border-radius: 10px;
@@ -53,7 +51,7 @@ td {
   transition: transform 0.2s ease-in-out;
 }
 
-.EmployeeDeleteButton {
+.studentDeleteButton {
   position: absolute;
   right: 70px;
   border-radius: 10px;
