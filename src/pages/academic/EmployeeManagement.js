@@ -88,7 +88,6 @@ function EmployeeManagement() {
       <div className={SearchBarCss.basic}>
         <SearchAndListLayout options={options}></SearchAndListLayout>
       </div>
-      
       <table className={EmployeeListCss.employeeTable}>
         <colgroup>
           <col width="5%" />

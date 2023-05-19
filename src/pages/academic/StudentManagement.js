@@ -22,6 +22,7 @@ const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
 function StudentManagement() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data, pageInfo } = useSelector((state) => state.StudentReducer);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -40,14 +41,14 @@ function StudentManagement() {
     [currentPage]
   );
 
+  // onClickStudentInsert
+  const onClickStudentInsert = () => {
+    navigate("/regist-student");
+  }
+
   // // onClickTableTr => 테이블 행 클릭시 교직원 상세 조회 및 수정 페이지로 라우팅
   // const onClickTableTr = (student) => {
   //   setIsEmployeeUpdateModalOpen(true);
-  // }
-
-  // // onCLickInsert => emp인서트모달창 오픈
-  // const onCLickInsert = () => {
-  //   setIsEmployeeInsertModalOpen(true);
   // }
 
   const handleSelectAll = () => {
@@ -70,6 +71,7 @@ function StudentManagement() {
       <motion.button
         whileHover={{ scale: 1.05 }}
         className={StudentListCss.studentRegistButton}
+        onClick={ onClickStudentInsert }
       >
         등록
       </motion.button>
