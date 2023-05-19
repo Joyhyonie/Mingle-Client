@@ -30,6 +30,9 @@ import IdSearch from './pages/login/IdSearch';
 import PwdSearch from './pages/login/PwdSearch';
 import MyPageLayout from './layouts/MypageLayout';
 import PwdChange from './pages/login/Pwdchange';
+
+import MypageUpdate from './pages/employee/MypageUpdate';
+
 import AttendanceDetail from './components/items/AttendanceDetail';
 import StudentModify from './pages/academic/StudentModify';
 import StudentDetail from './pages/academic/StudentDetail';
@@ -37,6 +40,7 @@ import StudentRegist from './pages/academic/StudentRegist';
 import EmployeeModify from './pages/academic/EmployeeModify';
 import EmployeeDetail from './pages/academic/EmployeeDetail';
 import EmployeeRegist from './pages/academic/EmployeeRegist';
+
 
 function App() {
   return (
@@ -70,14 +74,20 @@ function App() {
               <Route path="regist" element={<BoardRegist />} />
             </Route> {/* <BoardLayout/>의 Route */}
 
-            <Route path="mypage" element={<MyPageLayout />}>
-              <Route index element={<Navigate to="/mypage/profile" replace />} />
-              <Route path="profile" element={<ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute>} />
+          
+            <Route path="mypage" element={ <MyPageLayout /> }>
+              <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
+              <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
+            
+
             </Route> {/* <MyPageLayout/>의 Route */}
 
-            <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>} />
+            <Route path="mypage-update" element={ <ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute> }/>
+            <Route path="pwdchange" element={ <ProtectedRoute loginCheck={true}><PwdChange/></ProtectedRoute> }/>
+              <Route path="organization" element={<Organization />} />
 
-            <Route path="organization" element={<Organization />} />
+
+          
 
             <Route path="certi-doc-applied" element={<AppliedCertidocs />} />
             <Route path="certi-doc-apply" element={<ApplyCertiDoc />} />

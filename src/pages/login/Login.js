@@ -17,12 +17,13 @@ function Login(){
         if(login?.status === 200) {
             navigate("/", { replace : true });
             dispatch(resetEmployee());
-        }else if(login?.state === 400){
+        }else if(login?.state === 500){
             alert(login.message);
             dispatch(resetEmployee());
         }
-    }
-   )
+    },
+    [login]
+   );
 
 
     return (
