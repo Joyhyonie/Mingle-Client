@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import MainCSS from "../../css/Main.module.css"
 import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { callMyScheduleRegistAPI } from "../../apis/ScheduleAPICalls";
 
 function AddScheduleModal ({setAddScheduleModal}) {
 
     const dispatch = useDispatch();
     const [form, setForm] = useState({});
+    const { registMySche } = useSelector(state => state.ScheduleReducer);
 
     /* 등록 성공 시 실행 될 useEffect */
-    // useEffect(
-    //     () => {
-    //         if(regist?.status === 200) {
-    //             toast.success("일정이 등록되었습니다");
-    //             setAddScheduleModal(false);
-    //         }
-    //     }, [regist]
-    // );
+    useEffect(
+        () => {
+            if(registMySche?.status === 200) {
+                toast.success("일정이 등록되었습니다");
+                setAddScheduleModal(false);
+            } else if (registMySche?.state === 400) {
+                toast.error("일정 등록에 실패했습니다");
+            }
+
+        }, [registMySche]
+    );
 
     /* 입력된 input 요소들을 한번에 처리할 이벤트 함수 */
     const onChangeHandler = (e) => {
@@ -36,6 +41,8 @@ function AddScheduleModal ({setAddScheduleModal}) {
             toast.error("시작일을 선택해주세요!")
         } else if(form.scheEndDate === undefined) {
             toast.error("종료일을 선택해주세요 !")
+        } else if(form.colorCode === undefined) {
+            toast.error("색상을 선택해주세요 !")
         } else if(form.scheEndDate < form.scheStartDate) {
             toast.error("종료일은 시작일보다 이후의 날짜여야합니다 !")
         } else {
@@ -47,11 +54,8 @@ function AddScheduleModal ({setAddScheduleModal}) {
             formData.append("scheEndDate", form.scheEndDate);
             formData.append("colorCode", form.colorCode);
 
-            // dispatch(callRegistMyScheduleAPI(formData));
+            dispatch(callMyScheduleRegistAPI(formData));
 
-            // (임시용)
-            toast.success("일정이 등록되었습니다");
-            setAddScheduleModal(false);
         }
 
     }

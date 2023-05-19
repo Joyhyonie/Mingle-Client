@@ -26,7 +26,7 @@ function PwdSearch(){
         <input
             type="email"
             name="empEmail"
-            placeholder="이메일를 입력하세요."
+            placeholder="이메일을 입력하세요."
             autoComplete='off'
         />
         <div style={style.story}>

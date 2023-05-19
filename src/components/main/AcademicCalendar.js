@@ -2,27 +2,45 @@ import { motion } from "framer-motion"
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // interaction 패키지 추가설치 필요
-import { INITIAL_EVENTS, createEventId } from "../../utils/MyCalenderEventUtils"; // 이벤트 셋팅 함수
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { useDispatch, useSelector } from "react-redux";
+import { callAcScheduleByDateAPI, callAcScheduleListAPI } from "../../apis/ScheduleAPICalls";
 
-function AcademicCalender ({dateInAcCal, setDateInAcCal}) {
+function AcademicCalendar ({setDateInAcCal}) {
 
-    const [currentEvents, setCurrentEvents] = useState([]);
-  
-    const eventsHanlder = (events) => {
-      // setCurrentEvents(events);
-    };
+    const dispatch = useDispatch();
+    const { allAcSchedule } = useSelector(state => state.ScheduleReducer);
+
+    /* 학사 일정 전체 조회 API 호출 */
+    useEffect(
+      () => {
+        dispatch(callAcScheduleListAPI());
+      },[]
+    );
     
-    /* 클릭한 날짜의 toDoList를 조회하기 위한 함수 */
+    /* 클릭한 날짜의 학사일정을 조회하기 위한 함수 */
     const dateSelectHanlder = (selectInfo) => {
       const clickedDate = selectInfo.startStr;
       console.log(`클릭한 날짜 ? ${clickedDate}`)
-
       setDateInAcCal(clickedDate);
+        
+      // 클릭한 날짜의 학사 일정 조회 API 호출
+      dispatch(callAcScheduleByDateAPI(clickedDate));
     };
 
-    
+    /* 조회한 학사 일정 전체 캘린더 event로 넣기 */
+    const acEvents = () => {
+
+      if(allAcSchedule) {
+        return allAcSchedule.map(schedule => ({
+          id: schedule.scheCode,
+          title: schedule.scheName,
+          start: schedule.scheStartDate,
+          end: schedule.scheEndDate,
+        }))
+      }
+    }
 
     const FullCalendarContainer = styled.div`
       display: flex;
@@ -138,45 +156,16 @@ function AcademicCalender ({dateInAcCal, setDateInAcCal}) {
             initialView="dayGridMonth"
             selectable={true}
             weekends={true}
-            initialEvents={INITIAL_EVENTS}
             select={dateSelectHanlder}
             selectMirror={true}
             dayMaxEvents={2}
-            eventTextColor={'#343434'}
-            eventsSet={eventsHanlder}
-            events= {[
-                {
-                title: '2023학년도 1학기 강의 평가 실시',
-                start: '2023-05-12',
-                end: '2023-05-14',
-                },
-                {
-                title: '2023학년도 1학기 성적열람기간',
-                start: '2023-05-12',
-                end: '2023-05-14',
-                },
-                {
-                title: '2023학년도 1학기 성적 정정 신청기간',
-                start: '2023-05-12',
-                end: '2023-05-19',
-                },
-                {
-                title: '제 15회 밍글대학 축제 개최',
-                start: '2023-05-17',
-                end: '2023-05-20',
-                },
-                {
-                title: '여름학기 시작',
-                start: '2023-06-17',
-                end: '2023-06-20',
-                },
-        
-    
-            ]}
+            eventTextColor={'#666666'}
+            events={allAcSchedule && acEvents()}
+            displayEventTime={false}
             />
           </FullCalendarContainer>
         </motion.div>
     );
 }
 
-export default AcademicCalender;
+export default AcademicCalendar;
