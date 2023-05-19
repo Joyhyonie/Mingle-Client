@@ -1,8 +1,11 @@
-import SearchBarCss from '../../css/common/SearchBar.module.css'
+import SearchBarCss from '../../css/LectureSearchBar.module.css';
+import SearchBarCss2 from '../../css/common/SearchBar.module.css';
+
 import styled from "styled-components";
 
 const SelectBoxWrapper = styled.div`
   display: flex;
+  flex-grow:1;
   `;
 
 const IconSVG = styled.svg`
@@ -12,7 +15,7 @@ const IconSVG = styled.svg`
     height: 12px;
   `;
 
-const SelectBox = (props) => {
+const LectureAttendanceSelectBox = (props) => {
   const handleChange = (e) => {
     // event handler
     console.log(e.target.value);
@@ -47,10 +50,11 @@ const SelectBox = (props) => {
           />
         </IconSVG>
       </SelectBoxWrapper>
-
+      <button className={SearchBarCss2.searchBarBtnAtt}>조회</button>
+      <button className={SearchBarCss2.searchBarBtnAtt}>저장</button>
     </>
   );
 };
 
 
-export default SelectBox;
+export default LectureAttendanceSelectBox;
