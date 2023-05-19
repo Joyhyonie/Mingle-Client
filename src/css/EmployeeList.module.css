@@ -7,12 +7,12 @@
   font-size: 18px;
 }
 
-.EmployeeListTable {
+.employeeListTable {
   border-collapse: collapse;
   table-layout: fixed;
 }
 
-.EmployeeListTable th,
+.employeeListTable th,
 td {
   height: 10px;
   text-align: center;
@@ -26,6 +26,8 @@ td {
 .employeeTable {
   margin-top: 30px;
   border-collapse: collapse;
+  overflow: scroll;
+  height: 650px;
 }
 
 .employeeTable th {

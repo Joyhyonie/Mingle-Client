@@ -45,6 +45,22 @@ tbody tr:hover {
 }
 /* -------------------------------------- */
 
+.msgModalDiv {
+    position: relative;
+    z-index: 60; 
+}
+
+.notiModalDiv {
+    position: relative;
+    top: 96px;
+    z-index: 50;
+}
+
+.logoutModalDiv {
+    position: relative;
+    z-index: 70;
+}
+
 .flex {
     display: flex;
 }
@@ -55,8 +71,7 @@ tbody tr:hover {
     width: 100%;
     padding: 0;
     justify-content: center;
-    overflow-y: auto;
-    overflow-x:hidden
+    overflow: scroll;
 }
 
 
@@ -206,7 +221,8 @@ tbody tr:hover {
     padding: 20px;
 }
 
-/* logout modal */
+/* logout modal --------------------------------------------- */
+
 .logoutModal {
     position: fixed;
     top: 0;

@@ -21,6 +21,8 @@ function SubjectList() {
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
+  const [isCheckedAll, setIsCheckedAll] = useState(false);
+  console.log(data);
 
   const options = [
     { value: "sbjName", name: "과목명" },
@@ -31,7 +33,7 @@ function SubjectList() {
     ()=>{
       dispatch(callSubjectsAPI({currentPage}))
     },
-    [currentPage,isModalOpen,isInsertModalOpen,selectedSubject,checkedItems]
+    [currentPage,isModalOpen,isInsertModalOpen,checkedItems]
   );
 
   const openModal = (subject) => {
@@ -61,7 +63,20 @@ function SubjectList() {
     dispatch(callSubjectDelete(checkedItems));
     toast.success("과목이 삭제 되었습니다.");
     setCheckedItems([]);
+    setIsCheckedAll(false)
+    setCurrentPage(1);
   }
+
+  const handleChangeAll = (e) => {
+    const isChecked = e.target.checked;
+    setIsCheckedAll(isChecked);
+    if (isChecked) {
+      const subjectCodes = data.map((subject) => subject.sbjCode);
+      setCheckedItems(subjectCodes);
+    } else {
+      setCheckedItems([]);
+    }    
+  };
 
   const onCLickInsert = () => {
     setIsInsertModalOpen(true);
@@ -97,7 +112,7 @@ function SubjectList() {
           </colgroup>
           <thead>
             <tr>
-              <th><input type="checkbox" /></th>
+              <th><input type="checkbox" onChange={handleChangeAll}/></th>
               <th>과목코드</th>
               <th>학과명</th>
               <th>과목명</th>
@@ -111,7 +126,7 @@ function SubjectList() {
             {data && 
             data.map((subject) => (
               <tr key={subject.sbjCode}>
-                <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange}/></td>
+                <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange} checked={isCheckedAll}/></td>
                 <td>{subject.sbjCode}</td>
                 <td>{subject.department.deptName}</td>
                 <td>{subject.sbjName}</td>

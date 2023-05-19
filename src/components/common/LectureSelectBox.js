@@ -1,4 +1,6 @@
-import SearchBarCss from '../../css/LectureSearchBar.module.css'
+import SearchBarCss from '../../css/LectureSearchBar.module.css';
+import SearchBarCss2 from '../../css/common/SearchBar.module.css';
+
 import styled from "styled-components";
 
 const SelectBoxWrapper = styled.div`
@@ -48,6 +50,8 @@ const LectureSelectBox = (props) => {
           />
         </IconSVG>
       </SelectBoxWrapper>
+
+
     </>
   );
 };

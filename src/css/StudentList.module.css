@@ -1,0 +1,65 @@
+.studentList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  font-size: 18px;
+}
+
+.studentListTable {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.studentListTable th,
+td {
+  height: 10px;
+  text-align: center;
+  word-break: break-all;
+  table-layout: fixed;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+}
+
+.studentTable {
+  margin-top: 30px;
+  border-collapse: collapse;
+}
+
+.studentTable th {
+  font-weight: bold;
+  border-bottom: 1px solid;
+  padding: 20px;
+}
+
+.studentTable td {
+  padding: 20px;
+}
+
+.studentRegistButton {
+  position: absolute;
+  right: 170px;
+  border-radius: 10px;
+  border: none;
+  background-color: #FF9797;
+  color: white;
+  padding: 8px 30px;
+  font-size: 18px;
+  font-weight: 900;
+  transition: transform 0.2s ease-in-out;
+}
+
+.studentDeleteButton {
+  position: absolute;
+  right: 70px;
+  border-radius: 10px;
+  border: none;
+  background-color: #FF9797;
+  color: white;
+  padding: 8px 30px;
+  font-size: 18px;
+  font-weight: 900;
+  transition: transform 0.2s ease-in-out;
+}

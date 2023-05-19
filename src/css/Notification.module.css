@@ -1,8 +1,6 @@
 .whiteNotiModal,
 .darkNotiModal {
     position: absolute;
-    z-index: 1;
-    top: 10%; 
     right: 12%;
     border-radius: 0px 0px 20px 20px;
     width: 550px;

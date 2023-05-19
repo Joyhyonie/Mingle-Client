@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyCertiDocListAPI } from "../../apis/CertiDocAPICalls";
 import CareerCerti from "../../components/documents/CareerCerti";
-import { useNavigate } from "react-router";
+import EmploymentCerti from "../../components/documents/EmploymentCerti";
+import LectureExperienceCerti from "../../components/documents/LectureExperienceCerti";
 
 /* 모든 교직원의 '증명서 발급 이력' */
 
@@ -17,7 +18,6 @@ function MyCertiDoc () {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectCerti, setSelectCerti] = useState();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(
         ()=>{
@@ -34,6 +34,13 @@ function MyCertiDoc () {
     const closeModal = () => {
         setIsModalOpen(false);
       };
+
+    useEffect(() => {
+        if (!isModalOpen) {
+          dispatch(callMyCertiDocListAPI({ currentPage }));
+        }
+    }, [isModalOpen, currentPage]);
+    
 
     return (
         <motion.div
@@ -75,20 +82,29 @@ function MyCertiDoc () {
                                 <td>{myCerti.reason}</td>
                                 <td>{myCerti.certiUse}</td>
                                 <td>{myCerti.docStatus}</td>
+                                {myCerti.docStatus == "승인" ? (
                                 <td><button onClick={()=> openModal(myCerti)}>보기</button></td>
+                                ): null }
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                {isModalOpen && (
-              <CareerCerti
-              closeModal={closeModal}
-              myCerti={selectCerti}
-                  />
+                {isModalOpen && selectCerti &&(
+              <>
+              {selectCerti.certiForm.certiFormCode === 300001 && (
+                <EmploymentCerti closeModal={closeModal} myCerti={selectCerti}/>
+              )}
+              {selectCerti.certiForm.certiFormCode === 300002 &&(
+                <CareerCerti closeModal={closeModal} myCerti={selectCerti}/>
+              )}
+              {selectCerti.certiForm.certiFormCode === 300003 &&(
+                <LectureExperienceCerti closeModal={closeModal} myCerti={selectCerti}/>
+              )}
+              </>
       )}
             </div>
             <div>
-                {/* 페이징바 */}
+            { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
             </div>
         </motion.div>
     );

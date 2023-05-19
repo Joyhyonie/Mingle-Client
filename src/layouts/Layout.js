@@ -16,13 +16,13 @@ function Layout () {
 
     const logoutHandler = () => {
         window.localStorage.removeItem('accessToken');
-        toast.success('로그아웃 성공! 로그인 페이지로 이동합니다');
+        toast.success('로그아웃 성공 !');
         navigate('/login', { replace : true });
     }
 
 
     return (
-        <>
+        <div>
             <Header setActiveIndex={setActiveIndex} isDark={isDark} setIsDark={setIsDark} logoutHandler={logoutHandler}/>
             <div className={ CommonCSS.flex }>
                 <div className={ CommonCSS.navbarCustom }>
@@ -35,7 +35,7 @@ function Layout () {
                     <Outlet/>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

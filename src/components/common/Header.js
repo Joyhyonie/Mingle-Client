@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import MessageModalLayout from '../../layouts/MessageModalLayout';
 import NotificationModal from '../modal/NotificationModal';
 import LogoutModal from '../modal/LogoutModal';
+import { toast } from 'react-hot-toast';
 
 function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
 
@@ -34,7 +35,14 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
     }
     
     /* 다크모드/라이트모드를 제어하기 위한 이벤트 함수 */
-    const darkModeHandler = () => setIsDark(!isDark);
+    const darkModeHandler = () => {
+        setIsDark(!isDark);
+        if(isDark) {
+            toast("LIGHT MODE",{icon: "🌄"})
+        } else {
+            toast("DARK MODE",{icon: "🌠"})
+        }
+    }
 
     /* 쪽지 모달창 핸들러 함수 */
     const messageModalHandler = () => setMessageModal(!messageModal);
@@ -60,21 +68,25 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
     return (
         <>
             {/* 쪽지 모달창 */}
-            <motion.div drag dragConstraints={{ left: 0, right: 1200, top: 0, bottom: 200}}>
-                { messageModal ? 
-                    (<MessageModalLayout setMessageModal={setMessageModal} isIconClickedState={isIconClickedState} setIsIconClickedState={setIsIconClickedState}/>) : null
-                }
-            </motion.div>
-
+            <div className={ CommonCSS.msgModalDiv }>
+                <motion.div drag dragConstraints={{ left: 0, right: 1200, top: 0, bottom: 200}}>
+                    { messageModal ? 
+                        (<MessageModalLayout setMessageModal={setMessageModal} isIconClickedState={isIconClickedState} setIsIconClickedState={setIsIconClickedState}/>) : null
+                    }
+                </motion.div>
+            </div>
+            
             {/* 알림 모달창 */}
-            <div>
-                { notificationModal ?
-                    (<NotificationModal isDark={isDark}/>) : null
-                }
+            <div className={ CommonCSS.notiModalDiv }>
+                <div>
+                    { notificationModal ?
+                        (<NotificationModal isDark={isDark}/>) : null
+                    }
+                </div>
             </div>
 
             {/* 로그아웃 모달창 */}
-            <div>
+            <div className={ CommonCSS.logoutModalDiv }>
                 { logoutModal ?
                     (<LogoutModal logoutHandler={logoutHandler} setLogoutModal={setLogoutModal}/>) : null
                 }

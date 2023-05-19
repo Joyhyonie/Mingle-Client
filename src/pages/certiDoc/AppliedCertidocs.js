@@ -11,6 +11,7 @@ import PagingBar from "../../components/common/PagingBar";
 function AppliedCertidocs () {
 
     const {data,pageInfo} = useSelector(state => state.CertiReducer);
+    const { patch } = useSelector(state => state.CertiReducer);
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ function AppliedCertidocs () {
         ()=>{
             dispatch(callCertiListAPI({currentPage}));
         },
-        [currentPage]
+        [currentPage,patch]
     )
 
     const onClickHandler = (certi) => {      
