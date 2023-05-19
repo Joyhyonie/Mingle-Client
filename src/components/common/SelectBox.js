@@ -47,6 +47,7 @@ const SelectBox = (props) => {
           />
         </IconSVG>
       </SelectBoxWrapper>
+
     </>
   );
 };

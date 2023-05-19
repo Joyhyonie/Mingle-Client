@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import CommonCSS from '../../../css/common/Common.module.css'
 import SearchBarCSS from '../../../css/common/SearchBar.module.css';
 import SearchAndListLayout from '../../../layouts/SearchAndListLayout';
-import LectureList from "../../../components/lists/AttendenceList";
+import LectureList from "../../../components/lists/AttendanceList";
 import PagingBar from "../../../components/common/PagingBar";
 import { useEffect, useState } from "react";
 

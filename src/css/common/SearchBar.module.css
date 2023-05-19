@@ -49,3 +49,33 @@
 .selectBox:focus {
   outline: none;
 }
+
+.searchBarAttLec {
+  border: 1px solid #FF9797;
+  width: 400px;
+  height: 47px;
+  margin-right: 15px;
+  margin-left: 26px;
+  padding-left: 10px;
+  font-size: 18px;
+}
+.searchBarAttDate {
+  border: 1px solid #FF9797;
+  width: 230px;
+  height: 47px;
+  margin-right: 15px;
+  margin-left: 26px;
+  padding-left: 10px;
+  font-size: 18px;
+}
+.searchBarBtnAtt {
+  width: 120px;
+  height: 50px;
+  background-color: #FF9797;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 20px;
+}
