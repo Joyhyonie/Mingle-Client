@@ -19,7 +19,7 @@ export const { employee :
     [POST_LOGIN] : res => res,
     [RESET_EMPLOYEE] : () => {},
     [GET_EMPLOYEES] : (res) => res.data,
-    [GET_EMPLOYEE] : (res) => res.data,
+    [GET_EMPLOYEE] : (res) => res,
     [POST_EMPLOYEE] : (res) => res,
     [PUT_EMPLOYEE] : (res) => res
 });
@@ -29,7 +29,7 @@ const EmployeeReducer= handleActions({
     [POST_LOGIN] : (state, {payload}) => ({ login : payload}),
     [RESET_EMPLOYEE] : (state, {payload}) => payload,
     [GET_EMPLOYEES] : (state, {payload}) => payload,
-    [GET_EMPLOYEE] : (state, {payload}) => payload,
+    [GET_EMPLOYEE] : (state, {payload}) => ({employee : payload}),
     [POST_EMPLOYEE] : (state, {payload}) => ({regist : payload}),
     [PUT_EMPLOYEE] : (state, {payload}) => ({modify : payload})
 

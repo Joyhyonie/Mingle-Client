@@ -2,13 +2,28 @@ import { Outlet } from "react-router-dom";
 import MyPageLayoutCSS from '../css/MyPageLayout.module.css';
 import { useNavigate } from "react-router-dom";
 import MyPageAttendance from "../pages/attendance/MyPageAttendance";
+import { useState } from "react";
+import SubjectUpdateModal from "../components/modal/SubjectUpdateModal";
+import AttendanceDocInsert from "../components/modal/AttendanceDocInser";
 
 function MyPageLayout() {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const onClickHandler = () => {
+        setIsModalOpen(true);
+    }
+
     const navigate = useNavigate();
 
     const onClickPwdChangeHandler = () => {
         navigate("/pwdchange")
     }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+    
     return (
         <div className={ MyPageLayoutCSS.myPageLayoutDiv }>
 
@@ -24,7 +39,7 @@ function MyPageLayout() {
                 <div className={MyPageLayoutCSS.sub}>
                         <h1>기간</h1>
                         <span>
-                              <button>연차신청</button>
+                              <button onClick={onClickHandler}>연차신청</button>
                         </span>  
                         <div>
                                 <div>
@@ -33,7 +48,11 @@ function MyPageLayout() {
                             </div>
                </div>
             </main>
-                          
+            {isModalOpen && (
+        <AttendanceDocInsert
+          closeModal={closeModal}
+        />
+      )}                      
         </div>
 
 

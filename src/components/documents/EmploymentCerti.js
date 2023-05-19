@@ -4,7 +4,7 @@ import DocumentsCSS from "../../css/Documents.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { callDetailCertiDoc } from "../../apis/CertiDocAPICalls";
 
-function CareerCerti({closeModal,myCerti}){
+function EmploymentCerti({closeModal,myCerti}){
 
     const dispatch = useDispatch();
     const data = useSelector(state => state.CertiReducer);
@@ -27,8 +27,9 @@ function CareerCerti({closeModal,myCerti}){
             {data.certiDocCode && (
                 <>
             <div className={DocumentsCSS.modalContainer} onClick={(e)=> e.stopPropagation()}>
+            <div className={DocumentsCSS.docCode}>제 {data.certiDocCode}</div>
             <div className={DocumentsCSS.deptName}>{data.certiForm.certiFormName}</div>
-                <table className={DocumentsCSS.CareerCertiModalDiv}>
+                <table className={DocumentsCSS.CareerCertiModalDiv} onClick={()=> window.print()}>
                     <tbody>
                     <tr>
                         <th className={DocumentsCSS.th}>이름</th>
@@ -56,7 +57,6 @@ function CareerCerti({closeModal,myCerti}){
                     <h4 className={DocumentsCSS.date}> {formatDate(new Date())}</h4>
                     <p className={DocumentsCSS.in}>(인)</p>
                 </table>
-                <button onClick={()=> closeModal()}>돌아가기</button>
             </div>
             </>
 )}
@@ -65,4 +65,4 @@ function CareerCerti({closeModal,myCerti}){
     )
 }
 
-export default CareerCerti;
+export default EmploymentCerti;
