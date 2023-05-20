@@ -29,22 +29,24 @@ function StudentManagement() {
   const [selectAll, setSelectAll] = useState(false);
   const [checkboxes, setCheckboxes] = useState({});
 
-  // const [isEmployeeUpdateModalOpen, setIsEmployeeUpdateModalOpen] = useState(false);
-  // const [isEmployeeInsertModalOpen, setIsEmployeeInsertModalOpen] = useState(false);
-
-  // 아 헷갈려!!! 
-  // isEmployeeInsertModalOpen 추가
-  useEffect(
-    () => {
-      dispatch(callStudentsAPI({ currentPage }))
-    },
-    [currentPage]
-  );
-
+  useEffect(() => {
+    dispatch(callStudentsAPI({ currentPage }));
+    if (data) {
+      const initialCheckboxes = data.reduce((acc, student) => {
+        return { ...acc, [student.stdCode]: false };
+      }, {});
+      setCheckboxes(initialCheckboxes);
+    }
+  }, [currentPage, data]);
+  
   // onClickStudentInsert
   const onClickStudentInsert = () => {
     navigate("/regist-student");
   }
+
+  const handleCheckboxChange = (stdCode) => {
+    setCheckboxes({ ...checkboxes, [stdCode]: !checkboxes[stdCode] });
+  };
 
   // // onClickTableTr => 테이블 행 클릭시 교직원 상세 조회 및 수정 페이지로 라우팅
   // const onClickTableTr = (student) => {
@@ -60,6 +62,15 @@ function StudentManagement() {
     setSelectAll(!selectAll);
   };
 
+  const onClickDeleteStudents = () => {
+    const studentsToDelete = Object.keys(checkboxes).filter((stdCode) => checkboxes[stdCode]);
+    // API call to delete students
+    // dispatch(callDeleteStudentsAPI(studentsToDelete));
+    // Then reset checkboxes
+    // setCheckboxes({});
+  };
+
+
 
 
   return (
@@ -71,7 +82,7 @@ function StudentManagement() {
       <motion.button
         whileHover={{ scale: 1.05 }}
         className={StudentListCss.studentRegistButton}
-        onClick={ onClickStudentInsert }
+        onClick={onClickStudentInsert}
       >
         등록
       </motion.button>
@@ -79,6 +90,7 @@ function StudentManagement() {
       <motion.button
         whileHover={{ scale: 1.05 }}
         className={StudentListCss.studentDeleteButton}
+        onClick={onClickDeleteStudents}
       >
         삭제
       </motion.button>
@@ -121,9 +133,16 @@ function StudentManagement() {
           {data &&
             data.map((student) => (
               <tr
-              key={student.stdCode}
+                key={student.stdCode}
               >
-                <td><input type="checkbox" value={student.stdCode} /></td>
+                <td>
+                  <input
+                    type="checkbox"
+                    value={student.stdCode}
+                    checked={checkboxes[student.stdCode] || false}
+                    onChange={() => handleCheckboxChange(student.stdCode)}
+                  />
+                </td>
                 <td>{student.stdCode}</td>
                 <td>{student.stdName}</td>
                 <td>{student.department.deptName}</td>

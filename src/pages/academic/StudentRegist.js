@@ -5,17 +5,21 @@ import CommonCSS from '../../css/common/Common.module.css';
 import { toast } from "react-hot-toast";
 import { callStudentInsertAPI } from "../../apis/AcademicAPICalls";
 import { useNavigate } from 'react-router-dom';
+import DaumPostcode from "react-daum-postcode";
 
 function StudentRegist() {
 
   const dispatch = useDispatch();
-  const [form, setForm] = useState({});
-  const { regist } = useSelector((state) => state.StudentReducer);
   const navigate = useNavigate();
-  const imageInput = useRef();
+  const { regist } = useSelector((state) => state.StudentReducer);
+  const [form, setForm] = useState({});
+  const imageInput = useRef(); // 이미지 삽입
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
-  const [deptCode, setDeptCode] = useState();
+  const [deptCode, setDeptCode] = useState(); // 
+  const [isOpenPost, setIsOpenPost] = useState(false); // 주소 업데이트
+  const [stdAddressBase, setStdAddressBase] = useState('');
+  const [stdAddressDetail, setStdAddressDetail] = useState('');
 
   /* deptCode 값 변경 */
   const onChangeDeptCodeHandler = (e) => {
@@ -38,7 +42,26 @@ function StudentRegist() {
       ...form,
       [e.target.name]: e.target.value
     });
+    if(e.target.name === 'stdAddressDetail') {
+      setStdAddressDetail(e.target.value);
+    }
   }
+
+  /* 칸을 눌렀을 때 팝업이 열리도록 */
+  const onChangeOpenPost = () => {
+    setIsOpenPost(!isOpenPost);
+  };
+
+  /* 주소를 서치한 후 성공적으로 주소가 입력 되도록 */
+  const onCompletePost = (data) => {
+    let fullAddress = data.address;
+    setStdAddressBase(fullAddress);
+    setForm({
+      ...form,
+      stdAddress: fullAddress 
+    });
+    setIsOpenPost(false);
+  };
 
   /* select박스로 상태를 변경할 때 */
   // const onChangeStatusHandler = (e) => {
@@ -77,6 +100,7 @@ function StudentRegist() {
     },
     [image]
   );
+  
 
   /* 학생 등록 버튼 클릭 이벤트 */
   const onClickStudentRegistHandler = () => {
@@ -92,6 +116,8 @@ function StudentRegist() {
     formData.append("stdPhone", form.stdPhone);
     formData.append("stdStatus", form.stdStatus);
     formData.append("stdAddress", form.stdAddress);
+    const detailAddress = stdAddressDetail ? stdAddressDetail : '';
+    formData.append("stdAddress", form.stdAddressBase + ' ' + detailAddress); // 기본 주소와 상세 주소 합치기
     formData.append("stdEntDate", formatDate(form.stdEntDate));
     if (form.stdAbDate) formData.append("stdAbDate", formatDate(form.stdAbDate));
     if (form.stdDropDate) formData.append("stdDropDate", formatDate(form.stdDropDate));
@@ -217,13 +243,20 @@ function StudentRegist() {
               type="text"
               name="stdAddress"
               className={StudentRegistCss.StudentRegistAddress}
-              onChange={onChangeHandler}
+              value={form.stdAddress} // value
+              onClick={onChangeOpenPost}
+              readOnly
             />
+            {isOpenPost ? (
+              <div className={StudentRegistCss.postCodeStyle}><DaumPostcode autoClose onComplete={onCompletePost} /></div>
+            ) : null}
           </div>
           <div>
             <input
               type="text"
+              name="stdAddressDetail"
               className={StudentRegistCss.StudentRegistAddressDetail}
+              onChange={onChangeHandler}
             />
           </div>
           <div className={StudentRegistCss.StudentRegistFormFifth}>
