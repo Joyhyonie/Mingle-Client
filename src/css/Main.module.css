@@ -200,12 +200,17 @@
 
 .boardItemBox {
     display: flex;
+    justify-content:space-between;
     border-bottom: 2px dotted #E6E6E6;
     cursor: pointer;
 }
 
 .boardItemBox p {
-    margin: 8.5px 10px;
+    margin: 8.5px 5px;
+}
+
+.boardTitle {
+    width: 230px;
 }
 
 
