@@ -1,4 +1,4 @@
-import { getAttendance, getAttendanceToday, getAttendances, patchAttendance, postAttendance } from "../modules/AttendanceModule";
+import { getAttendance, getAttendanceToday, getAttendances, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
 import { getEmployee, getEmployees } from "../modules/EmployeeModule";
 import { request } from "./Api";
 
@@ -117,5 +117,41 @@ export function callMyAttendanceTodayAPI() {
 }
 
 /* 출근 시각 등록 */
+export function callStartTimeRecordAPI() {
+
+    return async (dispatch, getState) => {
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        };
+
+        const result = await request('POST', `/attendance/record`, headers);
+
+        if(result.status == 200) {
+            dispatch(postAttendanceRecord(result));
+        }
+
+    }
+
+}
 
 /* 퇴근 시각 등록 */
+export function callEndTimeRecordAPI() {
+
+    return async (dispatch, getState) => {
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        };
+
+        const result = await request('PATCH', `/attendance/record`, headers);
+
+        if(result.status == 200) {
+            dispatch(patchAttendanceRecord(result));
+        }
+
+    }
+
+}
