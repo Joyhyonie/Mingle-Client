@@ -1,9 +1,12 @@
-import { getAttendance, getAttendances, patchAttendance, postAttendance } from "../modules/Attendance";
+import { getAttendance, getAttendanceToday, getAttendances, patchAttendance, postAttendance } from "../modules/AttendanceModule";
 import { getEmployee, getEmployees } from "../modules/EmployeeModule";
+import { request } from "./Api";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const ATTEN_DANCE = `http://${SERVER_IP}:${SERVER_PORT}/attendance`;
+
+const accessToken = window.localStorage.getItem('accessToken');
 
 export const callEmployee = ({currentPage = 1}) => {
 
@@ -92,3 +95,27 @@ export const callLeaveRegist = (formData) => {
         }
     }
 }
+
+/* 오늘의 출퇴근 기록 조회 */
+export function callMyAttendanceTodayAPI() {
+
+    return async (dispatch, getState) => {
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        };
+
+        const result = await request('GET', `/attendance/today`, headers);
+
+        if(result.status == 200) {
+            dispatch(getAttendanceToday(result));
+        }
+
+    }
+
+}
+
+/* 출근 시각 등록 */
+
+/* 퇴근 시각 등록 */

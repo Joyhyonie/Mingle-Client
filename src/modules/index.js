@@ -3,7 +3,7 @@ import EmployeeReducer from "./EmployeeModule";
 import SubjectReducer from "./SubjectModule";
 import CertiReducer from "./CertiModule";
 import SubjectInfoReducer from "./LectureModule";
-import AttendanceReducer from './Attendance';
+import AttendanceReducer from './AttendanceModule';
 import StudentReducer from "./StudentModule";
 import ScheduleReducer from "./ScheduleModule";
 import BoardReducer from "./BoardModule";

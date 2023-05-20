@@ -12,7 +12,7 @@ function MyCalendarInfo ({dateInMyCal}) {
     const { mySchedule } = useSelector(state => state.ScheduleReducer);
     const [addScheduleModal, setAddScheduleModal] = useState(false);        // 나의 일정 추가 modal관리용 state
     const [modifyScheduleModal, setModifyScheduleModal] = useState(false);  // 나의 일정 수정 modal관리용 state
-    const [isChecked, setIsChecked] = useState('');                      // 체크박스 클릭 시, 현재 이 컴포넌트를 리렌더링 하기 위한 state
+    const [isChecked, setIsChecked] = useState('');                         // 체크박스 클릭 시, 현재 이 컴포넌트를 리렌더링 하기 위한 state
     const [selectedSchedule, setSelectedSchedule] = useState(null);         // 일정 수정 모달창에 클릭된 일정의 정보를 담아 보내기 위한 state
 
     console.log("MyCalendarInfo의 isChecked => ", isChecked);
