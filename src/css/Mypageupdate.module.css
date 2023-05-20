@@ -1,0 +1,93 @@
+.registerDiv {
+
+    display: flex;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0px 0px 30px 0px;
+}
+
+
+
+.registerDiv input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 206px;
+    height: 70px;   
+    border-radius: 10px;
+    text-indent: 16px;
+    background: #FFFFFF;
+    border: 1px solid #FF9797;
+    font-weight: 500;
+    font-size: 24px;    
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: 500;
+
+}
+
+.registerDiv button {
+    border: none;
+    border-radius: 20px;
+    background-color: #FFD7D7;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 35px;
+    color: white;
+    padding: 5px 40px;
+    margin-right: 45px;
+    float: right;
+}
+
+
+.registerDiv h1 {
+
+    float: left;
+    
+}
+.registerDiv img {
+
+
+    width: 300px;
+    height: 302px;
+    border-radius: 200px;
+    margin-top:10px;
+    margin-left: 45px;
+    
+
+}
+
+
+.row input{
+    width: 500px;
+    height: 50px;
+    font-size: 20px;
+}
+
+.row1 input {
+    width:  400px;
+    height: 50px;
+    font-size: 20px;
+
+}
+
+.column {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 30px;
+}
+
+.column2 {
+    display: flex;
+    margin-left: 30px;
+}
+
+.namebar input {
+    width: 170px;
+
+}
+
+.Enamebar input{
+    width: 284px;
+}
+.column3{
+    margin-left: 59px;
+}

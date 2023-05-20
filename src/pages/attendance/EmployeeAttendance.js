@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { callEmployee } from "../../apis/AttendanceAPICalls";
 import { useNavigate } from "react-router-dom";
 import PagingBar from "../../components/common/PagingBar";
-
+import SearchAndListLayout from "../../layouts/SearchAndListLayout";
+import SearchBarCss from '../../css/common/SearchBar.module.css';
 
 
 function EmployeeAttendance () {
@@ -18,6 +19,10 @@ function EmployeeAttendance () {
     const [currentPage, setCurrentPage] = useState(1);
     const {data, pageInfo} = useSelector(state => state.EmployeeReducer);
 
+    const options = [
+        { value: "sbjName", name: "소속" },
+        { value: "deptName", name: "이름" }
+    ];
 
     useEffect(
         ()=>{
@@ -37,8 +42,9 @@ function EmployeeAttendance () {
             <div>
                 <p className={ CommonCSS.pageDirection }>근태관리 ▸ 교직원 근태 기록</p>
             </div>
-            <div className={EmployeeAttendanceCSS.EmployeeAttendanceDiv}><button className={EmployeeAttendanceCSS.EmployeeAttendanceBtn}>교수</button>
-            <button className={EmployeeAttendanceCSS.EmployeeAttendanceBtn}>행정직원</button></div>
+            <div className={SearchBarCss.basic}>
+          <SearchAndListLayout options={options}></SearchAndListLayout>
+            </div>
             <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
