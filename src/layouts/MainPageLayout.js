@@ -14,7 +14,7 @@ function MainPageLayout () {
 
     const [isMyCalendar, setIsMyCalendar] = useState(true);             // 사용자가 선택한 캘린더를 관리하는 state
     const [dateInMyCal, setDateInMyCal] = useState(new Date());         // 나의 일정에서 선택된 날짜를 관리하는 state
-    const [dateInAcCal, setDateInAcCal] = useState(new Date());         // 학사 일정에서 선택된 날자를 관리하는 state
+    const [dateInAcCal, setDateInAcCal] = useState(new Date());         // 학사 일정에서 선택된 날짜를 관리하는 state
 
     return (
         <motion.div

@@ -14,7 +14,7 @@ const POST_EMPLOYEE = 'employee/POST_EMPLOYEE';
 const PUT_EMPLOYEE = 'employee/PUT_EMPLOYEE';
 
 export const { employee : 
-  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee }} = createActions
+  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee }} = createActions
 
   ({
 
