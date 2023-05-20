@@ -6,30 +6,55 @@ import { toast } from "react-hot-toast";
 
 function LectureInsertModal({ setIsInsertModalOpen }) {
     const dispatch = useDispatch();
-    const subjectInfo = useSelector(state => state.subjectInfoReducer);
-    console.log('subjectinfo', subjectInfo);
+    const subjectInfo = useSelector(state => state.SubjectInfoReducer);
+
+
+
 
     /*이벤트를 관리하는 상태값 관리  state*/
     const [form, setForm] = useState({
-        deptCode: 13
-    });
-    //망 const [deptcode, setDeptCode] = useState('');
 
-    // const [lecCount, setLecCount] = useState('');
-    // const [lecStartDate, setLecStartDate] = useState('');
-    // const [lecEndDate, setLecEndDate] = useState(''); // 입력값을 관리해주는
+        deptCode: 13,
+
+
+    });
+    const [score, setScore] = useState('');
+    const [classType, setClassType] = useState();
+
+
+
+
 
     /*수업회차, 수업시작일, 수업종료일의 (input)입력 값 상태 저장 */
+
+
+
+
 
     const onChangeHandler = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value,
         });
+
     };
+    const onChangeHandler2 = (e) => {
+        console.log('e.target.value', e.target.value)
+        setScore(subjectInfo.subjectNameList.find(subject => subject.sbjCode === 1001));
+
+        console.log('subjectInfo.subjectNameList', subjectInfo.subjectNameList);
+        console.log('subjectInfo.subject.sbjCode', subjectInfo.subjectNameList.sbjCode);
+
+
+    };
+
+
 
     const { deptCode } = form;
     console.log('subjectInfo', subjectInfo);
+    console.log('form', form);
+    console.log('score', score);
+
 
 
 
@@ -58,7 +83,11 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
         /*dispatch(callSubjectListAPI(formData));*/
     }
 
+
+
     return (
+
+
         <div className={LectureInsertModalCSS.modal}>
             <div className={LectureInsertModalCSS.modalContainer}>
                 <div className={LectureInsertModalCSS.SubjectModalDiv}>
@@ -85,35 +114,34 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
 
                         </select>
                         <label className={LectureInsertModalCSS.label}>교수명</label>
-                        <select className={LectureInsertModalCSS.classType} name="empName" onChange={onChangeHandler}>
-                            {/*가짜 옵션 */}
-                            <option value="전공필수">전공필수</option>
-                            <option value="전공선택">전공선택</option>
-                            <option value="교양필수">교양필수</option>
-                            <option value="교양선택">교양선택</option>
+                        <select className={LectureInsertModalCSS.classType} name="empCode" onChange={onChangeHandler}>
+                            {/*professorDTOList */}
+                            {subjectInfo && subjectInfo.professorDTOList &&
+                                subjectInfo.professorDTOList.map((professor) => (
+                                    <option value={professor.empCode}>{professor.empName}</option>
+                                ))}
+
                         </select>
                     </div>
                     <div className={LectureInsertModalCSS.subjectName}>
                         <label className={LectureInsertModalCSS.label}>교과목명</label>
-                        <select className={LectureInsertModalCSS.deptCode} name="sbjName" onChange={onChangeHandler}>
-                            {/*가짜 옵션 */}
-                            <option value="13">거시경제학</option>
-                            <option value="14">간호학과</option>
-                            <option value="15">경제학과</option>
-                            <option value="16">경영학과</option>
-                            <option value="17">환경공학과</option>
-                            <option value="18">외식조리학과</option>
-                            <option value="19">아동교육학과</option>
-                            <option value="20">시각디자인학과</option>
+                        <select className={LectureInsertModalCSS.deptCode} name="sbjCode" onChange={onChangeHandler2}>
+                            {/*subjectNameList */}
+                            {subjectInfo && subjectInfo.subjectNameList && subjectInfo.subjectNameList.map((subjectname) => (
+                                <option value={subjectname.sbjCode}>{subjectname.sbjName}</option>
+                            ))}
+
                         </select>
                     </div>
                     <div className={LectureInsertModalCSS.subScore}>
                         <label className={LectureInsertModalCSS.label}>학점</label>
-                        <input type="text" name="sbjName" onChange={onChangeHandler}
-                            className={LectureInsertModalCSS.sbjName} />
+                        {/*특정 subjectcode일때 score를 가져온다.  */}
+                        <input type="text" name="sbjName" onChange={onChangeHandler} className={LectureInsertModalCSS.sbjName} readonly value={score.score && score.score}>
+
+                        </input>
+                        {/*특정 subjectcode일때 calssType를 가져온다.  */}
                         <label className={LectureInsertModalCSS.label}>이수구분</label>
-                        <input type="text" name="sbjName" onChange={onChangeHandler}
-                            className={LectureInsertModalCSS.sbjName} />
+                        <input type="text" name="sbjName" onChange={onChangeHandler} className={LectureInsertModalCSS.sbjName} readonly />
                     </div>
                     <div className={LectureInsertModalCSS.subScore2}>
                         <label className={LectureInsertModalCSS.label}>수업회차</label>
@@ -132,7 +160,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

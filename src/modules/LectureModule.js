@@ -12,9 +12,9 @@ export const { lecture: { getSubjectInfo } } = createActions({
 });
 
 /*리듀서 */
-const subjectInfoReducer = handleActions({
+const SubjectInfoReducer = handleActions({
 
     [GET_SUBJECT_INFO]: (state, { payload }) => payload
 }, initialState)
 
-export default subjectInfoReducer;
+export default SubjectInfoReducer;
