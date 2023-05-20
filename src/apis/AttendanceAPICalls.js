@@ -82,11 +82,10 @@ export const callLeaveRegist = (formData) => {
         const result = await fetch(requestURL,{
             method : "POST",
             headers : {
-                "Content-Type": "application/json",
                 Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
             },
             body: formData
-        }).then(response => response.json())
+        }).then((response) => response.json())
 
         if(result.status === 200){
             dispatch(postAttendance(result));
