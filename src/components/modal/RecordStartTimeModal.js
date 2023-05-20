@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import MainCSS from "../../css/Main.module.css"
 import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { callEndTimeRecordAPI, callStartTimeRecordAPI } from "../../apis/AttendanceAPICalls";
 
 function RecordStartTimeModal ({setRecordStartTimeModal}) {
 
     const dispatch = useDispatch();
+    const { recordStartTime } = useSelector(state => state.AttendanceReducer);
 
     /* 등록 성공 시 실행 될 useEffect */
-    // useEffect(
-    //     () => {
-    //         if(recordStartTime?.status === 200) {
-    //             toast.success("오늘의 출근 시각이 등록되었습니다");
-    //             setRecordStartTimeModal(false);
-    //         } 
-    //     }, [recordStartTime]
-    // );
+    useEffect(
+        () => {
+            if(recordStartTime?.status === 200) {
+                toast.success("오늘의 출근 시각이 등록되었습니다");
+                setRecordStartTimeModal(false);
+            } 
+        }, [recordStartTime]
+    );
 
     const timeNow = () => {
         const now = new Date();
@@ -28,12 +30,8 @@ function RecordStartTimeModal ({setRecordStartTimeModal}) {
     } 
 
     const recordStartTimeHandler = () => {
-        // 출근 시각을 등록하기 위한 API
-        // dispatch(callStartTimeInsertAPI());
-
-        // 임시용
-        toast.success("오늘의 출근 시각이 등록되었습니다");
-        setRecordStartTimeModal(false);
+        // 출근 시각을 등록하기 위한 API 호출
+        dispatch(callStartTimeRecordAPI());
     }
 
     return (

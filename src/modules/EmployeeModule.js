@@ -13,8 +13,10 @@ const PATCH_EMPLOYEE = 'employee/PATCH_EMPLOYEE';
 const POST_EMPLOYEE = 'employee/POST_EMPLOYEE';
 const PUT_EMPLOYEE = 'employee/PUT_EMPLOYEE';
 
-export const { employee:
-  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee } } = createActions
+
+export const { employee : 
+  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee }} = createActions
+
 
     ({
 

@@ -1,31 +1,29 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MainCSS from "../../css/Main.module.css"
 import { useEffect } from "react";
+import { callBoardPreviewAPI } from "../../apis/BoardAPICalls";
+import { useNavigate } from "react-router-dom";
 
 function BoardPreview () {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { boardPreview } = useSelector(state => state.BoardReducer);
 
     useEffect(
         () => {
             /* 공지사항 조회 API */
-            // dispatch(callGetBoardListAPI())
+            dispatch(callBoardPreviewAPI())
         },[]
     );
 
-    const boardItemClickHandler = () => {
-        console.log('해당 공지사항의 상세 페이지로 이동하는 함수!')
+    /* 문자열 포맷 함수 */
+    const formatDate = (WriteDate) => {
+        const date = new Date(WriteDate);
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        return `${month < 10 ? '0' : ''}${month}/${day < 10 ? '0' : ''}${day}`;
     }
-
-    /* (임시용) API에서 넘어온 DATE 문자열을 포맷하기 위한 테스트 */
-    const dateString = '2023-05-18T10:30:00Z';
-    const date = new Date(dateString);
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const formattedDate = `${month < 10 ? '0' : ''}${month}/${day < 10 ? '0' : ''}${day}`;
-
-    /* (암시용) 공지사항명이 18자 이상일 경우 그 뒤는 ...으로 화면에 노출되게끔 하기 위한 테스트 */
-    const text = '[교외장학] 앤코이교육재단 23년도 희망장학생 선발 안내';
 
     return (
         <div className={ MainCSS.boardBox }>
@@ -33,55 +31,23 @@ function BoardPreview () {
                 <p>공지사항</p>
             </div>
             <div className={ MainCSS.boardListBox }>
-                <div 
-                    className={ MainCSS.boardItemBox }
-                    onClick={ boardItemClickHandler }
-                >
-                    <p>21234</p>
-                    <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 18 ? text.slice(0, 18) + '...' : text }</p>
-                    <p>{formattedDate}</p>
-                </div>
-
-                {/*  ---------------- 아래부터는 dummy data ----------------  */}
-
-                <div className={ MainCSS.boardItemBox }>
-                    <p>21234</p>
-                    <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
-                    <p>{formattedDate}</p>
-                </div>
-                <div className={ MainCSS.boardItemBox }>
-                    <p>21234</p>
-                    <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
-                    <p>{formattedDate}</p>
-                </div>
-                <div className={ MainCSS.boardItemBox }>
-                    <p>21234</p>
-                    <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
-                    <p>{formattedDate}</p>
-                </div>
-
-                <div className={ MainCSS.boardItemBox }>
-                    <p>21234</p>
-                    <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
-                    <p>{formattedDate}</p>
-                </div>
-                <div className={ MainCSS.boardItemBox }>
-                    <p>21234</p>
-                    <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
-                    <p>{formattedDate}</p>
-                </div>
-                <div className={ MainCSS.boardItemBox }>
-                    <p>21234</p>
-                    <p style={{fontWeight:'bold'}}>장학</p>
-                    <p>{ text.length > 20 ? text.slice(0, 18) + '...' : text }</p>
-                    <p>{formattedDate}</p>
-                </div>
+                { boardPreview && boardPreview.map( board => (
+                    <div 
+                        className={ MainCSS.boardItemBox }
+                        onClick={ () => navigate(`/board/${board.boardCode}`) }
+                    >
+                        <p>{board.boardCode}</p>
+                        <p style={{fontWeight:'bold'}}>{board.boardType}</p>
+                        <p
+                            className={ MainCSS.boardTitle }
+                        >
+                            { board.boardTitle.length > 18 ? board.boardTitle.slice(0, 18) + '...' : board.boardTitle }
+                        </p>
+                        <p>{formatDate(board.boardWriteDate)}</p>
+                    </div>
+                ))
+                }
+                
             </div>
         </div>
     );

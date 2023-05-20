@@ -1,5 +1,4 @@
-import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule } from "../modules/ScheduleModule";
-import { getMySchedule } from "../modules/ScheduleModule";
+import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule } from "../modules/ScheduleModule";
 import { request } from "./Api";
 
 const accessToken = window.localStorage.getItem('accessToken');
