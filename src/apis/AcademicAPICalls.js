@@ -1,5 +1,5 @@
 import { getEmployees, getEmployee, postEmployee, putEmployee } from '../modules/EmployeeModule';
-import { getStudents, getStudent, postStudent, putStudent } from '../modules/StudentModule';
+import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -176,3 +176,26 @@ export const callStudentUpdateAPI = (formData) => {
     }
   }
 }
+
+// 학생 정보 삭제
+export const callStudentsDeleteAPI = (stdCodes) => {
+
+  const requestURL = `${STUDENT_URL}/delete`;
+
+  return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(stdCodes),
+    }).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log('[AcademicAPICalls] : callStudentsDeleteAPI result : ', result);
+      dispatch(deleteStudent(result));
+    }
+  }
+}
+

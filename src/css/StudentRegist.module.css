@@ -209,4 +209,16 @@
   padding-right: 10px;
 }
 
-.studentImageAfter {}
+.postCodeStyle {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  padding: 7px;
+  z-index: 100;
+  border: 1px solid;
+  background-color: white;
+}
