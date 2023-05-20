@@ -39,7 +39,7 @@ function RecordMyAttendance () {
     /* 퇴근 시각 등록 전, 출근 시각이 존재하는지 확인한 후 퇴근 기록 모달창을 오픈하는 이벤트 함수 */
     const endTimeClickHandler = () => {
 
-        if(attendanceToday.atdStartTime) { /* 이후에 todayData.empAtdStartTime이 와야함 */
+        if(attendanceToday && attendanceToday.atdStartTime) { /* 이후에 todayData.empAtdStartTime이 와야함 */
             setRecordEndTimeModal(true);
         } else {
             toast('오늘의 출근 시각을 먼저 기록해주세요!',{ icon: "🥲" });
