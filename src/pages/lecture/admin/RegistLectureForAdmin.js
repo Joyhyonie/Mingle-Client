@@ -15,8 +15,8 @@ import LectureInsertModal from "../../../components/modal/LectureInsertModal";
 
 
 
-function RegistLectureForAdmin () {
-  const pageInfo = {startPage: 1, endPage: 10, currentPage:2, maxPage: 20}
+function RegistLectureForAdmin() {
+  const pageInfo = { startPage: 1, endPage: 10, currentPage: 2, maxPage: 20 }
 
 
   const dispatch = useDispatch();
