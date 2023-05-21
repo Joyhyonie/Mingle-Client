@@ -8,10 +8,17 @@ import { callMyCertiDocListAPI } from "../../apis/CertiDocAPICalls";
 import CareerCerti from "../../components/documents/CareerCerti";
 import EmploymentCerti from "../../components/documents/EmploymentCerti";
 import LectureExperienceCerti from "../../components/documents/LectureExperienceCerti";
+import SearchBarCss from "../../css/common/SearchBar.module.css";
+import SearchAndListLayout from "../../layouts/SearchAndListLayout";
 
 /* 모든 교직원의 '증명서 발급 이력' */
 
 function MyCertiDoc () {
+
+    const options = [
+        { value: "sbjName", name: "과목명" },
+        { value: "deptName", name: "학과명" }
+    ];
 
     const {data,pageInfo} = useSelector(state => state.CertiReducer);
     const [currentPage, setCurrentPage] = useState(1);
@@ -49,6 +56,9 @@ function MyCertiDoc () {
             <div>
                 <p className={ CommonCSS.pageDirection }>증명서 ▸ 증명서 발급 신청 이력</p>
             </div>
+            <div className={SearchBarCss.basic}>
+          <SearchAndListLayout options={options}></SearchAndListLayout>
+        </div>
             <div className={MyCertiDocCSS.MyCertiDocCSS}>
                 <table className={MyCertiDocCSS.MyCertiDocCSSTable}>
                     <colgroup>
