@@ -90,3 +90,21 @@ export const callSubjectListAPI = ({ deptCode }) => {
         }
     }
 }
+
+// export const callLectureInsertAPI = ({ }) => {
+
+//     const requestURL = `${LECTURE_URL}/officerregistration`;
+
+//     return async (dispatch, getState) => {
+//         const result = await fetch(requestURL, {
+//             method: 'POST',
+//             body: lectureformData1
+//         }).then(response => response.json());
+
+//         if (result.status === 200) {
+//             dispatch(postSubjects(result));
+//         }
+//     }
+// }
+
+

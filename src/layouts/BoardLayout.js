@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 
 
-function BoardLayout () {
+function BoardLayout() {
 
     return (
         <>
-            <Outlet/>
+            <Outlet />
         </>
     );
 }
