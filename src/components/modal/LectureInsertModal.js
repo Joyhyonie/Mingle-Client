@@ -18,8 +18,9 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
 
 
     });
-    const [score, setScore] = useState('');
-    const [classType, setClassType] = useState();
+    const [score, setScore] = useState({});
+
+    const [classType, setClassType] = useState('');
 
 
 
@@ -40,13 +41,18 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
     };
     const onChangeHandler2 = (e) => {
         console.log('e.target.value', e.target.value)
-        setScore(subjectInfo.subjectNameList.find(subject => subject.sbjCode === 1001));
+        setScore(subjectInfo.subjectNameList.find(subject => subject.sbjCode == e.target.value));
+
 
         console.log('subjectInfo.subjectNameList', subjectInfo.subjectNameList);
         console.log('subjectInfo.subject.sbjCode', subjectInfo.subjectNameList.sbjCode);
 
 
+
+
+
     };
+
 
 
 
@@ -141,7 +147,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
                         </input>
                         {/*특정 subjectcode일때 calssType를 가져온다.  */}
                         <label className={LectureInsertModalCSS.label}>이수구분</label>
-                        <input type="text" name="sbjName" onChange={onChangeHandler} className={LectureInsertModalCSS.sbjName} readonly />
+                        <input type="text" name="sbjName" onChange={onChangeHandler} className={LectureInsertModalCSS.sbjName} readonly value={score.classType && score.classType} />
                     </div>
                     <div className={LectureInsertModalCSS.subScore2}>
                         <label className={LectureInsertModalCSS.label}>수업회차</label>
