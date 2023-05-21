@@ -119,11 +119,16 @@ export const callStudentsAPI = ({ currentPage = 1 }) => {
 // 학생 상세 조회
 export const callStudentDetailAPI = ({ stdCode }) => {
 
-  const requestURL = `${STUDENT_URL}/students/{stdCode}`;
+  const requestURL = `${STUDENT_URL}/students/${stdCode}`;
 
   return async (dispatch, getState) => {
 
-    const result = await fetch(requestURL).then(response => response.json());
+    const result = await fetch(requestURL, {
+        method : 'GET',
+        headers : {
+          "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+        }
+      }).then(response => response.json());
 
     if (result.status === 200) {
       console.log("[AcademicAPICalls] callStudentDetailAPI result : ", result);
