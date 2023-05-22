@@ -24,7 +24,7 @@ const SubjectReducer = handleActions({
     [GET_SUBJECT] : (state, {payload}) => ({subject:payload}),
     [PUT_SUBJECTS] : (state ,{payload}) => ({modify: payload}),
     [POST_SUBJECTS] : (state, {payload}) => ({regist: payload}),
-    [DELETE_SUBJECT] : (state, {payload}) => ({delete: payload})
+    [DELETE_SUBJECT] : (state, {payload}) => ({delete1: payload})
 },initialState);
 
 export default SubjectReducer;

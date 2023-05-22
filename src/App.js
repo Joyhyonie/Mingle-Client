@@ -38,6 +38,7 @@ import StudentModify from './pages/academic/StudentModify';
 import StudentRegist from './pages/academic/StudentRegist';
 import EmployeeModify from './pages/academic/EmployeeModify';
 import EmployeeRegist from './pages/academic/EmployeeRegist';
+import MyLeave from './components/lists/MyLeaveDoc';
 
 
 function App() {
@@ -76,12 +77,12 @@ function App() {
             <Route path="mypage" element={ <MyPageLayout /> }>
               <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
               <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
-            
 
             </Route> {/* <MyPageLayout/>의 Route */}
 
             <Route path="mypage-update" element={ <ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute> }/>
             <Route path="pwdchange" element={ <ProtectedRoute loginCheck={true}><PwdChange/></ProtectedRoute> }/>
+            <Route path='MyLeave' element={ <ProtectedRoute loginCheck={true}> <MyLeave/> </ProtectedRoute>}/>
               <Route path="organization" element={<Organization />} />
 
 

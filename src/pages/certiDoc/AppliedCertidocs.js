@@ -65,9 +65,9 @@ function AppliedCertidocs () {
                     <td>{certi.certiDocCode}</td>
                     <td>{certi.certiApplyDate.split(" ")[0]}</td>
                     <td>{certi.certiForm.certiFormName}</td>
-                    <td>{certi.reason}</td>
-                    <td>{certi.applyer.empName}</td>
                     <td>{certi.certiUse}</td>
+                    <td>{certi.applyer.empName}</td>
+                    <td>{certi.reason}</td>
                     <td>{certi.docStatus}</td>
                     {certi.docStatus !== "승인" ? (
                     <td><button

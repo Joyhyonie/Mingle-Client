@@ -109,7 +109,6 @@ function StudentManagement() {
         whileHover={{ scale: 1.05 }}
         className={StudentListCss.studentRegistButton}
         onClick={onClickStudentInsert}
-        onClick={onClickStudentInsert}
       >
         등록
       </motion.button>
