@@ -71,9 +71,11 @@ export const callSubjectDelete = (checkedItems) => {
     }
 }
 
-export const callSubjectListAPI = ({ deptCode }) => {
+export const callSubjectListAPI = (deptCode) => {
 
-    const requestURL = `${LECTURE_URL}/professorsAndLectures?deptCode=${deptCode}`
+    console.log("")
+
+    const requestURL = `${LECTURE_URL}/professorsAndLectures/${deptCode}`
     /*필요한값 생각해보자  */
 
     //요청 url 이 안에서 비동기적으로 호출된다.. 
@@ -91,20 +93,23 @@ export const callSubjectListAPI = ({ deptCode }) => {
     }
 }
 
-// export const callLectureInsertAPI = ({ }) => {
+export const callLectureInsertAPI = (form) => {
 
-//     const requestURL = `${LECTURE_URL}/officerregistration`;
+    const requestURL = `${LECTURE_URL}/officerregistration`;
 
-//     return async (dispatch, getState) => {
-//         const result = await fetch(requestURL, {
-//             method: 'POST',
-//             body: lectureformData1
-//         }).then(response => response.json());
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)
+        }).then(response => response.json());
 
-//         if (result.status === 200) {
-//             dispatch(postSubjects(result));
-//         }
-//     }
-// }
+        if (result.status === 200) {
+            dispatch(postSubjects(result));
+        }
+    }
+}
 
 

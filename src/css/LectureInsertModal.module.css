@@ -15,7 +15,7 @@
 .modalContainer{
     position: flex;
     width: 740px;
-    height: 400px;
+    height: 430px;
     text-align: center;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
@@ -109,7 +109,7 @@
 }
 
 .SubjectModalDiv .sbjName{
-    width: 15%;
+    
     height: 30px;
     margin-left: 10px;
 }
@@ -170,3 +170,6 @@
     align-items: center; 
 
 }
+
+
+
