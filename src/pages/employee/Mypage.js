@@ -14,7 +14,7 @@ function Mypage() {
 
   return (
     <div className={MypageCSS.backgroundDiv} style={{ backgroundColor: 'white' }}>
-      {employee && employee && (
+      {employee && (
         <div className={MypageCSS.registerDiv}>
           <img src={employee.empProfile} alt="" />
           <div className={MypageCSS.row}>

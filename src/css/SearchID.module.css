@@ -1,0 +1,142 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    font-family: 'Paytone One';
+    
+}
+
+.modalContainer{
+    border: 1px solid #FF9797;
+    position: flex;
+    width: 500px;
+    height: 450px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 40px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);    
+    z-index: 1000;
+}
+
+.CareerCertiModalDiv{    
+    background-color: white;
+    margin-left: 88px;
+    width: 80%;
+    height: 80%;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.CareerCertiModalDiv {
+    border: 1px solid black;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.name {
+    width: 150px;
+}
+
+.content {
+    vertical-align: top;
+    
+}
+
+.CareerCertiModalDiv td {
+    border: 1px solid black;
+}
+
+.th {
+    border: 1px solid black;
+}
+
+.image {
+    position: absolute;
+    bottom: 20%;
+    right: 40%;
+}
+
+.in {
+    position: absolute;
+    right: 40%;
+    bottom: 18%;
+}
+
+.date {
+    position: absolute;
+    right: 46%;
+    bottom: 28%;
+    font-size: 18px;
+}
+
+.deptName {
+    font-size: 40px;
+    margin-left: 15px;
+}
+
+.docCode {
+    position: absolute;
+    align-self: flex-start;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.thLecture {
+    width: 100%;
+    font-size: 20px;
+    height: 0px;
+}
+
+.thLectureETC {
+    width: 280px;
+    border: 1px solid black;
+    font-size: 20px;
+    height: 0px;
+}
+
+.ID{
+    padding-top: 20px;
+    margin-bottom: -30px;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.story{
+    box-sizing: border-box;
+    height: 122px;
+    width: 382px;
+    background: #FFFFFF;
+    border: 1px solid #FF9797;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    justify-content: center;
+    margin: 60px 62px 50px 62px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.modalContainer button {
+    font-size: 23px;
+    background-color:  #FF9797;
+    color: white;
+    border: 10px solid rgba(255, 151, 151, 0.79);
+    width: 300px;
+    border-radius: 12px;
+    font-family: 'Paytone One', sans-serif;
+    margin-top: -50px;
+}
+
+.modalContainer span  {
+    color: #FF9797;
+}
