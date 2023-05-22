@@ -81,17 +81,18 @@ function MyPageLayout() {
                </div>
             </main>
             {isModalOpen && (
+              
         <AttendanceDocInsert
           closeModal={closeModal}
           employee={employee}
         />
-      )}                      
-        </div>
+      )}
+    </div>
 
 
 
 
-    );
+  );
 }
 
 export default MyPageLayout;
