@@ -5,9 +5,11 @@ import WriteMsg from '../pages/message/WriteMsg';
 import LikeMsgBox from '../pages/message/LikeMsgBox';
 import ReceivedMsgBox from '../pages/message/ReceivedMsgBox';
 import SentMsgBox from '../pages/message/SentMsgBox';
+import { useDispatch } from 'react-redux';
 
 function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClickedState}) {
     
+    const dispatch = useDispatch();
     const [replyContent, setReplyContent] = useState('');           // '답장' 클릭 시, 받은 쪽지 내용과 함께 답장시키기 위한 state
     const [selectedDeptCode, setSelectedDeptCode] = useState('');     // '답장' 클릭 시, Sender의 소속코드
     const [selectedEmpCode, setSelectedEmpCode] = useState('');       // '답장' 클릭 시, Sender의 교번

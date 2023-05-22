@@ -5,6 +5,7 @@ import RecordStartTimeModal from "../modal/RecordStartTimeModal";
 import RecordEndTimeModal from "../modal/RecordEndTimeModal";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyAttendanceTodayAPI } from "../../apis/AttendanceAPICalls";
+import { callGetEmployeeAPI } from "../../apis/EmployeeAPICalls";
 
 function RecordMyAttendance () {
 

@@ -27,7 +27,7 @@ export const { employee :
       [POST_ID]: (res) => res,
       [POST_PWD]: (res) => res,
 
-      [GET_EMPLOYEE]: res => res,
+      [GET_EMPLOYEE]: res => res.data,
       [PATCH_EMPLOYEE]: (res) => res,
       [POST_EMPLOYEE]: (res) => res,
       [PUT_EMPLOYEE]: (res) => res
