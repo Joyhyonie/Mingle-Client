@@ -5,8 +5,8 @@
     position: fixed;
     top: 100px;
     left: 250px;
-    width: 400px;
-    height: 600px;
+    width: 500px;
+    height: 700px;
     background-color: white;
     border: 2px solid #FFD7D7;
     border-radius: 20px;
@@ -23,11 +23,11 @@
     background-color: #FFD7D7;
     border-radius: 18px 0px 0px 18px;
     width: 90px;
-    height: 600px;
+    height: 700px;
 }
 
 .header {
-    width: 260px;
+    width: 360px;
     height: 50px;
 }
 
@@ -38,10 +38,8 @@
 
 .body {
     /* border: 2px solid #bbabfd; */
-    width: 310px;
-    height: 550px;
-    width: 310px;
-    height: 550px;
+    width: 410px;
+    height: 650px;
     overflow: scroll;
 }
 
@@ -82,11 +80,11 @@
 
 .deleteButton {
     position: absolute;
-    top: 2.4%;
+    top: 1.9%;
     right: 13%;
     border: none;
     border-radius: 5px;
-    padding: 2px 13px;
+    padding: 3px 15px;
     background-color: #FF9797;
     color: white;
     cursor: pointer;
@@ -102,15 +100,15 @@
     background-color: #FFD7D7;
     display: flex;
     align-items: center; 
-    width: 270px;
+    width: 370px;
     height: 25px;
     margin-top: -10px;
 }
 
 .selectReceiverBox {
     margin-top: -10px;
-    margin-left: 40px;
-    width: 230px;
+    margin-left: 60px;
+    width: 285px;
 }
 
 .selectReceiverBox p { 
@@ -142,16 +140,15 @@
 
 .selectDepartment,
 .selectEmployee {
-    width: 105px;
+    width: 133px;
     padding-right: 10px;
     margin-left: 25.5px;
 }
 
 .msgSearchWord {
     border: 1px solid #FF9797;
-    width: 140px;
+    width: 240px;
     height: 27px;
-    margin-right: 15px;
     margin-left: 20px;
     padding-left: 10px;
     font-size: 15px;
@@ -170,7 +167,7 @@
 }
 
 .msgItemBox {
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: -10px;
 }
 
@@ -186,7 +183,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 265px;
+    width: 365px;
     height: 20px;
     margin-left: -19px;
     border: 1px solid #FF9797;
@@ -208,7 +205,7 @@
 }
 
 .msgItemBody {
-    width: 265px;
+    width: 365px;
     height: auto;
     margin-left: -19px;
     border: 1px solid #FF9797;
@@ -255,10 +252,11 @@
     background-color: #F8F8F8;
 }
 
-.msgItemContentBox pre {
+.msgItemContentBox p {
     background-color: #F8F8F8;
     font-family: 'Noto Sans KR', sans-serif;
     margin: 5px;
+    color: #343434;
 }
 
 /* 쪽지 작성 ------------------------------------------------------------------------------ */
@@ -266,8 +264,8 @@
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: 600;
     font-size: 15px;
-    width: 229px;
-    height: 370px;
+    width: 329px;
+    height: 470px;
     resize: none;
     margin: 50px 10px 0px 10px;
     border: 1px solid #FF9797;
@@ -292,7 +290,7 @@
     font-size: 15px;
     padding: 10px 20px;
     cursor: pointer;
-    margin: 13px 110px;
+    margin: 13px 160px;
 }
 
 .sendButton:hover {

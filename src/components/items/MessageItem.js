@@ -1,64 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from "framer-motion"
 import MessageCSS from '../../css/Message.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { callGetEmployeeAPI } from '../../apis/EmployeeAPICalls';
+import { callLikeMsgAPI, callReadMsgAPI, callReceivedMsgListAPI } from '../../apis/MessageAPICalls';
 
-function MessageItem ({setWhichPage, stateChangeHandler, checkboxChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode}) {  
+function MessageItem ({message, isChecked, setWhichPage, stateChangeHandler, checkboxChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode}) {  
 
     const dispatch = useDispatch();
+    const { employee } = useSelector(state => state.EmployeeReducer);
+    const { readMsg } = useSelector(state => state.MessageReducer);
+    const { likeMsg } = useSelector(state => state.MessageReducer);
     const [isOpen, setIsOpen] = useState(false);
 
-    /* (임시용) 현재 로그인한 유저의 정보를 가져옴 (sender/receiver 분별) */
-    const currentUser = {
-        empCode: 202312345,
-        deptName: '학생처',
-        empName: '허치즈',
-    };
-    const message = {
-        msgCode: 12345,
-        msgContent: '안녕하세요 방가방가 햄토리 :3',
-        msgSendDate: '2023-05-15 13:30:30',
-        msgImpSender: 'N',
-        msgImpReceiver: 'Y',
-        msgReadYn: 'N',
-        msgSender: { empCode: 202311111, deptCode: '2', deptName: '교무처', empName: '신짱구' },
-        msgReceiver: { empCode: 202312345, deptCode: '1', deptName: '학생처', empName: '허치즈' },
-        msgDelSender: 'N',
-        msgDelReveiver: 'N'
-    }
+    console.log("employee => ", employee);
+    console.log("message =>", message);
+
+    useEffect(
+        () => {
+            /* 현재 로그인한 유저 조회 API 호출 */
+            dispatch(callGetEmployeeAPI());
+        },[]
+    );
 
     /* 해당 쪽지가 받은 쪽지인지, 보낸 쪽지인지 확인하여 from/to 표시 */
     const fromOrTo = () => {
-        if (message.msgSender.empCode === currentUser.empCode) {
-            return <><span>To</span> {message.msgReceiver.deptName} {message.msgReceiver.empName}</>;
+        if (message.sender.empCode === employee.empCode) {
+            return <><span>To</span> {message.receiver.department.deptName} {message.receiver.empName}</>;
         } else {
-            return <><span>From</span> {message.msgSender.deptName} {message.msgSender.empName}</>;
+            return <><span>From</span> {message.sender.department.deptName} {message.sender.empName}</>;
         }
     }
 
     /* 해당 쪽지를 현재 로그인한 유저가 좋아요를 했는지 확인 후, 했으면 꽉 찬 하트, 하지 않았으면 빈 하트 노출 */
     const likeIconHandler = () => {
-        if (message.msgSender.empCode === currentUser.empCode) {
+        if (message.sender.empCode === employee.empCode) {
             /* 현재 로그인 유저가 해당 쪽지의 보낸 사람일 경우, */
             if (message.msgImpSender === 'Y') {
-                return <img onClick={ senderLikeHandler('N', message.msgCode) } src="/images/like-hover.png"/>
+                return <img onClick={ likeHandler(message.msgCode) } src="/images/like-hover.png"/>
             } else {
-                return <img onClick={ senderLikeHandler('N', message.msgCode) } src="/images/unlike.png"/>
+                return <img onClick={ likeHandler(message.msgCode) } src="/images/unlike.png"/>
             }
             
         } else {
             /* 현재 로그인 유저가 해당 쪽지의 받는 사람일 경우, */
             if (message.msgImpReceiver === 'Y') {
-                return <img onClick={ receiverLikeHandler('N', message.msgCode) } src="/images/like-hover.png"/>
+                return <img onClick={ likeHandler(message.msgCode) } src="/images/like-hover.png"/>
             } else {
-                return <img onClick={ receiverLikeHandler('Y', message.msgCode) }src="/images/unlike.png"/>
+                return <img onClick={ likeHandler(message.msgCode) }src="/images/unlike.png"/>
             }
         }
     }
 
     /* 해당 쪽지가 받은 쪽지라면 답장 버튼, 보낸 쪽지라면 읽음 여부 노출 */
     const replyOrReadHandler = () => {
-        if (message.msgSender.empCode === currentUser.empCode) {
+        if (message.sender.empCode === employee.empCode) {
             /* 보낸 쪽지 */
             if(message.msgReadYn === 'Y') {
                 return <p>읽음</p>
@@ -80,26 +76,18 @@ function MessageItem ({setWhichPage, stateChangeHandler, checkboxChangeHandler, 
     }
 
     /* 쪽지의 Header를 클릭 시, 쪽지 토글 이벤트 함수 */
-    const msgOpenHandler = () => {
+    const msgOpenHandler = (msgCode) => {
         setIsOpen(!isOpen)
 
         /* 현재 로그인한 유저가 받는 사람일 경우, 쪽지 Header 클릭 시, 읽음 여부 'Y'로 변경 */
-        if (message.msgImpReceiver.empCode === currentUser.empCode) {
-            console.log('나 읽었다!');
-            // dispatch(callMsgReadAPI(msgCode));
+        if (message.receiver.empCode == employee.empCode) {
+            dispatch(callReadMsgAPI(msgCode));
         }
     }
 
-    /* 받는 사람의 중요 쪽지 등록/취소를 컨트롤 하는 이벤트 함수 */
-    const receiverLikeHandler = (YesOrNo, msgCode) => {
-        // 해당 쪽지 msgImpReceiver의 'Y' or 'N'를 patch 메소드로 변경
-        // dispatch(callReceiverLikeChangeAPI({YesOrNo, msgCode}));
-    }
-
-    /* 보낸 사람의 중요 쪽지 등록/취소를 컨트롤 하는 이벤트 함수 */
-    const senderLikeHandler = (YesOrNo, msgCode) => {
-        // 해당 쪽지 msgImpSender 'Y' or 'N'를 patch 메소드로 변경
-        // dispatch(callSenderLikeChangeAPI({YesOrNo, msgCode}));
+    /* 현재 로그인한 유저의 중요 쪽지 등록/취소를 컨트롤 하는 이벤트 함수 */
+    const likeHandler = (msgCode) => {
+        // dispatch(callLikeMsgAPI(msgCode));
     }
 
     /* '답장' 버튼 클릭 시, 해당 메시지의 content및 Sender의 정보와 함께 쪽지전송페이지로 이동 */
@@ -109,7 +97,7 @@ function MessageItem ({setWhichPage, stateChangeHandler, checkboxChangeHandler, 
         // content 정보 넘기기
         setReplyContent(message.msgContent);
         setSelectedDeptCode(message.msgSender.deptCode);
-        setSelectedEmpCode(message.msgSender.empCode);
+        setSelectedEmpCode(message.sender.empCode);
     }
     
 
@@ -118,13 +106,14 @@ function MessageItem ({setWhichPage, stateChangeHandler, checkboxChangeHandler, 
             <motion.div 
                 className={ MessageCSS.msgItemHeader }
                 style={{ border: message.msgReadYn === 'Y' ? '1px solid lightgray' : null }}
-                onClick={ msgOpenHandler }
+                onClick={ () => msgOpenHandler(message.msgCode) }
                 transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
             >
             <div className={ MessageCSS.flex }>
                 <input 
                     type='checkbox'
                     id={ message.msgCode }
+                    checked={ isChecked }
                     onClick={ (e) => e.stopPropagation() } /* 이벤트 버블링 방지 */
                     onChange={ checkboxChangeHandler }
                 /> 
@@ -144,7 +133,7 @@ function MessageItem ({setWhichPage, stateChangeHandler, checkboxChangeHandler, 
                         transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
                     >
                         <div className={ MessageCSS.msgItemContentBox }>
-                            <pre>{message.msgContent}</pre>
+                            <p>{message.msgContent}</p>
                         </div>
                         <div className={ MessageCSS.msgItemFooterBox }>
                             {likeIconHandler()}

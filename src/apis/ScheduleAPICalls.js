@@ -27,6 +27,8 @@ export function callMyScheduleListAPI() {
 /* 선택한 날짜의 나의 일정 조회 */
 export function callMyScheduleByDateAPI(date) {
 
+    console.log("마운팅 될 때 항상 오늘 날짜로 나의 일정이 조회되었으면 좋겠다 ,, ^^")
+
     return async (dispatch, getState) => {
 
         const headers = {

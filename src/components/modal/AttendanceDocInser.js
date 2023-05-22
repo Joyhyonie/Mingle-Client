@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { callLeaveRegist } from "../../apis/AttendanceAPICalls";
 import { toast } from "react-hot-toast";
 
-function AttendanceDocInsert({closeModal}){
+function AttendanceDocInsert({closeModal,employee}){
 
     const dispatch = useDispatch();
     const [form, setForm] = useState({});
@@ -46,14 +46,9 @@ function AttendanceDocInsert({closeModal}){
                 <div className={AttendanceInsertModalCSS.name}>휴가신청서</div>
                 <div className={AttendanceInsertModalCSS.AttendanceModalDiv}>
                     <label className={AttendanceInsertModalCSS.empName}>이름</label>
-                    <input type="text" className={AttendanceInsertModalCSS.inputEmpName} readOnly/>
+                    <input type="text" className={AttendanceInsertModalCSS.inputEmpName} value={employee.empName} readOnly/>
                     <label className={AttendanceInsertModalCSS.deptCode}>소속</label>
-                    <select className={AttendanceInsertModalCSS.selectdept} readOnly>
-                        <option>ㅎㅇ</option>
-                        <option>ㅎㅇ</option>
-                        <option>ㅎㅇ</option>
-                        <option>ㅎㅇ</option>
-                    </select>
+                    <input type="text" className={AttendanceInsertModalCSS.inputdeptName} value={employee.department.deptName} readOnly/>
                     <label className={AttendanceInsertModalCSS.leaveFormCode}>종류</label>
                     <select className={AttendanceInsertModalCSS.selectFormCode} onChange={onChangeHandler} name="applyFormCode">
                         <option value="100001">휴가신청서</option>

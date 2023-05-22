@@ -1,4 +1,4 @@
-import { getAttendance, getAttendanceToday, getAttendances, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
+import { getAttendance, getAttendanceToday, getAttendances, getMyattendance, getMyleave, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
 import { getEmployee, getEmployees } from "../modules/EmployeeModule";
 import { request } from "./Api";
 
@@ -77,6 +77,45 @@ export const callLeaveUpdateAPI = (leave) => {
         }
     }
 };
+
+export const callMyLeave = ({currentPage = 1}) => {
+    const requestURL = `${ATTEN_DANCE}/leave/myLeave?page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(getMyleave(result));
+            console.log(result);
+        }
+    }
+
+}
+
+export const callMyAttendance = ({currentPage = 1}) => {
+    const requestURL = `${ATTEN_DANCE}/myAttendance?page=${currentPage}`;
+
+    return async(dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+            }
+        }).then(response => response.json())
+
+        if(result.status === 200){
+            dispatch(getMyattendance(result));
+            console.log(result);
+        }
+    }
+}
 
 export const callLeaveRegist = (formData) => {
     const requestURL = `${ATTEN_DANCE}/regist`;

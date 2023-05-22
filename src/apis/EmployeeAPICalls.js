@@ -1,4 +1,5 @@
-import { getEmployee, postLogin, patchEmployee } from "../modules/EmployeeModule";
+import { getEmployee, postLogin, patchEmployee, postId,postPwd } from "../modules/EmployeeModule";
+
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -109,9 +110,54 @@ const createFormDataBody = (formData, boundary) => {
 
 
 
+export const callIdAPI = (form) => {
+
+    const requestURL = `${PRE_URL}/auth/idsearch`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)
+        })
+            .then(response => response.json());
+
+            if( result.status === 200){
+        console.log('[EmployeeCalls] callIdAPI result : ', result);
+              dispatch(postId(result));
+              return result;
+        }
+        
+    };
+};
 
 
+export const callPwdAPI = (form) => {
 
+    const requestURL = `${PRE_URL}/auth/sendemail`;
+
+    return async (dispatch, getState) => {
+
+        const result = await fetch(requestURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)
+        })
+            .then(response => response.json());
+
+            if( result.status === 200){
+        console.log('[EmployeeCalls] callIdAPI result : ', result);
+              dispatch(postPwd(result));
+              return result;
+        }
+        
+    };
+};
 
 
 

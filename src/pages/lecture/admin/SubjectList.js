@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import SubjectListCSS from '../../../css/SubjectList.module.css'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callSubjectDelete, callSubjectUpdateAPI, callSubjectsAPI } from "../../../apis/LectureAPICalls";
+import { callSubjectDelete, callSubjectsAPI } from "../../../apis/LectureAPICalls";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
 import SubjectInsertModal from "../../../components/modal/SubjectInsertModal";
 import { toast } from "react-hot-toast";
@@ -21,8 +21,8 @@ function SubjectList() {
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
-  const [isCheckedAll, setIsCheckedAll] = useState(false);
-  console.log(data);
+  const {delete1} = useSelector(state => state.SubjectReducer);
+
 
   const options = [
     { value: "sbjName", name: "과목명" },
@@ -33,7 +33,7 @@ function SubjectList() {
     ()=>{
       dispatch(callSubjectsAPI({currentPage}))
     },
-    [currentPage,isModalOpen,isInsertModalOpen,checkedItems]
+    [currentPage,isModalOpen,isInsertModalOpen,checkedItems,delete1]
   );
 
   const openModal = (subject) => {
@@ -54,7 +54,7 @@ function SubjectList() {
       setCheckedItems(checkedItems.filter(item => item !== value));
     }
   }
-
+  
   const onClickDelete = () => {
     if(checkedItems.length === 0){
       toast.error("과목을 선택해주세요");
@@ -63,20 +63,7 @@ function SubjectList() {
     dispatch(callSubjectDelete(checkedItems));
     toast.success("과목이 삭제 되었습니다.");
     setCheckedItems([]);
-    setIsCheckedAll(false)
-    setCurrentPage(1);
   }
-
-  const handleChangeAll = (e) => {
-    const isChecked = e.target.checked;
-    setIsCheckedAll(isChecked);
-    if (isChecked) {
-      const subjectCodes = data.map((subject) => subject.sbjCode);
-      setCheckedItems(subjectCodes);
-    } else {
-      setCheckedItems([]);
-    }    
-  };
 
   const onCLickInsert = () => {
     setIsInsertModalOpen(true);
@@ -112,7 +99,7 @@ function SubjectList() {
           </colgroup>
           <thead>
             <tr>
-              <th><input type="checkbox" onChange={handleChangeAll}/></th>
+              <th><input type="checkbox"/></th>
               <th>과목코드</th>
               <th>학과명</th>
               <th>과목명</th>
@@ -126,7 +113,7 @@ function SubjectList() {
             {data && 
             data.map((subject) => (
               <tr key={subject.sbjCode}>
-                <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange} checked={isCheckedAll}/></td>
+                <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange}/></td>
                 <td>{subject.sbjCode}</td>
                 <td>{subject.department.deptName}</td>
                 <td>{subject.sbjName}</td>

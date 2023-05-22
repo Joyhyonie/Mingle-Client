@@ -149,3 +149,13 @@
     bottom: 6%;
     left: 57%;
 }
+
+.inputdeptName {
+    width: 170px;
+    border: 1px solid #FF9797;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 30px;
+    text-align: center;
+}
