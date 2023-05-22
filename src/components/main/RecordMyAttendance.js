@@ -10,14 +10,14 @@ import { callGetEmployeeAPI } from "../../apis/EmployeeAPICalls";
 function RecordMyAttendance () {
 
     const dispatch = useDispatch();
-    const { attendanceToday } = useSelector(state => state.AttendanceReducer);
+    const { attendanceToday, recordStartTime, recordEndTime } = useSelector(state => state.AttendanceReducer);
     const [recordStartTimeModal, setRecordStartTimeModal] = useState(false);
     const [recordEndTimeModal, setRecordEndTimeModal] = useState(false);
 
     useEffect(
         () => {
             dispatch(callMyAttendanceTodayAPI());
-        },[]
+        },[recordStartTime, recordEndTime]
     );
 
     /* 출퇴근 시각 포맷 함수 */
