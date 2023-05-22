@@ -8,26 +8,55 @@ import { useDispatch, useSelector } from "react-redux";
 import { callAcScheduleByDateAPI, callAcScheduleListAPI } from "../../apis/ScheduleAPICalls";
 import dayjs from "dayjs";
 
-function AcademicCalendar ({setDateInAcCal}) {
+function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
 
     const dispatch = useDispatch();
     const { allAcSchedule } = useSelector(state => state.ScheduleReducer);
+    const [selectInfo, setSelectInfo] = useState();
 
-    /* 학사 일정 전체 조회 API 호출 */
     useEffect(
       () => {
+        /* 학사 일정 전체 조회 API 호출 */
         dispatch(callAcScheduleListAPI());
       },[]
     );
+
+    /* 오늘 날짜 및 선택한 날짜를 통해 Info 정보를 노출시키기 위한 useEffect */
+    useEffect(() => {
+
+      if(selectInfo) {
+        // selectInfo가 존재할 때, 다시 dateSelectHanlder()를 호출하여 MyCalendarInfo 컴포넌트도 리렌더링 되도록 함
+        dateSelectHanlder(selectInfo)
+      } else {
+        // 아직 날짜 선택이 되지 않았을 때, 현재 날짜를 첫 렌더링 시 노출
+        const today = dayjs().format('YYYY-MM-DD');
+        dateSelectHanlder({ startStr: today });
+      }
+        
+    }, [allAcSchedule]);
     
     /* 클릭한 날짜의 학사일정을 조회하기 위한 함수 */
     const dateSelectHanlder = (selectInfo) => {
       const clickedDate = selectInfo.startStr;
-      console.log(`클릭한 날짜 ? ${clickedDate}`)
+      console.log(`현재 학사일정 날짜 ? ${clickedDate}`)
       setDateInAcCal(clickedDate);
+      setSelectInfo(selectInfo);
         
-      // 클릭한 날짜의 학사 일정 조회 API 호출
-      dispatch(callAcScheduleByDateAPI(clickedDate));
+      if(allAcSchedule) {
+        const filteredSchedule = allAcSchedule.filter(schedule => {
+
+          const startDate = dayjs(schedule.scheStartDate);
+          const endDate = dayjs(schedule.scheEndDate).endOf('day'); // 해당 날짜의 자정 이후까지 조회
+
+          return dayjs(clickedDate).isSame(startDate) || 
+                dayjs(clickedDate).isSame(endDate) || 
+                (dayjs(clickedDate).isAfter(startDate) && dayjs(clickedDate).isBefore(endDate));
+
+        });
+      
+      console.log('filteredSchedule => ', filteredSchedule);
+      setFilteredAcSchedule(filteredSchedule); // 선택된 날짜의 나의 일정을 조회시키기 위한 state에 set
+      }
     };
 
     /* 조회한 학사 일정 전체 캘린더 event로 넣기 */

@@ -5,7 +5,7 @@ import interactionPlugin from "@fullcalendar/interaction"; // interaction 패키
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
-import { callMyScheduleByDateAPI, callMyScheduleListAPI } from "../../apis/ScheduleAPICalls";
+import { callMyScheduleListAPI } from "../../apis/ScheduleAPICalls";
 import dayjs from "dayjs";
 
 function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
@@ -16,14 +16,14 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
 
     useEffect(
       () => {
-
+        /* 나의 일정 전체 조회 API 호출 */
         dispatch(callMyScheduleListAPI());
-
       },[checkSchedule, registMySche, modifyMySche, removeMySche] 
       // => 일정 등록/수정/삭제 시 바로 캘린더에 적용
 
     );
 
+    /* 오늘 날짜 및 선택한 날짜를 통해 Info 정보를 노출시키기 위한 useEffect */
     useEffect(() => {
 
       if(selectInfo) {
@@ -43,7 +43,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
     const dateSelectHanlder = (selectInfo) => {
 
         const clickedDate = selectInfo.startStr;
-        console.log(`클릭한 날짜 ? ${clickedDate}`)
+        console.log(`현재 나의 일정 날짜 ? ${clickedDate}`)
         // 선택한 날짜 set
         setDateInMyCal(clickedDate);
         // 선택한 날짜의 정보 set (MyCalendarInfo 컴포넌트도 리렌더링 시키기 위해)
