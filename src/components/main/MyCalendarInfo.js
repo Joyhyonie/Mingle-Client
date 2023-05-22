@@ -5,6 +5,7 @@ import AddScheduleModal from "../modal/AddScheduleModal";
 import ModifyScheduleModal from "../modal/ModifyScheduleModal";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyScheduleByDateAPI, callMyScheduleCheckAPI } from "../../apis/ScheduleAPICalls";
+import dayjs from "dayjs";
 
 function MyCalendarInfo ({dateInMyCal, filteredMySchedule}) {
 

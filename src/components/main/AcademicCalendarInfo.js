@@ -5,22 +5,10 @@ import AcScheduleDetailModal from "../modal/AcScheduleDetailModal";
 import { useDispatch, useSelector } from "react-redux";
 import { callAcScheduleByDateAPI } from "../../apis/ScheduleAPICalls";
 
-function AcademicCalendarInfo ({dateInAcCal}) {
+function AcademicCalendarInfo ({dateInAcCal, filteredAcSchedule}) {
 
-    const dispatch = useDispatch();
-    const { acSchedule } = useSelector(state => state.ScheduleReducer);
     const [acScheduleDetailModal, setAcScheduleDetailModal] = useState(false);
     const [selectedSchedule, setSelectedSchedule] = useState(null);         // 일정 상세 모달창에 클릭된 일정의 정보를 담아 보내기 위한 state
-
-    useEffect(
-        () => {
-            /* 학사 일정 조회 API 호출 */
-            const date = new Date(dateInAcCal);
-            const formattedDate = date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '-');
-            console.log("MyCalendarInfo의 formattedDate => ", formattedDate);
-            dispatch(callAcScheduleByDateAPI(formattedDate));
-        },[]
-    );
 
     /* 학사일정 종료일의 형식 포맷용 함수 */
     const formatDate = (scheEndDate) => {
@@ -53,7 +41,7 @@ function AcademicCalendarInfo ({dateInAcCal}) {
                         <p>{clickedDateHandler()}</p>
                     </div>
                     <div className={ MainCSS.academicItemList }>
-                        { acSchedule && acSchedule.map(schedule => (
+                        { filteredAcSchedule && filteredAcSchedule.map(schedule => (
                             <div className={ MainCSS.academicItemBox }>
                                 <div>
                                     ~ {formatDate(schedule.scheEndDate)}

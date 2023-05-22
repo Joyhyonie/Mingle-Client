@@ -7,9 +7,7 @@ import MyCalendar from "../components/main/MyCalendar";
 import AcademicCalendar from "../components/main/AcademicCalendar";
 import AcademicCalendarInfo from "../components/main/AcademicCalendarInfo";
 import MyCalendarInfo from "../components/main/MyCalendarInfo";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { callMyScheduleListAPI } from "../apis/ScheduleAPICalls";
+import { useState } from "react";
 
 
 function MainPageLayout () {
@@ -17,7 +15,8 @@ function MainPageLayout () {
     const [isMyCalendar, setIsMyCalendar] = useState(true);             // 사용자가 선택한 캘린더를 관리하는 state
     const [dateInMyCal, setDateInMyCal] = useState(new Date());         // 나의 일정에서 선택된 날짜를 관리하는 state
     const [dateInAcCal, setDateInAcCal] = useState(new Date());         // 학사 일정에서 선택된 날짜를 관리하는 state
-    const [filteredMySchedule, setFilteredMySchedule] = useState([]);    // 선택된 나의 일정을 노출하기 위한 state
+    const [filteredMySchedule, setFilteredMySchedule] = useState([]);   // 선택된 나의 일정을 노출하기 위한 state
+    const [filteredAcSchedule, setFilteredAcSchedule] = useState([]);   // 선택된 학사 일정을 노출하기 위한 state
 
     return (
         <motion.div
@@ -32,14 +31,15 @@ function MainPageLayout () {
                     <div className={ MainCSS.calendarBox }>
                         { isMyCalendar ? 
                             <MyCalendar setDateInMyCal={setDateInMyCal} setFilteredMySchedule={setFilteredMySchedule}/> 
-                            : <AcademicCalendar dateInAcCal={dateInAcCal} setDateInAcCal={setDateInAcCal}/>
+                            : <AcademicCalendar setDateInAcCal={setDateInAcCal} setFilteredAcSchedule={setFilteredAcSchedule}/>
                         }
                     </div>
                 </div>
                 <div>
                     <div className={ MainCSS.calendarInfoBox }>
                         { isMyCalendar ? 
-                            <MyCalendarInfo dateInMyCal={dateInMyCal} filteredMySchedule={filteredMySchedule} setFilteredMySchedule={setFilteredMySchedule}/> : <AcademicCalendarInfo dateInAcCal={dateInAcCal}/>
+                            <MyCalendarInfo dateInMyCal={dateInMyCal} filteredMySchedule={filteredMySchedule}/> 
+                            : <AcademicCalendarInfo dateInAcCal={dateInAcCal} filteredAcSchedule={filteredAcSchedule}/>
                         }
                     </div>
                     <div className={ MainCSS.boardPreview }>

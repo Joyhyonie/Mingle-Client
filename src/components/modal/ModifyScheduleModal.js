@@ -32,7 +32,10 @@ function ModifyScheduleModal ({selectedSchedule, setModifyScheduleModal}) {
     /* 시작일/종료일을 기본값으로 노출 시키기 위한 날짜 포맷 함수 */
     const formatDate = (scheDate) => {
         const date = new Date(scheDate);
-        return date.toISOString().slice(0, 10);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
     }
 
     /* 입력된 input 요소들을 한번에 처리할 이벤트 함수 */
