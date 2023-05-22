@@ -1,21 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from "framer-motion"
 import MessageCSS from '../../css/Message.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { callGetEmployeeAPI } from '../../apis/EmployeeAPICalls';
-import { callLikeMsgAPI, callReadMsgAPI, callReceivedMsgListAPI } from '../../apis/MessageAPICalls';
+import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI } from '../../apis/MessageAPICalls';
+import { toast } from 'react-hot-toast';
 
-function MessageItem ({message, isChecked, setWhichPage, stateChangeHandler, checkboxChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode}) {  
+function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, 
+                       isChecked, checkboxChangeHandler, checkedIdList, setCheckedIdList}) {  
 
     const dispatch = useDispatch();
     const { employee } = useSelector(state => state.EmployeeReducer);
-    const { readMsg } = useSelector(state => state.MessageReducer);
-    const { likeMsg } = useSelector(state => state.MessageReducer);
-    const [isOpen, setIsOpen] = useState(false);
-
-    console.log("employee => ", employee);
-    console.log("message =>", message);
-
+    const [isOpen, setIsOpen] = useState(false); // 쪽지들을 열고 닫는 state
+    
     useEffect(
         () => {
             /* 현재 로그인한 유저 조회 API 호출 */
@@ -37,17 +34,17 @@ function MessageItem ({message, isChecked, setWhichPage, stateChangeHandler, che
         if (message.sender.empCode === employee.empCode) {
             /* 현재 로그인 유저가 해당 쪽지의 보낸 사람일 경우, */
             if (message.msgImpSender === 'Y') {
-                return <img onClick={ likeHandler(message.msgCode) } src="/images/like-hover.png"/>
+                return <img onClick={ () => {likeHandler(message.msgCode); toast.success("보낸 쪽지함으로 이동되었습니다 :)");} } src="/images/like-hover.png"/>
             } else {
-                return <img onClick={ likeHandler(message.msgCode) } src="/images/unlike.png"/>
+                return <img onClick={ () => {likeHandler(message.msgCode); toast.success("중요 쪽지함으로 이동되었습니다 :)");} } src="/images/unlike.png"/>
             }
             
         } else {
             /* 현재 로그인 유저가 해당 쪽지의 받는 사람일 경우, */
             if (message.msgImpReceiver === 'Y') {
-                return <img onClick={ likeHandler(message.msgCode) } src="/images/like-hover.png"/>
+                return <img onClick={ () => {likeHandler(message.msgCode); toast.success("받은 쪽지함으로 이동되었습니다 :)");} } src="/images/like-hover.png"/>
             } else {
-                return <img onClick={ likeHandler(message.msgCode) }src="/images/unlike.png"/>
+                return <img onClick={ () => {likeHandler(message.msgCode); toast.success("중요 쪽지함으로 이동되었습니다 :)");} }src="/images/unlike.png"/>
             }
         }
     }
@@ -87,7 +84,7 @@ function MessageItem ({message, isChecked, setWhichPage, stateChangeHandler, che
 
     /* 현재 로그인한 유저의 중요 쪽지 등록/취소를 컨트롤 하는 이벤트 함수 */
     const likeHandler = (msgCode) => {
-        // dispatch(callLikeMsgAPI(msgCode));
+        dispatch(callLikeMsgAPI(msgCode));
     }
 
     /* '답장' 버튼 클릭 시, 해당 메시지의 content및 Sender의 정보와 함께 쪽지전송페이지로 이동 */
@@ -99,50 +96,72 @@ function MessageItem ({message, isChecked, setWhichPage, stateChangeHandler, che
         setSelectedDeptCode(message.msgSender.deptCode);
         setSelectedEmpCode(message.sender.empCode);
     }
-    
+
+    /* 삭제할 쪽지 */
+    const deleteMsgHandler = () => {
+        
+        /* 해당 id를 가진 쪽지들의 msgDelReveiver를 'Y'로 변경하는 API */
+        dispatch(callRemoveMsgAPI(checkedIdList));
+
+        setCheckedIdList([]); // 선택되었던 체크박스의 체크 상태 초기화
+
+        if (checkedIdList.length === 0) {
+            toast.error('삭제할 쪽지를 선택해주세요 !');
+        } 
+
+    }    
 
     return (
-        <div className={ MessageCSS.msgItemBox }>
-            <motion.div 
-                className={ MessageCSS.msgItemHeader }
-                style={{ border: message.msgReadYn === 'Y' ? '1px solid lightgray' : null }}
-                onClick={ () => msgOpenHandler(message.msgCode) }
-                transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+        <>
+            <button 
+                className={ MessageCSS.deleteButton }
+                onClick={ deleteMsgHandler }
             >
-            <div className={ MessageCSS.flex }>
-                <input 
-                    type='checkbox'
-                    id={ message.msgCode }
-                    checked={ isChecked }
-                    onClick={ (e) => e.stopPropagation() } /* 이벤트 버블링 방지 */
-                    onChange={ checkboxChangeHandler }
-                /> 
-                <h4>{fromOrTo()}</h4>
+                삭제
+            </button>
+            <div className={ MessageCSS.msgItemBox }>
+                <motion.div 
+                    key={message.msgCode}
+                    className={ MessageCSS.msgItemHeader }
+                    style={{ border: message.msgReadYn === 'Y' ? '1px solid lightgray' : null }}
+                    onClick={ () => msgOpenHandler(message.msgCode) }
+                    transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+                >
+                <div className={ MessageCSS.flex }>
+                    <input 
+                        type='checkbox'
+                        id={ message.msgCode }
+                        checked={ isChecked }
+                        onClick={ (e) => e.stopPropagation() } /* 이벤트 버블링 방지 */
+                        onChange={ checkboxChangeHandler }
+                    /> 
+                    <h4>{fromOrTo()}</h4>
+                </div>
+                <p>{fommatedDate()}</p>
+                </motion.div>
+                <AnimatePresence>
+                    { isOpen && (
+                        <motion.div
+                            className={ MessageCSS.msgItemBody }
+                            style={{ border: message.msgReadYn === 'Y' ? '1px solid lightgray' : null,
+                                    borderTop: message.msgReadYn === 'Y' ? 'none' : null}}
+                            initial={{ y: -10, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+                        >
+                            <div className={ MessageCSS.msgItemContentBox }>
+                                <p>{message.msgContent}</p>
+                            </div>
+                            <div className={ MessageCSS.msgItemFooterBox }>
+                                {likeIconHandler()}
+                                {replyOrReadHandler()}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
-            <p>{fommatedDate()}</p>
-            </motion.div>
-            <AnimatePresence>
-                { isOpen && (
-                    <motion.div
-                        className={ MessageCSS.msgItemBody }
-                        style={{ border: message.msgReadYn === 'Y' ? '1px solid lightgray' : null,
-                                 borderTop: message.msgReadYn === 'Y' ? 'none' : null}}
-                        initial={{ y: -10, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
-                    >
-                        <div className={ MessageCSS.msgItemContentBox }>
-                            <p>{message.msgContent}</p>
-                        </div>
-                        <div className={ MessageCSS.msgItemFooterBox }>
-                            {likeIconHandler()}
-                            {replyOrReadHandler()}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
+        </>
     );
 }
 

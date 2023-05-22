@@ -216,6 +216,8 @@ export function callSendMsgAPI(formData) {
 /* 선택한 쪽지 삭제 */
 export function callRemoveMsgAPI(msgCodes) {
 
+    console.log('쪽지 삭제 API 호출 되었당')
+
     return async (dispatch, getState) => {
 
         const headers = {
@@ -223,7 +225,11 @@ export function callRemoveMsgAPI(msgCodes) {
             'Authorization': `Bearer ${accessToken}`
         };
 
-        const result = await request('PATCH', `/message/remove`, headers, msgCodes);
+        const messageDTO = {
+            selectedMsgs: msgCodes
+        };
+
+        const result = await request('PATCH', `/message/remove`, headers, messageDTO);
 
         if(result.status == 200) {
             dispatch(patchRemoveMsg(result));
