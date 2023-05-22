@@ -59,7 +59,7 @@ function LoginForm() {
                 autoComplete='off'
                 onChange={ onChangeHandler }
             />
-            <div >
+            <div>
           <a onClick={ onClickIdHandler }><span style={style.id_title}>아이디 찾기 </span></a>
             <span style={style.id_title} >/</span>
             <a  onClick={ onClickPwdHandler }><span style={style.id_title}> 비밀번호 찾기</span></a>
