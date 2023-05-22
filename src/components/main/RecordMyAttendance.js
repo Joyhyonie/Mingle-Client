@@ -29,9 +29,6 @@ function RecordMyAttendance () {
         const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
         const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
-        console.log(ampm);
-        console.log(formattedHours);
-        console.log(formattedMinutes);
         return `${ampm} ${formattedHours}시 ${formattedMinutes}분`;   
     }
 
