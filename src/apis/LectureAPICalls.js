@@ -14,8 +14,6 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
         console.log(result);
         if (result.status === 200) {
             dispatch(getSubjects(result));
-            console.log('123', result);
-            console.log(result);
         }
     };
 }

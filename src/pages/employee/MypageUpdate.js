@@ -49,7 +49,7 @@ const onChangeImageUpload = (e) => {
 
   const onClickModifyModeHandler = () => {
     setModifyMode(true);
-    setForm({ ...employee.data });
+    setForm({ ...employee });
   };
 
   const onClickMyPageUpdateHandler = () => {
@@ -107,9 +107,9 @@ const onChangeImageUpload = (e) => {
                   name='empName'
                   type="text"
                   readOnly={!modifyMode}
-                  placeholder={employee.data.empName}
+                  placeholder={employee.empName}
                   onChange={onChangeHandler}
-                  value={!modifyMode ? employee.data.empName : form.empName}
+                  value={!modifyMode ? employee.empName : form.empName}
                 />
               </div>
               <div className={MypageCSS.Enamebar}>
@@ -118,8 +118,8 @@ const onChangeImageUpload = (e) => {
                   type="text"
                   readOnly={!modifyMode}
                   onChange={onChangeHandler}
-                  placeholder={employee.data.empNameEn}
-                  value={!modifyMode ? employee.data.empNameEn : form.empNameEn}
+                  placeholder={employee.empNameEn}
+                  value={!modifyMode ? employee.empNameEn : form.empNameEn}
                 />
               </div>
             </div>
@@ -130,9 +130,9 @@ const onChangeImageUpload = (e) => {
                 name="empEmail"
                 type="text"
                 readOnly={!modifyMode}
-                placeholder={employee.data.empEmail}
+                placeholder={employee.empEmail}
                 onChange={onChangeHandler}
-                value={!modifyMode ? employee.data.empEmail : form.empEmail}
+                value={!modifyMode ? employee.empEmail : form.empEmail}
               />
             </div>
             <div className={MypageCSS.column}>
@@ -142,8 +142,8 @@ const onChangeImageUpload = (e) => {
                 type="text"
                 readOnly={!modifyMode}
                 onChange={onChangeHandler}
-                placeholder={employee.data.empPhone}
-                value={!modifyMode ? employee.data.empPhone : form.empPhone}
+                placeholder={employee.empPhone}
+                value={!modifyMode ? employee.empPhone : form.empPhone}
               />
             </div>
             <div className={MypageCSS.column}>
@@ -152,10 +152,10 @@ const onChangeImageUpload = (e) => {
                 name="empAddress"
                 type="text"
                 readOnly={!modifyMode}
-                placeholder={employee.data.empAddress}
+                placeholder={employee.empAddress}
                 onChange={onChangeHandler}
 
-                value={!modifyMode ? employee.data.empAddress : form.empAddress}
+                value={!modifyMode ? employee.empAddress : form.empAddress}
               />
             </div>
             <div className={MypageCSS.column3}>
@@ -163,7 +163,7 @@ const onChangeImageUpload = (e) => {
                 id="employeeEmail"
                 type="text"
                 readOnly={true}
-                placeholder={employee.data.employeeEmail}
+                placeholder={employee.employeeEmail}
               />
             </div>
           </div>
@@ -174,7 +174,7 @@ const onChangeImageUpload = (e) => {
               <input
                 type="text"
                 readOnly={true}
-                value={employee.data.empCode}
+                value={employee.empCode}
               />
             </div>
 
@@ -184,7 +184,7 @@ const onChangeImageUpload = (e) => {
                 id="employeeName"
                 type="text"
                 readOnly={true}
-                value={employee.data.empStatus}
+                value={employee.empStatus}
               />
             </div>
             <div className={MypageCSS.column}>
@@ -193,7 +193,7 @@ const onChangeImageUpload = (e) => {
                 id="employeeEmail"
                 type="text"
                 readOnly={true}
-                value={employee.data.empEntDate.substring(0, 10)}
+                value={employee.empEntDate.substring(0, 10)}
               />
             </div>
             <div className={MypageCSS.column}>
@@ -202,7 +202,7 @@ const onChangeImageUpload = (e) => {
                 id="employeeEmail"
                 type="text"
                 readOnly={true}
-                value={employee.data.department.deptName}
+                value={employee.department.deptName}
               />
             </div>
             <div className={MypageCSS.column}>
@@ -211,7 +211,7 @@ const onChangeImageUpload = (e) => {
                 id="employeeEmail"
                 type="text"
                 readOnly={true}
-                value={employee.data.empAnnual}
+                value={employee.empAnnual}
               />
             </div>
             {modifyMode && (

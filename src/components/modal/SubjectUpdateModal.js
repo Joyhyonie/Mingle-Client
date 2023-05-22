@@ -23,7 +23,7 @@ function SubjectUpdateModal({subject,closeModal}){
         formData.append("sbjCode", form.sbjCode);
         formData.append("classType", form.classType);
         formData.append("score", form.score);
-        formData.append("department.deptCode", form.department.deptCode);
+        formData.append("department.deptCode", form.deptCode);
         formData.append("sbjName", form.sbjName);
 
         dispatch(callSubjectUpdateAPI(formData));
@@ -54,8 +54,16 @@ function SubjectUpdateModal({subject,closeModal}){
                     <input type="number" name="score" placeholder={subject.score} onChange={onChangeHandler}
                     className={SubjectUpdateModalCSS.score}/>
                     <label className={SubjectUpdateModalCSS.label}>학과명</label>
-                    <input type="text" name="deptCode" placeholder={subject.department.deptName} onChange={onChangeHandler}
-                    className={SubjectUpdateModalCSS.deptName}/>
+                    <select className={SubjectUpdateModalCSS.deptCode} name="deptCode" onChange={onChangeHandler}>
+                        <option value="13">IT공학과</option>
+                        <option value="14">간호학과</option>
+                        <option value="15">경제학과</option>
+                        <option value="16">경영학과</option>
+                        <option value="17">환경공학과</option>
+                        <option value="18">외식조리학과</option>
+                        <option value="19">아동교육학과</option>
+                        <option value="20">시각디자인학과</option>
+                    </select>
                     <label className={SubjectUpdateModalCSS.label}>과목명</label>
                     <input type="text" name="sbjName" placeholder={subject.sbjName} onChange={onChangeHandler}
                     className={SubjectUpdateModalCSS.sbjName}/>

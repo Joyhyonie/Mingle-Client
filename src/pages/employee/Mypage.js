@@ -14,43 +14,43 @@ function Mypage() {
 
   return (
     <div className={MypageCSS.backgroundDiv} style={{ backgroundColor: 'white' }}>
-      {employee && employee.data && (
+      {employee && employee && (
         <div className={MypageCSS.registerDiv}>
-          <img src={employee.data.empProfile} alt="" />
+          <img src={employee.empProfile} alt="" />
           <div className={MypageCSS.row}>
             <div className={MypageCSS.column2}>
               <div className={MypageCSS.namebar}>
                 <label>이름</label>
-                <input type="text" readOnly value={employee.data.empName} />
+                <input type="text" readOnly value={employee.empName} />
               </div>
               <div className={MypageCSS.Enamebar}>
-                <input type="text" readOnly value={employee.data.empNameEn} />
+                <input type="text" readOnly value={employee.empNameEn} />
               </div>
             </div>
             <div className={MypageCSS.column}>
               <label htmlFor="employeeName">메일</label>
-              <input id="employeeName" type="text" readOnly value={employee.data.empEmail} />
+              <input id="employeeName" type="text" readOnly value={employee.empEmail} />
             </div>
             <div className={MypageCSS.column}>
               <label htmlFor="employeeEmail">번호</label>
-              <input id="employeeEmail" type="text" readOnly value={employee.data.empPhone} />
+              <input id="employeeEmail" type="text" readOnly value={employee.empPhone} />
             </div>
             <div className={MypageCSS.column}>
               <label htmlFor="employeeEmail">주소</label>
-              <input id="employeeEmail" type="text" readOnly value={employee.data.empAddress} />
+              <input id="employeeEmail" type="text" readOnly value={employee.empAddress} />
             </div>
             <div className={MypageCSS.column3}>
-              <input id="employeeEmail" type="text" readOnly value={employee.data.employeeEmail} />
+              <input id="employeeEmail" type="text" readOnly value={employee.employeeEmail} />
             </div>
           </div>
           <div className={MypageCSS.row1}>
             <div className={MypageCSS.column}>
               <label>교번</label>
-              <input type="text" readOnly value={employee.data.empCode} />
+              <input type="text" readOnly value={employee.empCode} />
             </div>
             <div className={MypageCSS.column}>
               <label htmlFor="employeeName">상태</label>
-              <input id="employeeName" type="text" readOnly value={employee.data.empStatus} />
+              <input id="employeeName" type="text" readOnly value={employee.empStatus} />
             </div>
             <div className={MypageCSS.column}>
               <label htmlFor="employeeEmail">입사</label>
@@ -58,16 +58,16 @@ function Mypage() {
                 id="employeeEmail"
                 type="text"
                 readOnly
-                value={employee.data.empEntDate?.substring(0, 10)}
+                value={employee.empEntDate?.substring(0, 10)}
               />
             </div>
             <div className={MypageCSS.column}>
               <label htmlFor="employeeEmail">소속</label>
-              <input id="employeeEmail" type="text" readOnly value={employee.data.department.deptName} />
+              <input id="employeeEmail" type="text" readOnly value={employee.department.deptName} />
             </div>
             <div className={MypageCSS.column}>
               <label htmlFor="employeeEmail">연차</label>
-              <input id="employeeEmail" type="text" readOnly value={employee.data.empAnnual} />
+              <input id="employeeEmail" type="text" readOnly value={employee.empAnnual} />
             </div>
           </div>
         </div>
