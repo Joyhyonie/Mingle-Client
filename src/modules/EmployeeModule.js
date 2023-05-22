@@ -24,7 +24,7 @@ export const { employee :
       [RESET_EMPLOYEE]: () => { },
       [GET_EMPLOYEES]: (res) => res.data,
 
-      [GET_EMPLOYEE]: res => res,
+      [GET_EMPLOYEE]: res => res.data,
       [PATCH_EMPLOYEE]: (res) => res,
       [POST_EMPLOYEE]: (res) => res,
       [PUT_EMPLOYEE]: (res) => res

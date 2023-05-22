@@ -2,32 +2,55 @@ import { motion } from "framer-motion"
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // interaction 패키지 추가설치 필요
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
 import { callMyScheduleByDateAPI, callMyScheduleListAPI } from "../../apis/ScheduleAPICalls";
+import { getMySchedule } from "../../modules/ScheduleModule";
+import dayjs from "dayjs";
 
-function MyCalendar ({setDateInMyCal}) {
+function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
 
     const dispatch = useDispatch();
-    const { allMySchedule } = useSelector(state => state.ScheduleReducer);
-    const { mySchedule } = useSelector(state => state.ScheduleReducer);
+    const { allMySchedule, checkSchedule, registMySche, modifyMySche, removeMySche } = useSelector(state => state.ScheduleReducer);
+    const [selectInfo, setSelectInfo] = useState(); // 선택한 날짜의 정보를 저장하기 위한 state
 
-    /* 나의 일정 전체 조회 API 호출 */
     useEffect(
       () => {
+        // 나의 일정 전체 조회 API 호출
         dispatch(callMyScheduleListAPI());
-      },[]
+
+        // selectInfo가 존재할 때, 다시 dateSelectHanlder()를 호출하여 MyCalendarInfo 컴포넌트도 리렌더링 되도록 함
+        if(selectInfo) dateSelectHanlder(selectInfo);
+
+      },[checkSchedule, registMySche, modifyMySche, removeMySche] 
+      // => 일정 등록/수정/삭제 시 바로 캘린더에 적용
+
     );
     
     /* 클릭한 날짜의 toDoList를 조회하기 위한 함수 */
     const dateSelectHanlder = (selectInfo) => {
+
         const clickedDate = selectInfo.startStr;
         console.log(`클릭한 날짜 ? ${clickedDate}`)
+        // 선택한 날짜 set
         setDateInMyCal(clickedDate);
-        
-        // 클릭한 날짜의 나의 일정 조회 API 호출
-        dispatch(callMyScheduleByDateAPI(clickedDate));
+        // 선택한 날짜의 정보 set (MyCalendarInfo 컴포넌트도 리렌더링 시키기 위해)
+        setSelectInfo(selectInfo);
+
+        /* 클릭한 날짜에 속하는 일정들만을 MyCalendarInfo에 보내기 위한 filter 함수 */
+        const filteredSchedule = allMySchedule.filter(schedule => {
+
+          const startDate = dayjs(schedule.scheStartDate);
+          const endDate = dayjs(schedule.scheEndDate).endOf('day'); // 해당 날짜의 자정 이후까지 조회
+
+          return dayjs(clickedDate).isSame(startDate) || 
+                 dayjs(clickedDate).isSame(endDate) || 
+                 (dayjs(clickedDate).isAfter(startDate) && dayjs(clickedDate).isBefore(endDate));
+
+        });
+
+        setFilteredMySchedule(filteredSchedule); // 선택된 날짜의 나의 일정을 조회시키기 위한 state에 set
     };
 
     /* 조회한 나의 일정 전체 캘린더 event로 넣기 */
@@ -37,7 +60,7 @@ function MyCalendar ({setDateInMyCal}) {
         return allMySchedule.map(schedule => ({
           id: schedule.scheCode,
           start: schedule.scheStartDate,
-          end: schedule.scheEndDate,
+          end: dayjs(schedule.scheEndDate).add(1,'day').format('YYYY-MM-DD'),
           color: schedule.colorCode 
         }))
       }

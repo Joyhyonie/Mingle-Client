@@ -16,7 +16,6 @@ function ModifyScheduleModal ({selectedSchedule, setModifyScheduleModal}) {
         colorCode: selectedSchedule.colorCode
     });
 
-
     /* 수정/삭제 성공 시 실행 될 useEffect */
     useEffect(
         () => {

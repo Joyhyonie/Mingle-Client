@@ -3,20 +3,21 @@ import MessageSearchBar from "../../components/common/MessageSearchBar";
 import MessageItem from "../../components/items/MessageItem";
 import MessageCSS from "../../css/Message.module.css";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
+import { callSentMsgListAPI } from "../../apis/MessageAPICalls";
 
 function SentMsgBox ({setWhichPage, stateChangeHandler}) {
 
     const dispatch = useDispatch();
+    const { sentMsg } = useSelector(state => state.MessageReducer);
     const [messageList, setMessageList] = useState([]);
     const [checkedIdList, setCheckedIdList] = useState([]);
 
     useEffect(
         () => {
-            /* msgSender가 현재 로그인 한 유저인 쪽지들 중 msgDelSender가 N인 쪽지들을 조회하는 API (보낸 쪽지함 조회) */
-            // dispatch(callSentMsgListAPI);
-
+            /* 보낸 쪽지함 조회 API 호출 */
+            dispatch(callSentMsgListAPI());
         },[]
     );
 
@@ -61,14 +62,17 @@ function SentMsgBox ({setWhichPage, stateChangeHandler}) {
             <MessageSearchBar/>
             <div className={ MessageCSS.dummyBox }/>
             <div className={ MessageCSS.msgListBox }>
-                <MessageItem 
-                    // key={ message.id }
-                    // message={ message }
-                    setWhichPage={setWhichPage} 
-                    stateChangeHandler={stateChangeHandler}
-                    // isChecked={checkedMsg.includes(String(message.id))}
-                    checkboxChangeHandler={checkboxChangeHandler}
-                />
+                { sentMsg && sentMsg.map(message => (
+                    <MessageItem 
+                        key={ message.msgCode }
+                        message={ message }
+                        setWhichPage={setWhichPage} 
+                        stateChangeHandler={stateChangeHandler}
+                        isChecked={checkedIdList.includes(String(message.msgCode))}
+                        checkboxChangeHandler={checkboxChangeHandler}
+                    />
+                ))
+                }
             </div>
         </motion.div>
     );

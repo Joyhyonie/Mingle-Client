@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
 import { callAcScheduleByDateAPI, callAcScheduleListAPI } from "../../apis/ScheduleAPICalls";
+import dayjs from "dayjs";
 
 function AcademicCalendar ({setDateInAcCal}) {
 
@@ -37,7 +38,7 @@ function AcademicCalendar ({setDateInAcCal}) {
           id: schedule.scheCode,
           title: schedule.scheName,
           start: schedule.scheStartDate,
-          end: schedule.scheEndDate,
+          end: dayjs(schedule.scheEndDate).add(1,'day').format('YYYY-MM-DD'),
         }))
       }
     }
