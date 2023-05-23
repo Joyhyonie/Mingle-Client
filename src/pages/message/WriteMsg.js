@@ -80,7 +80,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
             toast.error('내용을 입력해주세요 !');
             return;
         }
-        
+
         /* FormData 객체 설정 */
         const formData = new FormData();
         const empCode = selectedEmpCode ? selectedEmpCode : selectedEmployee;   // '답장'을 클릭하여 전송 시를 위한 조건 설정
@@ -103,7 +103,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                     onClick={departmentChangeHandler}
                     disabled={selectedDeptCode ? true : false}
                 >
-                    <option value=''>소속</option>
+                    <option value='' disabled>소속</option>
                     {/* departments 배열을 option으로 변환 */}
                     {department && department.map(dept => (
                     <option key={dept.deptCode} 
@@ -120,7 +120,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                     onChange={employeeChangeHandler}
                     disabled={!selectedDepartment}
                 >
-                    { selectedEmpName ? <option>{selectedEmpName}</option> : null }
+                    { selectedEmpName ? <option>{selectedEmpName}</option> : <option value='' disabled>이름</option> }
                     {/* employees 배열을 option으로 변환 */}
                     {employee && employee.map(emp => (
                     <option key={emp.empCode} 
