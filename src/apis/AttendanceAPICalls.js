@@ -1,4 +1,4 @@
-import { getAttendance, getAttendanceToday, getAttendances, getMyattendance, getMyleave, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
+import { getAttendance, getAttendanceToday, getAttendances, getMyattendance, getMyleave, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
 import { getEmployee, getEmployees } from "../modules/EmployeeModule";
 import { request } from "./Api";
 
@@ -113,6 +113,21 @@ export const callMyAttendance = ({currentPage = 1}) => {
         if(result.status === 200){
             dispatch(getMyattendance(result));
             console.log(result);
+        }
+    }
+}
+
+export const updateAttendanceAPI = (atdCode, formData) => {
+    const requestURL = `${ATTEN_DANCE}/updateAdmin/${atdCode}`;
+
+    return async(dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "PATCH",
+            body : formData
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(patchAdminattendance(result));
         }
     }
 }
