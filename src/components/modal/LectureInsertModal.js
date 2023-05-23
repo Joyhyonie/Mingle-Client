@@ -3,8 +3,6 @@ import LectureInsertModalCSS from "../../css/LectureInsertModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { callLectureInsertAPI, callSubjectInsertAPI, callSubjectListAPI } from "../../apis/LectureAPICalls";
 import { toast } from "react-hot-toast";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import styles from '../../css/ReactDatePicker.module.css';
 
 
