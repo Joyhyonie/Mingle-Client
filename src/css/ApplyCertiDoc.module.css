@@ -45,3 +45,8 @@
     color: white;
     background-color: #FF9797;
 }
+
+.inputAtdEtc {
+    height: 20px;
+    border-radius: 4px;
+}

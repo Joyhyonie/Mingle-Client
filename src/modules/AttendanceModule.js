@@ -11,6 +11,7 @@ const POST_ATTENDANCE_RECORD = "attendance/POST_ATTENDANCE_RECORD"
 const PATCH_ATTENDANCE_RECORD = "attendance/PATCH_ATTENDANCE_RECORD"
 const GET_MYATTENDANCE = "attendance/GET_MYATTENDANCE";
 const GET_MYLEAVE = "attendance/GET_MYLEAVE";
+const PATCH_ADMINATTENDANCE = "attendance/PATCH_ADMINATTENDANCE"
 
 export const { attendance : { getAttendances, 
                               patchAttendance, 
@@ -20,7 +21,8 @@ export const { attendance : { getAttendances,
                               postAttendanceRecord,
                               patchAttendanceRecord,
                               getMyattendance,
-                              getMyleave } } = createActions({
+                              getMyleave,
+                              patchAdminattendance } } = createActions({
         [GET_ATTENDANCES] : res => res.data,
         [GET_ATTENDANCE] : res => res.data,
         [PATCH_ATTENDANCE] : res => res,
@@ -29,7 +31,8 @@ export const { attendance : { getAttendances,
         [POST_ATTENDANCE_RECORD] : res => res,
         [PATCH_ATTENDANCE_RECORD] : res => res,
         [GET_MYATTENDANCE] : res => res.data,
-        [GET_MYLEAVE] : res => res.data
+        [GET_MYLEAVE] : res => res.data,
+        [PATCH_ADMINATTENDANCE] : res => res
 });
 
 const AttendanceReducer = handleActions({
@@ -41,7 +44,8 @@ const AttendanceReducer = handleActions({
     [POST_ATTENDANCE_RECORD] : (state, {payload}) => ({ recordStartTime : payload }),
     [PATCH_ATTENDANCE_RECORD] : (state, {payload}) => ({ recordEndTime : payload }),
     [GET_MYATTENDANCE] : (state, {payload}) => payload,
-    [GET_MYLEAVE] : (state, {payload}) => ({myleave: payload})
+    [GET_MYLEAVE] : (state, {payload}) => ({myleave: payload}),
+    [PATCH_ADMINATTENDANCE] : (state, {payload}) => ({adminpatch : payload})
 },initialState)
 
 export default AttendanceReducer;
