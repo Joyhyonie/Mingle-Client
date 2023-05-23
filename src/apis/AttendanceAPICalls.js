@@ -142,7 +142,7 @@ export function callMyAttendanceTodayAPI() {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/attendance/today`, headers);
@@ -162,7 +162,7 @@ export function callStartTimeRecordAPI() {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('POST', `/attendance/record`, headers);
@@ -182,7 +182,7 @@ export function callEndTimeRecordAPI() {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('PATCH', `/attendance/record`, headers);
