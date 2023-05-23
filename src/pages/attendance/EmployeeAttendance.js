@@ -9,26 +9,28 @@ import { callEmployee } from "../../apis/AttendanceAPICalls";
 import { useNavigate } from "react-router-dom";
 import PagingBar from "../../components/common/PagingBar";
 import SearchBarCss from '../../css/common/SearchBar.module.css';
+import SearchBar from "../../components/common/SearchBar";
 
 
 function EmployeeAttendance () {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const type = "attendance";
     const [currentPage, setCurrentPage] = useState(1);
-    const {data, pageInfo} = useSelector(state => state.EmployeeReducer);
-
+    const {employee, nameSearch} = useSelector(state => state.EmployeeReducer);    
+    
     const options = [
-        { value: "sbjName", name: "소속" },
-        { value: "deptName", name: "이름" }
+        { value: "deptName", label: "소속" },
+        { value: "empName", label: "이름" }
     ];
 
     useEffect(
         ()=>{
             dispatch(callEmployee({currentPage}));
-        },
-        [currentPage]
-    )
+            },        
+            [currentPage,employee,nameSearch]
+    )    
 
     const onClickHandler = (empCode) => {
         navigate(`/attendance-employee/${empCode}`);
@@ -42,7 +44,7 @@ function EmployeeAttendance () {
                 <p className={ CommonCSS.pageDirection }>근태관리 ▸ 교직원 근태 기록</p>
             </div>
             <div className={SearchBarCss.basic}>
-          {/* <SearchAndListLayout options={options}></SearchAndListLayout> */}
+            {<SearchBar options={options} type={type}/>}
             </div>
             <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
@@ -63,8 +65,8 @@ function EmployeeAttendance () {
                         </tr>
                     </thead>
                     <tbody>
-                            {data && (
-                            data.map((employee)=>(
+                    {employee.data && (
+                            employee.data.map((employee)=>(
                                 <tr key={employee.empCode}
                                     onClick={()=> onClickHandler(employee.empCode) }>
                                     <td>{employee.empCode}</td>
@@ -74,11 +76,11 @@ function EmployeeAttendance () {
                                     <td>{employee.empAnnual}</td>
                                 </tr>
                             )
-                            ))}
+                    ))}                           
                     </tbody>
                 </table>
                 <div>
-                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
+                { employee.pageInfo && <PagingBar pageInfo={ employee.pageInfo } setCurrentPage={ setCurrentPage } /> }
                 </div>     
             </div>
         </motion.div>

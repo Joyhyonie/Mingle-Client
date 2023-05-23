@@ -15,10 +15,11 @@ const PUT_EMPLOYEE = 'employee/PUT_EMPLOYEE';
 const DELETE_STUDENT = 'employee/DELETE_STUDENT'
 const POST_ID = 'employee/POST_ID';
 const POST_PWD = 'employee/POST_PWD';
+const GET_SEARCHNAME = 'employee/GET_SEARCHNAME';
 
 export const { employee : 
-  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee, deleteEmployee, postId, postPwd }} = createActions
 
+  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee, deleteEmployee, postId, postPwd }} = createActions
 
     ({
 
@@ -27,11 +28,11 @@ export const { employee :
       [GET_EMPLOYEES]: (res) => res.data,
       [POST_ID]: (res) => res,
       [POST_PWD]: (res) => res,
-
       [GET_EMPLOYEE]: res => res.data,
       [PATCH_EMPLOYEE]: (res) => res,
       [POST_EMPLOYEE]: (res) => res,
       [PUT_EMPLOYEE]: (res) => res,
+      [GET_SEARCHNAME] : res => res.data
       [DELETE_STUDENT]: (res) => res,
 
     });
@@ -47,7 +48,8 @@ const EmployeeReducer = handleActions({
   [DELETE_STUDENT] : (state, {payload}) => ({delete : payload}),
   [PATCH_EMPLOYEE]: (state, { payload }) => payload,
   [POST_ID]:(state, {payload}) => ({ search : payload}),
-  [POST_PWD]:(state, {payload}) => ({ search : payload})
+  [POST_PWD]:(state, {payload}) => ({ search : payload}),
+  [GET_SEARCHNAME] : (state, {payload}) => ({nameSearch : payload})
 
 
 }, initialState);

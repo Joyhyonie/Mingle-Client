@@ -1,5 +1,5 @@
 import { getAttendance, getAttendanceToday, getAttendances, getMyattendance, getMyleave, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
-import { getEmployee, getEmployees } from "../modules/EmployeeModule";
+import { getEmployee, getSearchname } from "../modules/EmployeeModule";
 import { request } from "./Api";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -17,7 +17,7 @@ export const callEmployee = ({currentPage = 1}) => {
             method:'GET'
         }).then(response => response.json());
         if(result.status ===200){
-            dispatch(getEmployees(result));
+            dispatch(getEmployee(result));
             console.log(result);
         }
     }
@@ -146,6 +146,19 @@ export const callLeaveRegist = (formData) => {
 
         if(result.status === 200){
             dispatch(postAttendance(result));
+        }
+    }
+}
+
+export const callAttendanceSearchName = ({search, condition ,currentPage = 1}) => {
+    const requestURL = `${ATTEN_DANCE}/search?condition=${condition}&search=${search}&page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if(result.status === 200){
+            console.log(result);
+            dispatch(getSearchname(result));
         }
     }
 }
