@@ -2,7 +2,6 @@
 import { motion } from "framer-motion"
 import CommonCSS from '../../../css/common/Common.module.css'
 import SearchBarCSS from '../../../css/common/SearchBar.module.css';
-import SearchAndListLayout from '../../../layouts/SearchAndListLayout';
 import LectureList from "../../../components/lists/AttendanceList";
 import PagingBar from "../../../components/common/PagingBar";
 import { useEffect, useState } from "react";
@@ -32,7 +31,7 @@ function StudentAttendanceForAdmin () {
         >
         <p className={ CommonCSS.pageDirection }>출결 및 성적관리</p>
         <div className={ SearchBarCSS.basic }>
-                <SearchAndListLayout options={options}/>
+                {/* <SearchAndListLayout options={options}/> */}
             </div>
             <div>
                 { lectureInfoList && <LectureList LectureInfoList={ lectureInfoList }/> }

@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import MypageCSS from '../../css/Mypage.module.css';
 import { useEffect } from 'react';
 import { callGetEmployeeAPI } from '../../apis/EmployeeAPICalls';
-import screenshotImage from "./스크린샷 2023-05-17 103847.png";
 
 function Mypage() {
   const dispatch = useDispatch();

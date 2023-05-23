@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { callEmployeesAPI } from '../../apis/AcademicAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
 import EmployeeInsertModal from "../../components/modal/EmployeeInsertModal";
-import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import EmployeeListCss from '../../css/EmployeeList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
@@ -86,7 +85,7 @@ function EmployeeManagement() {
 
 
       <div className={SearchBarCss.basic}>
-        <SearchAndListLayout options={options}></SearchAndListLayout>
+        {/* <SearchAndListLayout options={options}></SearchAndListLayout> */}
       </div>
       <table className={EmployeeListCss.employeeTable}>
         <colgroup>
