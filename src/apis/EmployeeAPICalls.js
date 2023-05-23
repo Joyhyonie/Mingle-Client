@@ -1,4 +1,5 @@
-import { getEmployee, postLogin, patchEmployee, postId,postPwd } from "../modules/EmployeeModule";
+import { toast } from "react-hot-toast";
+import { getEmployee, postLogin, patchEmployee, postId, postPwd, postPwdchange, resetEmployee } from "../modules/EmployeeModule";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -60,55 +61,22 @@ export const callPatchEmployeeAPI = (formData) => {
     const requestURL = `${PRE_URL}/employee/putmypage`;
 
     return async (dispatch, getState) => {
-        const headers = new Headers();
-        headers.append("Authorization", "Bearer " + window.localStorage.getItem("accessToken"));
-        headers.append("Content-Type", `multipart/form-data`); // 수정된 부분
 
-        // 추가된 코드: 경계 값을 생성하고 Content-Type 헤더에 추가
-        const boundary = generateBoundary();
-        headers.append("Content-Type", `multipart/form-data; boundary=${boundary}`);
+        const result = await fetch(requestURL,{
+            method : 'PATCH',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
 
-        const requestOptions = {
-            method: 'PATCH',
-            headers: headers,
-            body: createFormDataBody(formData, boundary) // FormData의 내용과 경계 값을 사용하여 요청 본문 생성
-        };
+            },
+            body : formData
+        }).then(response => response.json());
 
-        try {
-            const response = await fetch(requestURL, requestOptions);
-            const result = await response.json();
-
-            console.log('[content-type] : ', response.headers.get('content-type'));
-            console.log('[EmployeeAPICalls] callPatchEmployeeAPI result : ', result);
-
-            if (response.status === 200) {
-                dispatch(patchEmployee(result));
-            }
-        } catch (error) {
-            // Handle error
-            console.error(error);
+        if(result.status === 200){
+            console.log('[ProductAPICalls] callProductUpdateAPI Result :', result);
+            dispatch(patchEmployee(result));
         }
-    };
-};
-
-// 추가된 함수: 경계 값을 생성하는 함수
-const generateBoundary = () => {
-    return "----WebKitFormBoundary" + Math.random().toString(16).substr(2);
-};
-
-// 추가된 함수: FormData의 내용과 경계 값을 사용하여 요청 본문 생성
-const createFormDataBody = (formData, boundary) => {
-    const body = new FormData();
-    for (let key of formData.keys()) {
-        body.append(key, formData.get(key));
     }
-    return `--${boundary}\r\n` + [...body].map(part => `Content-Disposition: form-data; name="${part[0]}"\r\n\r\n${part[1]}`).join(`\r\n--${boundary}\r\n`) + `\r\n--${boundary}--`;
-};
-
-
-
-
-
+}
 
 export const callIdAPI = (form) => {
 
@@ -159,6 +127,37 @@ export const callPwdAPI = (form) => {
     };
 };
 
+
+export const callPwdChangeAPI = (form) => {
+    const requestURL = `${PRE_URL}/auth/pwdChange`;
+  
+    return async (dispatch, getState) => {
+      try {
+        const result = await fetch(requestURL, {
+          method: 'POST',
+          headers: {
+            "Authorization": "Bearer " + window.localStorage.getItem('accessToken'),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(form)
+        }).then(response => response.json());
+  
+        if (result.status === 200) {
+          console.log('[EmployeeCalls] callPwdChangeAPI result : ', result);
+          // 성공 메시지 처리
+          toast.success(result.message); // 또는 다른 방식으로 메시지 표시
+          dispatch(resetEmployee());
+        } else {
+          // 실패 메시지 처리
+          toast.error(result.message); // 또는 다른 방식으로 메시지 표시
+        }
+      } catch (error) {
+        // 예기치 못한 오류 처리
+        console.error('An error occurred:', error);
+        toast.error('요청을 처리하는 중에 오류가 발생했습니다.');
+      }
+    };
+  };
 
 
 

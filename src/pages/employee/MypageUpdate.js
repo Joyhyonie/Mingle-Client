@@ -17,10 +17,13 @@ function MypageUpdate() {
    
   /* 읽기모드와 수정모드를 구분 */
   const [modifyMode, setModifyMode] = useState(false);
-
+  const fileInputRef = useRef(null);
   useEffect(() => {
     dispatch(callGetEmployeeAPI());
   }, []);
+
+
+
 
   useEffect(() => {
     if (modify?.status === 200) {
@@ -38,14 +41,18 @@ function MypageUpdate() {
 
 /* 파일 첨부 시 동작하는 이벤트 */
 const onChangeImageUpload = (e) => {
-    const image = e.target.files[0];
-    setImage(image);
+  const image = e.target.files[0];
+  setImage(image);
 
-    // 이미지 url 설정
-    const imageUrl = URL.createObjectURL(image);
+  // 이미지 url 설정
+  const imageUrl = URL.createObjectURL(image);
   setImageUrl(imageUrl);
-};
 
+  // formData에 myPageImage 설정
+  const formData = new FormData();
+  formData.append('myPageImage', image);
+  setForm(formData);
+};
 
   const onClickModifyModeHandler = () => {
     setModifyMode(true);
@@ -56,17 +63,24 @@ const onChangeImageUpload = (e) => {
     const formData = new FormData();
     console.log('image', image);
     console.log('form', form);
+   
+    formData.append("empName", form.empName || employee.empName);
+  formData.append("empNameEn", form.empNameEn || employee.empNameEn);
+  formData.append("empEmail", form.empEmail || employee.empEmail);
+  formData.append("empPhone", form.empPhone || employee.empPhone);
+  formData.append("empAddress", form.empAddress || employee.empAddress);
 
-    formData.append('myPageImage', image);
-    formData.append("empName", form.empName);
-    formData.append("empNameEn", form.empNameEn);
-    formData.append("empEmail", form.empEmail);
-    formData.append("empPhone", form.empPhone);
-    formData.append("empAddress", form.empAddress);
 
+    if(image) {
+      formData.append('myPageImage', image);
+  }
     dispatch(callPatchEmployeeAPI(formData));
+    navigate(-1);
   };
 
+  const onClickFileInput = () => {
+    imageInput.current.click();
+  };
   return (
     <div
       className={MypageCSS.backgroundDiv}
@@ -85,15 +99,18 @@ const onChangeImageUpload = (e) => {
         <div className={MypageCSS.registerDiv}>
             <div>
           <img 
-          src={ !imageUrl ? employee.data.profile : imageUrl } 
-          alt="preview" />
+          src={ !imageUrl ? employee.profile : imageUrl } 
+          alt="preview"
+          onClick={onClickFileInput}
+           />
           <input
             type="file"
-            name="myPageImgae"
+            name="myPageImage"
             accept='image/jpg,image/png,image/jpeg,image/gif'
             onChange={ onChangeImageUpload }
             ref={ imageInput }   
-            disabled={ !modifyMode }         
+            disabled={ !modifyMode }   
+            style={{ display: 'none' }}      
           />
          
             </div>
@@ -166,9 +183,11 @@ const onChangeImageUpload = (e) => {
                 placeholder={employee.employeeEmail}
               />
             </div>
+         
           </div>
+        
 
-          <div className={MypageCSS.row1}>
+            <div className={MypageCSS.row1}>
             <div className={MypageCSS.column}>
               <label>교번</label>
               <input
