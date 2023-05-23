@@ -1,4 +1,4 @@
-import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule } from "../modules/ScheduleModule";
+import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule } from "../modules/ScheduleModule";
 import { request } from "./Api";
 
 const accessToken = window.localStorage.getItem('accessToken');
@@ -10,7 +10,7 @@ export function callMyScheduleListAPI() {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         // axios 라이브러리 활용
@@ -33,7 +33,7 @@ export function callMyScheduleByDateAPI(date) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/schedule/mine/${date}`, headers);
@@ -66,7 +66,7 @@ export function callMyScheduleRegistAPI(formData) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('POST', `/schedule/mine`, headers, formData);
@@ -144,4 +144,23 @@ export function callAcScheduleByDateAPI(date) {
         }
 
     }
+}
+
+
+/* 학사 일정 등록 */
+export function callAcScheduleRegistAPI(formData) {
+
+  return async (dispatch, getState) => {
+
+      const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+      };
+
+      const result = await request('POST', `/schedule/academic`, headers, formData);
+
+      if(result.status == 200) {
+          dispatch(postAcSchedule(result));
+      }
+  }
 }

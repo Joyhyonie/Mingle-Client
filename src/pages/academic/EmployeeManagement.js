@@ -1,20 +1,19 @@
 /* 행정직원의 '교직원 관리' */
 import { motion } from "framer-motion";
 import { useEffect, useState } from 'react';
-import { callEmployeesAPI } from '../../apis/AcademicAPICalls';
+import { callEmployeesAPI, callEmployeesDeleteAPI } from '../../apis/AcademicAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
-import EmployeeInsertModal from "../../components/modal/EmployeeInsertModal";
-import SearchAndListLayout from '../../layouts/SearchAndListLayout';
+import SearchBar from '../../components/common/SearchBar';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import EmployeeListCss from '../../css/EmployeeList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
-const options = [
-  { value: "empCode", name: "교번" },
-  { value: "empName", name: "직원명" },
-  { value: "deptCode", name: "부서명" },
+const employeeOptions = [
+  { value: 'option1', label: 'option 1' },
+  { value: 'option2', label: 'option 2' },
 ];
 
 const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
@@ -22,42 +21,76 @@ const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
 function EmployeeManagement() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data, pageInfo } = useSelector((state) => state.EmployeeReducer);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [selectAll, setSelectAll] = useState(false);
   const [checkboxes, setCheckboxes] = useState({});
 
-  const [isEmployeeUpdateModalOpen, setIsEmployeeUpdateModalOpen] = useState(false);
-  const [isEmployeeInsertModalOpen, setIsEmployeeInsertModalOpen] = useState(false);
 
-  // 아 헷갈려!!! 
-  // isEmployeeInsertModalOpen 추가
+
+  // 검색!
+  const handleSearch = (selectedOption, inputValue) => {
+    // 이곳에 검색 로직을 구현해야 합니다
+    // 예를 들어, API 호출 등을 수행할 수 있습니다
+    console.log("Selected option:", selectedOption);
+    console.log("Input value:", inputValue);
+  };
+
   useEffect(
     () => {
       dispatch(callEmployeesAPI({ currentPage }))
     },
-    [currentPage, isEmployeeInsertModalOpen, isEmployeeUpdateModalOpen]
+    [currentPage]
   );
 
-  // onClickTableTr => 테이블 행 클릭시 교직원 상세 조회 및 수정 페이지로 라우팅
-  const onClickTableTr = (employee) => {
-    setIsEmployeeUpdateModalOpen(true);
-  }
 
-  // onCLickInsert => emp인서트모달창 오픈
-  const onCLickInsert = () => {
-    setIsEmployeeInsertModalOpen(true);
-  }
-
-  const handleSelectAll = () => {
-    const newCheckboxes = Object.keys(checkboxes).reduce((prev, curr) => {
-      return { ...prev, [curr]: !selectAll };
-    }, {});
-
+  const handleCheckboxChange = (e, empCode) => {
+    const newCheckboxes = {
+      ...checkboxes,
+      [empCode]: e.target.checked
+    };
     setCheckboxes(newCheckboxes);
-    setSelectAll(!selectAll);
+
+    const allSelected = Object.values(newCheckboxes).every(val => val === true);
+    setSelectAll(allSelected);
   };
+
+  // 모두 선택
+  const handleSelectAll = (e) => {
+    // 체크 해제
+    setSelectAll(e.target.checked);
+
+    // 체크박스 상태 통일(전체)
+    let newCheckboxes = {};
+    data.forEach((employee) => {
+      newCheckboxes[employee.empCode] = e.target.checked;
+    });
+    setCheckboxes(newCheckboxes);
+  };
+
+  // onClickEmployeeInsert
+  const onClickEmployeeInsert = () => {
+    navigate("/regist-employee");
+  }
+
+  // onClickEmployeeDelete
+  const onClickEmployeeDelete =
+    async () => {
+      const selectedEmpCodes =
+        Object.keys(checkboxes).filter((empCode) => checkboxes[empCode]);
+      if (selectedEmpCodes.length > 0) {
+        await dispatch(callEmployeesDeleteAPI(selectedEmpCodes));
+        // 선택한 체크박스 초기화
+        setCheckboxes({});
+        // 교직원 목록 갱신
+        dispatch(callEmployeesAPI({ currentPage }));
+        toast.success("교직원 정보가 성공적으로 삭제 되었습니다.");
+      } else {
+        toast.error("지우고자 하는 교직원 정보를 선택해 주세요!");
+      }
+    };
 
 
 
@@ -69,16 +102,14 @@ function EmployeeManagement() {
       <motion.button
         whileHover={{ scale: 1.05 }}
         className={EmployeeListCss.EmployeeRegistButton}
-        onClick={() => setIsEmployeeInsertModalOpen(true)}
+        onClick={onClickEmployeeInsert}
       >
         등록
       </motion.button>
-      {isEmployeeInsertModalOpen && (
-        <EmployeeInsertModal setIsEmployeeInsertModalOpen={setIsEmployeeInsertModalOpen} />
-      )}
       <motion.button
         whileHover={{ scale: 1.05 }}
         className={EmployeeListCss.EmployeeDeleteButton}
+        onClick={onClickEmployeeDelete}
       >
         삭제
       </motion.button>
@@ -86,7 +117,10 @@ function EmployeeManagement() {
 
 
       <div className={SearchBarCss.basic}>
-        <SearchAndListLayout options={options}></SearchAndListLayout>
+        <SearchBar
+          options={employeeOptions}
+          onSearch={handleSearch}>
+        </SearchBar>
       </div>
       <table className={EmployeeListCss.employeeTable}>
         <colgroup>
@@ -120,9 +154,16 @@ function EmployeeManagement() {
           {data &&
             data.map((employee) => (
               <tr
-              key={employee.empCode}
-              onClick={ () => onClickTableTr(employee.empCode)}>
-                <td><input type="checkbox" value={employee.empCode} /></td>
+                key={employee.empCode}
+              >
+                <td>
+                  <input
+                    type="checkbox"
+                    value={employee.empCode}
+                    checked={checkboxes[employee.empCode] || false}
+                    onChange={(e) => handleCheckboxChange(e, employee.empCode)}
+                  />
+                </td>
                 <td>{employee.empCode}</td>
                 <td>{employee.empName}</td>
                 <td>{employee.department.deptName}</td>

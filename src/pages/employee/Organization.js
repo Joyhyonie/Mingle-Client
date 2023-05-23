@@ -4,18 +4,17 @@ import { callEmployeesAPI, callEmployeeSearchListAPI } from '../../apis/Academic
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useSearchParams } from "react-router-dom";
 import SearchBarCss from '../../css/common/SearchBar.module.css'
-import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
+import SearchBar from '../../components/common/SearchBar';
 import OrganizationList from '../../components/lists/OrganizationList';
 import OrganizationItemCss from "../../css/OrganizationItemCss.module.css";
 
 /* 조직도 */
 
-const options = [
-  { value: "empCode", name: "교번" },
-  { value: "empName", name: "직원명" },
-  { value: "deptCode", name: "부서명" },
+const organizationOptions = [
+  { value: "empName", label: "직원명" },
+  { value: "deptCode", label: "부서명" },
 ];
 
 const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
@@ -52,11 +51,9 @@ function Organization() {
       <p className={CommonCSS.pageDirection}>조직도</p>
 
       <div className={SearchBarCss.basic}>
-        <SearchAndListLayout
-          options={options}
-          search={search}
-          setSearch={setSearchParams}
-        />
+        {<SearchBar
+          options={organizationOptions}>
+        </SearchBar>}
       </div>
 
       <div className={OrganizationItemCss.div}>

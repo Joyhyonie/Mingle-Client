@@ -6,17 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 // import EmployeeInsertModal from "../../components/modal/EmployeeInsertModal";
-import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import StudentListCss from '../../css/StudentList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
+import SearchBar from "../../components/common/SearchBar";
 
 
-const options = [
-  { value: "stdCode", name: "학번" },
-  { value: "stdName", name: "학생명" },
-  { value: "deptCode", name: "학과명" },
+const studentOptions = [
+  { value: "stdCode", label: "학번" },
+  { value: "stdName", label: "학생명" },
+  { value: "deptCode", label: "학과명" },
 ];
 
 const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
@@ -53,7 +53,7 @@ function StudentManagement() {
     setCheckboxes(newCheckboxes);
 
     const allSelected = Object.values(newCheckboxes).every(val => val === true);
-    setSelectAll(allSelected); 
+    setSelectAll(allSelected);
   };
 
 
@@ -93,11 +93,6 @@ function StudentManagement() {
     };
 
 
-  // // onClickTableTr => 테이블 행 클릭시 교직원 상세 조회 및 수정 페이지로 라우팅
-  // const onClickTableTr = (student) => {
-  //   setIsEmployeeUpdateModalOpen(true);
-  // }
-
 
   return (
     <motion.div
@@ -125,7 +120,9 @@ function StudentManagement() {
 
 
       <div className={SearchBarCss.basic}>
-        <SearchAndListLayout options={options}></SearchAndListLayout>
+        {<SearchBar
+          options={studentOptions}>
+        </SearchBar>}
       </div>
       <table className={StudentListCss.studentTable}>
         <colgroup>
@@ -160,7 +157,7 @@ function StudentManagement() {
             data.map((student) => (
               <tr
                 key={student.stdCode}
-                onClick={ () => onClickTableTr(student.stdCode) }
+                onClick={() => onClickTableTr(student.stdCode)}
               >
                 <td><input
                   type="checkbox"

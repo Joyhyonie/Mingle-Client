@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { callReceivedMsgListAPI } from "../../apis/MessageAPICalls";
 import { toast } from "react-hot-toast";
 
-function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode}) {
+function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName}) {
 
     const dispatch = useDispatch();
-    const { receivedMsg, likeMsg, readMsg, removeMsg } = useSelector(state => state.MessageReducer);
+    const { receivedMsg, likeMsg, readMsg, removeMsg, receivedMsgSearch } = useSelector(state => state.MessageReducer);
     const [checkedIdList, setCheckedIdList] = useState([]);     // check된 쪽지들의 id가 저장되는 state
 
     useEffect(
@@ -22,7 +22,20 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
                 toast.success("선택하신 쪽지가 삭제되었습니다 :)");
             }
 
-        },[likeMsg, readMsg, removeMsg] 
+        },[likeMsg, removeMsg] 
+    );
+
+    /* 검색한 쪽지에서 쪽지의 Header 클릭 시, 읽음처리 API 호출로 인해 re-rendering이 발생하여 검색한 쪽지가 아닌 전체 쪽지 조회가 일어나
+       UX에 좋지 않은 영향을 끼치게 되므로 useEffect를 분리하여 검색한 쪽지가 존재하지 않을 경우에만 readMsg의 값이 변경될 때 전체 쪽지 조회가 일어나도록 함 */
+    useEffect(
+        () => {
+
+            if(receivedMsgSearch == undefined) {
+                /* 받은 쪽지함 조회 API 호출 */
+                dispatch(callReceivedMsgListAPI());
+            }
+
+        },[readMsg]
     );
 
     /* 각 checkbox의 상태가 변경될 때 호출되는 이벤트 함수 */
@@ -43,10 +56,11 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
             
-            <MessageSearchBar/>
+            <MessageSearchBar msgBoxType={ 'received' }/>
             <div className={ MessageCSS.dummyBox }/>
             <div className={ MessageCSS.msgListBox }>
-                { receivedMsg && receivedMsg.map(message => (
+                {/* receivedMsg와 receivedMsgSearch가 모두 undefined인 경우에는 빈 배열([])을 이용하여 concat() 함수를 호출 (undefined 오류 발생 방지) */}
+                { (receivedMsg || []).concat(receivedMsgSearch || []).map(message => (
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }
@@ -55,6 +69,7 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
                         setReplyContent={ setReplyContent }
                         setSelectedDeptCode={ setSelectedDeptCode } 
                         setSelectedEmpCode={ setSelectedEmpCode }
+                        setSelectedEmpName={ setSelectedEmpName }
                         isChecked={ checkedIdList.includes(String(message.msgCode)) }
                         checkboxChangeHandler={ checkboxChangeHandler }
                         checkedIdList={checkedIdList}

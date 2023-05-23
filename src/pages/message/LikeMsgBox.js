@@ -10,7 +10,7 @@ import { callLikedMsgListAPI } from "../../apis/MessageAPICalls";
 function LikeMsgBox ({setWhichPage, stateChangeHandler}) {
 
     const dispatch = useDispatch();
-    const { likedMsg, likeMsg, removeMsg } = useSelector(state => state.MessageReducer);
+    const { likedMsg, likeMsg, removeMsg, likedMsgSearch } = useSelector(state => state.MessageReducer);
     const [checkedIdList, setCheckedIdList] = useState([]);
 
     useEffect(
@@ -41,10 +41,10 @@ function LikeMsgBox ({setWhichPage, stateChangeHandler}) {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
-            <MessageSearchBar/>
+            <MessageSearchBar msgBoxType={ 'liked' }/>
             <div className={ MessageCSS.dummyBox }/>
             <div className={ MessageCSS.msgListBox }>
-                { likedMsg && likedMsg.map(message => (
+                { (likedMsg || []).concat(likedMsgSearch || []).map(message => (
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }

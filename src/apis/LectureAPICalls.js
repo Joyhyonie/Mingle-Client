@@ -1,4 +1,4 @@
-import { deleteSubject, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
+import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 import { getSubjectInfo } from "../modules/LectureModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -17,6 +17,20 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
         }
     };
 }
+
+export const callSubjectSearchName = ({search, condition ,currentPage = 1}) => {
+    const requestURL = `${SUBJECT_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if(result.status === 200){
+            console.log(result);
+            dispatch(getSearch(result));
+        }
+    }
+}
+
 
 export const callSubjectUpdateAPI = (formData) => {
 
@@ -83,7 +97,8 @@ export const callSubjectListAPI = (deptCode) => {
         if (result.status === 200) {
 
 
-            //꺼내와서 store에 저장하자(내가 원하는값을 )
+            //api를 통해 데이터를 꺼내와서 store에 저장하자(내가 원하는값을 액션과 페이로드 )
+            //store에 있는 값들을 다루는것은 action이라는 
             dispatch(getSubjectInfo(result));
 
 
@@ -94,6 +109,13 @@ export const callSubjectListAPI = (deptCode) => {
 export const callLectureInsertAPI = (form) => {
 
     const requestURL = `${LECTURE_URL}/officerregistration`;
+
+    form = {
+        ...form,
+        employee: { empCode: form.empCode },
+        subject: { sbjCode: form.sbjCode }
+
+    }
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {

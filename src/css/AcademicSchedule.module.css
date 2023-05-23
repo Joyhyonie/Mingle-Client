@@ -10,17 +10,23 @@
 .acScheRegist {
   padding: 20px;
   width: 900px;
+  margin-top: 40px;
 }
 
 .acScheLeft {
   border: 1px solid none;
   padding: 20px;
   overflow: scroll;
-  background-color: #F3F3F3;
+  background-color: #F8F8F8;
   width: 600px;
+  margin-top: 40px;
 }
 
-.acScheRead p {
+.acScheRead {
+  margin-bottom: 20px;
+}
+
+.acScheRead .acScheTitle {
   border: 1px solid #FF9797;
   border-radius: 10px;
   background-color: white;
@@ -57,23 +63,130 @@
   float: left;
 }
 
-.acScheName {
-  margin-bottom: 20px;
-  height: 50px;
-}
-
-.acScheName input {
-  display: flex;
-  float: right;
-  border: 1px solid #FF9797;
-}
 
 .acScheDateInput {
   display: flex;
   float: right;
 }
 
+
+
 .acScheDetail textarea {
   display: flex;
   float: right;
+}
+
+.acScheRegistName {
+  width: 900px;
+  height: 90px;
+  margin-top: 40px;
+
+}
+
+.acScheRegistName span {
+  display: flex;
+  display: left;
+  margin-top: 12.5px;
+  margin-left: 10px;
+}
+
+.acScheRegistName input {
+  float: right;
+  display: flex;
+  width: 764px;
+  height: 60px;
+  margin-right: 10px;
+  border: 1px solid #FF9797;
+  border-radius: 10px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.acScheType {
+  font-size: 16px;
+  color: #FF9797;
+}
+
+.acScheName {
+  font-size: 18px;
+  padding-left: 10px;
+  color: #343434;
+}
+
+.acScheListName {
+  margin-bottom: 35px;
+  color: #343434;
+}
+
+.acScheStartDate {
+  padding-left: 15px;
+}
+
+.acScheListDate {
+  margin-bottom: -15px;
+  font-weight: bold;
+  color: #343434;
+}
+
+.acScheRegistDate {
+  width: 900px;
+  height: 90px;
+}
+
+.acScheRegistDate input {
+  width: 346px;
+  height: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid #FF9797;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+  outline: none;
+}
+
+.acScheRegistDate span {
+  margin-top: 12.5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.acScheDetail {
+  width: 900px;
+  height: 360px;
+}
+
+.acScheDetail span {
+  margin-left: 10px;
+}
+
+.acScheDetail textarea {
+  margin-right: 10px;
+  width: 750px;
+  height: 340px;
+  padding: 18px;
+  border: 1px solid #FF9797;
+  border-radius: 10px;
+  outline: none;
+  font-size: 20px;
+  resize: none;
+}
+
+.acScheRegistBtn {
+  display: flex;
+  float: right;
+  margin-right: 10px;
+  border: none;
+  border-radius: 10px;
+  width: 200px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-top: 10px;
+  background-color: #FF9797;
+  color: white;
 }

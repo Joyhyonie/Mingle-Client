@@ -10,7 +10,7 @@ export function callReceivedMsgListAPI() {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/message/received`, headers);
@@ -30,7 +30,7 @@ export function callReceivedMsgSearchAPI(condition, word) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/message/received/search?condition=${condition}&word=${word}`, headers);
@@ -50,7 +50,7 @@ export function callReadMsgAPI(msgCode) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('PATCH', `/message/read/${msgCode}`, headers);
@@ -70,7 +70,7 @@ export function callSentMsgListAPI() {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/message/sent`, headers);
@@ -90,7 +90,7 @@ export function callSentMsgSearchAPI(condition, word) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/message/sent/search?condition=${condition}&word=${word}`, headers);
@@ -110,7 +110,7 @@ export function callLikedMsgListAPI() {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/message/liked`, headers);
@@ -130,7 +130,7 @@ export function callLikedMsgSearchAPI(condition, word) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/message/liked/search?condition=${condition}&word=${word}`, headers);
@@ -150,7 +150,7 @@ export function callLikeMsgAPI(msgCode) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('PATCH', `/message/like/${msgCode}`, headers);
@@ -199,8 +199,7 @@ export function callSendMsgAPI(formData) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('POST', `/message/send`, headers, formData);
@@ -216,13 +215,11 @@ export function callSendMsgAPI(formData) {
 /* 선택한 쪽지 삭제 */
 export function callRemoveMsgAPI(msgCodes) {
 
-    console.log('쪽지 삭제 API 호출 되었당')
-
     return async (dispatch, getState) => {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const messageDTO = {

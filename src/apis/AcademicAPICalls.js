@@ -1,4 +1,4 @@
-import { getEmployees, getEmployee, postEmployee, putEmployee } from '../modules/EmployeeModule';
+import { getEmployees, getEmployee, postEmployee, putEmployee, deleteEmployee } from '../modules/EmployeeModule';
 import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -97,6 +97,29 @@ export const callEmployeeUpdateAPI = (formData) => {
     }
   }
 }
+
+// 교직원 정보 삭제
+export const callEmployeesDeleteAPI = (empCodes) => {
+
+  const requestURL = `${EMPLOYEE_URL}/delete`;
+
+  return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(empCodes),
+    }).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log('[AcademicAPICalls] : callEmployeesDeleteAPI result : ', result);
+      dispatch(deleteEmployee(result));
+    }
+  }
+}
+
 
 
 // 학생 전체 조회

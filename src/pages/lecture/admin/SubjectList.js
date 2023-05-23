@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 import PagingBar from "../../../components/common/PagingBar";
 import CommonCSS from '../../../css/common/Common.module.css';
 import SearchBarCss from "../../../css/common/SearchBar.module.css";
-import SearchAndListLayout from "../../../layouts/SearchAndListLayout";
+import SearchBar from "../../../components/common/SearchBar";
 
 function SubjectList() {
 
@@ -25,8 +25,8 @@ function SubjectList() {
 
 
   const options = [
-    { value: "sbjName", name: "과목명" },
-    { value: "deptName", name: "학과명" }
+    { value: "sbjName", label: "과목명" },
+    { value: "deptName", label: "학과명" }
   ];
 
   useEffect(
@@ -68,7 +68,7 @@ function SubjectList() {
   const onCLickInsert = () => {
     setIsInsertModalOpen(true);
   }
-
+  
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
@@ -86,7 +86,7 @@ function SubjectList() {
       </div>
       <div className={SubjectListCSS.SubjectList}>
       <div className={SearchBarCss.basic}>
-          <SearchAndListLayout options={options}></SearchAndListLayout>
+          {<SearchBar options={options} type="subject"/>}
         </div>
         <table className={SubjectListCSS.SubjectListTable}>
           <colgroup>

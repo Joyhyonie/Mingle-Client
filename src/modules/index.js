@@ -12,8 +12,8 @@ import MessageReducer from "./MessageModule";
 
 /* 여러 모듈을 combine 시키기 */
 const rootReducer = combineReducers({
-  SubjectReducer, CertiReducer, EmployeeReducer, StudentReducer, ScheduleReducer, AttendanceReducer, 
-  SubjectInfoReducer, BoardReducer, MessageReducer
+  SubjectReducer, CertiReducer, EmployeeReducer, StudentReducer, ScheduleReducer, AttendanceReducer,
+  SubjectInfoReducer, BoardReducer, MessageReducer,
 });
 
 export default rootReducer;

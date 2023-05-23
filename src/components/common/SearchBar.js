@@ -1,32 +1,53 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import SearchBarCss from '../../css/common/SearchBar.module.css';
 import { callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
-import Header from './Header';
-import NavbarForAdmin from './NavbarForAdmin';
-import NavbarForAdminItem from './NavbarForAdminItem';
-import SearchBarCss from '../../css/common/SearchBar.module.css'
+import { callAttendanceSearchName } from '../../apis/AttendanceAPICalls';
+import { useNavigate } from 'react-router-dom';
 
+const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
 
-function SearchBar({ search, setSearch }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedOption, setSelectedOption] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
-  const handleChange = event => {
-    setSearch(event.target.value);
-  };
+  const handleSearch = () => {
+    
+    // 구분 해주세용 :)
+    if(type == "employee") {
+      dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
+    } else if(type == "board") {
+      // dispatch(callBoardSearchAPI())
+    } else if(type == "attendance") {
+        dispatch(callAttendanceSearchName({search: inputValue , selectedOption, currentPage}));
+    }
 
-  const handleSearch = async () => {
-    callEmployeeSearchListAPI({ search });  // API 호출 함수를 실행합니다.
   };
 
   return (
-    <>
-      <input className={SearchBarCss.searchBar}
+    <div className={SearchBarCss.searchBarWhole}>
+      <select
+        value={selectedOption}
+        onChange={(e) => setSelectedOption(e.target.value)}
+        className={SearchBarCss.selectBox}>
+        <option value="">화 이 팅 ୧( "̮ )୨✧</option> {/* default option */}
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      <input
         type="text"
-        placeholder="검색어를 입력해 주세요 :)"
-        value={search}
-        onChange={handleChange}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        className={SearchBarCss.searchBar}
       />
       <button className={SearchBarCss.searchBarBtn} onClick={handleSearch}>검색</button>
-    </>
+    </div>
   );
-}
+};
 
 export default SearchBar;
