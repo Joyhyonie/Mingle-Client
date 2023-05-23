@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { callEmployee } from "../../apis/AttendanceAPICalls";
 import { useNavigate } from "react-router-dom";
 import PagingBar from "../../components/common/PagingBar";
-import SearchAndListLayout from "../../layouts/SearchAndListLayout";
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 
 
@@ -43,7 +42,7 @@ function EmployeeAttendance () {
                 <p className={ CommonCSS.pageDirection }>근태관리 ▸ 교직원 근태 기록</p>
             </div>
             <div className={SearchBarCss.basic}>
-          <SearchAndListLayout options={options}></SearchAndListLayout>
+          {/* <SearchAndListLayout options={options}></SearchAndListLayout> */}
             </div>
             <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>

@@ -4,7 +4,6 @@ import { callEmployeesAPI, callEmployeeSearchListAPI } from '../../apis/Academic
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useSearchParams } from "react-router-dom";
 import SearchBarCss from '../../css/common/SearchBar.module.css'
-import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
 import OrganizationList from '../../components/lists/OrganizationList';
@@ -52,11 +51,11 @@ function Organization() {
       <p className={CommonCSS.pageDirection}>조직도</p>
 
       <div className={SearchBarCss.basic}>
-        <SearchAndListLayout
+        {/* <SearchAndListLayout
           options={options}
           search={search}
           setSearch={setSearchParams}
-        />
+        /> */}
       </div>
 
       <div className={OrganizationItemCss.div}>
