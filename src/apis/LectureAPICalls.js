@@ -83,7 +83,8 @@ export const callSubjectListAPI = (deptCode) => {
         if (result.status === 200) {
 
 
-            //꺼내와서 store에 저장하자(내가 원하는값을 )
+            //api를 통해 데이터를 꺼내와서 store에 저장하자(내가 원하는값을 액션과 페이로드 )
+            //store에 있는 값들을 다루는것은 action이라는 
             dispatch(getSubjectInfo(result));
 
 
@@ -94,6 +95,13 @@ export const callSubjectListAPI = (deptCode) => {
 export const callLectureInsertAPI = (form) => {
 
     const requestURL = `${LECTURE_URL}/officerregistration`;
+
+    form = {
+        ...form,
+        employee: { empCode: form.empCode },
+        subject: { sbjCode: form.sbjCode }
+
+    }
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {

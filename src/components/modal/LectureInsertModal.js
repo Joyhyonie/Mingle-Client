@@ -138,7 +138,8 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
 
                         <label className={LectureInsertModalCSS.label}>개설학과</label>
                         <select className={LectureInsertModalCSS.classType} name="deptCode" onChange={onChangeHandler3}>
-                            {/*가짜 옵션 */}
+
+                            <option value="">선택해주세요</option>
                             <option value={13}>IT공학과</option>
                             <option value={14}>간호학과</option>
                             <option value={15}>경제학과</option>
@@ -152,6 +153,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
                         <label className={LectureInsertModalCSS.label}>교수명</label>
                         <select className={LectureInsertModalCSS.classType} name="empCode" onChange={onChangeHandler}>
                             {/*professorDTOList */}
+                            <option value="">선택해주세요</option>
                             {subjectInfo && subjectInfo.professorDTOList &&
                                 subjectInfo.professorDTOList.map((professor) => (
                                     <option value={professor.empCode}>{professor.empName}</option>
@@ -163,6 +165,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
                         <label className={LectureInsertModalCSS.label}>교과목명</label>
                         <select className={LectureInsertModalCSS.deptCode} name="sbjCode" onChange={onChangeHandler2} >
                             {/*subjectNameList */}
+                            <option value="">선택해주세요.</option>
                             {subjectInfo && subjectInfo.subjectNameList && subjectInfo.subjectNameList.map((subjectname) => (
                                 <option value={subjectname.sbjCode}>{subjectname.sbjName}</option>
                             ))}

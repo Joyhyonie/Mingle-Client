@@ -91,7 +91,6 @@ function RegistLectureForAdmin() {
               <th>교과목 코드</th>
               <th>교과목명</th>
               <th>학점</th>
-              <th>학년</th>
               <th>담당교수</th>
               <th>상태</th>
               <th></th> <br />
@@ -99,7 +98,18 @@ function RegistLectureForAdmin() {
             </tr>
           </thead>
           <tbody>
-
+            {/* {data && (
+                            data.map((employee)=>(
+                                <tr key={employee.empCode}
+                                    onClick={()=> onClickHandler(employee.empCode) }>
+                                    <td>{employee.empCode}</td>
+                                    <td>{employee.department.deptName}</td>
+                                    <td>{employee.empName}</td>
+                                    <td>{employee.empStatus}</td>
+                                    <td>{employee.empAnnual}</td>
+                                </tr>
+                            )
+                            ))} */}
           </tbody>
         </table>
         <div>
