@@ -10,7 +10,7 @@ export function callMyScheduleListAPI() {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         // axios 라이브러리 활용
@@ -33,7 +33,7 @@ export function callMyScheduleByDateAPI(date) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('GET', `/schedule/mine/${date}`, headers);
@@ -66,7 +66,7 @@ export function callMyScheduleRegistAPI(formData) {
 
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`
         };
 
         const result = await request('POST', `/schedule/mine`, headers, formData);
