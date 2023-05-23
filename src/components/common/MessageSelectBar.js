@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MessageCSS from '../../css/Message.module.css'
+import { callDepartmentListAPI } from "../../apis/MessageAPICalls";
 
 
 function MessageSelectBar ({selectedDeptCode, selectedEmpCode}) {
@@ -9,15 +10,16 @@ function MessageSelectBar ({selectedDeptCode, selectedEmpCode}) {
     console.log(selectedEmpCode);
 
     const dispatch = useDispatch();
-    const [departments, setDepartments] = useState([{deptCode:1, deptName:'학생처'},{deptCode:2, deptName:'교무처'},{deptCode:3, deptName:'총무처'}]); // (임시용 기본값)
+    const {} = useSelector(state => state.MessageReducer);
+    const [departments, setDepartments] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState('');
-    const [employees, setEmployees] = useState([{empCode:202322222, empName: '김맹구'}, {empCode:202311111, empName: '신짱구'}, {empCode:202312345, empName: '허치즈'}]); // (임시용 기본값)
+    const [employees, setEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState('');
     
     useEffect(
         () => {
-            // 존재하는 학과 조회 API
-            // dispatch(callGetDepartments());
+            // 존재하는 학과 조회 API 호출
+            dispatch(callDepartmentListAPI());
 
             // API 응답 데이터를 departments 상태 변수에 저장
             // setDepartments(response.data);

@@ -10,7 +10,6 @@ import { toast } from "react-hot-toast";
 import PagingBar from "../../../components/common/PagingBar";
 import CommonCSS from '../../../css/common/Common.module.css';
 import SearchBarCss from "../../../css/common/SearchBar.module.css";
-import SearchAndListLayout from "../../../layouts/SearchAndListLayout";
 
 function SubjectList() {
 
@@ -86,7 +85,7 @@ function SubjectList() {
       </div>
       <div className={SubjectListCSS.SubjectList}>
       <div className={SearchBarCss.basic}>
-          <SearchAndListLayout options={options}></SearchAndListLayout>
+          {/* <SearchAndListLayout options={options}></SearchAndListLayout> */}
         </div>
         <table className={SubjectListCSS.SubjectListTable}>
           <colgroup>

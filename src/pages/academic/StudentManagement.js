@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 // import EmployeeInsertModal from "../../components/modal/EmployeeInsertModal";
-import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import StudentListCss from '../../css/StudentList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
@@ -125,7 +124,7 @@ function StudentManagement() {
 
 
       <div className={SearchBarCss.basic}>
-        <SearchAndListLayout options={options}></SearchAndListLayout>
+        {/* <SearchAndListLayout options={options}></SearchAndListLayout> */}
       </div>
       <table className={StudentListCss.studentTable}>
         <colgroup>

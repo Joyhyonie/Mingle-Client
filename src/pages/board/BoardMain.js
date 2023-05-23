@@ -1,6 +1,5 @@
 import { motion } from "framer-motion"
 import CommonCSS from '../../css/common/Common.module.css'
-import SearchAndListLayout from '../../layouts/SearchAndListLayout';
 import SearchBarCSS from '../../css/common/SearchBar.module.css';
 import BoardCSS from '../../css/Board.module.css';
 import { useEffect, useState } from "react";
@@ -56,7 +55,7 @@ function BoardMain () {
             </button>
             <p className={ CommonCSS.pageDirection }>공지사항</p>
             <div className={ SearchBarCSS.basic }>
-                <SearchAndListLayout options={options}/>
+                {/* <SearchAndListLayout options={options}/> */}
             </div>
             <div className={ BoardCSS.boardButtonBox }>
                 <button 
