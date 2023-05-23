@@ -252,7 +252,7 @@
     background-color: #F8F8F8;
 }
 
-.msgItemContentBox p {
+.msgItemContentBox pre {
     background-color: #F8F8F8;
     font-family: 'Noto Sans KR', sans-serif;
     margin: 5px;

@@ -199,7 +199,6 @@ export function callSendMsgAPI(formData) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${accessToken}`
         };
 
