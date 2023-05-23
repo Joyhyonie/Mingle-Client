@@ -32,7 +32,6 @@ function LoginForm() {
     // 로그인 버튼 클릭 이벤트
     const onClickHandler = () => {
         dispatch(callLoginAPI(form));
-        navigate("/")
     }
     const onClickIdHandler = () => {
         navigate("/idsearch")
