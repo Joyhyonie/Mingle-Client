@@ -19,7 +19,7 @@ const GET_SEARCHNAME = 'employee/GET_SEARCHNAME';
 
 export const { employee : 
 
-  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee, deleteEmployee, postId, postPwd }} = createActions
+  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee, deleteEmployee, postId, postPwd,getSearchname }} = createActions
 
     ({
 
@@ -32,8 +32,9 @@ export const { employee :
       [PATCH_EMPLOYEE]: (res) => res,
       [POST_EMPLOYEE]: (res) => res,
       [PUT_EMPLOYEE]: (res) => res,
-      [GET_SEARCHNAME] : res => res.data
+      [GET_SEARCHNAME] : res => res.data,
       [DELETE_STUDENT]: (res) => res,
+      [GET_SEARCHNAME] : res => res.data
 
     });
 
