@@ -58,6 +58,7 @@ function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClic
                                     selectedEmpCode={selectedEmpCode} 
                                     selectedEmpName={selectedEmpName}
                                     setWhichPage={setWhichPage}
+                                    stateChangeHandler={stateChangeHandler}
                             />,
                 likeMsgBox: <LikeMsgBox setWhichPage={setWhichPage} stateChangeHandler={stateChangeHandler}/>
             };

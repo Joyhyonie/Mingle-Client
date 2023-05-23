@@ -89,8 +89,8 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
 
     /* '답장' 버튼 클릭 시, 해당 메시지의 content및 Sender의 정보와 함께 쪽지전송페이지로 이동 */
     const moveToReply = () => {
-        setWhichPage('writeMsg'); 
-        stateChangeHandler('writeIsClicked');
+        setWhichPage('writeMsg');               // '쪽지 작성'으로 페이지 이동
+        stateChangeHandler('writeIsClicked');   // Nav바를 '쪽지 작성'으로 설정
         // content 정보 넘기기
         setReplyContent(message.msgContent);
         setSelectedDeptCode(message.sender.department.deptCode);

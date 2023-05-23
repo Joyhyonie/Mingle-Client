@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { callDepartmentListAPI, callEmployeeListAPI, callSendMsgAPI } from "../../apis/MessageAPICalls";
 
-function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmpName, setWhichPage}) {
+function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmpName, setWhichPage, stateChangeHandler}) {
 
     const dispatch = useDispatch();
     const textareaRef = useRef(null); // 내용이 작성되어있는지 확인하기 위한 Ref
@@ -45,7 +45,8 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
             
             if(sendMsg?.status === 200) {
                 toast.success('쪽지가 정상적으로 전송되었습니다');
-                setWhichPage('sentMsgBox'); 
+                setWhichPage('sentMsgBox');             // '보낸 쪽지함'으로 페이지 이동
+                stateChangeHandler('sentIsClicked');    // Nav바를 '보낸 쪽지함'으로 설정
             }
 
         },[sendMsg]
