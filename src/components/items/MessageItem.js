@@ -6,7 +6,7 @@ import { callGetEmployeeAPI } from '../../apis/EmployeeAPICalls';
 import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI } from '../../apis/MessageAPICalls';
 import { toast } from 'react-hot-toast';
 
-function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, 
+function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName,
                        isChecked, checkboxChangeHandler, checkedIdList, setCheckedIdList}) {  
 
     const dispatch = useDispatch();
@@ -93,21 +93,21 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
         stateChangeHandler('writeIsClicked');
         // content 정보 넘기기
         setReplyContent(message.msgContent);
-        setSelectedDeptCode(message.msgSender.deptCode);
+        setSelectedDeptCode(message.sender.department.deptCode);
         setSelectedEmpCode(message.sender.empCode);
+        setSelectedEmpName(message.sender.empName);
     }
 
     /* 삭제할 쪽지 */
     const deleteMsgHandler = () => {
         
-        /* 해당 id를 가진 쪽지들의 msgDelReveiver를 'Y'로 변경하는 API */
-        dispatch(callRemoveMsgAPI(checkedIdList));
-
-        setCheckedIdList([]); // 선택되었던 체크박스의 체크 상태 초기화
-
         if (checkedIdList.length === 0) {
             toast.error('삭제할 쪽지를 선택해주세요 !');
-        } 
+        } else {
+            /* 해당 id를 가진 쪽지들의 msgDelReveiver를 'Y'로 변경하는 API */
+            dispatch(callRemoveMsgAPI(checkedIdList));
+            setCheckedIdList([]); // 선택되었던 체크박스의 체크 상태 초기화
+        }
 
     }    
 
@@ -151,7 +151,7 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
                             transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
                         >
                             <div className={ MessageCSS.msgItemContentBox }>
-                                <p>{message.msgContent}</p>
+                            <pre>{message.msgContent.replace(/(?:\r\n|\r|\n)/g, '\n')}</pre>
                             </div>
                             <div className={ MessageCSS.msgItemFooterBox }>
                                 {likeIconHandler()}
