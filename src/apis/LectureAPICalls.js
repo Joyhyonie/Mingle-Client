@@ -1,4 +1,4 @@
-import { deleteSubject, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
+import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 import { getSubjectInfo } from "../modules/LectureModule";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -17,6 +17,20 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
         }
     };
 }
+
+export const callSubjectSearchName = ({search, condition ,currentPage = 1}) => {
+    const requestURL = `${SUBJECT_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if(result.status === 200){
+            console.log(result);
+            dispatch(getSearch(result));
+        }
+    }
+}
+
 
 export const callSubjectUpdateAPI = (formData) => {
 
