@@ -8,12 +8,13 @@ import SearchBarCss from '../../css/common/SearchBar.module.css';
 import EmployeeListCss from '../../css/EmployeeList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
+import SearchBar from "../../components/common/SearchBar";
 import { useNavigate } from "react-router-dom";
 
-const options = [
-  { value: "empCode", name: "교번" },
-  { value: "empName", name: "직원명" },
-  { value: "deptCode", name: "부서명" },
+const employeeOptions = [
+  { value: "empCode", label: "교번" },
+  { value: "empName", label: "직원명" },
+  { value: "deptCode", label: "부서명" },
 ];
 
 const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
@@ -85,7 +86,9 @@ function EmployeeManagement() {
 
 
       <div className={SearchBarCss.basic}>
-        {/* <SearchAndListLayout options={options}></SearchAndListLayout> */}
+        {<SearchBar
+          options={employeeOptions}>
+        </SearchBar>}
       </div>
       <table className={EmployeeListCss.employeeTable}>
         <colgroup>
@@ -119,8 +122,8 @@ function EmployeeManagement() {
           {data &&
             data.map((employee) => (
               <tr
-              key={employee.empCode}
-              onClick={ () => onClickTableTr(employee.empCode)}>
+                key={employee.empCode}
+                onClick={() => onClickTableTr(employee.empCode)}>
                 <td><input type="checkbox" value={employee.empCode} /></td>
                 <td>{employee.empCode}</td>
                 <td>{employee.empName}</td>
