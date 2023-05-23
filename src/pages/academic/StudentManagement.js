@@ -93,11 +93,6 @@ function StudentManagement() {
     };
 
 
-  // // onClickTableTr => 테이블 행 클릭시 교직원 상세 조회 및 수정 페이지로 라우팅
-  // const onClickTableTr = (student) => {
-  //   setIsEmployeeUpdateModalOpen(true);
-  // }
-
 
   return (
     <motion.div
