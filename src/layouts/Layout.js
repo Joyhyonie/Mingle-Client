@@ -28,7 +28,8 @@ function Layout () {
     const logoutHandler = () => {
         window.localStorage.removeItem('accessToken');
         toast.success('로그아웃 성공 !');
-        navigate('/login', { replace : true });
+        // navigate('/login', { replace : true });
+        window.location.href = '/login';
     }
 
 

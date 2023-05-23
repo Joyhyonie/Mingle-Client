@@ -1,3 +1,4 @@
+
 .EmployeeList {
   display: flex;
   flex-wrap: wrap;
@@ -5,11 +6,13 @@
   align-items: center;
   margin: 10px;
   font-size: 18px;
+  
 }
 
 .employeeListTable {
   border-collapse: collapse;
   table-layout: fixed;
+  
 }
 
 .employeeListTable th,
@@ -21,6 +24,7 @@ td {
   flex-direction: column;
   align-items: center;
   font-size: 18px;
+  
 }
 
 .employeeTable {
@@ -28,6 +32,7 @@ td {
   border-collapse: collapse;
   overflow: scroll;
   height: 650px;
+  
 }
 
 .employeeTable th {
