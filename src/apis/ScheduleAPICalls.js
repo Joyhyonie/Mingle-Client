@@ -1,4 +1,4 @@
-import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule } from "../modules/ScheduleModule";
+import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule, putAcSchedule } from "../modules/ScheduleModule";
 import { request } from "./Api";
 
 const accessToken = window.localStorage.getItem('accessToken');
@@ -163,4 +163,22 @@ export function callAcScheduleRegistAPI(formData) {
           dispatch(postAcSchedule(result));
       }
   }
+}
+
+/* 학사 일정 수정 */
+export function callAcScheduleModifyAPI(formData) {
+
+  return async (dispatch, getState) => {
+
+      const headers = {
+          'Content-Type': 'application/json',
+      };
+
+      const result = await request('PUT', `/schedule/academic/modify`, headers, formData);
+
+      if(result.status == 200) {
+          dispatch(putAcSchedule(result));
+      }
+  }
+
 }

@@ -78,7 +78,7 @@
 
 .acScheRegistName {
   width: 900px;
-  height: 90px;
+  height: 80px;
   margin-top: 40px;
 
 }
@@ -86,21 +86,21 @@
 .acScheRegistName span {
   display: flex;
   display: left;
-  margin-top: 12.5px;
+  margin-top: 10px;
   margin-left: 10px;
 }
 
 .acScheRegistName input {
   float: right;
   display: flex;
-  width: 764px;
-  height: 60px;
+  width: 750px;
+  height: 50px;
   margin-right: 10px;
   border: 1px solid #FF9797;
   border-radius: 10px;
-  font-size: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  font-size: 18px;
+  padding-left: 20px;
+  padding-right: 20px;
   outline: none;
 }
 
@@ -130,14 +130,55 @@
   color: #343434;
 }
 
+.acScheRegistDevide {
+  width: 900px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.acScheRegistType span {
+  margin-left: 10px;
+  margin-right: 52px;
+  margin-top: 10px;
+}
+
+.acScheRegistType input {
+  width: 310px;
+  height: 50px;
+  border: 1px solid #FF9797;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 18px;
+  outline: none;
+}
+
+.acScheRegistEmployee span {
+  margin-top: 10px;
+}
+
+.acScheRegistEmployee input {
+  width: 310px;
+  height: 50px;
+  margin-right: 10px;
+  margin-left: 16px;
+  border: 1px solid #FF9797;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 18px;
+  outline: none;
+}
+
 .acScheRegistDate {
   width: 900px;
-  height: 90px;
+  height: 80px;
 }
 
 .acScheRegistDate input {
-  width: 346px;
-  height: 60px;
+  width: 349px;
+  height: 50px;
   margin-left: 10px;
   margin-right: 10px;
   border: 1px solid #FF9797;
@@ -156,7 +197,7 @@
 
 .acScheDetail {
   width: 900px;
-  height: 360px;
+  height: 320px;
 }
 
 .acScheDetail span {
@@ -165,8 +206,8 @@
 
 .acScheDetail textarea {
   margin-right: 10px;
-  width: 750px;
-  height: 340px;
+  width: 754px;
+  height: 300px;
   padding: 18px;
   border: 1px solid #FF9797;
   border-radius: 10px;

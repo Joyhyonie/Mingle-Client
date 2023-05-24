@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { callAcScheduleListAPI, callAcScheduleRegistAPI } from '../../apis/ScheduleAPICalls';
+import { callAcScheduleListAPI, callAcScheduleByDateAPI, callAcScheduleModifyAPI } from '../../apis/ScheduleAPICalls';
 import { toast } from "react-hot-toast";
 import AcademicScheduleCss from "../../css/AcademicSchedule.module.css";
 import CommonCSS from '../../css/common/Common.module.css';
@@ -13,18 +13,25 @@ function AcademicSchedule() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { allAcSchedule, registAcSche } = useSelector((state) => state.ScheduleReducer);
+  const { allAcSchedule, acSchedule } = useSelector((state) => state.ScheduleReducer);
   const { employee } = useSelector(state => state.EmployeeReducer);
-  const [form, setForm] = useState({
-    empCode: employee.empCode,
-    scheType: '학사',
-  });
+  const [form, setForm] = useState({});
 
+  /* 선택한 학사 일정 조회 및 수정모드 구분 */
+  const [modifyMode, setModifyMode] = useState(false);
+
+  /* 전체 일정 조회 */
   useEffect(() => {
     dispatch(callAcScheduleListAPI());
   },
     [dispatch]
   );
+
+  // 학사 일정 목록에서 항목 클릭 이벤트 핸들러
+  const onScheduleItemClickHandler = (schedule) => {
+    dispatch(callAcScheduleByDateAPI(schedule.scheStartDate)); // or scheEndDate depending on what date you want to pass
+  };
+
 
   /* 입력 양식의 값이 변경될 때 */
   const onChangeHandler = (e) => {
@@ -43,17 +50,23 @@ function AcademicSchedule() {
     return `${year}-${month}-${day}`;
   };
 
-  /* 학사일정 등록 후 regist 값이 확인되면 목록에 반영/새로고침 */
+  /* 학사일정 수정 후 modify 값이 확인되면 목록에 반영/새로고침 */
   useEffect(() => {
-    if (registAcSche?.status === 200) {
-      toast.success("학사 일정 등록이 완료 되었습니다.");
+    if (modifyAcSche?.status === 200) {
+      toast.success("학사 일정 수정이 완료 되었습니다.");
       navigate('/schedule-academic', { replace: true });
-      console.log(registAcSche);
+      console.log(modifyAcSche);
     }
-  }, [registAcSche]);
+  }, [modifyAcSche]);
 
-  /* 학생 등록 버튼 클릭 이벤트 */
-  const onClickAcademicScheduleRegistHandler = () => {
+  /* 수정 모드 변경 이벤트 */
+  const onClickModifyModeHandler = () => {
+    setModifyMode(true);
+    setForm({ ...acSchedule });
+  }
+
+  /* 학사일정 수정 버튼 클릭 이벤트 */
+  const onClickAcademicScheduleModifyHandler = () => {
 
     const formData = new FormData();
     // formData.append("empCode", form.empCode);
@@ -66,7 +79,7 @@ function AcademicSchedule() {
     console.log('regist form ', form)
     console.log('regist formdata ', formData)
 
-    dispatch(callAcScheduleRegistAPI(formData));
+    dispatch(callAcScheduleModifyAPI(formData));
   }
 
 
@@ -75,7 +88,8 @@ function AcademicSchedule() {
       className={AcademicScheduleCss.acScheContainer}
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
     >
-      <p className={CommonCSS.pageDirection}>학사 일정 관리 ▸ 학사 일정 조회 및 등록</p>
+      <p className={CommonCSS.pageDirection}>학사 일정 관리 ▸학사 일정 수정 및 삭제</p>
+      {!modifyMode && <p className={CommonCSS.pageDirection}>학사 일정 관리 ▸ 학사 일정 조회</p>}
       <div></div>
       <div className={AcademicScheduleCss.acScheLeft}>
         <div className={AcademicScheduleCss.acScheRead}>
@@ -84,6 +98,7 @@ function AcademicSchedule() {
             allAcSchedule.map((schedule) => (
               <div
                 key={schedule.scheCode}
+                onClick={() => onScheduleItemClickHandler(schedule)}
               >
                 <p className={AcademicScheduleCss.acScheListDate}>
                   <span>•</span>
@@ -96,13 +111,16 @@ function AcademicSchedule() {
       </div>
       <div className={AcademicScheduleCss.acScheRegist}>
         <div className={AcademicScheduleCss.acScheRead}>
-          <p><img src="/images/cal.png"></img>일정 등록</p>
+          <p><img src="/images/cal.png"></img>일정 수정 및 삭제</p>
+          {!modifyMode && <p><img src="/images/cal.png"></img>일정 조회</p>}
         </div>
         <div className={AcademicScheduleCss.acScheRegistName}>
           <span>일정명</span>
           <input
             type='text'
             name="scheName"
+            readOnly={!modifyMode} // 수정모드가 아닐 때는 입력 불가능
+            value={acSchedule.scheName}
             required
             onChange={onChangeHandler}></input>
           <br />
@@ -120,8 +138,8 @@ function AcademicSchedule() {
             <span>등록자</span>
             <input
               type="text"
-              readOnly
               name="empCode"
+              readOnly={!modifyMode} // 수정모드가 아닐 때는 입력 불가능
               value={form.empCode}>
             </input>
           </div>
@@ -156,7 +174,10 @@ function AcademicSchedule() {
             onChange={onChangeHandler}></textarea>
         </div>
         <br />
-        <button onClick={onClickAcademicScheduleRegistHandler} className={AcademicScheduleCss.acScheRegistBtn}>등록</button>
+        {!modifyMode && <button onClick={onClickModifyModeHandler} className={AcademicScheduleCss.acScheRegistBtn}>수정</button>}
+        {!modifyMode && <button className={AcademicScheduleCss.acScheRegistBtn}>삭제</button>}
+        <button onClick={onClickAcademicScheduleModifyHandler} className={AcademicScheduleCss.acScheRegistBtn}>저장</button>
+        <button onClick={() => navigate(-1)} className={AcademicScheduleCss.acScheRegistBtn}>취소</button>
       </div>
 
     </motion.div>
