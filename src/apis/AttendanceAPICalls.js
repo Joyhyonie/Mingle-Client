@@ -1,4 +1,4 @@
-import { getAttendance, getAttendanceToday, getAttendances, getMyattendance, getMyleave, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
+import { getAttendance, getAttendanceToday, getAttendances, getLeavesearchname, getMyattendance, getMyleave, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
 import { getEmployee, getSearchname } from "../modules/EmployeeModule";
 import { request } from "./Api";
 
@@ -61,6 +61,25 @@ export const callLeaveDoc = ({currentPage = 1}) => {
 
 export const callLeaveUpdateAPI = (leave) => {
     const requestURL = `${ATTEN_DANCE}/update/${leave.leaveDocCode}`;
+  
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : 'PATCH',
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+            },
+            body: JSON.stringify(leave)
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(patchAttendance(result));
+        }
+    }
+};
+
+export const callLeaveNoUpdateAPI = (leave) => {
+    const requestURL = `${ATTEN_DANCE}/noUpdate/${leave.leaveDocCode}`;
   
     return async (dispatch,getState) => {
         const result = await fetch(requestURL,{
@@ -160,6 +179,20 @@ export const callAttendanceSearchName = ({search, condition ,currentPage = 1}) =
         if(result.status === 200){
             console.log(result);
             dispatch(getSearchname(result));
+        }
+    }
+}
+
+export const callLeaveDocSearchName = ({search, condition ,currentPage = 1}) => {
+    const requestURL = `${ATTEN_DANCE}/leaveDocSearch?condition=${condition}&search=${search}&page=${currentPage}`;
+    console.log(requestURL);
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL).then(response => response.json());
+
+        if(result.status === 200){
+            console.log(result);
+            dispatch(getLeavesearchname(result));
         }
     }
 }

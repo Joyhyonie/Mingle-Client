@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import { callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
-import { callAttendanceSearchName } from '../../apis/AttendanceAPICalls';
+import { callAttendanceSearchName, callLeaveDocSearchName } from '../../apis/AttendanceAPICalls';
 import { useNavigate } from 'react-router-dom';
 import { callCertiDocSearchName } from '../../apis/CertiDocAPICalls';
 import { callSubjectSearchName } from '../../apis/LectureAPICalls';
@@ -27,6 +27,9 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
         dispatch(callSubjectSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
     } else if(type == "certiDoc"){
       dispatch(callCertiDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+    } else if(type == "leaveDoc"){
+      console.log(selectedOption);
+      dispatch(callLeaveDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
     }
 
   };
