@@ -6,6 +6,7 @@ import MessageModalLayout from '../../layouts/MessageModalLayout';
 import NotificationModal from '../modal/NotificationModal';
 import LogoutModal from '../modal/LogoutModal';
 import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
 
@@ -13,6 +14,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const { employee } = useSelector(state => state.EmployeeReducer);
     const [isIconClickedState, setIsIconClickedState] = useState({      // 클릭된 아이콘 컨트롤 state
         mpgIsClicked: false,
         notiIsClicked: false,
@@ -105,7 +107,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
                 >
                     <span>M</span>ingle
                 </p>
-                <p className={ CommonCSS.hello }>mingler님 안녕하세요 :)</p>
+                <p className={ CommonCSS.hello }>{employee && employee.empName}님 안녕하세요 :)</p>
                 <div className={ CommonCSS.iconBox }>
                     {isIconClickedState.mpgIsClicked ? (
                         <motion.img
