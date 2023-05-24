@@ -13,6 +13,7 @@ const GET_MYATTENDANCE = "attendance/GET_MYATTENDANCE";
 const GET_MYLEAVE = "attendance/GET_MYLEAVE";
 const PATCH_ADMINATTENDANCE = "attendance/PATCH_ADMINATTENDANCE"
 const GET_LEAVESEARCHNAME = "attendance/GET_LEAVESEARCHNAME";
+const GET_MYLEAVESEARCHNAME = "attendance/GET_MYLEAVESEARCHNAME";
 
 export const { attendance : { getAttendances, 
                               patchAttendance, 
@@ -24,7 +25,8 @@ export const { attendance : { getAttendances,
                               getMyattendance,
                               getMyleave,
                               patchAdminattendance,
-                              getLeavesearchname} } = createActions({
+                              getLeavesearchname,
+                              getMyleavesearchname} } = createActions({
         [GET_ATTENDANCES] : res => res.data,
         [GET_ATTENDANCE] : res => res.data,
         [PATCH_ATTENDANCE] : res => res,
@@ -35,7 +37,8 @@ export const { attendance : { getAttendances,
         [GET_MYATTENDANCE] : res => res.data,
         [GET_MYLEAVE] : res => res.data,
         [PATCH_ADMINATTENDANCE] : res => res,
-        [GET_LEAVESEARCHNAME] : res => res.data
+        [GET_LEAVESEARCHNAME] : res => res.data,
+        [GET_MYLEAVESEARCHNAME] : res => res.data
 });
 
 const AttendanceReducer = handleActions({
@@ -49,7 +52,8 @@ const AttendanceReducer = handleActions({
     [GET_MYATTENDANCE] : (state, {payload}) => payload,
     [GET_MYLEAVE] : (state, {payload}) => ({myleave: payload}),
     [PATCH_ADMINATTENDANCE] : (state, {payload}) => ({adminpatch : payload}),
-    [GET_LEAVESEARCHNAME] : (state, {payload}) => ({searchName: payload})
+    [GET_LEAVESEARCHNAME] : (state, {payload}) => ({searchName: payload}),
+    [GET_MYLEAVESEARCHNAME] : (state, {payload}) => ({searchMyLeaveDoc : payload})
 },initialState)
 
 export default AttendanceReducer;
