@@ -1,7 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import notiCSS from "../../css/Notification.module.css";
 import dayjs from 'dayjs';
 import { toast } from "react-hot-toast";
+import { callNotificationRemoveAPI } from "../../apis/NotificationAPICalls";
+import { useEffect } from "react";
 
 function NotificationItem ({noti}) {
 
@@ -31,19 +33,19 @@ function NotificationItem ({noti}) {
 
     /* '삭제'클릭 시, 해당 알림 삭제  */
     const deleteHandler = (notiCode) => {
-        // dispatch(callDeleteNotiAPI(notiCode))
-
-        // status === 200일 시,
-        toast.success("해당 알림이 삭제되었습니다") // 알림창이 뜨면서 전체 삭제된 알림창을 렌더링 하고싶은데 useEffect에서 어떻게 돌릴까?
+        dispatch(callNotificationRemoveAPI(notiCode));
     }
     
 
     return (
         <div className={ notiCSS.notiItemBox }>
             <div className={ notiCSS.notiItemHeader }>
-                <h4>{noti.notiTypeCode === 1 ? `💬 ${noti.notiTitle}` : noti.notiTypeCode === 2 ? `🌞 ${noti.notiTitle}` : `🌝 ${noti.notiTitle}`}</h4>
+                <h4>{noti.notiType.notiTypeCode === 40001 ? `💬 ${noti.notiType.notiTitle}` 
+                    : noti.notiType.notiTypeCode === 40002 ? `🌞 ${noti.notiType.notiTitle}` 
+                    : `🌝 ${noti.notiType.notiTitle}`}
+                </h4>
                 <div>
-                    <p>{dateFormatHandler(noti.notiDate)}</p>
+                    <p>{dateFormatHandler(noti.notiStartDate)}</p>
                     <img 
                         src={`${process.env.PUBLIC_URL}/images/delete.png`}
                         onClick={ () => deleteHandler(noti.notiCode) }

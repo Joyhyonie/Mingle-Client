@@ -8,12 +8,13 @@ import StudentReducer from "./StudentModule";
 import ScheduleReducer from "./ScheduleModule";
 import BoardReducer from "./BoardModule";
 import MessageReducer from "./MessageModule";
+import NotificationReducer from "./NofiticationModule";
 
 
 /* 여러 모듈을 combine 시키기 */
 const rootReducer = combineReducers({
   SubjectReducer, CertiReducer, EmployeeReducer, StudentReducer, ScheduleReducer, AttendanceReducer,
-  SubjectInfoReducer, BoardReducer, MessageReducer,
+  SubjectInfoReducer, BoardReducer, MessageReducer, NotificationReducer
 });
 
 export default rootReducer;
