@@ -1,5 +1,6 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
-import { getSubjectInfo } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo } from "../modules/LectureModule";
+import { wait } from '@testing-library/user-event/dist/utils';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -18,13 +19,13 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
     };
 }
 
-export const callSubjectSearchName = ({search, condition ,currentPage = 1}) => {
+export const callSubjectSearchName = ({ search, condition, currentPage = 1 }) => {
     const requestURL = `${SUBJECT_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
 
-    return async (dispatch,getState) => {
+    return async (dispatch, getState) => {
         const result = await fetch(requestURL).then(response => response.json());
 
-        if(result.status === 200){
+        if (result.status === 200) {
             console.log(result);
             dispatch(getSearch(result));
         }
@@ -131,5 +132,23 @@ export const callLectureInsertAPI = (form) => {
         }
     }
 }
+
+export const callLectureListAPI = ({ currentPage = 1 }) => {
+
+    const requestURL = `${LECTURE_URL}/adminLectureList?page=${currentPage}`;
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: 'GET'
+        }).then(response => response.json());
+
+        /*dispatch의 매개변수로 action 객체를 전달하여 store에 state를 저장하게 한다. */
+        if (result.status === 200) {
+            dispatch(getLectureInfo(result));
+            console.log(result);
+        }
+    }
+}
+
+
 
 
