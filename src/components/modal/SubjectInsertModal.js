@@ -28,6 +28,11 @@ function SubjectInsertModal({setIsInsertModalOpen}){
 
     const onClickInsertSubjectHandler = () => {
 
+        if (form.classType === null || form.score === null || form.deptCode === null || form.sbjName === null ||
+            form.classType === undefined || form.score === undefined || form.deptCode === undefined || form.sbjName === undefined) {
+          toast.error("양식을 제대로 입력하세요");
+          return;
+        }
         const formData = new FormData();
         formData.append("classType", form.classType);
         formData.append("score", form.score);

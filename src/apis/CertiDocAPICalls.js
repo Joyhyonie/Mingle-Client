@@ -45,7 +45,6 @@ export const callCertiDocSearchName = ({search, condition ,currentPage = 1}) => 
         const result = await fetch(requestURL).then(response => response.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getCertidocname(result));
         }
     }

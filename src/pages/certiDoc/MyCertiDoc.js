@@ -16,11 +16,11 @@ import SearchBar from "../../components/common/SearchBar";
 function MyCertiDoc () {
 
     const options = [
-        { value: "sbjName", name: "과목명" },
-        { value: "deptName", name: "학과명" }
+        { value: "certiFormName", label: "증명서종류" }
     ];
 
-    const {data,pageInfo} = useSelector(state => state.CertiReducer);
+    const {certi,certiName} = useSelector(state => state.CertiReducer);
+    const type = "certiDoc";
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectCerti, setSelectCerti] = useState();
@@ -30,7 +30,7 @@ function MyCertiDoc () {
         ()=>{
             dispatch(callMyCertiDocListAPI({currentPage}));
         },
-        [currentPage]
+        [currentPage,dispatch]
     )
 
     const openModal = (myCerti) => {
@@ -57,8 +57,8 @@ function MyCertiDoc () {
                 <p className={ CommonCSS.pageDirection }>증명서 ▸ 증명서 발급 신청 이력</p>
             </div>
             <div className={SearchBarCss.basic}>
-            {<SearchBar options={options} type="certiDoc"/>}
-        </div>
+            {<SearchBar options={options} type={type}/>}
+           </div>
             <div className={MyCertiDocCSS.MyCertiDocCSS}>
                 <table className={MyCertiDocCSS.MyCertiDocCSSTable}>
                     <colgroup>
@@ -83,9 +83,10 @@ function MyCertiDoc () {
                         </tr>
                     </thead>
                     <tbody>
-                        { data && 
-                        data.map((myCerti)=>(
-                            <tr key={myCerti.certiDocCode}>
+                    {
+                        (certiName && certiName.data) ? (
+                            certiName.data.map((myCerti) => (
+                                <tr key={myCerti.certiDocCode}>
                                 <td>{myCerti.certiDocCode}</td>
                                 <td>{myCerti.certiApplyDate.split(" ")[0]}</td>
                                 <td>{myCerti.certiForm.certiFormName}</td>
@@ -95,8 +96,26 @@ function MyCertiDoc () {
                                 {myCerti.docStatus == "승인" ? (
                                 <td><button onClick={()=> openModal(myCerti)}>보기</button></td>
                                 ): null }
-                            </tr>
-                        ))}
+                                </tr>
+                            ))
+                        ) : (
+                            (certi && certi.data) && (
+                            certi.data.map((myCerti) => (
+                                <tr key={myCerti.certiDocCode}>
+                                <td>{myCerti.certiDocCode}</td>
+                                <td>{myCerti.certiApplyDate.split(" ")[0]}</td>
+                                <td>{myCerti.certiForm.certiFormName}</td>
+                                <td>{myCerti.reason}</td>
+                                <td>{myCerti.certiUse}</td>
+                                <td>{myCerti.docStatus}</td>
+                                {myCerti.docStatus == "승인" ? (
+                                <td><button onClick={()=> openModal(myCerti)}>보기</button></td>
+                                ): null }
+                                </tr>
+                            ))
+                            )
+                        )
+                        }
                     </tbody>
                 </table>
                 {isModalOpen && selectCerti &&(
@@ -114,7 +133,9 @@ function MyCertiDoc () {
       )}
             </div>
             <div>
-            { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
+            { (certiName && certiName.pageInfo) ? (<PagingBar pageInfo={certiName.pageInfo} setCurrentPage={setCurrentPage} /> ) 
+                : (certi && certi.pageInfo) ? (<PagingBar pageInfo={certi.pageInfo} setCurrentPage={setCurrentPage} /> )
+                : null }
             </div>
         </motion.div>
     );

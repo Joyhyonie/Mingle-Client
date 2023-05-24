@@ -10,6 +10,7 @@ function SubjectUpdateModal({subject,closeModal}){
 
     const [form, setForm] = useState(subject);
     const {modify} = useSelector(state => state.SubjectReducer);
+    console.log(subject);
 
     const onChangeHandler = (e) => {
         setForm({
@@ -19,6 +20,10 @@ function SubjectUpdateModal({subject,closeModal}){
       };
 
       const onClickSubjectUpdateHandler = () => {
+
+        if(form.deptCode == null) {
+            toast.error("학과를 선택해주세요")
+        }
         const formData = new FormData();
         formData.append("sbjCode", form.sbjCode);
         formData.append("classType", form.classType);
@@ -55,6 +60,7 @@ function SubjectUpdateModal({subject,closeModal}){
                     className={SubjectUpdateModalCSS.score}/>
                     <label className={SubjectUpdateModalCSS.label}>학과명</label>
                     <select className={SubjectUpdateModalCSS.deptCode} name="deptCode" onChange={onChangeHandler}>
+                        <option defaultValue="">학과를 선택해주세요</option>
                         <option value="13">IT공학과</option>
                         <option value="14">간호학과</option>
                         <option value="15">경제학과</option>
