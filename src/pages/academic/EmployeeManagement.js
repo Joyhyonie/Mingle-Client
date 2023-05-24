@@ -46,6 +46,7 @@ function EmployeeManagement() {
   );
 
 
+  // 각 교직원의 체크박스
   const handleCheckboxChange = (e, empCode) => {
     const newCheckboxes = {
       ...checkboxes,
@@ -56,6 +57,7 @@ function EmployeeManagement() {
     const allSelected = Object.values(newCheckboxes).every(val => val === true);
     setSelectAll(allSelected);
   };
+
 
   // 모두 선택
   const handleSelectAll = (e) => {
@@ -113,6 +115,7 @@ function EmployeeManagement() {
       >
         삭제
       </motion.button>
+      
       <p className={CommonCSS.pageDirection}>학사관리 ▸ 교직원</p>
 
 
