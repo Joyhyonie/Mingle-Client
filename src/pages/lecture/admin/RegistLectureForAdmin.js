@@ -7,7 +7,7 @@ import SearchBarCss from '../../../css/LectureSearchBar.module.css'
 import LectureListCSS from '../../../css/LectureList.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { callSubjectDelete, callSubjectUpdateAPI, callSubjectsAPI } from "../../../apis/LectureAPICalls";
+import { callLectureListAPI, callSubjectDelete, callSubjectUpdateAPI, callSubjectsAPI } from "../../../apis/LectureAPICalls";
 import { toast } from "react-hot-toast";
 import PagingBar from "../../../components/common/PagingBar";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
@@ -16,7 +16,7 @@ import LectureInsertModal from "../../../components/modal/LectureInsertModal";
 
 
 function RegistLectureForAdmin() {
-  const pageInfo = { startPage: 1, endPage: 10, currentPage: 2, maxPage: 20 }
+
 
 
   const dispatch = useDispatch();
@@ -28,20 +28,19 @@ function RegistLectureForAdmin() {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
 
+  const { data, pageInfo } = useSelector(state => state.SubjectInfoReducer);
+  console.log("getInfo", data);
+
+
 
   useEffect(
     () => {
-      dispatch(callSubjectsAPI({ currentPage }))
+      /*lectureList APi 호출  () 함수를 전달해줘야 미들웨어에서 호출되고 넘어갈 것. */
+
+      dispatch(callLectureListAPI({ currentPage }))
     },
     [currentPage, isModalOpen, isInsertModalOpen]
   );
-
-
-
-
-
-
-
 
   const onCLickInsert = () => {
     setIsInsertModalOpen(true);
@@ -98,18 +97,21 @@ function RegistLectureForAdmin() {
             </tr>
           </thead>
           <tbody>
-            {/* {data && (
-                            data.map((employee)=>(
-                                <tr key={employee.empCode}
-                                    onClick={()=> onClickHandler(employee.empCode) }>
-                                    <td>{employee.empCode}</td>
-                                    <td>{employee.department.deptName}</td>
-                                    <td>{employee.empName}</td>
-                                    <td>{employee.empStatus}</td>
-                                    <td>{employee.empAnnual}</td>
-                                </tr>
-                            )
-                            ))} */}
+            {data && (
+              data.map((lec) => (
+                <tr key={lec.lecCode}>
+                  <td>{lec.lecCode}</td>
+                  <td>{lec.subject.department.deptName}</td>
+                  <td>{lec.subject.classType}</td>
+                  <td>{lec.subject.sbjCode}</td>
+                  <td>{lec.subject.sbjName}</td>
+                  <td>{lec.subject.score}</td>
+                  <td>{lec.employee.empName}</td>
+                  <td>{lec.lecName ? "개설완료" : "개설요청"}</td>
+
+                </tr>
+              )
+              ))}
           </tbody>
         </table>
         <div>
