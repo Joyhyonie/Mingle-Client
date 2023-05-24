@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { callAcScheduleListAPI, callAcScheduleRegistAPI } from '../../apis/ScheduleAPICalls';
+import { callAcScheduleListAPI, callAcScheduleRegistAPI, callAcScheduleByDateAPI } from '../../apis/ScheduleAPICalls';
 import { toast } from "react-hot-toast";
 import AcademicScheduleCss from "../../css/AcademicSchedule.module.css";
 import CommonCSS from '../../css/common/Common.module.css';
@@ -16,15 +16,24 @@ function AcademicSchedule() {
   const { allAcSchedule, registAcSche } = useSelector((state) => state.ScheduleReducer);
   const { employee } = useSelector(state => state.EmployeeReducer);
   const [form, setForm] = useState({
-    empCode: employee.empCode,
+    empCode: employee.empCode || '',
     scheType: '학사',
   });
+  const [selectedSchedule, setSelectedSchedule] = useState(null);
+
 
   useEffect(() => {
     dispatch(callAcScheduleListAPI());
   },
     [dispatch]
   );
+
+  /* 학사 일정 항목 클릭 이벤트 */
+  const onScheduleItemClickHandler = async (schedule) => {
+    setSelectedSchedule(schedule);
+  }
+
+
 
   /* 입력 양식의 값이 변경될 때 */
   const onChangeHandler = (e) => {
@@ -84,6 +93,7 @@ function AcademicSchedule() {
             allAcSchedule.map((schedule) => (
               <div
                 key={schedule.scheCode}
+                onClick={onScheduleItemClickHandler}
               >
                 <p className={AcademicScheduleCss.acScheListDate}>
                   <span>•</span>
@@ -94,71 +104,137 @@ function AcademicSchedule() {
         </div>
 
       </div>
-      <div className={AcademicScheduleCss.acScheRegist}>
-        <div className={AcademicScheduleCss.acScheRead}>
-          <p><img src="/images/cal.png"></img>일정 등록</p>
-        </div>
-        <div className={AcademicScheduleCss.acScheRegistName}>
-          <span>일정명</span>
-          <input
-            type='text'
-            name="scheName"
-            required
-            onChange={onChangeHandler}></input>
+
+      {selectedSchedule ?
+        /* 학사일정 상세 조회 컴포넌트 */
+        <div className={AcademicScheduleCss.acScheRegist}>
+          <div className={AcademicScheduleCss.acScheRead}>
+            <p><img src="/images/cal.png"></img>일정 상세 조회</p>
+          </div>
+          <div className={AcademicScheduleCss.acScheRegistName}>
+            <span>일정명</span>
+            <input
+              type='text'
+              name="scheName"
+              value={selectedSchedule.scheName}
+              readOnly></input>
+            <br />
+          </div>
+
+          <div className={AcademicScheduleCss.acScheRegistDevide}>
+            <div className={AcademicScheduleCss.acScheRegistType}>
+              <span>구분</span>
+              <input type="text"
+                readOnly
+                name="scheType"
+                value={selectedSchedule.scheType}></input>
+            </div>
+            <div className={AcademicScheduleCss.acScheRegistEmployee}>
+              <span>등록자</span>
+              <input
+                type="text"
+                readOnly
+                name="empCode"
+                value={selectedSchedule.empCode}>
+              </input>
+            </div>
+          </div>
+
+          <div className={AcademicScheduleCss.acScheRegistDate}>
+            <span>일시</span>
+            <div className={AcademicScheduleCss.acScheDateInput}>
+              <input
+                type='date'
+                name="scheStartDate"
+                value={formatDate(selectedSchedule.scheStartDate)}
+                readOnly>
+              </input>
+              <span>~</span>
+              <input
+                type='date'
+                name="scheEndDate"
+                value={formatDate(selectedSchedule.scheEndDate)}
+                readOnly></input>
+            </div>
+            <br />
+          </div>
+
+          <div className={AcademicScheduleCss.acScheDetail}>
+            <span>일정 상세</span>
+            <textarea
+              name="scheContent"
+              value={selectedSchedule.scheContent}
+              readOnly></textarea>
+          </div>
           <br />
+          <button onClick={() => setSelectedSchedule(null)} className={AcademicScheduleCss.acScheRegistBtn}>돌아가기</button>
         </div>
-
-        <div className={AcademicScheduleCss.acScheRegistDevide}>
-          <div className={AcademicScheduleCss.acScheRegistType}>
-            <span>구분</span>
-            <input type="text"
-              readOnly
-              name="scheType"
-              value={form.scheType}></input>
+        :
+        <div className={AcademicScheduleCss.acScheRegist}>
+          <div className={AcademicScheduleCss.acScheRead}>
+            <p><img src="/images/cal.png"></img>일정 등록</p>
           </div>
-          <div className={AcademicScheduleCss.acScheRegistEmployee}>
-            <span>등록자</span>
+          <div className={AcademicScheduleCss.acScheRegistName}>
+            <span>일정명</span>
             <input
-              type="text"
-              readOnly
-              name="empCode"
-              value={form.empCode}>
-            </input>
-          </div>
-        </div>
-
-
-
-        <div className={AcademicScheduleCss.acScheRegistDate}>
-          <span>일시</span>
-          <div className={AcademicScheduleCss.acScheDateInput}>
-            <input
-              type='date'
-              name="scheStartDate"
-              required
-              onChange={onChangeHandler}>
-            </input>
-            <span>~</span>
-            <input
-              type='date'
-              name="scheEndDate"
+              type='text'
+              name="scheName"
               required
               onChange={onChangeHandler}></input>
+            <br />
+          </div>
+
+          <div className={AcademicScheduleCss.acScheRegistDevide}>
+            <div className={AcademicScheduleCss.acScheRegistType}>
+              <span>구분</span>
+              <input type="text"
+                readOnly
+                name="scheType"
+                value={form.scheType}></input>
+            </div>
+            <div className={AcademicScheduleCss.acScheRegistEmployee}>
+              <span>등록자</span>
+              <input
+                type="text"
+                readOnly
+                name="empCode"
+                value={form.empCode}>
+              </input>
+            </div>
+          </div>
+
+
+
+          <div className={AcademicScheduleCss.acScheRegistDate}>
+            <span>일시</span>
+            <div className={AcademicScheduleCss.acScheDateInput}>
+              <input
+                type='date'
+                name="scheStartDate"
+                required
+                onChange={onChangeHandler}>
+              </input>
+              <span>~</span>
+              <input
+                type='date'
+                name="scheEndDate"
+                required
+                onChange={onChangeHandler}></input>
+            </div>
+            <br />
+          </div>
+
+          <div className={AcademicScheduleCss.acScheDetail}>
+            <span>일정 상세</span>
+            <textarea
+              name="scheContent"
+              required
+              onChange={onChangeHandler}></textarea>
           </div>
           <br />
+          <button onClick={onClickAcademicScheduleRegistHandler} className={AcademicScheduleCss.acScheRegistBtn}>등록</button>
         </div>
-
-        <div className={AcademicScheduleCss.acScheDetail}>
-          <span>일정 상세</span>
-          <textarea
-            name="scheContent"
-            required
-            onChange={onChangeHandler}></textarea>
-        </div>
-        <br />
-        <button onClick={onClickAcademicScheduleRegistHandler} className={AcademicScheduleCss.acScheRegistBtn}>등록</button>
-      </div>
-
+      }
     </motion.div>
   );
 }

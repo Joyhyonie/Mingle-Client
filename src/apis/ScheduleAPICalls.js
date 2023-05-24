@@ -128,7 +128,7 @@ export function callAcScheduleListAPI() {
 }
 
 
-/* 선택한 날짜의 학사 일정 조회  */
+/* 특정 학사 일정 조회  */
 export function callAcScheduleByDateAPI(date) {
 
     return async (dispatch, getState) => {
@@ -138,6 +138,7 @@ export function callAcScheduleByDateAPI(date) {
         };
 
         const result = await request('GET', `/schedule/academic/${date}`, headers);
+        console.log(result);
 
         if(result.status == 200) {
             dispatch(getAcSchedule(result));
