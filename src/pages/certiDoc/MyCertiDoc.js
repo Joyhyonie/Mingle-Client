@@ -19,8 +19,8 @@ function MyCertiDoc () {
         { value: "certiFormName", label: "증명서종류" }
     ];
 
-    const {certi,certiName} = useSelector(state => state.CertiReducer);
-    const type = "certiDoc";
+    const {certi,myCertiSearchName} = useSelector(state => state.CertiReducer);
+    const type = "myCertiDoc";
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectCerti, setSelectCerti] = useState();
@@ -84,8 +84,8 @@ function MyCertiDoc () {
                     </thead>
                     <tbody>
                     {
-                        (certiName && certiName.data) ? (
-                            certiName.data.map((myCerti) => (
+                        (myCertiSearchName && myCertiSearchName.data) ? (
+                            myCertiSearchName.data.map((myCerti) => (
                                 <tr key={myCerti.certiDocCode}>
                                 <td>{myCerti.certiDocCode}</td>
                                 <td>{myCerti.certiApplyDate.split(" ")[0]}</td>
@@ -133,7 +133,7 @@ function MyCertiDoc () {
       )}
             </div>
             <div>
-            { (certiName && certiName.pageInfo) ? (<PagingBar pageInfo={certiName.pageInfo} setCurrentPage={setCurrentPage} /> ) 
+            { (myCertiSearchName && myCertiSearchName.pageInfo) ? (<PagingBar pageInfo={myCertiSearchName.pageInfo} setCurrentPage={setCurrentPage} /> ) 
                 : (certi && certi.pageInfo) ? (<PagingBar pageInfo={certi.pageInfo} setCurrentPage={setCurrentPage} /> )
                 : null }
             </div>

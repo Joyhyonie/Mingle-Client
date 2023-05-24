@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import { callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
-import { callAttendanceSearchName, callLeaveDocSearchName } from '../../apis/AttendanceAPICalls';
+import { callAttendanceSearchName, callLeaveDocSearchName, callMyLeaveDocSearchName } from '../../apis/AttendanceAPICalls';
 import { useNavigate } from 'react-router-dom';
-import { callCertiDocSearchName } from '../../apis/CertiDocAPICalls';
+import { callCertiDocSearchName, callMyCertiDocSearchName } from '../../apis/CertiDocAPICalls';
 import { callSubjectSearchName } from '../../apis/LectureAPICalls';
 
 const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
@@ -28,8 +28,11 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
     } else if(type == "certiDoc"){
       dispatch(callCertiDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
     } else if(type == "leaveDoc"){
-      console.log(selectedOption);
       dispatch(callLeaveDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+    } else if(type == "MyLeaveDoc"){
+      dispatch(callMyLeaveDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+    } else if(type == "myCertiDoc"){
+      dispatch(callMyCertiDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
     }
 
   };
