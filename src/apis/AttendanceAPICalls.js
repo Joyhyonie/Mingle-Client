@@ -152,6 +152,7 @@ export const callLeaveRegist = (formData) => {
 
 export const callAttendanceSearchName = ({search, condition ,currentPage = 1}) => {
     const requestURL = `${ATTEN_DANCE}/search?condition=${condition}&search=${search}&page=${currentPage}`;
+    console.log(requestURL);
 
     return async (dispatch,getState) => {
         const result = await fetch(requestURL).then(response => response.json());

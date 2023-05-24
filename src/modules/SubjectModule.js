@@ -22,7 +22,7 @@ export const {
 });
 
 const SubjectReducer = handleActions({
-    [GET_SUBJECTS] : (state, {payload}) => payload,
+    [GET_SUBJECTS] : (state, {payload}) => ({subjects : payload}),
     [GET_SUBJECT] : (state, {payload}) => ({subject:payload}),
     [PUT_SUBJECTS] : (state ,{payload}) => ({modify: payload}),
     [POST_SUBJECTS] : (state, {payload}) => ({regist: payload}),

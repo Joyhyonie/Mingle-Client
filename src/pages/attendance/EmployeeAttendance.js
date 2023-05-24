@@ -29,7 +29,7 @@ function EmployeeAttendance () {
         ()=>{
             dispatch(callEmployee({currentPage}));
             },        
-            [currentPage,employee,nameSearch]
+            [currentPage,dispatch]
     )    
 
     const onClickHandler = (empCode) => {
@@ -65,22 +65,43 @@ function EmployeeAttendance () {
                         </tr>
                     </thead>
                     <tbody>
-                    {employee.data && (
-                            employee.data.map((employee)=>(
-                                <tr key={employee.empCode}
-                                    onClick={()=> onClickHandler(employee.empCode) }>
-                                    <td>{employee.empCode}</td>
-                                    <td>{employee.department.deptName}</td>
-                                    <td>{employee.empName}</td>
-                                    <td>{employee.empStatus}</td>
-                                    <td>{employee.empAnnual}</td>
+                    {
+                        (nameSearch && nameSearch.data) ? (
+                            nameSearch.data.map((employee) => (
+                            <tr
+                                key={employee.empCode}
+                                onClick={() => onClickHandler(employee.empCode)}
+                            >
+                                <td>{employee.empCode}</td>
+                                <td>{employee.department.deptName}</td>
+                                <td>{employee.empName}</td>
+                                <td>{employee.empStatus}</td>
+                                <td>{employee.empAnnual}</td>
+                            </tr>
+                            ))
+                        ) : (
+                            (employee && employee.data) && (
+                            employee.data.map((employee) => (
+                                <tr
+                                key={employee.empCode}
+                                onClick={() => onClickHandler(employee.empCode)}
+                                >
+                                <td>{employee.empCode}</td>
+                                <td>{employee.department.deptName}</td>
+                                <td>{employee.empName}</td>
+                                <td>{employee.empStatus}</td>
+                                <td>{employee.empAnnual}</td>
                                 </tr>
+                            ))
                             )
-                    ))}                           
+                        )
+                        }
                     </tbody>
                 </table>
                 <div>
-                { employee.pageInfo && <PagingBar pageInfo={ employee.pageInfo } setCurrentPage={ setCurrentPage } /> }
+                { (nameSearch && nameSearch.pageInfo) ? (<PagingBar pageInfo={nameSearch.pageInfo} setCurrentPage={setCurrentPage} /> ) 
+                : (employee && employee.pageInfo) ? (<PagingBar pageInfo={employee.pageInfo} setCurrentPage={setCurrentPage} /> )
+                : null }
                 </div>     
             </div>
         </motion.div>
