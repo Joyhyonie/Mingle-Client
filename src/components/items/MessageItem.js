@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI } from '../../apis/MessageAPICalls';
 import { toast } from 'react-hot-toast';
 
-function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName,
+function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName, setSelectedEmpId,
                        isChecked, checkboxChangeHandler, checkedIdList, setCheckedIdList}) {  
 
     const dispatch = useDispatch();
@@ -88,6 +88,7 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
         setSelectedDeptCode(message.sender.department.deptCode);
         setSelectedEmpCode(message.sender.empCode);
         setSelectedEmpName(message.sender.empName);
+        setSelectedEmpId(message.sender.empId)
     }
 
     /* 삭제할 쪽지 */
