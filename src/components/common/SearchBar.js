@@ -22,17 +22,17 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
     } else if(type == "board") {
       navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
     } else if(type == "attendance") {
-        dispatch(callAttendanceSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+        navigate(`/attendance-employee?condtion=${selectedOption}&search=${inputValue}`);
     } else if(type == "subject"){
-        dispatch(callSubjectSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+        navigate(`/subject?condtion=${selectedOption}&search=${inputValue}`);
     } else if(type == "certiDoc"){
-      dispatch(callCertiDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+       navigate(`/certi-doc-applied?condtion=${selectedOption}&search=${inputValue}`);
     } else if(type == "leaveDoc"){
-      dispatch(callLeaveDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+      navigate(`/leave-doc-applied?condtion=${selectedOption}&search=${inputValue}`);
     } else if(type == "MyLeaveDoc"){
-      dispatch(callMyLeaveDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+      navigate(`/Myleave?condtion=${selectedOption}&search=${inputValue}`);
     } else if(type == "myCertiDoc"){
-      dispatch(callMyCertiDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+      navigate(`/certi-doc-mine?condtion=${selectedOption}&search=${inputValue}`);
     }
 
   };

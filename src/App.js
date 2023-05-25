@@ -84,22 +84,34 @@ function App() {
 
             <Route path="mypage-update" element={<ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute>} />
             <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>} />
-            <Route path='MyLeave' element={<ProtectedRoute loginCheck={true}> <MyLeave /> </ProtectedRoute>} />
+            <Route path='MyLeave' element={<ProtectedRoute loginCheck={true}> <MyLeave /> </ProtectedRoute>}>
+              <Route path='search' element={<MyLeave/>}/>
+            </Route>
             <Route path="organization" element={<Organization />} />
 
 
 
 
-            <Route path="certi-doc-applied" element={<AppliedCertidocs />} />
-            <Route path="certi-doc-apply" element={<ApplyCertiDoc />} />
-            <Route path="certi-doc-mine" element={<MyCertiDoc />} />
+            <Route path="certi-doc-applied" element={<AppliedCertidocs />}>
+              <Route path='search' element={<AppliedCertidocs/>}/>
+            </Route>
+            <Route path="certi-doc-apply" element={<ApplyCertiDoc />}/>
+            <Route path="certi-doc-mine" element={<MyCertiDoc />}>
+              <Route path='search' element={<MyCertiDoc/>}/>
+            </Route>
 
-            <Route path="attendance-employee" element={<EmployeeAttendance />} />
+            <Route path="attendance-employee" element={<EmployeeAttendance />}>
+              <Route path='search' element={<EmployeeAttendance/>}/>
+            </Route>
             <Route path="attendance-employee/:empCode" element={<AttendanceDetail />} />
 
-            <Route path="leave-doc-applied" element={<AppliedLeaveList />} />
+            <Route path="leave-doc-applied" element={<AppliedLeaveList />}>
+              <Route path='search' element={<AppliedLeaveList/>}/>
+            </Route>
 
-            <Route path="subject" element={<SubjectList />} />
+            <Route path="subject" element={<SubjectList />}>
+              <Route path='search' element={<SubjectList/>}/>
+            </Route>
 
             <Route path="lecture-student-admin" element={<StudentAttendanceForAdmin />} />
             <Route path="/attendance/:lectureCode" element={<AttendanceDetailList />} />
