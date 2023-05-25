@@ -37,7 +37,7 @@ export const { employee :
       [PUT_EMPLOYEE]: (res) => res,
       [GET_SEARCHNAME] : res => res.data,
       [DELETE_STUDENT]: (res) => res,
-      [GET_SEARCHNAME] : res => res.data
+      [GET_SEARCHNAME] : res => res.data,
 
     });
 
@@ -54,7 +54,7 @@ const EmployeeReducer = handleActions({
   [POST_ID]:(state, {payload}) => ({ search : payload}),
   [POST_PWD]:(state, {payload}) => ({ search : payload}),
   [POST_PWDCHANGE]:(state, {payload}) => ({ change : payload }),
-  [GET_SEARCHNAME] : (state, {payload}) => ({nameSearch : payload})
+  [GET_SEARCHNAME] : (state, {payload}) => ({nameSearch : payload}),
 
 
 }, initialState);

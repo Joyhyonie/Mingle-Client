@@ -87,7 +87,7 @@ function SubjectList() {
       </div>
       <div className={SubjectListCSS.SubjectList}>
       <div className={SearchBarCss.basic}>
-          {<SearchBar options={options} type={type}/>}
+          {<SearchBar options={options} type={type} />}
         </div>
         <table className={SubjectListCSS.SubjectListTable}>
           <colgroup>
