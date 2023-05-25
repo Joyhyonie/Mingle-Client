@@ -15,7 +15,7 @@ export function callMyScheduleListAPI() {
 
         // axios 라이브러리 활용
         const result = await request('GET', `/schedule/mine`, headers);
-
+        console.log(result);
         if(result.status == 200) {
             dispatch(getAllMySchedule(result));
         }

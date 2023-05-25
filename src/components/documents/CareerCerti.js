@@ -7,14 +7,14 @@ import { callDetailCertiDoc } from "../../apis/CertiDocAPICalls";
 function CareerCerti({closeModal,myCerti}){
 
     const dispatch = useDispatch();
-    const data = useSelector(state => state.CertiReducer);
+    const {certi} = useSelector(state => state.CertiReducer);
+    const code = certi.certiDocCode;
 
     useEffect(
         ()=>{
             dispatch(callDetailCertiDoc(myCerti));
-            
         },
-        []
+        [code]
     )
 
     function formatDate(dateString) {
@@ -25,30 +25,30 @@ function CareerCerti({closeModal,myCerti}){
     return (    
         <>        
         <div className={DocumentsCSS.modal} onClick={(e)=> {closeModal()}}>
-            {data.certiDocCode && (
+            {certi.certiDocCode && (
                 <>
             <div className={DocumentsCSS.modalContainer} onClick={(e)=> e.stopPropagation()}>
-            <div className={DocumentsCSS.docCode}>제 {data.certiDocCode}</div>
-            <div className={DocumentsCSS.deptName}>{data.certiForm.certiFormName}</div>
+            <div className={DocumentsCSS.docCode}>제 {certi.certiDocCode}</div>
+            <div className={DocumentsCSS.deptName}>{certi.certiForm.certiFormName}</div>
                 <table className={DocumentsCSS.CareerCertiModalDiv} onClick={()=> window.print()}>
                     <tbody>
                     <tr>
                         <th className={DocumentsCSS.th}>이름</th>
-                        <td className={DocumentsCSS.name}>{data.applyer.empName}</td>                    
+                        <td className={DocumentsCSS.name}>{certi.applyer.empName}</td>                    
                         <th className={DocumentsCSS.th}>소속</th>
-                        <td className={DocumentsCSS.name} colSpan="2">{data.applyer.department.deptName}</td>
+                        <td className={DocumentsCSS.name} colSpan="2">{certi.applyer.department.deptName}</td>
                     </tr>
                     <tr>
                         <th className={DocumentsCSS.th}>주민등록번호</th>
-                        <td className={DocumentsCSS.ssn} colSpan="4">{data.applyer.empSsn}</td>
+                        <td className={DocumentsCSS.ssn} colSpan="4">{certi.applyer.empSsn}</td>
                     </tr>
                     <tr>
                         <th className={DocumentsCSS.th}>발급용도</th>
-                        <td colSpan="4">{data.certiUse}</td>
+                        <td colSpan="4">{certi.certiUse}</td>
                     </tr>
                     <tr>
                         <th className={DocumentsCSS.th}>재직기간</th>
-                        <td colSpan="4">{data.applyer.empEntDate.split("T")[0]} 부터 {new Date().toISOString().split("T")[0]} 까지</td>
+                        <td colSpan="4">{certi.applyer.empEntDate.split("T")[0]} 부터 {new Date().toISOString().split("T")[0]} 까지</td>
                     </tr>
                     <tr>
                         <th colSpan="8" className={DocumentsCSS.content}>위와 같이 재직한 경력이 있음을 증명합니다.</th>

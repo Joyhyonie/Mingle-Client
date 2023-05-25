@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { callEmployeeDetail, updateAttendanceAPI } from "../../apis/AttendanceAPICalls";
 import ApplideCertidocCSS from '../../css/ApplyCertiDoc.module.css';
 import CommonCSS from "../../css/common/Common.module.css";
@@ -15,6 +15,7 @@ function AttendanceDetail(){
     const {data , pageInfo} = useSelector(state => state.AttendanceReducer);
     const [form, setForm] = useState({});
     const {adminpatch} = useSelector(state => state.AttendanceReducer);
+    const navigate = useNavigate();
     const params = useParams();
     console.log(data);
     console.log(params.empCode);
@@ -46,6 +47,7 @@ function AttendanceDetail(){
         ()=>{
             if(adminpatch?.status ===200){
                 toast.success("수정이 완료되었습니다.");
+                navigate(-1);
             }
         },
         [adminpatch]

@@ -4,12 +4,14 @@ import CommonCSS from "../../css/common/Common.module.css";
 import PagingBar from "../../components/common/PagingBar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callMyCertiDocListAPI } from "../../apis/CertiDocAPICalls";
+import { callCertiDocSearchName, callMyCertiDocListAPI, callMyCertiDocSearchName } from "../../apis/CertiDocAPICalls";
 import CareerCerti from "../../components/documents/CareerCerti";
 import EmploymentCerti from "../../components/documents/EmploymentCerti";
 import LectureExperienceCerti from "../../components/documents/LectureExperienceCerti";
 import SearchBarCss from "../../css/common/SearchBar.module.css";
 import SearchBar from "../../components/common/SearchBar";
+import { useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 /* 모든 교직원의 '증명서 발급 이력' */
 
@@ -25,12 +27,19 @@ function MyCertiDoc () {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectCerti, setSelectCerti] = useState();
     const dispatch = useDispatch();
+    const [params] = useSearchParams();
+    const condition = params.get('condtion');
+    const name = params.get('search');
 
     useEffect(
         ()=>{
+            if(name){
+                dispatch(callMyCertiDocSearchName({search : name, condition: condition, currentPage : currentPage }));
+                return;
+            }
             dispatch(callMyCertiDocListAPI({currentPage}));
         },
-        [currentPage,dispatch]
+        [currentPage,condition,name,isModalOpen]
     )
 
     const openModal = (myCerti) => {
@@ -40,14 +49,8 @@ function MyCertiDoc () {
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setSelectCerti(null);
       };
-
-    useEffect(() => {
-        if (!isModalOpen) {
-          dispatch(callMyCertiDocListAPI({ currentPage }));
-        }
-    }, [isModalOpen, currentPage]);
-    
 
     return (
         <motion.div
@@ -78,8 +81,7 @@ function MyCertiDoc () {
                             <th>용도</th>
                             <th>사유</th>
                             <th>상태</th>
-                            <th></th> <br/>
-                            <br></br>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,8 +92,8 @@ function MyCertiDoc () {
                                 <td>{myCerti.certiDocCode}</td>
                                 <td>{myCerti.certiApplyDate.split(" ")[0]}</td>
                                 <td>{myCerti.certiForm.certiFormName}</td>
-                                <td>{myCerti.reason}</td>
                                 <td>{myCerti.certiUse}</td>
+                                <td>{myCerti.reason}</td>
                                 <td>{myCerti.docStatus}</td>
                                 {myCerti.docStatus == "승인" ? (
                                 <td><button onClick={()=> openModal(myCerti)}>보기</button></td>
@@ -105,8 +107,8 @@ function MyCertiDoc () {
                                 <td>{myCerti.certiDocCode}</td>
                                 <td>{myCerti.certiApplyDate.split(" ")[0]}</td>
                                 <td>{myCerti.certiForm.certiFormName}</td>
-                                <td>{myCerti.reason}</td>
                                 <td>{myCerti.certiUse}</td>
+                                <td>{myCerti.reason}</td>
                                 <td>{myCerti.docStatus}</td>
                                 {myCerti.docStatus == "승인" ? (
                                 <td><button onClick={()=> openModal(myCerti)}>보기</button></td>
@@ -118,15 +120,15 @@ function MyCertiDoc () {
                         }
                     </tbody>
                 </table>
-                {isModalOpen && selectCerti &&(
+                {isModalOpen && selectCerti && (
               <>
-              {selectCerti.certiForm.certiFormCode === 300001 && (
+              {selectCerti.certiForm.certiFormCode == 300001 && (
                 <EmploymentCerti closeModal={closeModal} myCerti={selectCerti}/>
               )}
-              {selectCerti.certiForm.certiFormCode === 300002 &&(
+              {selectCerti.certiForm.certiFormCode == 300002 &&(
                 <CareerCerti closeModal={closeModal} myCerti={selectCerti}/>
               )}
-              {selectCerti.certiForm.certiFormCode === 300003 &&(
+              {selectCerti.certiForm.certiFormCode == 300003 &&(
                 <LectureExperienceCerti closeModal={closeModal} myCerti={selectCerti}/>
               )}
               </>

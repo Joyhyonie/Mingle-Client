@@ -16,6 +16,7 @@ function AttendanceDocInsert({closeModal,employee}){
         ()=>{
             if(regist?.status === 200){
                 toast.success("신청서가 등록되었습니다.");
+                closeModal();
             }
         }
     )
@@ -29,6 +30,10 @@ function AttendanceDocInsert({closeModal,employee}){
 
 
     const onClickHandler = () => {
+        if(form.applyFormCode == null || undefined){
+            toast.error("종류를 선택하세요");
+            return;            
+        }
 
         const formData = new FormData();
 
@@ -51,6 +56,7 @@ function AttendanceDocInsert({closeModal,employee}){
                     <input type="text" className={AttendanceInsertModalCSS.inputdeptName} value={employee.department.deptName} readOnly/>
                     <label className={AttendanceInsertModalCSS.leaveFormCode}>종류</label>
                     <select className={AttendanceInsertModalCSS.selectFormCode} onChange={onChangeHandler} name="applyFormCode">
+                        <option value="1">종류 선택</option>
                         <option value="100001">휴가신청서</option>
                         <option value="100002">연차신청서</option>                        
                     </select>

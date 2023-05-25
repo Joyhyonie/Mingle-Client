@@ -42,6 +42,7 @@ function MyPageLayout() {
     setModifyMode(true);
     setForm({ ...employee });
     
+
   }
 
   const onClickHandlerLeaveDoc = () => {
@@ -81,6 +82,7 @@ function MyPageLayout() {
         </div>
       </main>
       {isAttendanceDocModalOpen && (
+
         <AttendanceDocInsert
           closeModal={closeModal}
           employee={employee}
