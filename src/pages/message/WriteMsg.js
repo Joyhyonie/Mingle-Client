@@ -5,39 +5,27 @@ import { toast } from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { callDepartmentListAPI, callEmployeeListAPI, callSendMsgAPI } from "../../apis/MessageAPICalls";
 
-function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmpName, setWhichPage, stateChangeHandler}) {
+function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmpName, selectedEmpId, setWhichPage, stateChangeHandler}) {
 
     const dispatch = useDispatch();
     const textareaRef = useRef(null); // 내용이 작성되어있는지 확인하기 위한 Ref
     const { department, employee, sendMsg } = useSelector(state => state.MessageReducer);
-    const [selectedDepartment, setSelectedDepartment] = useState('');
-    const [selectedEmployee, setSelectedEmployee] = useState('');
+    const [pickedDepartment, setPickedDepartment] = useState('');
+    const [pickedEmpCode, setPickedEmpCode] = useState('');
+    const [pickedEmpId, setPickedEmpId] = useState('');
     
-    console.log('department => ', department);
-    console.log('employee => ', employee);
-    console.log('답장 시, selectedDeptCode => ', selectedDeptCode);
-    console.log('답장 시, selectedEmpCode => ', selectedEmpCode);
-    console.log('답장 시, selectedEmpName =>', selectedEmpName);
-
-    /* (임시용) 출력 현황 체크 */
-    useEffect(
-        () => {
-            console.log('selectedDepartment => ', selectedDepartment);
-            console.log('selectedEmployee => ', selectedEmployee);
-        },[selectedDepartment, selectedEmployee]
-    ); 
 
     useEffect(
         () => {
             // 존재하는 학과 조회 API 호출
             dispatch(callDepartmentListAPI());
 
-            if(selectedDepartment) {
+            if(pickedDepartment) {
                 // 학과가 선택되었을 경우, 학과에 해당하는 교직원들 조회 API
-                dispatch(callEmployeeListAPI(selectedDepartment));
+                dispatch(callEmployeeListAPI(pickedDepartment));
             }
 
-        },[selectedDepartment]
+        },[pickedDepartment]
     );
 
     useEffect(
@@ -54,13 +42,13 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
 
     /* 학과가 선택/변경될 때 동작하는 이벤트 함수 */
     const departmentChangeHandler = (e) => {
-        setSelectedDepartment(e.target.value);
-        // setSelectedEmployee('');
+        setPickedDepartment(e.target.value);
     }
 
     /* 교직원이 선택/변경될 때 동작하는 이벤트 함수 */
     const employeeChangeHandler = (e) => {
-        setSelectedEmployee(e.target.value);
+        setPickedEmpCode(e.target.value);
+        setPickedEmpId(e.target.id);
     }
 
     /* 입력된 쪽지 내용을 확인하기 위한 이벤트 함수 */
@@ -74,7 +62,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
         const messageContent = textareaRef.current.value.trim();
         console.log("messageContent => ", messageContent);
 
-        if (!selectedEmpCode && !selectedEmployee) {
+        if (!selectedEmpCode && !pickedEmpCode) {
             toast.error('받는 사람을 선택해주세요 !');
             return;
         } else if (!messageContent) {
@@ -83,9 +71,13 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
         }
 
         /* FormData 객체 설정 */
+        // '답장'을 클릭하여 쪽지를 전송할 때에는 picked가 아닌 props로 받아온 selected를 formData에 설정
         const formData = new FormData();
-        const empCode = selectedEmpCode ? selectedEmpCode : selectedEmployee;   // '답장'을 클릭하여 전송 시를 위한 조건 설정
+        const empCode = selectedEmpCode ? selectedEmpCode : pickedEmpCode;   
+        const empId = selectedEmpId ? selectedEmpId : pickedEmpId;
+
         formData.append("receiver.empCode", empCode);
+        formData.append("receiver.empId", empId);
         formData.append("msgContent", messageContent);
 
         /* 쪽지를 등록하는 API */
@@ -99,7 +91,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                 <p>to</p>
                 <select 
                     className={ MessageCSS.selectDepartment }
-                    value={selectedDeptCode ? selectedDeptCode : selectedDepartment}
+                    value={selectedDeptCode ? selectedDeptCode : pickedDepartment}
                     onChange={departmentChangeHandler}
                     onClick={departmentChangeHandler}
                     disabled={selectedDeptCode ? true : false}
@@ -117,14 +109,15 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                 <img src={`${process.env.PUBLIC_URL}/images/down.png`}/>
                 <select
                     className={ MessageCSS.selectEmployee }
-                    value={selectedEmpCode ? selectedEmpCode : selectedEmployee}
+                    value={selectedEmpCode ? selectedEmpCode : pickedEmpCode}
                     onChange={employeeChangeHandler}
-                    disabled={!selectedDepartment}
+                    disabled={!pickedDepartment}
                 >
                     { selectedEmpName ? <option>{selectedEmpName}</option> : <option value='' disabled>이름</option> }
                     {/* employees 배열을 option으로 변환 */}
                     {employee && employee.map(emp => (
                     <option key={emp.empCode} 
+                            id={emp.empId}
                             value={emp.empCode}
                     >
                         {emp.empName}

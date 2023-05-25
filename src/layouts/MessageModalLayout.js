@@ -13,7 +13,8 @@ function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClic
     const [replyContent, setReplyContent] = useState('');           // '답장' 클릭 시, 받은 쪽지 내용과 함께 답장시키기 위한 state
     const [selectedDeptCode, setSelectedDeptCode] = useState('');   // '답장' 클릭 시, Sender의 소속코드
     const [selectedEmpCode, setSelectedEmpCode] = useState('');     // '답장' 클릭 시, Sender의 교번
-    const [selectedEmpName, setSelectedEmpName] = useState('');     // '답장' 클릭 시, Sneder의 이름
+    const [selectedEmpName, setSelectedEmpName] = useState('');     // '답장' 클릭 시, Sender의 이름
+    const [selectedEmpId, setSelectedEmpId] = useState('');         // '답장' 클릭 시, Sender의 이름
     const [whichPage, setWhichPage] = useState('receivedMsgBox');
     const [isClickedstate, setIsClickedState] = useState({          // 클릭된 메뉴를 컨트롤 하기 위한 state
         receiveIsClicked: true,
@@ -50,13 +51,15 @@ function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClic
                                                 setReplyContent={setReplyContent} 
                                                 setSelectedDeptCode={setSelectedDeptCode} 
                                                 setSelectedEmpCode={setSelectedEmpCode}
-                                                setSelectedEmpName={setSelectedEmpName} />,
+                                                setSelectedEmpName={setSelectedEmpName}
+                                                setSelectedEmpId={setSelectedEmpId} />,
                 sentMsgBox: <SentMsgBox setWhichPage={setWhichPage} stateChangeHandler={stateChangeHandler}/>,
                 writeMsg: <WriteMsg replyContent={replyContent} 
                                     setReplyContent={setReplyContent} 
                                     selectedDeptCode={selectedDeptCode} 
                                     selectedEmpCode={selectedEmpCode} 
                                     selectedEmpName={selectedEmpName}
+                                    selectedEmpId={selectedEmpId}
                                     setWhichPage={setWhichPage}
                                     stateChangeHandler={stateChangeHandler}
                             />,
