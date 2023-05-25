@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     margin: 10px;
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 .ApplyCertiDocCSSTable {
@@ -26,6 +26,8 @@
 .ApplyCertiDocCSSTable input {
     width: 80%;
     border: 1px solid #FF9797;
+    height: 20px;
+    border-radius: 2px;
 }
 
 .ApplyCertiDocCSSTable input:focus {
@@ -36,6 +38,7 @@
 .ApplyCertiDocCSSTable select {
     text-align: center;
     width: 70%;
+    border-radius: 2px;
     border: 1px solid #FF9797;
     font-size: 17px;
     outline: none;
@@ -50,3 +53,5 @@
     height: 20px;
     border-radius: 4px;
 }
+
+

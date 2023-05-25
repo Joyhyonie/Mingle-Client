@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import { callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
-import { callAttendanceSearchName } from '../../apis/AttendanceAPICalls';
+import { callAttendanceSearchName, callLeaveDocSearchName, callMyLeaveDocSearchName } from '../../apis/AttendanceAPICalls';
 import { useNavigate } from 'react-router-dom';
+import { callCertiDocSearchName, callMyCertiDocSearchName } from '../../apis/CertiDocAPICalls';
+import { callSubjectSearchName } from '../../apis/LectureAPICalls';
 
 const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
 
@@ -12,7 +14,6 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState('');
   const [inputValue, setInputValue] = useState('');
-
   const handleSearch = () => {
     
     // 구분 해주세용 :)
@@ -21,9 +22,25 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
     } else if(type == "board") {
       // dispatch(callBoardSearchAPI())
     } else if(type == "attendance") {
-        dispatch(callAttendanceSearchName({search: inputValue , selectedOption, currentPage}));
+        dispatch(callAttendanceSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+    } else if(type == "subject"){
+        dispatch(callSubjectSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+    } else if(type == "certiDoc"){
+      dispatch(callCertiDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+    } else if(type == "leaveDoc"){
+      dispatch(callLeaveDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+    } else if(type == "MyLeaveDoc"){
+      dispatch(callMyLeaveDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
+    } else if(type == "myCertiDoc"){
+      dispatch(callMyCertiDocSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
     }
 
+  };
+
+  const handleEnterKey = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
@@ -31,7 +48,7 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
       <select
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
-        className={SearchBarCss.selectBox}>
+        className={SearchBarCss.searchBarSelect}>
         <option value="">화 이 팅 ୧( "̮ )୨✧</option> {/* default option */}
         {options.map((option) => (
           <option key={option.value} value={option.value}>
@@ -44,6 +61,7 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         className={SearchBarCss.searchBar}
+        onKeyUp={handleEnterKey}
       />
       <button className={SearchBarCss.searchBarBtn} onClick={handleSearch}>검색</button>
     </div>

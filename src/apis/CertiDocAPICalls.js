@@ -1,5 +1,5 @@
 import { async } from "q";
-import { getCertidocname, getCertis, patchCerti, postCerti } from "../modules/CertiModule";
+import { getCertidocname, getCertis, getMycertidocname, patchCerti, postCerti } from "../modules/CertiModule";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -45,8 +45,25 @@ export const callCertiDocSearchName = ({search, condition ,currentPage = 1}) => 
         const result = await fetch(requestURL).then(response => response.json());
 
         if(result.status === 200){
-            console.log(result);
             dispatch(getCertidocname(result));
+        }
+    }
+}
+
+export const callMyCertiDocSearchName = ({search, condition ,currentPage = 1}) => {
+    const requestURL = `${CERTI_URL}/myCertiDocSearch?condition=${condition}&search=${search}&page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(getMycertidocname(result));
         }
     }
 }

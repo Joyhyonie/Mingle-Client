@@ -39,6 +39,7 @@ import StudentRegist from './pages/academic/StudentRegist';
 import EmployeeModify from './pages/academic/EmployeeModify';
 import EmployeeRegist from './pages/academic/EmployeeRegist';
 import MyLeave from './components/lists/MyLeaveDoc';
+import AttendanceDetailList from './components/lists/AttendanceDetailList';
 
 
 function App() {
@@ -58,11 +59,11 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <ProtectedRoute loginCheck={true}><Layout/></ProtectedRoute> }>
-            <Route element={ <MainPageLayout/> }>
-              <Route index element={ <MyCalendar/> }/>
-              <Route element={ <AcademicCalendar/> }/>
-                
+          <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}>
+            <Route element={<MainPageLayout />}>
+              <Route index element={<MyCalendar />} />
+              <Route element={<AcademicCalendar />} />
+
             </Route> {/* <MainPageLayout/>의 Route */}
 
             <Route path="board" element={<BoardLayout />}>
@@ -73,20 +74,20 @@ function App() {
               <Route path="regist" element={<BoardRegist />} />
             </Route> {/* <BoardLayout/>의 Route */}
 
-          
-            <Route path="mypage" element={ <MyPageLayout /> }>
-              <Route index element={ <Navigate to="/mypage/profile" replace/> }/>
-              <Route path="profile" element={ <ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute> }/>
+
+            <Route path="mypage" element={<MyPageLayout />}>
+              <Route index element={<Navigate to="/mypage/profile" replace />} />
+              <Route path="profile" element={<ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute>} />
 
             </Route> {/* <MyPageLayout/>의 Route */}
 
-            <Route path="mypage-update" element={ <ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute> }/>
-            <Route path="pwdchange" element={ <ProtectedRoute loginCheck={true}><PwdChange/></ProtectedRoute> }/>
-            <Route path='MyLeave' element={ <ProtectedRoute loginCheck={true}> <MyLeave/> </ProtectedRoute>}/>
-              <Route path="organization" element={<Organization />} />
+            <Route path="mypage-update" element={<ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute>} />
+            <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>} />
+            <Route path='MyLeave' element={<ProtectedRoute loginCheck={true}> <MyLeave /> </ProtectedRoute>} />
+            <Route path="organization" element={<Organization />} />
 
 
-          
+
 
             <Route path="certi-doc-applied" element={<AppliedCertidocs />} />
             <Route path="certi-doc-apply" element={<ApplyCertiDoc />} />
@@ -100,19 +101,19 @@ function App() {
             <Route path="subject" element={<SubjectList />} />
 
             <Route path="lecture-student-admin" element={<StudentAttendanceForAdmin />} />
-            <Route path="/attendance/:lectureCode" element={<AttendanceDetail />} />
+            <Route path="/attendance/:lectureCode" element={<AttendanceDetailList />} />
             <Route path="lecture-regist-admin" element={<RegistLectureForAdmin />} />
             <Route path="lecture-student-prof" element={<StudentAttendanceForProf />} />
             <Route path="lecture-regist-prof" element={<RegistLectureForProf />} />
 
             <Route path="management-employee" element={<EmployeeManagement />} />
-              <Route path="regist-employee" element={<EmployeeRegist />} />
-              <Route path="modify-employee/:empCode" element={<EmployeeModify />} />
-              <Route path="search-employee" element={<EmployeeManagement />} />
+            <Route path="regist-employee" element={<EmployeeRegist />} />
+            <Route path="modify-employee/:empCode" element={<EmployeeModify />} />
+            <Route path="search-employee" element={<EmployeeManagement />} />
             <Route path="management-student" element={<StudentManagement />} />
-              <Route path="regist-student" element={<StudentRegist />} />
-              <Route path=":stdCode/modify" element={<StudentModify />} />
-              <Route path="search-student" element={<StudentManagement />} />
+            <Route path="regist-student" element={<StudentRegist />} />
+            <Route path=":stdCode/modify" element={<StudentModify />} />
+            <Route path="search-student" element={<StudentManagement />} />
 
             <Route path="schedule-academic" element={<AcademicSchedule />} />
           </Route> {/* <Layout/>의 Route */}

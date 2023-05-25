@@ -15,8 +15,9 @@ import SearchBar from "../../../components/common/SearchBar";
 function SubjectList() {
 
   const dispatch = useDispatch();
+  const type = "subject";
   const [currentPage, setCurrentPage] = useState(1);
-  const {data, pageInfo} = useSelector((state) => state.SubjectReducer);
+  const {subjects,search} = useSelector((state) => state.SubjectReducer);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -33,7 +34,7 @@ function SubjectList() {
     ()=>{
       dispatch(callSubjectsAPI({currentPage}))
     },
-    [currentPage,isModalOpen,isInsertModalOpen,checkedItems,delete1]
+    [currentPage,isModalOpen,isInsertModalOpen,checkedItems,dispatch,delete1]
   );
 
   const openModal = (subject) => {
@@ -86,7 +87,7 @@ function SubjectList() {
       </div>
       <div className={SubjectListCSS.SubjectList}>
       <div className={SearchBarCss.basic}>
-          {<SearchBar options={options} type="subject"/>}
+          {<SearchBar options={options} type={type} />}
         </div>
         <table className={SubjectListCSS.SubjectListTable}>
           <colgroup>
@@ -110,9 +111,10 @@ function SubjectList() {
             </tr>
           </thead>
           <tbody>
-            {data && 
-            data.map((subject) => (
-              <tr key={subject.sbjCode}>
+          {
+             (search && search.data) ? (
+              search.data.map((subject) => (
+                <tr key={subject.sbjCode}>
                 <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange}/></td>
                 <td>{subject.sbjCode}</td>
                 <td>{subject.department.deptName}</td>
@@ -122,11 +124,30 @@ function SubjectList() {
                 <td><button 
                 onClick={()=> openModal(subject)}>수정</button></td>
               </tr>
-            ))}    
+                  ))
+                ) : (
+                      (subjects && subjects.data) && (
+                        subjects.data.map((subject) => (
+                        <tr key={subject.sbjCode}>
+                          <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange}/></td>
+                          <td>{subject.sbjCode}</td>
+                          <td>{subject.department.deptName}</td>
+                          <td>{subject.sbjName}</td>
+                          <td>{subject.classType}</td>
+                          <td>{subject.score}</td>
+                          <td><button 
+                               onClick={()=> openModal(subject)}>수정</button></td>
+                        </tr>
+                 ))
+                )
+              )
+             } 
           </tbody>
         </table>
         <div>
-                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
+        { (search && search.pageInfo) ? (<PagingBar pageInfo={search.pageInfo} setCurrentPage={setCurrentPage} /> ) 
+            : (subjects && subjects.pageInfo) ? (<PagingBar pageInfo={subjects.pageInfo} setCurrentPage={setCurrentPage} /> )
+            : null }
         </div>
         {isModalOpen && (
         <SubjectUpdateModal

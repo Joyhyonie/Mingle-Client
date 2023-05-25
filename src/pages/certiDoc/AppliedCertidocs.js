@@ -5,21 +5,29 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callCertiListAPI, callCertiUpdateAPI } from "../../apis/CertiDocAPICalls";
 import PagingBar from "../../components/common/PagingBar";
+import SearchBar from "../../components/common/SearchBar";
+import SearchBarCss from "../../css/common/SearchBar.module.css";
 
 /* 행정직원의 '증명서 발급 신청 내역' */
 
 function AppliedCertidocs () {
 
-    const {data,pageInfo} = useSelector(state => state.CertiReducer);
+    const {certi,certiName} = useSelector(state => state.CertiReducer);
     const { patch } = useSelector(state => state.CertiReducer);
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
+    const type = "certiDoc";
+
+    const options = [
+        { value: "certiFormName", label: "증명서종류" },
+        { value: "empName", label: "신청자"}
+    ];
 
     useEffect(
         ()=>{
             dispatch(callCertiListAPI({currentPage}));
         },
-        [currentPage,patch]
+        [currentPage,patch,dispatch]
     )
 
     const onClickHandler = (certi) => {      
@@ -34,6 +42,9 @@ function AppliedCertidocs () {
             <div>
                 <p className={ CommonCSS.pageDirection }>증명서 ▸ 증명서 발급 신청 내역</p>
             </div>
+            <div className={SearchBarCss.basic}>
+            {<SearchBar options={options} type={type}/>}
+           </div>
              <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
@@ -59,27 +70,51 @@ function AppliedCertidocs () {
                         </tr>
                     </thead>
                     <tbody>
-                {data && 
-                    data.map((certi) => (
-                    <tr key={certi.certiDocCode}>
-                    <td>{certi.certiDocCode}</td>
-                    <td>{certi.certiApplyDate.split(" ")[0]}</td>
-                    <td>{certi.certiForm.certiFormName}</td>
-                    <td>{certi.certiUse}</td>
-                    <td>{certi.applyer.empName}</td>
-                    <td>{certi.reason}</td>
-                    <td>{certi.docStatus}</td>
-                    {certi.docStatus !== "승인" ? (
-                    <td><button
-                    onClick={()=>onClickHandler(certi)} 
-                   >승인</button></td>
-                   ) : null }
-                   </tr>
-                ))}   
+                    {
+                        (certiName && certiName.data) ? (
+                            certiName.data.map((certi) => (
+                                <tr key={certi.certiDocCode}>
+                                <td>{certi.certiDocCode}</td>
+                                <td>{certi.certiApplyDate.split(" ")[0]}</td>
+                                <td>{certi.certiForm.certiFormName}</td>
+                                <td>{certi.certiUse}</td>
+                                <td>{certi.applyer.empName}</td>
+                                <td>{certi.reason}</td>
+                                <td>{certi.docStatus}</td>
+                                {certi.docStatus !== "승인" ? (
+                                <td><button
+                                onClick={()=>onClickHandler(certi)} 
+                                >승인</button></td>
+                                  ) : null }
+                                </tr>
+                            ))
+                        ) : (
+                            (certi && certi.data) && (
+                            certi.data.map((certi) => (
+                                <tr key={certi.certiDocCode}>
+                                <td>{certi.certiDocCode}</td>
+                                <td>{certi.certiApplyDate.split(" ")[0]}</td>
+                                <td>{certi.certiForm.certiFormName}</td>
+                                <td>{certi.certiUse}</td>
+                                <td>{certi.applyer.empName}</td>
+                                <td>{certi.reason}</td>
+                                <td>{certi.docStatus}</td>
+                                {certi.docStatus !== "승인" ? (
+                                <td><button
+                                onClick={()=>onClickHandler(certi)} 
+                                 >승인</button></td>
+                                  ) : null }
+                                </tr>
+                            ))
+                            )
+                        )
+                        }
                     </tbody>
                 </table>
                 <div>
-                { pageInfo && <PagingBar pageInfo={ pageInfo } setCurrentPage={ setCurrentPage } /> }
+                { (certiName && certiName.pageInfo) ? (<PagingBar pageInfo={certiName.pageInfo} setCurrentPage={setCurrentPage} /> ) 
+                : (certi && certi.pageInfo) ? (<PagingBar pageInfo={certi.pageInfo} setCurrentPage={setCurrentPage} /> )
+                : null }
                 </div>
             </div>
         </motion.div>

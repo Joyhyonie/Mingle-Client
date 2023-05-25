@@ -5,28 +5,38 @@ import ApplideCertidocCSS from '../../css/ApplyCertiDoc.module.css';
 import PagingBar from "../../components/common/PagingBar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callLeaveDoc, callLeaveUpdateAPI } from "../../apis/AttendanceAPICalls";
-
+import { callLeaveDoc, callLeaveNoUpdateAPI, callLeaveUpdateAPI } from "../../apis/AttendanceAPICalls";
+import SearchBar from "../../components/common/SearchBar";
+import SearchBarCss from "../../css/common/SearchBar.module.css";
 
 function AppliedLeaveList () {
 
     const [currentPage, setCurrentPage] = useState(1);
-    const {attendance} = useSelector(state => state.AttendanceReducer);
+    const {attendance,searchName} = useSelector(state => state.AttendanceReducer);
     const {patch} = useSelector(state => state.AttendanceReducer);
     const dispatch = useDispatch();
+
+    const type = "leaveDoc";
     
-    console.log("at",attendance);
+    const options = [
+        { value: "applyFormName", label: "증명서종류" },
+        { value: "empName", label: "신청자"}
+    ];
 
     useEffect(
         ()=>{
             dispatch(callLeaveDoc({currentPage}))
         },
-        [currentPage,patch]
+        [currentPage,patch,dispatch]
     )
 
     const onClickHandler = (leave) => {      
         dispatch(callLeaveUpdateAPI(leave));
         
+    }
+
+    const onClickRejectHandler = (leave) => {
+        dispatch(callLeaveNoUpdateAPI(leave));
     }
 
     return (
@@ -36,17 +46,22 @@ function AppliedLeaveList () {
             <div>
                 <p className={ CommonCSS.pageDirection }>증명서 ▸ 휴가 신청 내역</p>
             </div>
+            <div className={SearchBarCss.basic}>
+            {<SearchBar options={options} type={type}/>}
+           </div>
              <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
+                    <col width="5%"/>
+                    <col width="5%"/>
+                    <col width="5%"/>
+                    <col width="5%"/>
+                    <col width="5%"/>
                     <col width="10%"/>
                     <col width="10%"/>
-                    <col width="10%"/>
-                    <col width="15%"/>
-                    <col width="15%"/>
-                    <col width="10%"/>
-                    <col width="10%"/>
-                    <col width="10%"/>                    
+                    <col width="5%"/>                    
+                    <col width="2%"/>  
+                    <col width="2%"/>  
                     </colgroup>
                     <thead>
                         <tr>
@@ -58,32 +73,65 @@ function AppliedLeaveList () {
                             <th>사유</th>
                             <th>신청자</th>
                             <th>상태</th>
-                            <th></th>                            
+                            <th></th>   
+                            <th></th>                         
                         </tr>
                     </thead>
                     <tbody>
-                    {attendance && (
-                    attendance.data.map((leave)=>(
-                        <tr key={leave.leaveDocCode}>
-                            <td>{leave.leaveDocCode}</td>
-                            <td>{leave.applyDate.split(" ")[0]}</td>
-                            <td>{leave.applyForm.applyFormName}</td>
-                            <td>{leave.startDate.split(" ")[0]}</td>                            
-                            <td>{leave.endDate.split(" ")[0]}</td>
-                            <td>{leave.reason}</td>
-                            <td>{leave.leaveApplyer.empName}</td>
-                            <td>{leave.docStatus}</td>
-                            {leave.docStatus !== "승인" ? (
-                            <td><button
-                            onClick={()=>onClickHandler(leave)} 
-                            >승인</button></td>
-                            ) : null }
-                        </tr>
-                    )
-                    ))}
+                    {
+                        (searchName && searchName.data) ? (
+                            searchName.data.map((leave) => (
+                                <tr key={leave.leaveDocCode}>
+                                <td>{leave.leaveDocCode}</td>
+                                <td>{leave.applyDate.split(" ")[0]}</td>
+                                <td>{leave.applyForm.applyFormName}</td>
+                                <td>{leave.startDate.split(" ")[0]}</td>                            
+                                <td>{leave.endDate.split(" ")[0]}</td>
+                                <td>{leave.reason}</td>
+                                <td>{leave.leaveApplyer.empName}</td>
+                                <td>{leave.docStatus}</td>
+                                {leave.docStatus == "대기" ? (
+                                    <>
+                                <td><button
+                                onClick={()=>onClickHandler(leave)}
+                                >승인</button></td>
+                                <td><button onClick={() => onClickRejectHandler(leave)}>반려</button></td>
+                                </>
+                                ) : null } 
+                                </tr>
+                            ))
+                        ) : (
+                            (attendance && attendance.data) && (
+                                attendance.data.map((leave) => (
+                                <tr key={leave.leaveDocCode}>
+                                <td>{leave.leaveDocCode}</td>
+                                <td>{leave.applyDate.split(" ")[0]}</td>
+                                <td>{leave.applyForm.applyFormName}</td>
+                                <td>{leave.startDate.split(" ")[0]}</td>                            
+                                <td>{leave.endDate.split(" ")[0]}</td>
+                                <td>{leave.reason}</td>
+                                <td>{leave.leaveApplyer.empName}</td>
+                                <td>{leave.docStatus}</td>
+                                {leave.docStatus == "대기" ? (
+                                    <>
+                                <td><button
+                                onClick={()=>onClickHandler(leave)}
+                                >승인</button></td>
+                                <td><button onClick={() => onClickRejectHandler(leave)}>반려</button></td>
+                                </>
+                                ) : null }   
+                                </tr>
+                            ))
+                            )
+                        )
+                        }
                     </tbody>
                 </table>
-                
+                <div>
+                { (searchName && searchName.pageInfo) ? (<PagingBar pageInfo={searchName.pageInfo} setCurrentPage={setCurrentPage} /> ) 
+                : (attendance && attendance.pageInfo) ? (<PagingBar pageInfo={attendance.pageInfo} setCurrentPage={setCurrentPage} /> )
+                : null }
+                </div>
             </div>
         </motion.div>
     );

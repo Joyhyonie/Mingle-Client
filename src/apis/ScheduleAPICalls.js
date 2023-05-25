@@ -1,4 +1,4 @@
-import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule } from "../modules/ScheduleModule";
+import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule, putAcSchedule } from "../modules/ScheduleModule";
 import { request } from "./Api";
 
 const accessToken = window.localStorage.getItem('accessToken');
@@ -26,8 +26,6 @@ export function callMyScheduleListAPI() {
 
 /* 선택한 날짜의 나의 일정 조회 */
 export function callMyScheduleByDateAPI(date) {
-
-    console.log("마운팅 될 때 항상 오늘 날짜로 나의 일정이 조회되었으면 좋겠다 ,, ^^")
 
     return async (dispatch, getState) => {
 
@@ -128,7 +126,7 @@ export function callAcScheduleListAPI() {
 }
 
 
-/* 선택한 날짜의 학사 일정 조회  */
+/* 특정 학사 일정 조회  */
 export function callAcScheduleByDateAPI(date) {
 
     return async (dispatch, getState) => {
@@ -138,6 +136,7 @@ export function callAcScheduleByDateAPI(date) {
         };
 
         const result = await request('GET', `/schedule/academic/${date}`, headers);
+        console.log(result);
 
         if(result.status == 200) {
             dispatch(getAcSchedule(result));
@@ -163,4 +162,22 @@ export function callAcScheduleRegistAPI(formData) {
           dispatch(postAcSchedule(result));
       }
   }
+}
+
+/* 학사 일정 수정 */
+export function callAcScheduleModifyAPI(formData) {
+
+  return async (dispatch, getState) => {
+
+      const headers = {
+          'Content-Type': 'application/json',
+      };
+
+      const result = await request('PUT', `/schedule/academic/modify`, headers, formData);
+
+      if(result.status == 200) {
+          dispatch(putAcSchedule(result));
+      }
+  }
+
 }

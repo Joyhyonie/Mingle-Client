@@ -4,7 +4,6 @@ import { createActions, handleActions } from "redux-actions";
 const initialState = {};
 
 /* 액션 */
-
 const POST_LOGIN = 'employee/POST_LOGIN';
 const RESET_EMPLOYEE = 'employee/RESET_EMPLOYEE';
 const GET_EMPLOYEES = 'employee/GET_EMPLOYEES';
@@ -29,8 +28,7 @@ export const { employee : { postLogin,
                             postId, 
                             postPwd, 
                             getSearchname, 
-                            postPwdchange,
-                            getLoginUser }} = createActions
+                            postPwdchange }} = createActions
     ({
       [POST_LOGIN]: res => res,
       [RESET_EMPLOYEE]: () => { },

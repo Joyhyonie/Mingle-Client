@@ -13,6 +13,7 @@ const DELETE_MY_SCHEDULE = "schedule/DELETE_MY_SCHEDULE";
 const GET_ALL_AC_SCHEDULE = "schedule/GET_ALL_AC_SCHEDULE";
 const GET_AC_SCHEDULE = "schedule/GET_AC_SCHEDULE";
 const POST_AC_SCHEDULE = "schedule/POST_AC_SCHEDULE";
+const PUT_AC_SCHEDULE = "schedule/PUT_AC_SCHEDULE";
 
 export const { schedule : { getAllMySchedule, 
                             getMySchedule, 
@@ -22,7 +23,8 @@ export const { schedule : { getAllMySchedule,
                             deleteMySchedule,
                             getAllAcSchedule,
                             getAcSchedule,
-                            postAcSchedule, } } = createActions({
+                            postAcSchedule,
+                            putAcSchedule, } } = createActions({
     [GET_ALL_MY_SCHEDULE] : (res) => res.data,
     [GET_MY_SCHEDULE] : (res) => res,
     [PATCH_MY_SCHEDULE_CHECK] : (res) => res,
@@ -32,6 +34,7 @@ export const { schedule : { getAllMySchedule,
     [GET_ALL_AC_SCHEDULE] : (res) => res.data,
     [GET_AC_SCHEDULE] : (res) => res.data,
     [POST_AC_SCHEDULE] : (res) => res,
+    [PUT_AC_SCHEDULE] : (res) => res,
 })
 
 /* 리듀서 */
@@ -44,8 +47,9 @@ const ScheduleReducer = handleActions(
         [PUT_MY_SCHEDULE] : (state, { payload }) => ({ ...state, modifyMySche : payload }),
         [DELETE_MY_SCHEDULE] : (state, { payload }) => ({ ...state, removeMySche : payload }),
         [GET_ALL_AC_SCHEDULE] : (state, { payload }) => ({ allAcSchedule : payload }),
-        [GET_AC_SCHEDULE] : (state, { payload }) => ({ acSchedule : payload }),
+        [GET_AC_SCHEDULE] : (state, { payload }) => ({ ...state, acSchedule : payload }),
         [POST_AC_SCHEDULE] : (state, { payload }) => ({ ...state, registAcSche : payload }),
+        [PUT_AC_SCHEDULE] : (state, { payload }) => ({ ...state, modifyAcSche : payload }),
     }
 , initalState);
 

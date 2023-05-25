@@ -5,7 +5,7 @@ import EmployeeAttendanceCSS from '../../css/EmployeeAttendance.module.css';
 import CommonCSS from "../../css/common/Common.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callEmployee } from "../../apis/AttendanceAPICalls";
+import { callEmployeeList } from "../../apis/AttendanceAPICalls";
 import { useNavigate } from "react-router-dom";
 import PagingBar from "../../components/common/PagingBar";
 import SearchBarCss from '../../css/common/SearchBar.module.css';
@@ -18,7 +18,8 @@ function EmployeeAttendance () {
     const navigate = useNavigate();
     const type = "attendance";
     const [currentPage, setCurrentPage] = useState(1);
-    const {employee, nameSearch} = useSelector(state => state.EmployeeReducer);    
+    const { nameSearch} = useSelector(state => state.EmployeeReducer);    
+    const {employeeList} = useSelector(state => state.AttendanceReducer);
     
     const options = [
         { value: "deptName", label: "소속" },
@@ -27,9 +28,9 @@ function EmployeeAttendance () {
 
     useEffect(
         ()=>{
-            dispatch(callEmployee({currentPage}));
+            dispatch(callEmployeeList({currentPage}));
             },        
-            [currentPage,employee,nameSearch]
+            [currentPage,dispatch]
     )    
 
     const onClickHandler = (empCode) => {
@@ -65,22 +66,43 @@ function EmployeeAttendance () {
                         </tr>
                     </thead>
                     <tbody>
-                    {employee.data && (
-                            employee.data.map((employee)=>(
-                                <tr key={employee.empCode}
-                                    onClick={()=> onClickHandler(employee.empCode) }>
-                                    <td>{employee.empCode}</td>
-                                    <td>{employee.department.deptName}</td>
-                                    <td>{employee.empName}</td>
-                                    <td>{employee.empStatus}</td>
-                                    <td>{employee.empAnnual}</td>
+                    {
+                        (nameSearch && nameSearch.data) ? (
+                            nameSearch.data.map((employee) => (
+                            <tr
+                                key={employee.empCode}
+                                onClick={() => onClickHandler(employee.empCode)}
+                            >
+                                <td>{employee.empCode}</td>
+                                <td>{employee.department.deptName}</td>
+                                <td>{employee.empName}</td>
+                                <td>{employee.empStatus}</td>
+                                <td>{employee.empAnnual}</td>
+                            </tr>
+                            ))
+                        ) : (
+                            (employeeList && employeeList.data) && (
+                                employeeList.data.map((employee) => (
+                                <tr
+                                key={employee.empCode}
+                                onClick={() => onClickHandler(employee.empCode)}
+                                >
+                                <td>{employee.empCode}</td>
+                                <td>{employee.department.deptName}</td>
+                                <td>{employee.empName}</td>
+                                <td>{employee.empStatus}</td>
+                                <td>{employee.empAnnual}</td>
                                 </tr>
+                            ))
                             )
-                    ))}                           
+                        )
+                        }
                     </tbody>
                 </table>
                 <div>
-                { employee.pageInfo && <PagingBar pageInfo={ employee.pageInfo } setCurrentPage={ setCurrentPage } /> }
+                { (nameSearch && nameSearch.pageInfo) ? (<PagingBar pageInfo={nameSearch.pageInfo} setCurrentPage={setCurrentPage} /> ) 
+                : (employeeList && employeeList.pageInfo) ? (<PagingBar pageInfo={employeeList.pageInfo} setCurrentPage={setCurrentPage} /> )
+                : null }
                 </div>     
             </div>
         </motion.div>

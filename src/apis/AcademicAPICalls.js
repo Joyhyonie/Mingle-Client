@@ -1,5 +1,7 @@
 import { getEmployees, getEmployee, postEmployee, putEmployee, deleteEmployee } from '../modules/EmployeeModule';
+import { getList } from '../modules/OrganizationModule';
 import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
+
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -17,7 +19,7 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
     console.log(result);
 
     if (result.status === 200) {
-      dispatch(getEmployees(result));
+      dispatch(getList(result));
       console.log(result);
     }
   }
@@ -42,7 +44,7 @@ export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
 // 교직원 상세 조회
 export const callEmployeeDetailAPI = ({ empCode }) => {
 
-  const requestURL = `${EMPLOYEE_URL}/employees/{empCode}`;
+  const requestURL = `${EMPLOYEE_URL}/employees/${empCode}`;
 
   return async (dispatch, getState) => {
 
@@ -119,6 +121,8 @@ export const callEmployeesDeleteAPI = (empCodes) => {
     }
   }
 }
+
+
 
 
 
