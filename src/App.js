@@ -69,6 +69,7 @@ function App() {
             <Route path="board" element={<BoardLayout />}>
               <Route index element={<Navigate to="/board/main" replace />} />
               <Route path="main" element={<BoardMain />} />
+              <Route path="search" element={<BoardMain />} />
               <Route path=":boardCode" element={<BoardDetail />} />
               <Route path=":boardCode/modify" element={<BoardModify />} />
               <Route path="regist" element={<BoardRegist />} />

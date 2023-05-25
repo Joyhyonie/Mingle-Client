@@ -20,7 +20,7 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
     if(type == "employee") {
       dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
     } else if(type == "board") {
-      // dispatch(callBoardSearchAPI())
+      navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
     } else if(type == "attendance") {
         dispatch(callAttendanceSearchName({search: inputValue , condition : selectedOption, currentPage : currentPage}));
     } else if(type == "subject"){
