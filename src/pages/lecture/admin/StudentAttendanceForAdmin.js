@@ -2,29 +2,51 @@
 import { motion } from "framer-motion"
 import CommonCSS from '../../../css/common/Common.module.css'
 import SearchBarCSS from '../../../css/common/SearchBar.module.css';
-import LectureList from "../../../components/lists/AttendanceList";
+import AttendanceList from "../../../components/lists/AttendanceList";
 import PagingBar from "../../../components/common/PagingBar";
 import { useEffect, useState } from "react";
 import SearchBar from "../../../components/common/SearchBar";
+import { callLectureListAPI } from "../../../apis/LectureAPICalls";
+import { useDispatch, useSelector } from "react-redux";
 
 function StudentAttendanceForAdmin() {
     /* (임시용 데이터) */
-    const lectureInfoList = [{ lectureNo: 1, lectureCode: 87512, lectureName: '거시경제학', lectureYear: '2023', lectureSeason: 2, empCode: 12345, empName: '최지원', lectureAttendence: '출석' },
-    { lectureNo: 2, lectureCode: 137512, lectureName: '미시경제학', lectureYear: '2023', lectureSeason: 2, empCode: 42345, empName: '최지원', lectureAttendence: '출석' },
+    // const lectureInfoList = [{ lectureNo: 1, lectureCode: 87512, lectureName: '거시경제학', lectureYear: '2023', lectureSeason: 2, empCode: 12345, empName: '최지원', lectureAttendence: '출석' },
+    // { lectureNo: 2, lectureCode: 137512, lectureName: '미시경제학', lectureYear: '2023', lectureSeason: 2, empCode: 42345, empName: '최지원', lectureAttendence: '출석' },
 
-    ]
-    console.log("studentAttenace :", lectureInfoList);
-
-    const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
-
+    // ]
 
     const [currentPage, setCurrentPage] = useState(1);
+    const { data, pageInfo } = useSelector(state => state.SubjectInfoReducer);
+    const dispatch = useDispatch();
+
+
+    console.log("getInfo", data);
+
+
+    // console.log("studentAttenace :", lectureInfoList);
+
+    // const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
+
+
+
 
     const options = [//프롭스
         { value: "title", name: "주차" },
         { value: "content", name: "1주차" }//어떻게 처리해야할까나
 
     ];
+
+
+    useEffect(
+        () => {
+            /*lectureList APi 호출  () 함수를 전달해줘야 미들웨어에서 호출되고 넘어갈 것. */
+
+            dispatch(callLectureListAPI({ currentPage }))
+        },
+        [currentPage]
+    );
+
 
     return (
         <motion.div
@@ -39,12 +61,14 @@ function StudentAttendanceForAdmin() {
                 {/* <SearchAndListLayout options={options}/> */}
             </div>
             <div>
-                {lectureInfoList && <LectureList LectureInfoList={lectureInfoList} />}
+                {data && <AttendanceList LectureInfoList={data} />}
             </div>
 
             <div>
                 {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
             </div>
+
+
 
 
         </motion.div>
