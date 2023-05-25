@@ -19,7 +19,7 @@ function BoardMain() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [boardType, setBoardType] = useState('');
+  const [boardType, setBoardType] = useState('전체');
   const [currentPage, setCurrentPage] = useState(1);
 
   const options = [
@@ -62,8 +62,8 @@ function BoardMain() {
       </div>
       <div className={BoardCSS.boardButtonBox}>
         <button
-          style={boardType === '' ? clikedStyle : null}
-          onClick={(e) => { setBoardType(''); }}
+          style={boardType === '전체' ? clikedStyle : null}
+          onClick={(e) => { setBoardType(e.target.textContent); }}
         >
           전체
         </button>

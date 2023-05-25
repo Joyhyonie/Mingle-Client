@@ -6,13 +6,14 @@ import MessageModalLayout from '../../layouts/MessageModalLayout';
 import NotificationModal from '../modal/NotificationModal';
 import LogoutModal from '../modal/LogoutModal';
 import { toast } from 'react-hot-toast';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
 
     /*  setActiveIndex : 로고 및 마이페이지 아이콘을 클릭 시, Nav바 활성화 취소 */
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const location = useLocation();
     const { employee } = useSelector(state => state.EmployeeReducer);
     const [isIconClickedState, setIsIconClickedState] = useState({      // 클릭된 아이콘 컨트롤 state

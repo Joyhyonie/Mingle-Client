@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from "framer-motion"
 import MessageCSS from '../../css/Message.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { callGetEmployeeAPI } from '../../apis/EmployeeAPICalls';
 import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI } from '../../apis/MessageAPICalls';
 import { toast } from 'react-hot-toast';
 
@@ -12,13 +11,6 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
     const dispatch = useDispatch();
     const { employee } = useSelector(state => state.EmployeeReducer);
     const [isOpen, setIsOpen] = useState(false); // 쪽지들을 열고 닫는 state
-    
-    useEffect(
-        () => {
-            /* 현재 로그인한 유저 조회 API 호출 */
-            dispatch(callGetEmployeeAPI());
-        },[]
-    );
 
     /* 해당 쪽지가 받은 쪽지인지, 보낸 쪽지인지 확인하여 from/to 표시 */
     const fromOrTo = () => {
