@@ -15,14 +15,21 @@ function Layout () {
     const [activeIndex, setActiveIndex] = useState();   // 활성화된 화면을 컨트롤하기 위한 state
     const [isDark, setIsDark] = useState(false);        // 다크모드 설정을 위한 state
 
+    useEffect(
+        () => {
+            dispatch(callGetEmployeeAPI());
+        },[]
+    );
+
     // 현재 로그인 한 유저가 교수 or 행정직원인지에 따라 Navbar 변경하기 위한 변수
     const isAdmin = employee && employee.empId.startsWith('AD');
+
+    // 로그아웃
     const logoutHandler = () => {
         window.localStorage.removeItem('accessToken');
         toast.success('로그아웃 성공 !');
         window.location.href = '/login';
     }
-
 
     return (
         <div>
