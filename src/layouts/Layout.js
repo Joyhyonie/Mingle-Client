@@ -17,15 +17,6 @@ function Layout () {
 
     // 현재 로그인 한 유저가 교수 or 행정직원인지에 따라 Navbar 변경하기 위한 변수
     const isAdmin = employee && employee.empId.startsWith('AD');
-
-    /* 첫 로그인 시, empCode를 찾지 못 해 발생하는 모든 오류를 해결하기 위해 현재 로그인한 유저 조회 API 호출을 Layout에서 실행 */
-    useEffect(
-        () => {
-            /* 현재 로그인한 유저 조회 API 호출 */
-            dispatch(callGetEmployeeAPI());
-        },[]
-    );
-
     const logoutHandler = () => {
         window.localStorage.removeItem('accessToken');
         toast.success('로그아웃 성공 !');
