@@ -1,4 +1,4 @@
-import { getAttendance, getAttendanceToday, getAttendances, getLeavesearchname, getMyattendance, getMyleave, getMyleavesearchname, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord, getEmployeelist } from "../modules/AttendanceModule";
+import { getAttendance, getAttendanceToday, getAttendances, getLeavesearchname, getMyattendance, getMyleave, getMyleavesearchname, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord, getEmployeelist, getEmployeesearch } from "../modules/AttendanceModule";
 import { getEmployee, getSearchname } from "../modules/EmployeeModule";
 import { request } from "./Api";
 
@@ -177,7 +177,7 @@ export const callAttendanceSearchName = ({search, condition ,currentPage = 1}) =
 
         if(result.status === 200){
             console.log(result);
-            dispatch(getSearchname(result));
+            dispatch(getEmployeesearch(result));
         }
     }
 }
