@@ -97,7 +97,12 @@ export const callIdAPI = (form) => {
         console.log('[EmployeeCalls] callIdAPI result : ', result);
               dispatch(postId(result));
               return result;
+              
+        }else{
+            toast.error("입력하신 정보와 일치하는 아이디가 존재하지 않습니다.");
         }
+
+        
         
     };
 };
@@ -122,6 +127,8 @@ export const callPwdAPI = (form) => {
         console.log('[EmployeeCalls] callIdAPI result : ', result);
               dispatch(postPwd(result));
               return result;
+        }else{
+            toast.error("해당 아이디와 일치하는 사용자가 없습니다.");
         }
         
     };
