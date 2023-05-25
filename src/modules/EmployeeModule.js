@@ -4,7 +4,6 @@ import { createActions, handleActions } from "redux-actions";
 const initialState = {};
 
 /* 액션 */
-
 const POST_LOGIN = 'employee/POST_LOGIN';
 const RESET_EMPLOYEE = 'employee/RESET_EMPLOYEE';
 const GET_EMPLOYEES = 'employee/GET_EMPLOYEES';
@@ -18,13 +17,19 @@ const POST_PWD = 'employee/POST_PWD';
 const POST_PWDCHANGE = 'employee/POST_PWDCHANGE';
 const GET_SEARCHNAME = 'employee/GET_SEARCHNAME';
 
-export const { employee : 
-
-
-  { postLogin, resetEmployee, getEmployees, getEmployee, postEmployee, putEmployee, patchEmployee, deleteEmployee, postId, postPwd,getSearchname,postPwdchange }} = createActions
-
+export const { employee : { postLogin, 
+                            resetEmployee, 
+                            getEmployees, 
+                            getEmployee, 
+                            postEmployee, 
+                            putEmployee, 
+                            patchEmployee, 
+                            deleteEmployee, 
+                            postId, 
+                            postPwd, 
+                            getSearchname, 
+                            postPwdchange }} = createActions
     ({
-
       [POST_LOGIN]: res => res,
       [RESET_EMPLOYEE]: () => { },
       [GET_EMPLOYEES]: (res) => res.data,
@@ -55,7 +60,6 @@ const EmployeeReducer = handleActions({
   [POST_PWD]:(state, {payload}) => ({ search : payload}),
   [POST_PWDCHANGE]:(state, {payload}) => ({ change : payload }),
   [GET_SEARCHNAME] : (state, {payload}) => ({nameSearch : payload}),
-
 
 }, initialState);
 
