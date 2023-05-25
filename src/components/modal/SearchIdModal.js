@@ -9,8 +9,7 @@ function SearchIdModal({ selectedId, closeModal }){
     const empId = selectedId.empId;
     const maskedEmpId = empId ? empId[0] + '*' + '*'.repeat(empId.length - 4) + empId.slice(-2) : '';
 
-    console.log("empId" , search.empId);
-    console.log("empId" , selectedId);
+   
     return(
         <div className={SearchIDCSS.modal}>
         <div className={SearchIDCSS.modalContainer}>
