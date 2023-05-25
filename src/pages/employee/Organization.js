@@ -17,14 +17,14 @@ const organizationOptions = [
   { value: "deptCode", label: "부서명" },
 ];
 
-const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
+
 
 function Organization() {
 
   const dispatch = useDispatch();
-  const { data, pageInfo } = useSelector((state) => state.EmployeeReducer);
+  const { employeeList } = useSelector(state => state.OrganizationReducer);
   const [currentPage, setCurrentPage] = useState(1);
-  const employeeList = data;
+  console.log(employeeList);
 
   /* 검색어 요청시 사용할 값 */
   const [searchParams, setSearchParams] = useSearchParams();
@@ -58,11 +58,11 @@ function Organization() {
 
       <div className={OrganizationItemCss.div}>
         <div>
-          {employeeList && <OrganizationList employeeList={employeeList} />}
+          {employeeList && employeeList.data && <OrganizationList employeeList={employeeList.data} />}
         </div>
 
         <div>
-          {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+          {employeeList && employeeList.pageInfo && <PagingBar pageInfo={employeeList.pageInfo} setCurrentPage={setCurrentPage} />}
         </div>
       </div>
 

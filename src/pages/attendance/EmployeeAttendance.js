@@ -5,7 +5,7 @@ import EmployeeAttendanceCSS from '../../css/EmployeeAttendance.module.css';
 import CommonCSS from "../../css/common/Common.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callEmployee } from "../../apis/AttendanceAPICalls";
+import { callEmployeeList } from "../../apis/AttendanceAPICalls";
 import { useNavigate } from "react-router-dom";
 import PagingBar from "../../components/common/PagingBar";
 import SearchBarCss from '../../css/common/SearchBar.module.css';
@@ -18,7 +18,8 @@ function EmployeeAttendance () {
     const navigate = useNavigate();
     const type = "attendance";
     const [currentPage, setCurrentPage] = useState(1);
-    const {employee, nameSearch} = useSelector(state => state.EmployeeReducer);    
+    const { nameSearch} = useSelector(state => state.EmployeeReducer);    
+    const {employeeList} = useSelector(state => state.AttendanceReducer);
     
     const options = [
         { value: "deptName", label: "소속" },
@@ -27,7 +28,7 @@ function EmployeeAttendance () {
 
     useEffect(
         ()=>{
-            dispatch(callEmployee({currentPage}));
+            dispatch(callEmployeeList({currentPage}));
             },        
             [currentPage,dispatch]
     )    
@@ -80,8 +81,8 @@ function EmployeeAttendance () {
                             </tr>
                             ))
                         ) : (
-                            (employee && employee.data) && (
-                            employee.data.map((employee) => (
+                            (employeeList && employeeList.data) && (
+                                employeeList.data.map((employee) => (
                                 <tr
                                 key={employee.empCode}
                                 onClick={() => onClickHandler(employee.empCode)}
@@ -100,7 +101,7 @@ function EmployeeAttendance () {
                 </table>
                 <div>
                 { (nameSearch && nameSearch.pageInfo) ? (<PagingBar pageInfo={nameSearch.pageInfo} setCurrentPage={setCurrentPage} /> ) 
-                : (employee && employee.pageInfo) ? (<PagingBar pageInfo={employee.pageInfo} setCurrentPage={setCurrentPage} /> )
+                : (employeeList && employeeList.pageInfo) ? (<PagingBar pageInfo={employeeList.pageInfo} setCurrentPage={setCurrentPage} /> )
                 : null }
                 </div>     
             </div>

@@ -1,4 +1,4 @@
-import { getAttendance, getAttendanceToday, getAttendances, getLeavesearchname, getMyattendance, getMyleave, getMyleavesearchname, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord } from "../modules/AttendanceModule";
+import { getAttendance, getAttendanceToday, getAttendances, getLeavesearchname, getMyattendance, getMyleave, getMyleavesearchname, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord, getEmployeelist } from "../modules/AttendanceModule";
 import { getEmployee, getSearchname } from "../modules/EmployeeModule";
 import { request } from "./Api";
 
@@ -8,7 +8,7 @@ const ATTEN_DANCE = `http://${SERVER_IP}:${SERVER_PORT}/attendance`;
 
 const accessToken = window.localStorage.getItem('accessToken');
 
-export const callEmployee = ({currentPage = 1}) => {
+export const callEmployeeList = ({currentPage = 1}) => {
 
     const requestURL = `${ATTEN_DANCE}/list?page=${currentPage}`;
 
@@ -17,11 +17,10 @@ export const callEmployee = ({currentPage = 1}) => {
             method:'GET'
         }).then(response => response.json());
         if(result.status ===200){
-            dispatch(getEmployee(result));
+            dispatch(getEmployeelist(result));
             console.log(result);
         }
     }
-
 }
 
 export const callEmployeeDetail = ({empCode,currentPage = 1}) => {
