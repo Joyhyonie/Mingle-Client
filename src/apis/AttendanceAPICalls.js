@@ -6,8 +6,6 @@ const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const ATTEN_DANCE = `http://${SERVER_IP}:${SERVER_PORT}/attendance`;
 
-const accessToken = window.localStorage.getItem('accessToken');
-
 export const callEmployeeList = ({currentPage = 1}) => {
 
     const requestURL = `${ATTEN_DANCE}/list?page=${currentPage}`;
@@ -219,8 +217,8 @@ export function callMyAttendanceTodayAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/attendance/today`, headers);
@@ -239,8 +237,8 @@ export function callStartTimeRecordAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('POST', `/attendance/record`, headers);
@@ -259,8 +257,8 @@ export function callEndTimeRecordAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+             Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('PATCH', `/attendance/record`, headers);

@@ -55,14 +55,16 @@ function LectureExperienceCerti({closeModal,myCerti}){
                         <th className={DocumentsCSS.thLectureETC} colSpan="1">담당과목</th>
                         <th className={DocumentsCSS.thLectureETC} colSpan="2">강의시간</th>
                     </tr>
-                    { myLecture && 
+                    { (myLecture) ? (
                         myLecture.map((lecture) => (
                         <tr key={lecture.lecCode}>
                         <th colSpan="1" className={DocumentsCSS.thTable}>{lecture.lecStartDate} ~ {lecture.lecEndDate}</th>
                         <th colSpan="1" className={DocumentsCSS.thTable}>{lecture.subject.sbjName}</th>
                         <th colSpan="2" className={DocumentsCSS.thTable}>{lecture.lecCount * 2}시간</th>
                         </tr> 
-                    ))}    
+                    ))) 
+                    : null
+                         }    
                                        
                     <h4 className={DocumentsCSS.date}> {formatDate(new Date())}</h4>
                     <p className={DocumentsCSS.in}><img src="/images\최지원인 3.png "/>(인)</p> 

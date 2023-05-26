@@ -115,7 +115,7 @@ export const callMyLectureCallAPI = () => {
             method : "GET",
             headers : {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
