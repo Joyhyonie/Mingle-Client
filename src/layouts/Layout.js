@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from '../components/common/Header';
 import NavbarForAdmin from '../components/common/NavbarForAdmin';
 import CommonCSS from '../css/common/Common.module.css';
+import ToastCSS from '../css/common/Toast.module.css';
 import { Outlet } from "react-router-dom";
 import NavbarForProfessor from '../components/common/NavbarForProfessor';
 import { toast } from 'react-hot-toast';
@@ -37,7 +38,7 @@ function Layout () {
                     const senderImg = data.sender.empProfile;
                     const senderName = data.sender.empName;
                     const msgContent = data.msgContent;
-                    toast.custom((senderImg, senderName, msgContent) => customMessageNoti());
+                    toast.custom((t, senderImg, senderName, msgContent) => customMessageNoti());
                     toast(`${senderName}님의 쪽지 도착🥳 ${msgContent}`);
                 });
 
@@ -58,13 +59,26 @@ function Layout () {
     );
 
     /* 실시간 쪽지 알림을 커스텀하기 위한 함수 */
-    const customMessageNoti = () => {
+    const customMessageNoti = (t, senderImg, senderName, msgContent) => {
 
-        return <></>
+        return (
+            <>
+                <div className={ `${t.visible ? 'ToastCSS.animate-enter' : 'ToastCSS.animate-leave'}` }>
+                    <div className={ ToastCSS.msgNotiBox }>
+                        <div className={ ToastCSS.msgContentBox }>
+
+                        </div>
+                        <div className={ ToastCSS.closeBox }>
+                            <p onClick={ () => toast.dismiss(t.id) }>close</p>
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
     }
 
     /* 학사일정, 공지사항  */
-    const customCommonNoti = () => {
+    const customCommonNoti = (notiTitle, notiContent) => {
 
         return <></>
     }
