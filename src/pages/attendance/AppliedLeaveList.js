@@ -5,9 +5,10 @@ import ApplideCertidocCSS from '../../css/ApplyCertiDoc.module.css';
 import PagingBar from "../../components/common/PagingBar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callLeaveDoc, callLeaveNoUpdateAPI, callLeaveUpdateAPI } from "../../apis/AttendanceAPICalls";
+import { callLeaveDoc, callLeaveDocSearchName, callLeaveNoUpdateAPI, callLeaveUpdateAPI } from "../../apis/AttendanceAPICalls";
 import SearchBar from "../../components/common/SearchBar";
 import SearchBarCss from "../../css/common/SearchBar.module.css";
+import { useSearchParams } from "react-router-dom";
 
 function AppliedLeaveList () {
 
@@ -15,6 +16,9 @@ function AppliedLeaveList () {
     const {attendance,searchName} = useSelector(state => state.AttendanceReducer);
     const {patch} = useSelector(state => state.AttendanceReducer);
     const dispatch = useDispatch();
+    const [params] = useSearchParams();
+    const condition = params.get('condtion');
+    const name = params.get('search');
 
     const type = "leaveDoc";
     
@@ -25,9 +29,13 @@ function AppliedLeaveList () {
 
     useEffect(
         ()=>{
+            if(name){
+                dispatch(callLeaveDocSearchName({search : name, condition: condition, currentPage : currentPage }));
+                return;
+            }
             dispatch(callLeaveDoc({currentPage}))
         },
-        [currentPage,patch,dispatch]
+        [currentPage,patch,name,condition]
     )
 
     const onClickHandler = (leave) => {      
@@ -44,7 +52,7 @@ function AppliedLeaveList () {
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
             <div>
-                <p className={ CommonCSS.pageDirection }>증명서 ▸ 휴가 신청 내역</p>
+                <p className={ CommonCSS.pageDirection }>근태관리 ▸ 휴가 신청 내역</p>
             </div>
             <div className={SearchBarCss.basic}>
             {<SearchBar options={options} type={type}/>}

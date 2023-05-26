@@ -15,7 +15,7 @@
   width: 150px;
   height: 50px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #343434;
   padding-left: 10px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -24,7 +24,7 @@
 
 
 .searchBar {
-  border: 1px solid #FF9797;
+  border: 1px solid #343434;
   width: 700px;
   height: 47px;
   margin-right: 15px;
@@ -36,7 +36,7 @@
 .searchBarBtn {
   padding: 5px 50px;
   height: 50px;
-  background-color: #FF9797;
+  background-color: #343434;
   border: none;
   color: white;
   font-size: 18px;

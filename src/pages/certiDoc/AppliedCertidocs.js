@@ -3,10 +3,11 @@ import ApplideCertidocCSS from '../../css/ApplyCertiDoc.module.css';
 import CommonCSS from "../../css/common/Common.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callCertiListAPI, callCertiUpdateAPI } from "../../apis/CertiDocAPICalls";
+import { callCertiDocSearchName, callCertiListAPI, callCertiUpdateAPI } from "../../apis/CertiDocAPICalls";
 import PagingBar from "../../components/common/PagingBar";
 import SearchBar from "../../components/common/SearchBar";
 import SearchBarCss from "../../css/common/SearchBar.module.css";
+import { useSearchParams } from "react-router-dom";
 
 /* 행정직원의 '증명서 발급 신청 내역' */
 
@@ -17,6 +18,9 @@ function AppliedCertidocs () {
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
     const type = "certiDoc";
+    const [params] = useSearchParams();
+    const condition = params.get('condtion');
+    const name = params.get('search');
 
     const options = [
         { value: "certiFormName", label: "증명서종류" },
@@ -25,9 +29,13 @@ function AppliedCertidocs () {
 
     useEffect(
         ()=>{
+            if(name){
+                dispatch(callCertiDocSearchName({search : name, condition: condition, currentPage : currentPage }));
+                return;
+            }
             dispatch(callCertiListAPI({currentPage}));
         },
-        [currentPage,patch,dispatch]
+        [currentPage,patch,dispatch,name,condition]
     )
 
     const onClickHandler = (certi) => {      

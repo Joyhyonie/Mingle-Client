@@ -70,7 +70,8 @@
 .acScheRegistName input {
   width: 410px;
   height: 50px;
-  border: 1px solid #FF9797;
+  margin-right: 10px;
+  border: 1px solid #343434;
   border-radius: 10px;
   font-size: 18px;
   padding-left: 20px;
@@ -81,8 +82,8 @@
 
 .acScheType {
   font-size: 16px;
-  color: #FF9797;
   margin-left: 20px;
+  color: #999;
 }
 
 .acScheName {
@@ -123,7 +124,7 @@
 .acScheRegistType input {
   width: 200px;
   height: 50px;
-  border: 1px solid #FF9797;
+  border: 1px solid #343434;
   border-radius: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -141,7 +142,7 @@
   height: 50px;
   margin-right: 10px;
   margin-left: 16px;
-  border: 1px solid #FF9797;
+  border: 1px solid #343434;
   border-radius: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -159,7 +160,7 @@
   height: 50px;
   margin-left: 10px;
   margin-right: 10px;
-  border: 1px solid #FF9797;
+  border: 1px solid #343434;
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -190,7 +191,7 @@
   width: 754px;
   height: 300px;
   padding: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #343434;
   border-radius: 10px;
   outline: none;
   font-size: 20px;
@@ -209,6 +210,6 @@
   justify-content: center;
   font-size: 18px;
   margin-top: 10px;
-  background-color: #FF9797;
+  background-color: #343434;
   color: white;
 }

@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import PagingBar from "../../components/common/PagingBar";
 import BoardList from "../../components/lists/BoardList";
 import SearchBar from "../../components/common/SearchBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function BoardMain() {
 
@@ -19,8 +19,18 @@ function BoardMain() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
   const [boardType, setBoardType] = useState('전체');
   const [currentPage, setCurrentPage] = useState(1);
+
+  const condition = searchParams.get('condition');
+  const word = searchParams.get('word');
+
+  useEffect(
+    () => {
+        // dispatch(call());
+    }, [condition, word]
+  );
 
   const options = [
     { value: "title", label: "제목" },
@@ -39,7 +49,7 @@ function BoardMain() {
   );
 
   const clikedStyle = {
-    background: '#FF9797',
+    background: '#343434',
     color: 'white',
     fontWeight: 'bold'
   }
@@ -57,7 +67,7 @@ function BoardMain() {
       <p className={CommonCSS.pageDirection}>공지사항</p>
       <div className={SearchBarCss.basic}>
         {<SearchBar
-          options={options}>
+          options={options} type="board">
         </SearchBar>}
       </div>
       <div className={BoardCSS.boardButtonBox}>

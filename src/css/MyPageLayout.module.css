@@ -20,16 +20,16 @@
 /* .myPageLayoutDiv main {
     margin-top: 10px;
 } */
-.myPageLayoutDiv button {
+.myPageLayoutDiv .button {
 
     margin-top: 30px;
     margin-bottom: 5px;
     width: 150px;
     height: 50px;
     border-radius: 12px;
-    background-color: #FFD7D7;
+    background-color: #999999;
     font-weight: bold;
-    border: solid #FFD7D7;
+    border: solid #999999;
     color: white;
     font-family: 'Paytone One';
     font-style: normal;

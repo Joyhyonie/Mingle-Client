@@ -9,7 +9,7 @@ function Mypage() {
 
   useEffect(() => {
     dispatch(callGetEmployeeAPI());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={MypageCSS.backgroundDiv} style={{ backgroundColor: 'white' }}>

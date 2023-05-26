@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import SubjectListCSS from '../../../css/SubjectList.module.css'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callSubjectDelete, callSubjectsAPI } from "../../../apis/LectureAPICalls";
+import { callSubjectDelete, callSubjectSearchName, callSubjectsAPI } from "../../../apis/LectureAPICalls";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
 import SubjectInsertModal from "../../../components/modal/SubjectInsertModal";
 import { toast } from "react-hot-toast";
@@ -11,6 +11,7 @@ import PagingBar from "../../../components/common/PagingBar";
 import CommonCSS from '../../../css/common/Common.module.css';
 import SearchBarCss from "../../../css/common/SearchBar.module.css";
 import SearchBar from "../../../components/common/SearchBar";
+import { useSearchParams } from "react-router-dom";
 
 function SubjectList() {
 
@@ -23,6 +24,9 @@ function SubjectList() {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
   const {delete1} = useSelector(state => state.SubjectReducer);
+  const [params] = useSearchParams();
+  const condition = params.get('condtion');
+  const name = params.get('search');
 
 
   const options = [
@@ -32,9 +36,13 @@ function SubjectList() {
 
   useEffect(
     ()=>{
+      if(name){
+        dispatch(callSubjectSearchName({search : name, condition: condition, currentPage : currentPage }))
+        return;
+      }
       dispatch(callSubjectsAPI({currentPage}))
     },
-    [currentPage,isModalOpen,isInsertModalOpen,checkedItems,dispatch,delete1]
+    [currentPage,isModalOpen,isInsertModalOpen,checkedItems,delete1,name,condition]
   );
 
   const openModal = (subject) => {

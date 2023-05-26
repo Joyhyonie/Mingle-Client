@@ -1,12 +1,10 @@
-import { getAttendance, getAttendanceToday, getAttendances, getLeavesearchname, getMyattendance, getMyleave, getMyleavesearchname, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord, getEmployeelist } from "../modules/AttendanceModule";
+import { getAttendance, getAttendanceToday, getAttendances, getLeavesearchname, getMyattendance, getMyleave, getMyleavesearchname, patchAdminattendance, patchAttendance, patchAttendanceRecord, postAttendance, postAttendanceRecord, getEmployeelist, getEmployeesearch } from "../modules/AttendanceModule";
 import { getEmployee, getSearchname } from "../modules/EmployeeModule";
 import { request } from "./Api";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const ATTEN_DANCE = `http://${SERVER_IP}:${SERVER_PORT}/attendance`;
-
-const accessToken = window.localStorage.getItem('accessToken');
 
 export const callEmployeeList = ({currentPage = 1}) => {
 
@@ -177,7 +175,7 @@ export const callAttendanceSearchName = ({search, condition ,currentPage = 1}) =
 
         if(result.status === 200){
             console.log(result);
-            dispatch(getSearchname(result));
+            dispatch(getEmployeesearch(result));
         }
     }
 }
@@ -219,8 +217,8 @@ export function callMyAttendanceTodayAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/attendance/today`, headers);
@@ -239,8 +237,8 @@ export function callStartTimeRecordAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('POST', `/attendance/record`, headers);
@@ -259,8 +257,8 @@ export function callEndTimeRecordAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+             Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('PATCH', `/attendance/record`, headers);

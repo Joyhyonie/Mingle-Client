@@ -5,8 +5,8 @@ import EmployeeAttendanceCSS from '../../css/EmployeeAttendance.module.css';
 import CommonCSS from "../../css/common/Common.module.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callEmployeeList } from "../../apis/AttendanceAPICalls";
-import { useNavigate } from "react-router-dom";
+import { callAttendanceSearchName, callEmployeeList } from "../../apis/AttendanceAPICalls";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PagingBar from "../../components/common/PagingBar";
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import SearchBar from "../../components/common/SearchBar";
@@ -18,8 +18,10 @@ function EmployeeAttendance () {
     const navigate = useNavigate();
     const type = "attendance";
     const [currentPage, setCurrentPage] = useState(1);
-    const { nameSearch} = useSelector(state => state.EmployeeReducer);    
-    const {employeeList} = useSelector(state => state.AttendanceReducer);
+    const {employeeList, nameSearch} = useSelector(state => state.AttendanceReducer);
+    const [params] = useSearchParams();
+    const condition = params.get('condtion');
+    const name = params.get('search');
     
     const options = [
         { value: "deptName", label: "소속" },
@@ -28,9 +30,14 @@ function EmployeeAttendance () {
 
     useEffect(
         ()=>{
+            if(name){
+                dispatch(callAttendanceSearchName({search : name, condition: condition, currentPage : currentPage }));
+                return;
+            } 
             dispatch(callEmployeeList({currentPage}));
+            
             },        
-            [currentPage,dispatch]
+            [currentPage,name,condition]
     )    
 
     const onClickHandler = (empCode) => {

@@ -14,7 +14,7 @@
 }
 
 .modalContainer{
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     position: flex;
     width: 500px;
     height: 450px;
@@ -116,7 +116,7 @@
     height: 122px;
     width: 382px;
     background: #FFFFFF;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     border-radius: 40px;
     display: flex;
     flex-direction: column;
@@ -128,9 +128,9 @@
 
 .modalContainer button {
     font-size: 23px;
-    background-color:  #FF9797;
+    background-color:  #343434;
     color: white;
-    border: 10px solid rgba(255, 151, 151, 0.79);
+    border: 10px solid #343434;
     width: 300px;
     border-radius: 12px;
     font-family: 'Paytone One', sans-serif;
@@ -138,5 +138,5 @@
 }
 
 .modalContainer span  {
-    color: #FF9797;
+    color: #66D2B3;
 }

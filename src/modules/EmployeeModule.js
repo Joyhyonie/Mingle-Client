@@ -16,7 +16,6 @@ const DELETE_STUDENT = 'employee/DELETE_STUDENT'
 const POST_ID = 'employee/POST_ID';
 const POST_PWD = 'employee/POST_PWD';
 const POST_PWDCHANGE = 'employee/POST_PWDCHANGE';
-const GET_SEARCHNAME = 'employee/GET_SEARCHNAME';
 
 export const { employee : { postLogin, 
                             resetEmployee, 
@@ -44,8 +43,8 @@ export const { employee : { postLogin,
       [PATCH_EMPLOYEE]: (res) => res,
       [POST_EMPLOYEE]: (res) => res,
       [PUT_EMPLOYEE]: (res) => res,
-      [GET_SEARCHNAME] : res => res.data,
       [DELETE_STUDENT]: (res) => res,
+
     });
 
 /* 리듀서 */
@@ -64,5 +63,6 @@ const EmployeeReducer = handleActions({
   [POST_PWDCHANGE]:(state, { payload }) => ({ change : payload }),
   [GET_SEARCHNAME] : (state, { payload }) => ({ nameSearch : payload }),
 }, initialState); 
+
 
 export default EmployeeReducer; 
