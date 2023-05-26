@@ -29,7 +29,7 @@
 }
 
 .notiHeader span {
-    color : #FF9797;
+    color : #343434;
     letter-spacing: 1.5px;
     font-weight: 900;
 }
@@ -40,7 +40,7 @@
     height: 30px;
     padding: 0px 15px;
     color: white;
-    background-color: #FF9797;
+    background-color: #343434;
     cursor: pointer;
     font-size: 15px;
 }

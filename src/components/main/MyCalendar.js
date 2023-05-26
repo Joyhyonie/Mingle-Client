@@ -105,7 +105,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
 
         // toolbar 버튼
         .fc .fc-button {
-          background-color: #ffd7d7;
+          background-color: #999;
           border: none;
           outline: none; /* 버튼 클릭 시 외곽선 제거 */
           cursor: pointer;
@@ -116,7 +116,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
           }
 
           :hover {
-            background-color: #ff9797;
+            background-color: #343434;
           }
         }
 
@@ -135,7 +135,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
           padding: 6px;
           border: none;
           border-radius: 10px;
-          background: #FFD7D7;
+          background: #DADADA;
           font-weight: 600;
           font-size: 23px;
           line-height: 19px;
@@ -159,7 +159,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
 
         // 오늘 날짜 색
         .fc .fc-daygrid-day.fc-day-today {
-          background-color: #FF9797;
+          background-color: #999;
         }
 
         // 날짜별 그리드

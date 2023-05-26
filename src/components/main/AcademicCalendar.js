@@ -94,7 +94,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
 
       // toolbar 버튼
       .fc .fc-button {
-        background-color: #ffd7d7;
+        background-color: #999;
         border: none;
         outline: none; /* 버튼 클릭 시 외곽선 제거 */
 
@@ -104,7 +104,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
         }
 
         :hover {
-          background-color: #ff9797;
+          background-color: #343434;
         }
       }
 
@@ -123,7 +123,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
         padding: 6px;
         border: none;
         border-radius: 10px;
-        background: #FFD7D7;
+        background: #DADADA;
         font-weight: 600;
         font-size: 23px;
         line-height: 19px;
@@ -146,7 +146,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
 
       // 오늘 날짜 색
       .fc .fc-daygrid-day.fc-day-today {
-        background-color: #FF9797;
+        background-color: #999;
       }
 
       // 날짜별 그리드
@@ -165,7 +165,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
       // 각 이벤트 요소
       .fc-event {
         background: white;
-        border: 1px solid #FF9797;
+        border: 1px solid #999;
         border-radius: 8px;
         margin-bottom: 2px;
         height: 25px;
