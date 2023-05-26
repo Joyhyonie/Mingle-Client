@@ -1,4 +1,4 @@
-import { getEmployees, getEmployee, postEmployee, putEmployee, deleteEmployee } from '../modules/EmployeeModule';
+import { getEmployees, postEmployee, putEmployee, deleteEmployee, getAcEmployee } from '../modules/EmployeeModule';
 import { getList } from '../modules/OrganizationModule';
 import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
 
@@ -19,13 +19,30 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
     console.log(result);
 
     if (result.status === 200) {
+      dispatch(getEmployees(result));
+      console.log(result);
+    }
+  }
+}
+
+// 조직도 전체 조회
+export const callAllEmployeesAPI = ({ currentPage = 1}) => {
+
+  const requestURL = `${EMPLOYEE_URL}/organization?page=${currentPage}`;
+
+  return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL).then(response => response.json());
+    console.log(result);
+
+    if (result.status === 200) {
       dispatch(getList(result));
       console.log(result);
     }
   }
 }
 
-// 교직원(조직도) 서치
+// 교직원 서치
 export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
   const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
   const requestURL = `${EMPLOYEE_URL}/employees/search?search=${search}&page=${currentPage}`;
@@ -40,6 +57,21 @@ export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
   }
 }
 
+// 조직도 서치
+export const callEmployeeOrgSearchListAPI = ({ search, currentPage = 1 }) => {
+  const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
+  const requestURL = `${EMPLOYEE_URL}/organization/search?search=${search}&page=${currentPage}`;
+
+  return async (dispatch, getState) => {
+    const result = await fetch(requestURL).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log("[EmployeeAPICalls] callEmployeeOrgSearchListAPI result : ", result);
+      dispatch(getList(result));
+    }
+  }
+}
+
 
 // 교직원 상세 조회
 export const callEmployeeDetailAPI = ({ empCode }) => {
@@ -48,11 +80,17 @@ export const callEmployeeDetailAPI = ({ empCode }) => {
 
   return async (dispatch, getState) => {
 
-    const result = await fetch(requestURL).then(response => response.json());
+    const result = await fetch(requestURL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+      },
+    }).then(response => response.json());
 
     if (result.status === 200) {
       console.log("[AcademicAPICalls] callEmployeeDetailAPI result : ", result);
-      dispatch(getEmployee(result));
+      dispatch(getAcEmployee(result));
 
 
     }

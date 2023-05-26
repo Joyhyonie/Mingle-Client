@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from "framer-motion"
-import { callEmployeesAPI, callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
+import { callAllEmployeesAPI, callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useSearchParams } from "react-router-dom";
 import SearchBarCss from '../../css/common/SearchBar.module.css'
@@ -16,8 +16,6 @@ const organizationOptions = [
   { value: "empName", label: "직원명" },
   { value: "deptCode", label: "부서명" },
 ];
-
-
 
 function Organization() {
 
@@ -38,7 +36,7 @@ function Organization() {
         dispatch(callEmployeeSearchListAPI({ search, currentPage }));
       } else {
         /* 모든 직원 정보에 대한 요청 */
-        dispatch(callEmployeesAPI({ currentPage }))
+        dispatch(callAllEmployeesAPI({ currentPage }))
       }
     },
     [currentPage, search]

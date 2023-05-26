@@ -1,4 +1,4 @@
-import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule, putAcSchedule } from "../modules/ScheduleModule";
+import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule, putAcSchedule, deleteAcSchedule } from "../modules/ScheduleModule";
 import { request } from "./Api";
 
 const accessToken = window.localStorage.getItem('accessToken');
@@ -180,4 +180,17 @@ export function callAcScheduleModifyAPI(formData) {
       }
   }
 
+}
+
+/* 학사 일정 삭제 */
+export function callAcScheduleDeleteAPI(scheCode) {
+
+  return async (dispatch, getState) => {
+
+      const result = await request('DELETE', `/schedule/academic/${scheCode}`);
+
+      if(result.status == 200) {
+          dispatch(deleteAcSchedule(result));
+      }
+  }
 }

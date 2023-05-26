@@ -110,9 +110,10 @@ function App() {
             <Route path="regist-employee" element={<EmployeeRegist />} />
             <Route path="modify-employee/:empCode" element={<EmployeeModify />} />
             <Route path="search-employee" element={<EmployeeManagement />} />
+
             <Route path="management-student" element={<StudentManagement />} />
             <Route path="regist-student" element={<StudentRegist />} />
-            <Route path=":stdCode/modify" element={<StudentModify />} />
+            <Route path="modify-student/:stdCode" element={<StudentModify />} />
             <Route path="search-student" element={<StudentManagement />} />
 
             <Route path="schedule-academic" element={<AcademicSchedule />} />

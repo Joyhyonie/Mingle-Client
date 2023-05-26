@@ -8,55 +8,31 @@
 }
 
 .acScheRegist {
-  padding: 20px;
   width: 900px;
   margin-top: 40px;
 }
 
 .acScheLeft {
   border: 1px solid none;
-  padding: 20px;
   overflow: scroll;
   background-color: #F8F8F8;
   width: 600px;
   margin-top: 40px;
+  padding-left: 20px;
 }
 
 .acScheRead {
   margin-bottom: 20px;
 }
 
-.acScheRead .acScheTitle {
-  border: 1px solid #FF9797;
-  border-radius: 10px;
-  background-color: white;
+.acScheRead p {
   display: flex;
   align-items: center;
   padding: 10px;
+  font-size: 26px;
+  font-weight: bolder;
 }
 
-.acScheRead img {
-  width: 30px;
-  height: 30px;
-  margin-right: 20px;
-  margin-left: 20px;
-}
-
-.acScheRegist p {
-  border: 1px solid #FF9797;
-  border-radius: 10px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-.acScheRegist img {
-  width: 30px;
-  height: 30px;
-  margin-right: 20px;
-  margin-left: 20px;
-}
 
 .acScheRegist span {
   display: flex;
@@ -76,26 +52,24 @@
   float: right;
 }
 
-.acScheRegistName {
-  width: 900px;
+.acScheRegistDevide {
+  display: flex;
+  justify-content: space-between;
   height: 80px;
-  margin-top: 40px;
-
 }
 
 .acScheRegistName span {
   display: flex;
   display: left;
-  margin-top: 10px;
+  margin-top: 12px;
+  font-size: 18px;
   margin-left: 10px;
+  margin-right: 40px;
 }
 
 .acScheRegistName input {
-  float: right;
-  display: flex;
-  width: 750px;
+  width: 410px;
   height: 50px;
-  margin-right: 10px;
   border: 1px solid #FF9797;
   border-radius: 10px;
   font-size: 18px;
@@ -104,14 +78,16 @@
   outline: none;
 }
 
+
 .acScheType {
   font-size: 16px;
   color: #FF9797;
+  margin-left: 20px;
 }
 
 .acScheName {
-  font-size: 18px;
-  padding-left: 10px;
+  font-size: 16px;
+  margin-left: 22px;
   color: #343434;
 }
 
@@ -122,34 +98,36 @@
 
 .acScheStartDate {
   padding-left: 15px;
+  padding-right: 15px;
+  font-size: 20px;
+}
+
+.acScheEndDate {
+  font-size: 20px;
+  padding-left: 15px;
 }
 
 .acScheListDate {
-  margin-bottom: -15px;
+  margin-bottom: -30px;
   font-weight: bold;
   color: #343434;
 }
 
-.acScheRegistDevide {
-  width: 900px;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-}
-
 .acScheRegistType span {
   margin-left: 10px;
-  margin-right: 52px;
-  margin-top: 10px;
+  margin-right: 32px;
+  margin-top: 12px;
+  font-size: 18px;
 }
 
 .acScheRegistType input {
-  width: 310px;
+  width: 200px;
   height: 50px;
   border: 1px solid #FF9797;
   border-radius: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  margin-right: 10px;
   font-size: 18px;
   outline: none;
 }
@@ -193,6 +171,7 @@
   margin-top: 12.5px;
   margin-left: 10px;
   margin-right: 10px;
+  font-size: 18px;
 }
 
 .acScheDetail {
@@ -202,6 +181,8 @@
 
 .acScheDetail span {
   margin-left: 10px;
+  font-size: 18px;
+  margin-top: 10px;
 }
 
 .acScheDetail textarea {

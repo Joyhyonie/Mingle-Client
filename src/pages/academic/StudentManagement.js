@@ -38,11 +38,16 @@ function StudentManagement() {
     [currentPage]
   );
 
-  // // 테이블 행을 클릭하면 학생 상세 및 수정 페이지로 라우팅
-  // const onClickTableTr = (stdCode) => {
-  //   console.log("학생 정보 : " + stdCode)
-  //   navigate(`/${stdCode}/modify`);
-  // }
+  // 테이블 행을 클릭하면 학생 상세 및 수정 페이지로 라우팅
+  const onClickTableTr = (stdCode) => {
+    console.log("학생 정보 : " + stdCode)
+    navigate(`/modify-student/${stdCode}`);
+  }
+
+  // onClickStudentInsert
+  const onClickStudentInsert = () => {
+    navigate("/regist-student");
+  }
 
   // 각 학생의 체크박스
   const handleCheckboxChange = (e, stdCode) => {
@@ -69,11 +74,6 @@ function StudentManagement() {
     });
     setCheckboxes(newCheckboxes);
   };
-
-  // onClickStudentInsert
-  const onClickStudentInsert = () => {
-    navigate("/regist-student");
-  }
 
   // onClickStudentDelete => 학생 정보 삭제 !
   const onClickStudentDelete =
@@ -157,7 +157,7 @@ function StudentManagement() {
             data.map((student) => (
               <tr
                 key={student.stdCode}
-                // onClick={() => onClickTableTr(student.stdCode)}
+                onClick={() => onClickTableTr(student.stdCode)}
               >
                 <td><input
                   type="checkbox"
