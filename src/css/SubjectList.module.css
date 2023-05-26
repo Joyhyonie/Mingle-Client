@@ -22,7 +22,7 @@
     padding: 10px;
     margin-right: 10px;
     width: 120px;
-    background-color: #FF9797;
+    background-color: #999;
     border-radius: 7px;
     border: none;
     color: white;
@@ -34,7 +34,7 @@
     cursor: pointer;
     color: white;
     padding: 10px;
-    background-color: #FF9797;
+    background-color: #999;
     border-radius: 7px;
     border: none;
   }
@@ -43,7 +43,7 @@
 .SubjectListTable button {
     width: 50px;
     text-align: center;
-    background-color: #FFD7D7;
+    background-color: #dadada;
     margin-top: 10px;
     border-radius: 20px;
     font-family: 'Do Hyeon', sans-serif;
@@ -55,5 +55,5 @@
 
 .SubjectListTable button:hover{
     color: white;
-    background-color: #FF9797;
+    background-color: #343434;
 }

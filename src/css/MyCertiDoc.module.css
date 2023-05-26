@@ -14,7 +14,7 @@
 
 .MyCertiDocCSSTable button {
     width: 50px;
-    background-color: #FFD7D7;
+    background-color: #dadada;
     margin-top: 5px;
     border-radius: 20px;
     font-family: 'Do Hyeon', sans-serif;
@@ -26,11 +26,11 @@
 
 .MyCertiDocCSSTable input {
     width: 80%;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
 }
 
 .MyCertiDocCSSTable input:focus {
-    border-color: #FF9797;
+    border-color: #343434;
     outline: none;
 }
 
@@ -45,5 +45,5 @@
 
 .MyCertiDocCSSTable button:hover {
     color: white;
-    background-color: #FF9797;
+    background-color: #343434;
 }

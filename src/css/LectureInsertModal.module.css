@@ -35,7 +35,7 @@
     margin: 0;
     padding: 0;
     background-color: white;
-    border: solid 1px #FF9797;
+    border: solid 1px #343434;
     border-radius: 25px; 
 }
 
@@ -44,7 +44,7 @@
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 35px;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     height: 25px;
     border-radius: 5px;
     text-align: center;
@@ -67,7 +67,7 @@
     color: #666666;
     background-color: white;
     font-weight: bold;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     margin-left: 20px;
 }
 
@@ -75,18 +75,18 @@
     cursor: pointer;
     margin-top: 5px;
     margin-bottom: 5px;
-    color: #666666;
+    color: white;
     height: 40px;
     width: 100px;
     border-radius: 8px;
-    background-color: #FF9797;
+    background-color: #343434;
     font-weight: bold;
 }
 
 .SubjectModalDiv .classType{
     text-align: center;
     width: 20%;
-    border-color: #FF9797;
+    border-color: #343434;
     border-radius: 8px;
     height: 43px;
     margin-left: 10px;
@@ -117,7 +117,7 @@
 .SubjectModalDiv .deptCode{
     text-align: center;
     width: 60%;
-    border-color: #FF9797;
+    border-color: #343434;
     border-radius: 8px;
     height: 43px;
     margin-left: 10px;
@@ -162,7 +162,7 @@
     flex-grow: 1;
     border: 1px solid none;
     border-radius: 10px;
-    background-color: #FFD7D7;
+    background-color: #dadada;
     margin-top: 20px;
     padding: 0px;
     display: flex;

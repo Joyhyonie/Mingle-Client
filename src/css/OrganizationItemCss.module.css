@@ -38,11 +38,11 @@
 }
 .orgEmpNameEn {
   font-size: 14px;
-  color: #FF9797;
+  color: #343434;
 }
 
 .orgContentBox {
-  border-left: 4px solid #FFD7D7;
+  border-left: 4px solid #dadada;
   padding-left: 30px;
   margin-right: 10px;
 }
