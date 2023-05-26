@@ -16,6 +16,7 @@ const DELETE_STUDENT = 'employee/DELETE_STUDENT'
 const POST_ID = 'employee/POST_ID';
 const POST_PWD = 'employee/POST_PWD';
 const POST_PWDCHANGE = 'employee/POST_PWDCHANGE';
+const GET_SEARCHNAME = 'employee/GET_SEARCHNAME';
 
 export const { employee : { postLogin, 
                             resetEmployee, 
@@ -44,7 +45,7 @@ export const { employee : { postLogin,
       [POST_EMPLOYEE]: (res) => res,
       [PUT_EMPLOYEE]: (res) => res,
       [DELETE_STUDENT]: (res) => res,
-
+      [GET_SEARCHNAME]: (res) => res,
     });
 
 /* 리듀서 */
