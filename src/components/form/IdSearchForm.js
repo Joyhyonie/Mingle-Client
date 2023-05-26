@@ -61,7 +61,11 @@ function IdSearchForm(){
         navigate("/");
       };
     
-
+      const onKeyPressHandler = (e) => {
+        if (e.key === "Enter") {
+          onClickHandler();
+        }
+      };
 
 
 
@@ -79,6 +83,7 @@ function IdSearchForm(){
             placeholder="이름을 입력하세요."
             autoComplete='off'
             onChange={ onChangeHandler }
+            onKeyUp={onKeyPressHandler}
         />
         <input
             type="email"
@@ -86,6 +91,7 @@ function IdSearchForm(){
             placeholder="이메일을 입력하세요."
             autoComplete='off'
             onChange={ onChangeHandler }
+            onKeyUp={onKeyPressHandler}
         />
         <div style={style.story}>
        <div>회원가입 시 입력하신 이름과 이메일로 인증메일이 발송됩니다.</div>
