@@ -148,6 +148,14 @@
     position: absolute;
     bottom: 6%;
     left: 57%;
+    width: 150px;
+    height: 50px;
+    border-radius: 12px;
+    background-color:  #FFD7D7;
+    font-weight: bold;
+    border: solid #FFD7D7;
+    color: white;
+    font-size: 18px;
 }
 
 .inputdeptName {

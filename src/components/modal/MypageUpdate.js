@@ -3,8 +3,9 @@ import MypageCSS from '../../css/Mypageupdate.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { callGetEmployeeAPI, callPatchEmployeeAPI } from '../../apis/EmployeeAPICalls';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
-function MypageUpdate() {
+function MypageUpdate({closeModal, modifyMode}) {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const { employee } = useSelector(state => state.EmployeeReducer);
@@ -15,20 +16,16 @@ function MypageUpdate() {
   const [imageUrl, setImageUrl] = useState('');
  
    
-  /* 읽기모드와 수정모드를 구분 */
-  const [modifyMode, setModifyMode] = useState(false);
+
   const fileInputRef = useRef(null);
   useEffect(() => {
     dispatch(callGetEmployeeAPI());
-  }, []);
-
-
-
+  }, [dispatch]);
 
   useEffect(() => {
     if (modify?.status === 200) {
-      alert('마이페이지 수정이 완료되었습니다.');
-      navigate('/mypage-profile');
+      toast.success('마이페이지 수정이 완료되었습니다.');
+      closeModal(false);
     }
   }, [modify]);
 
@@ -54,11 +51,7 @@ const onChangeImageUpload = (e) => {
   setForm(formData);
 };
 
-  const onClickModifyModeHandler = () => {
-    setModifyMode(true);
-    setForm({ ...employee });
-  };
-
+  
   const onClickMyPageUpdateHandler = () => {
     const formData = new FormData();
     console.log('image', image);
@@ -74,33 +67,27 @@ const onChangeImageUpload = (e) => {
     if(image) {
       formData.append('myPageImage', image);
   }
-    dispatch(callPatchEmployeeAPI(formData));
-    navigate(-1);
+    dispatch(callPatchEmployeeAPI(formData));    
   };
 
   const onClickFileInput = () => {
     imageInput.current.click();
   };
   return (
-    <div
-      className={MypageCSS.backgroundDiv}
-      style={{ backgroundColor: 'white' }}
-    >
+    <div className={MypageCSS.modal} >
+          <div
+        className={MypageCSS.backgroundDiv}
+        style={{ backgroundColor: 'white' }}
+      >
      
-      {!modifyMode && (
-        <button
-          onClick={onClickModifyModeHandler}
-        >
-          수정모드
-        </button>
-      )}
+     
       
       {employee && (
         <div className={MypageCSS.registerDiv}>
             <div>
           <img 
           src={ !imageUrl ? employee.profile : imageUrl } 
-          alt="preview"
+        
           onClick={onClickFileInput}
            />
           <input
@@ -184,69 +171,27 @@ const onChangeImageUpload = (e) => {
               />
             </div>
          
-          </div>
         
 
-            <div className={MypageCSS.row1}>
-            <div className={MypageCSS.column}>
-              <label>교번</label>
-              <input
-                type="text"
-                readOnly={true}
-                value={employee.empCode}
-              />
-            </div>
-
-            <div className={MypageCSS.column}>
-              <label htmlFor="employeeName">상태</label>
-              <input
-                id="employeeName"
-                type="text"
-                readOnly={true}
-                value={employee.empStatus}
-              />
-            </div>
-            <div className={MypageCSS.column}>
-              <label htmlFor="employeeEmail">입사</label>
-              <input
-                id="employeeEmail"
-                type="text"
-                readOnly={true}
-                value={employee.empEntDate.substring(0, 10)}
-              />
-            </div>
-            <div className={MypageCSS.column}>
-              <label htmlFor="employeeEmail">소속</label>
-              <input
-                id="employeeEmail"
-                type="text"
-                readOnly={true}
-                value={employee.department.deptName}
-              />
-            </div>
-            <div className={MypageCSS.column}>
-              <label htmlFor="employeeEmail">연차</label>
-              <input
-                id="employeeEmail"
-                type="text"
-                readOnly={true}
-                value={employee.empAnnual}
-              />
-            </div>
             {modifyMode && (
               <button
               onClick={onClickMyPageUpdateHandler}>
                 수정하기
               </button>
             )}
-             <button onClick={() => navigate(-1)}>
-        돌아가기
-      </button>
-          </div>
+               <button onClick={ () => closeModal(false)}>
+                돌아가기
+              </button>
+
+                </div>
         </div>
       )}
     </div>
+    </div>
+
   );
 }
+
+
 
 export default MypageUpdate;

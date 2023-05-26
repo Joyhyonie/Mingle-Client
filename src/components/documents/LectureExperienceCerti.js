@@ -4,18 +4,22 @@ import { useEffect } from "react";
 import DocumentsCSS from "../../css/Documents.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { callDetailCertiDoc } from "../../apis/CertiDocAPICalls";
+import { callMyLectureCallAPI } from "../../apis/LectureAPICalls";
 
 function LectureExperienceCerti({closeModal,myCerti}){
 
     const dispatch = useDispatch();
-    const data = useSelector(state => state.CertiReducer);
+    const {certi} = useSelector(state => state.CertiReducer);
+    const {myLecture} = useSelector(state => state.SubjectInfoReducer);
+    const code = certi.certiDocCode;
+    console.log(myLecture);
 
     useEffect(
         ()=>{
             dispatch(callDetailCertiDoc(myCerti));
-            
+            dispatch(callMyLectureCallAPI());
         },
-        []
+        [code]
     )
 
     function formatDate(dateString) {
@@ -26,37 +30,46 @@ function LectureExperienceCerti({closeModal,myCerti}){
     return (    
         <>        
         <div className={DocumentsCSS.modal} onClick={(e)=> {closeModal()}}>
-            {data.certiDocCode && (
+            {certi.certiDocCode && (
                 <>
             <div className={DocumentsCSS.modalContainer} onClick={(e)=> e.stopPropagation()}>
-            <div className={DocumentsCSS.docCode}>제 {data.certiDocCode}</div>
-            <div className={DocumentsCSS.deptName}>{data.certiForm.certiFormName}</div>
+            <div className={DocumentsCSS.docCode}>제 {certi.certiDocCode}</div>
+            <div className={DocumentsCSS.deptName}>{certi.certiForm.certiFormName}</div>
                 <table className={DocumentsCSS.CareerCertiModalDiv} onClick={()=> window.print()}>
                     <tbody>
                     <tr>
-                        <th className={DocumentsCSS.th}>이름</th>
-                        <td className={DocumentsCSS.name}>{data.applyer.empName}</td>                    
-                        <th className={DocumentsCSS.th}>소속</th>
-                        <td className={DocumentsCSS.name} colSpan="2">{data.applyer.department.deptName}</td>
+                        <th className={DocumentsCSS.thEmpName}>이름</th>
+                        <td className={DocumentsCSS.name}>{certi.applyer.empName}</td>                    
+                        <th className={DocumentsCSS.thEmpName}>소속</th>
+                        <td className={DocumentsCSS.name} colSpan="2">{certi.applyer.department.deptName}</td>
                     </tr>
                     <tr>
                         <th className={DocumentsCSS.th}>주민등록번호</th>
-                        <td className={DocumentsCSS.ssn} colSpan="4">{data.applyer.empSsn}</td>
+                        <td className={DocumentsCSS.ssn} colSpan="4">{certi.applyer.empSsn}</td>
                     </tr>
                     <tr>
                         <th className={DocumentsCSS.thLecture} colSpan="8">강의 경력 사항</th>                        
                     </tr>
                     <tr>
                         <th className={DocumentsCSS.thLectureETC} colSpan="1">강의기간</th>
-                        <th className={DocumentsCSS.thLectureETC} colSpan="2">담당과목</th>
-                        <th className={DocumentsCSS.thLectureETC} colSpan="1">강의시간</th>
+                        <th className={DocumentsCSS.thLectureETC} colSpan="1">담당과목</th>
+                        <th className={DocumentsCSS.thLectureETC} colSpan="2">강의시간</th>
                     </tr>
-                    <th>
-                        <td colSpan="1" className={DocumentsCSS.thLectureETC}>ㅎㅇㅎㅇ</td>
-                    </th>
-                    </tbody>
+                    { (myLecture) ? (
+                        myLecture.map((lecture) => (
+                        <tr key={lecture.lecCode}>
+                        <th colSpan="1" className={DocumentsCSS.thTable}>{lecture.lecStartDate} ~ {lecture.lecEndDate}</th>
+                        <th colSpan="1" className={DocumentsCSS.thTable}>{lecture.subject.sbjName}</th>
+                        <th colSpan="2" className={DocumentsCSS.thTable}>{lecture.lecCount * 2}시간</th>
+                        </tr> 
+                    ))) 
+                    : null
+                         }    
+                                       
                     <h4 className={DocumentsCSS.date}> {formatDate(new Date())}</h4>
-                    <p className={DocumentsCSS.in}>(인)</p>
+                    <p className={DocumentsCSS.in}><img src="/images\최지원인 3.png "/>(인)</p> 
+                    </tbody>
+                   
                 </table>
             </div>
             </>

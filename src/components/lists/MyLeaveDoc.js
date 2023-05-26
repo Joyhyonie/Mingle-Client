@@ -2,11 +2,12 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CommonCSS from '../../css/common/Common.module.css';
-import { callMyLeave } from "../../apis/AttendanceAPICalls";
+import { callMyLeave, callMyLeaveDocSearchName } from "../../apis/AttendanceAPICalls";
 import PagingBar from "../common/PagingBar";
 import ApplideCertidocCSS from '../../css/ApplyCertiDoc.module.css';
 import SearchBar from "../common/SearchBar";
 import SearchBarCss from "../../css/common/SearchBar.module.css";
+import { useSearchParams } from "react-router-dom";
 
 function MyLeave(){
 
@@ -14,6 +15,9 @@ function MyLeave(){
     const [currentPage, setCurrentPage] = useState(1);
     const {myleave,searchMyLeaveDoc} = useSelector(state => state.AttendanceReducer);
     const type = "MyLeaveDoc";
+    const [params] = useSearchParams();
+    const condition = params.get('condtion');
+    const name = params.get('search');
     
     const options = [
         { value: "applyFormName", label: "증명서종류" }
@@ -21,9 +25,13 @@ function MyLeave(){
 
     useEffect(
         ()=>{
+            if(name){
+                dispatch(callMyLeaveDocSearchName({search : name, condition: condition, currentPage : currentPage }));
+                return;
+            }
             dispatch(callMyLeave({currentPage}));
         },
-        [currentPage]
+        [currentPage,name,condition]
     )
 
     return (

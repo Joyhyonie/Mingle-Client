@@ -1,5 +1,5 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
-import { getSubjectInfo, getLectureInfo } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, getMylecture } from "../modules/LectureModule";
 import { wait } from '@testing-library/user-event/dist/utils';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -103,6 +103,24 @@ export const callSubjectListAPI = (deptCode) => {
             dispatch(getSubjectInfo(result));
 
 
+        }
+    }
+}
+
+export const callMyLectureCallAPI = () => {
+    const requestURL = `${LECTURE_URL}/myLecture`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(getMylecture(result));
         }
     }
 }

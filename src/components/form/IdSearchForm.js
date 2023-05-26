@@ -5,13 +5,15 @@ import { useState } from 'react';
 import { callIdAPI } from "../../apis/EmployeeAPICalls";
 import SearchIdModal from '../modal/SearchIdModal';
 import { async } from 'q';
+import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
 
 
 function IdSearchForm(){
     
     const dispatch = useDispatch();
-    const {employee } = useSelector((state) => state.EmployeeReducer);
+    const {search } = useSelector(state => state.EmployeeReducer);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
     const navigate = useNavigate();
@@ -21,35 +23,38 @@ function IdSearchForm(){
         }
     };
 
+
+
     // 폼데이터 저장
     const[form, setForm] = useState({
         empName:'',
         empEmail:''
     });
 
-    
-    
+    useEffect(() => {
+        if (search && search.status === 500) {
+          toast.error(search.message);
+        }
+      }, [search]);
     
     const onChangeHandler = (e) => {
         setForm({
-            ...form,
-            [e.target.name]: e.target.value
+          ...form,
+          [e.target.name]: e.target.value
         });
-    }
-
-    // 아이디 찾기 버튼 클릭 
-    const onClickHandler = async () => {
-        const result = await dispatch(callIdAPI(form));
-
-        setSelectedId(result.data);
-        setIsModalOpen(true);
-        console.log(result);
-
-    }
-      
-        
-  
+      }
     
+      const onClickHandler = async () => {
+        const result = await dispatch(callIdAPI(form));
+        if (result && result.data) { // result가 유효하고 data가 있는지 확인
+          setSelectedId(result.data);
+          setIsModalOpen(true);
+          console.log("아아ㅏ : ", result)
+        }
+      }
+    
+  
+      console.log("? :" ,selectedId);
     const closeModal = () => {
         setSelectedId(null);
         setIsModalOpen(false);

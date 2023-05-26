@@ -51,7 +51,15 @@ function ApplyCertiDoc () {
     )
 
     const onClickHandler = ({DocType}) => {        
+
         if(DocType == "재직"){
+            if(form1.certiUse == undefined || form1.certiUse == "용도 선택"){
+                toast.error("양식을 재대로 입력해주세요")
+                return;
+            } else if(form1.reason == undefined || null ){
+                toast.error("양식을 재대로 입력해주세요")
+                return;
+            }
         const formData = new FormData();
         formData.append("certiForm.certiFormCode", form1.certiFormCode);
         formData.append("certiUse", form1.certiUse);
@@ -60,6 +68,13 @@ function ApplyCertiDoc () {
         dispatch(callRegistCertiDoc(formData));
         }
         if(DocType == "경력"){
+            if(form2.certiUse == undefined || form2.certiUse == "용도 선택"){
+                toast.error("양식을 재대로 입력해주세요")
+                return;
+            } else if(form2.reason == undefined || null ){
+                toast.error("양식을 재대로 입력해주세요")
+                return;
+            }
             const formData = new FormData();
             formData.append("certiForm.certiFormCode", form2.certiFormCode);
             formData.append("certiUse", form2.certiUse);
@@ -68,6 +83,13 @@ function ApplyCertiDoc () {
             dispatch(callRegistCertiDoc(formData));
         }
         if(DocType == "경력증명"){
+            if(form3.certiUse == undefined || form3.certiUse == "용도 선택"){
+                toast.error("양식을 재대로 입력해주세요")
+                return;
+            } else if(form3.reason == undefined || null ){
+                toast.error("양식을 재대로 입력해주세요")
+                return;
+            }
             const formData = new FormData();
             formData.append("certiForm.certiFormCode", form3.certiFormCode);
             formData.append("certiUse", form3.certiUse);
@@ -111,8 +133,10 @@ function ApplyCertiDoc () {
                             <td>3</td>
                             <td>재직증명서</td>
                             <td><select onChange={(e)=> onChangeHandler(e,"재직증명서")} name="certiUse">
-                                <option value="은행제출용">은행제출용</option>
-                                <option value="???????">????????</option>
+                                <option value="용도 선택">용도 선택</option> 
+                                <option value="금융기관제출용">금융기관제출용</option>
+                                <option value="관공서제출용">관공서제출용</option>
+                                <option value="회사제출용">회사제출용</option>
                                 </select></td>
                             <td><input type="text" name="reason" onChange={(e) => onChangeHandler(e,"재직증명서")}/></td>
                             <td>1시간 내외</td>
@@ -122,8 +146,10 @@ function ApplyCertiDoc () {
                             <td>2</td>
                             <td>경력증명서</td>
                             <td><select onChange={(e)=> onChangeHandler(e,"경력증명서")} name="certiUse">
-                                <option value="은행제출용">은행제출용</option>
-                                <option value="???????">????????</option>
+                                <option value="용도 선택">용도 선택</option> 
+                                <option value="금융기관제출용">금융기관제출용</option>
+                                <option value="관공서제출용">관공서제출용</option>
+                                <option value="회사제출용">회사제출용</option>
                                 </select></td>
                             <td><input type="text" name="reason" onChange={(e)=> onChangeHandler(e,"경력증명서")}/></td>
                             <td>1시간 내외</td>
@@ -133,8 +159,10 @@ function ApplyCertiDoc () {
                             <td>1</td>
                             <td>강의경력증명서</td>
                             <td><select onChange={(e)=> onChangeHandler(e,"강의경력증명서")}  name="certiUse">
-                                <option value="은행제출용">은행제출용</option>
-                                <option value="???????">????????</option>
+                                <option value="용도 선택">용도 선택</option> 
+                                <option value="금융기관제출용">금융기관제출용</option>
+                                <option value="관공서제출용">관공서제출용</option>
+                                <option value="회사제출용">회사제출용</option>
                                 </select> </td>
                             <td><input type="text" name="reason" onChange={(e)=> onChangeHandler(e,"강의경력증명서")}/></td>
                             <td>1시간 내외</td>
