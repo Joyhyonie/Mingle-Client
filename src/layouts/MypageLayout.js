@@ -64,15 +64,15 @@ function MyPageLayout() {
       <main className={MyPageLayoutCSS.main}>
         <h1>마이페이지</h1>
         <span>
-          <button onClick={onClickPwdChangeHandler}>비밀번호 변경</button>
-          <button onClick={onClickPageChange}>정보 수정</button>
+          <button onClick={onClickPwdChangeHandler} className={MyPageLayoutCSS.button}>비밀번호 변경</button>
+          <button onClick={onClickPageChange} className={MyPageLayoutCSS.button}>정보 수정</button>
         </span>
         <Outlet />
         <div className={MyPageLayoutCSS.sub}>
           <h1>기간</h1>
           <span>
-            <button onClick={onClickHandlerLeaveDoc}>휴가신청서</button>
-            <button onClick={onClickHandler}>연차신청</button>
+            <button onClick={onClickHandlerLeaveDoc} className={MyPageLayoutCSS.button}>휴가신청서</button>
+            <button onClick={onClickHandler} className={MyPageLayoutCSS.button}>연차신청</button>
           </span>
           <div>
             <div>

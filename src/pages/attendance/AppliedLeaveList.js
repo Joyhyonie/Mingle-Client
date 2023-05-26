@@ -52,7 +52,7 @@ function AppliedLeaveList () {
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
             <div>
-                <p className={ CommonCSS.pageDirection }>증명서 ▸ 휴가 신청 내역</p>
+                <p className={ CommonCSS.pageDirection }>근태관리 ▸ 휴가 신청 내역</p>
             </div>
             <div className={SearchBarCss.basic}>
             {<SearchBar options={options} type={type}/>}
