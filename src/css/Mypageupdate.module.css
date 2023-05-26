@@ -6,7 +6,7 @@
   height: 400px;
   padding: 10px;
     background-color: white;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     border-radius: 20px;
     padding: 50px;
     font-family: 'Noto Sans KR', sans-serif;
@@ -35,7 +35,7 @@
     border-radius: 10px;
     text-indent: 16px;
     background: #FFFFFF;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     font-weight: 500;
     font-size: 24px;    
     font-family: 'Noto Sans KR', sans-serif;
@@ -48,7 +48,7 @@
 .registerDiv button {
     border: none;
     border-radius: 20px;
-    background-color: #FFD7D7;
+    background-color: #999;
     font-family: 'Do Hyeon', sans-serif;
     font-size: 35px;
     color: white;
@@ -71,7 +71,7 @@
     border-radius: 200px;
     margin-top:10px;
     margin-left: 45px;
-    border: 4px solid #FF9797;
+    border: 4px solid #343434;
     
 
 }
