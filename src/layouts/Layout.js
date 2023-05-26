@@ -38,7 +38,16 @@ function Layout () {
                     const senderName = data.sender.empName;
                     const msgContent = data.msgContent;
                     toast.custom((senderImg, senderName, msgContent) => customMessageNoti());
+                    toast(`${senderName}님의 쪽지 도착🥳 ${msgContent}`);
                 });
+
+                eventSource.addEventListener("commonNoti", (e) => {
+                    const data = JSON.parse(e.data);
+                    const notiTitle = data.notiType.notiTitle;
+                    const notiContent = data.notiContent;
+                    toast.custom((notiTitle, notiContent) => customCommonNoti());
+                    toast(`${notiTitle}🥳 ${notiContent}`);
+                })
           
                 eventSource.addEventListener("error", (e) => {
                     eventSource.close();
@@ -50,6 +59,12 @@ function Layout () {
 
     /* 실시간 쪽지 알림을 커스텀하기 위한 함수 */
     const customMessageNoti = () => {
+
+        return <></>
+    }
+
+    /* 학사일정, 공지사항  */
+    const customCommonNoti = () => {
 
         return <></>
     }
