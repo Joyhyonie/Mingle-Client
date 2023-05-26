@@ -3,14 +3,14 @@
     width: 30px;
     height: 30px;
     background-color: white;
-    border : 1px solid #E7E7E7;
+    border : 1px solid #343434;
     color: black;
     box-shadow: none;
 }
 
 .pagingBtn:hover {
     cursor: pointer;
-    border : 1px solid #FF9797;
-    background-color: #FF9797;
+    border : 1px solid #343434;
+    background-color: #343434;
     color: white;
 }
