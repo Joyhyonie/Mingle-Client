@@ -4,16 +4,20 @@ import { useEffect } from "react";
 import DocumentsCSS from "../../css/Documents.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { callDetailCertiDoc } from "../../apis/CertiDocAPICalls";
+import { callMyLectureCallAPI } from "../../apis/LectureAPICalls";
 
 function LectureExperienceCerti({closeModal,myCerti}){
 
     const dispatch = useDispatch();
     const {certi} = useSelector(state => state.CertiReducer);
+    const {myLecture} = useSelector(state => state.SubjectInfoReducer);
     const code = certi.certiDocCode;
+    console.log(myLecture);
 
     useEffect(
         ()=>{
             dispatch(callDetailCertiDoc(myCerti));
+            dispatch(callMyLectureCallAPI());
         },
         [code]
     )
@@ -34,9 +38,9 @@ function LectureExperienceCerti({closeModal,myCerti}){
                 <table className={DocumentsCSS.CareerCertiModalDiv} onClick={()=> window.print()}>
                     <tbody>
                     <tr>
-                        <th className={DocumentsCSS.th}>이름</th>
+                        <th className={DocumentsCSS.thEmpName}>이름</th>
                         <td className={DocumentsCSS.name}>{certi.applyer.empName}</td>                    
-                        <th className={DocumentsCSS.th}>소속</th>
+                        <th className={DocumentsCSS.thEmpName}>소속</th>
                         <td className={DocumentsCSS.name} colSpan="2">{certi.applyer.department.deptName}</td>
                     </tr>
                     <tr>
@@ -48,17 +52,22 @@ function LectureExperienceCerti({closeModal,myCerti}){
                     </tr>
                     <tr>
                         <th className={DocumentsCSS.thLectureETC} colSpan="1">강의기간</th>
-                        <th className={DocumentsCSS.thLectureETC} colSpan="2">담당과목</th>
-                        <th className={DocumentsCSS.thLectureETC} colSpan="1">강의시간</th>
-                    </tr>    
-                    <tr>
-                    <th colSpan="1">ㅎㅇ</th>
-                    <th colSpan="2">ㅎㅇ</th>
-                    <th colSpan="1">ㅎㅇ</th>
+                        <th className={DocumentsCSS.thLectureETC} colSpan="1">담당과목</th>
+                        <th className={DocumentsCSS.thLectureETC} colSpan="2">강의시간</th>
                     </tr>
-                    </tbody>
+                    { myLecture && 
+                        myLecture.map((lecture) => (
+                        <tr key={lecture.lecCode}>
+                        <th colSpan="1" className={DocumentsCSS.thTable}>{lecture.lecStartDate} ~ {lecture.lecEndDate}</th>
+                        <th colSpan="1" className={DocumentsCSS.thTable}>{lecture.subject.sbjName}</th>
+                        <th colSpan="2" className={DocumentsCSS.thTable}>{lecture.lecCount * 2}시간</th>
+                        </tr> 
+                    ))}    
+                                       
                     <h4 className={DocumentsCSS.date}> {formatDate(new Date())}</h4>
-                    <p className={DocumentsCSS.in}>(인)</p>
+                    <p className={DocumentsCSS.in}><img src="/images\최지원인 3.png "/>(인)</p> 
+                    </tbody>
+                   
                 </table>
             </div>
             </>
