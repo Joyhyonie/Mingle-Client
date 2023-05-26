@@ -1,16 +1,14 @@
 import { getDepartmentForSend, getEmployeeForSend, getLikedMsg, getLikedMsgSearch, getReceivedMsg, getReceivedMsgSearch, getSentMsg, getSentMsgSearch, patchLikeMsg, patchReadMsg, patchRemoveMsg, postSendMsg } from "../modules/MessageModule";
 import { request } from "./Api";
 
-const accessToken = window.localStorage.getItem('accessToken');
-
 /* 받은 쪽지함 조회 */
 export function callReceivedMsgListAPI() {
 
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/message/received`, headers);
@@ -29,8 +27,8 @@ export function callReceivedMsgSearchAPI(condition, word) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/message/received/search?condition=${condition}&word=${word}`, headers);
@@ -49,8 +47,8 @@ export function callReadMsgAPI(msgCode) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('PATCH', `/message/read/${msgCode}`, headers);
@@ -69,8 +67,8 @@ export function callSentMsgListAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/message/sent`, headers);
@@ -89,8 +87,8 @@ export function callSentMsgSearchAPI(condition, word) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/message/sent/search?condition=${condition}&word=${word}`, headers);
@@ -109,8 +107,8 @@ export function callLikedMsgListAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/message/liked`, headers);
@@ -129,8 +127,8 @@ export function callLikedMsgSearchAPI(condition, word) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/message/liked/search?condition=${condition}&word=${word}`, headers);
@@ -149,8 +147,8 @@ export function callLikeMsgAPI(msgCode) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('PATCH', `/message/like/${msgCode}`, headers);
@@ -199,7 +197,7 @@ export function callSendMsgAPI(formData) {
     return async (dispatch, getState) => {
 
         const headers = {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('POST', `/message/send`, headers, formData);
@@ -218,8 +216,8 @@ export function callRemoveMsgAPI(msgCodes) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const messageDTO = {

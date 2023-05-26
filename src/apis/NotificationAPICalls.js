@@ -2,16 +2,14 @@ import { getBoardPreview } from "../modules/BoardModule";
 import { getNotification, postRemoveAllNoti, postRemoveNoti } from "../modules/NofiticationModule";
 import { request } from "./Api";
 
-const accessToken = window.localStorage.getItem('accessToken');
-
 /* 1. 유효한 알림 전체 조회 */
 export function callNotificationListAPI () {
 
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('GET', `/notification/all`, headers);
@@ -30,8 +28,8 @@ export function callNotificationRemoveAPI (notiCode) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('POST', `/notification/remove/${notiCode}`, headers);
@@ -50,8 +48,8 @@ export function callNotificationRemoveAllAPI (notiCode) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('POST', `/notification/remove/all`, headers);

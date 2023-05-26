@@ -45,7 +45,7 @@ export const callGetEmployeeAPI = () => {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
@@ -150,8 +150,8 @@ export const callPwdChangeAPI = (form) => {
         const result = await fetch(requestURL, {
           method: 'POST',
           headers: {
-            "Authorization": "Bearer " + window.localStorage.getItem('accessToken'),
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem('accessToken')
           },
           body: JSON.stringify(form)
         }).then(response => response.json());
