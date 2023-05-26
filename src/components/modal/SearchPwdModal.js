@@ -8,7 +8,7 @@ function SearchPwdModal({ selectedId, closeModal }) {
     <div className={SearchIDCSS.modal}>
       <div className={SearchIDCSS.modalContainer}>
         <h1><span id="title">M</span>ingle</h1>
-        {selectedId.empId ? (
+        {selectedId && selectedId.empId ? (
           <div className={SearchIDCSS.ID}>{selectedId.empEmail}</div>
         ) : (
           <div>조회된 아이디가 없습니다.</div>
