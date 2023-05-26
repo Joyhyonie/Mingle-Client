@@ -22,7 +22,7 @@ function EmployeeManagement() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data, pageInfo } = useSelector((state) => state.EmployeeReducer);
+  const { Employees } = useSelector((state) => state.EmployeeReducer);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [selectAll, setSelectAll] = useState(false);
@@ -66,7 +66,7 @@ function EmployeeManagement() {
 
     // 체크박스 상태 통일(전체)
     let newCheckboxes = {};
-    data.forEach((employee) => {
+    Employees.forEach((employee) => {
       newCheckboxes[employee.empCode] = e.target.checked;
     });
     setCheckboxes(newCheckboxes);
@@ -154,8 +154,8 @@ function EmployeeManagement() {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.map((employee) => (
+          {(Employees && Employees.data) &&
+            Employees.data.map((employee) => (
               <tr
                 key={employee.empCode}
               >
