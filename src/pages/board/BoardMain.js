@@ -49,7 +49,7 @@ function BoardMain() {
   );
 
   const clikedStyle = {
-    background: '#FF9797',
+    background: '#343434',
     color: 'white',
     fontWeight: 'bold'
   }

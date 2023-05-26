@@ -11,7 +11,7 @@ html::-webkit-scrollbar {
 }
 
 input[type="checkbox"] {
-  accent-color: #FFD7D7;
+  accent-color: #999;
 }
 
 .pageDirection {
@@ -106,7 +106,7 @@ tbody tr:hover {
 }
 
 .logo span {
-    color: #FF9797;
+    color: #66D2B3;;
 }
 
 .hello {
@@ -134,7 +134,7 @@ tbody tr:hover {
 .buttonBoxLight button {
     border: none;
     border-radius: 20px;
-    background-color: #FFD7D7;
+    background-color: #999;
     font-family: 'Do Hyeon', sans-serif;
     font-size: 35px;
     color: white;
@@ -145,7 +145,7 @@ tbody tr:hover {
 .buttonBoxDark button {
     border: none;
     border-radius: 20px;
-    background-color: #FFD7D7;
+    background-color: #999;
     font-family: 'Do Hyeon', sans-serif;
     font-size: 35px;
     color: #4D4D4D;
@@ -155,7 +155,7 @@ tbody tr:hover {
 
 .buttonBoxLight button:hover,
 .buttonBoxDark button:hover {
-    background-color: #FF9797;
+    background-color: #343434;
     cursor: pointer;
 }
 
@@ -202,18 +202,8 @@ tbody tr:hover {
 
 .active .superMenu,
 .activelist {
-    color: #FF9797;
-    box-shadow: 5px 0 0 #FF9797;
-}
-
-.closed {
-    display: none;
-}
-
-.active .superMenu,
-.activelist {
-    color: #FF9797;
-    box-shadow: 5px 0 0 #FF9797;
+    color: #343434;;
+    box-shadow: 5px 0 0 #66D2B3;;
 }
 
 .superMenu {
@@ -239,7 +229,7 @@ tbody tr:hover {
     left: 50%; 
     transform: translate(-50%, -50%);
     background-color: white;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     border-radius: 20px;
     padding: 50px 70px;
 }
@@ -255,7 +245,7 @@ tbody tr:hover {
 }
 
 .logoutButtonBox button {
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     font-size: 18px;
     padding: 7px 35px;
     border-radius: 10px;
@@ -270,6 +260,6 @@ tbody tr:hover {
 }
 
 .pinkButton {
-    background-color: #FF9797;
+    background-color: #343434;
     color: white;
 }
