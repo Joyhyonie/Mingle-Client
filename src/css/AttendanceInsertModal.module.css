@@ -59,7 +59,7 @@
     display: block;
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     height: 30px;
     border-radius: 8px;
     text-align: center;
@@ -69,8 +69,7 @@
 .selectdept {
     margin-top: 4px;
     text-align: center;
-    border: 1px solid #FF9797;
-    border-radius: 8px;
+    border: 1px solid #343434;
     width: 180px;
     height: 35px;
     margin-right: 7px;
@@ -86,7 +85,7 @@
 .selectFormCode {
     margin-top: 25px;
     text-align: center;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     border-radius: 8px;
     width: 475px;
     height: 35px;
@@ -99,7 +98,7 @@
 
 .inputStartTime {
     height: 38px;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     margin-top: 33px;
     border-radius: 8px;
     width: 197px;
@@ -116,7 +115,7 @@
 .inputEndTime {
     height: 38px;
     text-align: center;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     margin-top: 33px;
     border-radius: 8px;
     width: 200px;
@@ -131,7 +130,7 @@
     margin-top: 30px;
     margin-left: 30px;
     margin-right: 16px;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     border-radius: 8px;
     width: 466px;
     height: 255px;
@@ -151,16 +150,16 @@
     width: 150px;
     height: 50px;
     border-radius: 12px;
-    background-color:  #FFD7D7;
+    background-color:  #999;
     font-weight: bold;
-    border: solid #FFD7D7;
+    border: solid #999;
     color: white;
     font-size: 18px;
 }
 
 .inputdeptName {
     width: 170px;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     border-radius: 8px;
     margin-top: 5px;
     margin-bottom: 5px;
