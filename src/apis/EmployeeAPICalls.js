@@ -109,30 +109,37 @@ export const callIdAPI = (form) => {
 
 
 export const callPwdAPI = (form) => {
-
     const requestURL = `${PRE_URL}/auth/sendemail`;
-
-    return async (dispatch, getState) => {
-
+  
+    return async (dispatch) => {
+      try {
         const result = await fetch(requestURL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(form)
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(form)
         })
-            .then(response => response.json());
-
-            if( result.status === 200){
-        console.log('[EmployeeCalls] callIdAPI result : ', result);
-              dispatch(postPwd(result));
-              return result;
-        }else{
-            toast.error("해당 아이디와 일치하는 사용자가 없습니다.");
+        .then(response => response.json());
+  
+        if ( result.status === 200) {
+          console.log('[EmployeeCalls] callPwdAPI result:', result);
+          dispatch(resetEmployee());
+          // postPwd 액션 디스패치
+         
+          toast.success(result.message);
+          dispatch(resetEmployee());
+          return result;
+        } else {
+          toast.error("해당 아이디와 일치하는 사용자가 없습니다.");
         }
-        
+      } catch (error) {
+        console.error('An error occurred:', error);
+        toast.error('요청을 처리하는 중에 오류가 발생했습니다.');
+      }
     };
-};
+  };
+  
 
 
 export const callPwdChangeAPI = (form) => {

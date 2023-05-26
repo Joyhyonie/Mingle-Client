@@ -49,11 +49,12 @@ function IdSearchForm(){
         if (result && result.data) { // result가 유효하고 data가 있는지 확인
           setSelectedId(result.data);
           setIsModalOpen(true);
+          console.log("아아ㅏ : ", result)
         }
       }
     
   
-    
+      console.log("? :" ,selectedId);
     const closeModal = () => {
         setSelectedId(null);
         setIsModalOpen(false);
