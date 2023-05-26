@@ -50,9 +50,9 @@ function PwdSearchForm(){
       }
     
       const onClickHandler = async () => {
-        const result = await dispatch(callPwdAPI(form));
-        navigate("/")
+        const result = await dispatch(callPwdAPI(form));     
         if (result && result.data) { // result가 유효하고 data가 있는지 확인
+          navigate("/")
           setSelectedId(result.data);
           setIsModalOpen(true);
           console.log("아아ㅏ : ", result);
@@ -68,7 +68,11 @@ function PwdSearchForm(){
       };
     
 
-
+      const onKeyPressHandler = (e) => {
+        if (e.key === "Enter") {
+          onClickHandler();
+        }
+      };
 
 
 
@@ -85,6 +89,8 @@ function PwdSearchForm(){
             placeholder="아이디를 입력하세요."
             autoComplete='off'
             onChange={ onChangeHandler }
+            onKeyUp={onKeyPressHandler}
+
         />
         <input
             type="email"
@@ -92,6 +98,8 @@ function PwdSearchForm(){
             placeholder="이메일을 입력하세요."
             autoComplete='off'
             onChange={ onChangeHandler }
+            onKeyUp={onKeyPressHandler}
+
         />
         <div style={style.story}>
        <div>회원가입 시 입력하신 이름과 이메일로 인증메일이 발송됩니다.</div>
