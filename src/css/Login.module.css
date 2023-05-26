@@ -20,7 +20,7 @@
     margin-bottom: 10px;
     height: 50px;
     width: 440px;
-    border: 3px solid  #FF9797;
+    border: 3px solid  #343434;
     text-indent: 10px;
     border-radius: 25px;
 }
@@ -34,8 +34,8 @@
     padding-bottom: 5px;
     width: 440px;
     border-radius: 10px;
-    background-color: #FF9797;
-    border: solid rgba(255, 151, 151, 0.79);
+    background-color: #343434;
+    border: solid #343434;
     color: white;
     font-family: 'Paytone One';
     font-size: 29px;
@@ -43,7 +43,7 @@
  }
 
 .loginDiv span  {
-    color: #FF9797;
+    color: #66d2b3;
 }
 
 .loginDiv h1{
