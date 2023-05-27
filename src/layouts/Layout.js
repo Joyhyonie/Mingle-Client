@@ -8,7 +8,6 @@ import NavbarForProfessor from '../components/common/NavbarForProfessor';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { callGetEmployeeAPI } from '../apis/EmployeeAPICalls';
-import { AnimatePresence, motion } from 'framer-motion';
 
 function Layout () {
 
@@ -22,6 +21,7 @@ function Layout () {
             dispatch(callGetEmployeeAPI());
         },[]
     );
+
 
     // SSE 구독 후 클라이언트별로 알림 받기
     useEffect(
@@ -39,14 +39,14 @@ function Layout () {
                     const senderImg = data.sender.empProfile;
                     const senderName = data.sender.empName;
                     const msgContent = data.msgContent;
-                    toast.custom((t) => customMessageNoti(t, senderImg, senderName, msgContent));
+                    customMessageNoti(senderImg, senderName, msgContent);
                 });
 
                 eventSource.addEventListener("commonNoti", (e) => {
                     const data = JSON.parse(e.data);
                     const notiTitle = data.notiType.notiTitle;
                     const notiContent = data.notiContent;
-                    toast.custom((notiTitle, notiContent) => customCommonNoti());
+                    toast.custom((t) => customCommonNoti(t, notiTitle, notiContent));
                 })
           
                 eventSource.addEventListener("error", (e) => {
@@ -57,32 +57,39 @@ function Layout () {
         },[]
     );
 
-    /* 실시간 쪽지 알림을 커스텀하기 위한 함수 */
-    const customMessageNoti = (t, senderImg, senderName, msgContent) => {
+    const click = () => {
+        const senderImg = './images/dummyProfile.png'
+        const senderName = '조효연';
+        const msgContent = '아 제발 되라고 좀 왜 안닫히냐고 ㅡㅡ'
+        customMessageNoti(senderImg, senderName, msgContent);
+    }
 
-        return (
-            <AnimatePresence>
-                {t.visible && (
-                <motion.div initial={{ opacity: 0, y: -50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -50 }}
-                            transition={{ duration: 0.3 }}
-                >
-                    <div className={ ToastCSS.msgNotiBox }>
-                        <div className={ ToastCSS.msgContentBox }>
-                            <img src={senderImg}/>
-                            <div>
-                                <sub><span>{senderName}</span>님의 쪽지가 도착했습니다 :)</sub>
-                                <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
-                            </div>
-                        </div>
-                        <div className={ ToastCSS.closeBox }>
-                            <p onClick={ () => toast.dismiss(t.id) }>close</p>
+    /* 실시간 쪽지 알림을 커스텀하기 위한 함수 */
+    const customMessageNoti = (senderImg, senderName, msgContent) => {
+
+        toast.custom((t) => (
+            <div
+                style={{
+                    opacity: t.visible ? 1 : 0,
+                    transition: "opacity 400ms ease-in-out, transform 400ms ease-in-out",
+                    transform: t.visible ? "translateY(0)" : "translateY(-20%)",
+                }}
+            >
+                <div className={ ToastCSS.msgNotiBox }>
+                    <div className={ ToastCSS.msgContentBox }>
+                        <img src={senderImg}/>
+                        <div>
+                            <sub><span>{senderName}</span>님의 쪽지가 도착했습니다 :)</sub>
+                            <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
                         </div>
                     </div>
-                </motion.div>
-                )}
-            </AnimatePresence>
+                    <div className={ ToastCSS.closeBox } onClick={ () => {toast.dismiss(t.id); console.log("클릭됨")}}>
+                        <p>close</p>
+                    </div>
+                </div>
+            </div>
+            ),
+            { duration: 5000 }
         );
     }
 
@@ -104,6 +111,7 @@ function Layout () {
 
     return (
         <div>
+            <button onClick={click}>toast</button>
             <Header setActiveIndex={setActiveIndex} isDark={isDark} setIsDark={setIsDark} logoutHandler={logoutHandler}/>
             <div className={ CommonCSS.flex }>
                 <div className={ CommonCSS.navbarCustom }>

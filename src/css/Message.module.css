@@ -95,7 +95,8 @@
     position: fixed;
     position: absolute;
     border-radius: 5px;
-    background-color: #66d2b466;
+    background-color: #DADADA;
+    /* background-color: #66d2b466; */
     display: flex;
     align-items: center; 
     width: 370px;
