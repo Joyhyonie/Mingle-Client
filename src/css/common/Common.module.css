@@ -11,7 +11,8 @@ html::-webkit-scrollbar {
 }
 
 input[type="checkbox"] {
-  accent-color: #999;
+  accent-color: #343434;
+  width: 15px;
 }
 
 .pageDirection {
@@ -186,7 +187,7 @@ tbody tr:hover {
 }
 
 .superMenu {
-    font-size: 24px;
+    font-size: 23px;
     font-weight: 600;
     padding: 20px;
 }

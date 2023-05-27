@@ -95,7 +95,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
 
         // 캘린더 Header
         .fc .fc-toolbar.fc-header-toolbar {
-          margin: -5px 0px 15px;
+          margin: -5px 0px 20px;
           padding: 20px;
           height: 70px;
           font-size: 18px;
@@ -167,7 +167,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
           padding: 2px;
           height: 90px;
           border-radius: 15px;
-          background-color: #FDFDFD;
+          background-color: #FBFBFB;
         }
 
         // 날짜

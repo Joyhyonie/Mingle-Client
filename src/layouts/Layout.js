@@ -8,6 +8,7 @@ import NavbarForProfessor from '../components/common/NavbarForProfessor';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { callGetEmployeeAPI } from '../apis/EmployeeAPICalls';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function Layout () {
 
@@ -38,8 +39,7 @@ function Layout () {
                     const senderImg = data.sender.empProfile;
                     const senderName = data.sender.empName;
                     const msgContent = data.msgContent;
-                    toast.custom((t, senderImg, senderName, msgContent) => customMessageNoti());
-                    toast(`${senderName}님의 쪽지 도착🥳 ${msgContent}`);
+                    toast.custom((t) => customMessageNoti(t, senderImg, senderName, msgContent));
                 });
 
                 eventSource.addEventListener("commonNoti", (e) => {
@@ -47,7 +47,6 @@ function Layout () {
                     const notiTitle = data.notiType.notiTitle;
                     const notiContent = data.notiContent;
                     toast.custom((notiTitle, notiContent) => customCommonNoti());
-                    toast(`${notiTitle}🥳 ${notiContent}`);
                 })
           
                 eventSource.addEventListener("error", (e) => {
@@ -62,18 +61,28 @@ function Layout () {
     const customMessageNoti = (t, senderImg, senderName, msgContent) => {
 
         return (
-            <>
-                <div className={ `${t.visible ? 'ToastCSS.animate-enter' : 'ToastCSS.animate-leave'}` }>
+            <AnimatePresence>
+                {t.visible && (
+                <motion.div initial={{ opacity: 0, y: -50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -50 }}
+                            transition={{ duration: 0.3 }}
+                >
                     <div className={ ToastCSS.msgNotiBox }>
                         <div className={ ToastCSS.msgContentBox }>
-
+                            <img src={senderImg}/>
+                            <div>
+                                <sub><span>{senderName}</span>님의 쪽지가 도착했습니다 :)</sub>
+                                <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
+                            </div>
                         </div>
                         <div className={ ToastCSS.closeBox }>
                             <p onClick={ () => toast.dismiss(t.id) }>close</p>
                         </div>
                     </div>
-                </div>
-            </>
+                </motion.div>
+                )}
+            </AnimatePresence>
         );
     }
 
