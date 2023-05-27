@@ -129,10 +129,10 @@ function ModifyScheduleModal ({selectedSchedule, setModifyScheduleModal}) {
                     <button className={ MainCSS.whiteButton } onClick={ () => setModifyScheduleModal(false)}>
                         취소
                     </button>
-                    <button className={ MainCSS.pinkButton } onClick={ () => modifyMySchedule(selectedSchedule.scheCode) }>
+                    <button className={ MainCSS.blackButton } onClick={ () => modifyMySchedule(selectedSchedule.scheCode) }>
                         수정
                     </button>
-                    <button className={ MainCSS.pinkButton } onClick={ () => deleteMySchedule(selectedSchedule.scheCode) }>
+                    <button className={ MainCSS.blackButton } onClick={ () => deleteMySchedule(selectedSchedule.scheCode) }>
                         삭제
                     </button>
                 </div>

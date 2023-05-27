@@ -89,7 +89,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
         height: 70px;
         font-size: 18px;
         line-height: 29px;
-        color: #343434;
+        color: #66d2b3;
       }
 
       // toolbar 버튼
@@ -123,7 +123,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
         padding: 6px;
         border: none;
         border-radius: 10px;
-        background: #DADADA;
+        background: #343434;
         font-weight: 600;
         font-size: 23px;
         line-height: 19px;
@@ -146,7 +146,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
 
       // 오늘 날짜 색
       .fc .fc-daygrid-day.fc-day-today {
-        background-color: #999;
+        background-color: #66d2b3;
       }
 
       // 날짜별 그리드
@@ -165,7 +165,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
       // 각 이벤트 요소
       .fc-event {
         background: white;
-        border: 1px solid #999;
+        border: 1px solid #66d2b3;
         border-radius: 8px;
         margin-bottom: 2px;
         height: 25px;
@@ -188,8 +188,8 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
             weekends={true}
             select={dateSelectHanlder}
             selectMirror={true}
-            dayMaxEvents={2}
-            eventTextColor={'#666666'}
+            dayMaxEvents={1}
+            eventTextColor={'#343434'}
             events={allAcSchedule && acEvents()}
             displayEventTime={false}
             />

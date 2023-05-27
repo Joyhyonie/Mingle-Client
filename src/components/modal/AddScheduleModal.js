@@ -91,7 +91,7 @@ function AddScheduleModal ({setAddScheduleModal}) {
                     <input
                         type="color"
                         name="colorCode"
-                        defaultValue={"#FFD7D7"}
+                        defaultValue={"#66d2b3"}
                         onChange={onChangeHandler}
                     />
                 </div>
@@ -99,7 +99,7 @@ function AddScheduleModal ({setAddScheduleModal}) {
                     <button className={ MainCSS.whiteButton } onClick={ () => setAddScheduleModal(false)}>
                         취소
                     </button>
-                    <button className={ MainCSS.pinkButton } onClick={ registMySchedule }>
+                    <button className={ MainCSS.blackButton } onClick={ registMySchedule }>
                         등록
                     </button>
                 </div>

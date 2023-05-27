@@ -88,17 +88,16 @@
     font-size: 23px;
     font-weight: 600;
     margin: 15px;
-    color: #999; 
+    color: #66d2b3; 
 }
 
 .dateBox div {
     cursor: pointer;
-    background-color: #E6E6E6;
+    background-color: #343434;
     margin: 15px 5px;
     padding: 3px 30px;
     border-radius: 10px;
-    color: #666666;
-    font-weight: 900;
+    color: #FFFFFF;
     font-size: 18px;
 }
 
@@ -123,6 +122,7 @@
 
 .toDoItemBox img {
     cursor: pointer;
+    width: 25px;
 }
 
 .colorAndToDo {
@@ -163,11 +163,11 @@
 }
 
 .academicItemBox div {
-    background-color: #999;
+    border: 2px solid #E6E6E6;
     padding: 5px 15px;
     border-radius: 10px;
     margin-right: 15px;
-    color: white;
+    color: #66d2b3;
     font-size: 16px;
 }
 
@@ -224,15 +224,19 @@
 .recordBox div div {
     border-radius: 20px;
     margin: 10px;
-    background-color: #999;
+    background-color: #66d2b3;
     color: white;
     font-size: 23px;
     font-weight: 600;
     padding: 10px 67px;
 }
 
+.recordBox div div:hover {
+    background-color: #343434;
+}
+
 .recordBox p {
-    color: #999;
+    color: #66d2b3;
     text-align: center;
     margin: -10px 0px;
     font-size: 15px;
@@ -316,7 +320,7 @@
 
 .timeNow {
     margin: 0px 0px -30px 0px;
-    color: #999;
+    color: #66d2b3;
 }
 
 .attendanceModalContainer text {
@@ -329,7 +333,7 @@
 .acScheduleModalContainer .title {
     border-top: 1px solid #999;
     border-bottom: 1px solid #999;
-    background: #fff7f7;
+    background: #66d2b42f;
     text-align: center;
     padding: 10px;
     font-size: 20px;
@@ -347,7 +351,7 @@
 }
 
 .acScheduleModalContainer .info text {
-    color: #999;
+    color: #66d2b3;
 }
 
 .acScheduleModalContainer .content {
@@ -375,7 +379,6 @@
 
 .buttonBox button,
 .centerButtonBox button {
-    border: 1px solid #999;
     font-size: 18px;
     padding: 5px 39.5px;
     border-radius: 10px;
@@ -389,12 +392,14 @@
 }
 
 .whiteButton {
+    border: 1px solid #999;
     background-color: white;
     color: #666666;
 }
 
-.pinkButton {
-    background-color: #999;
+.blackButton {
+    border: 1px solid #343434;
+    background-color: #343434;
     color: white;
 }
 

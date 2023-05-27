@@ -105,8 +105,9 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-.logo span {
-    color: #66D2B3;;
+.logo span,
+.hello span {
+    color: #66D2B3;
 }
 
 .hello {
@@ -115,6 +116,7 @@ tbody tr:hover {
     letter-spacing: 1px;
     margin: 0 auto;
 }
+
 
 .iconBox {
     margin: 45px;
@@ -142,23 +144,6 @@ tbody tr:hover {
     margin-right: 45px;
 }
 
-.buttonBoxDark button {
-    border: none;
-    border-radius: 20px;
-    background-color: #999;
-    font-family: 'Do Hyeon', sans-serif;
-    font-size: 35px;
-    color: #4D4D4D;
-    padding: 5px 40px;
-    margin-right: 45px;
-}
-
-.buttonBoxLight button:hover,
-.buttonBoxDark button:hover {
-    background-color: #343434;
-    cursor: pointer;
-}
-
 
 /* -------------------------------------------------------------------------------------- */
 
@@ -168,7 +153,6 @@ tbody tr:hover {
     width: 250px;
     height: 89.5vh;
     color: #666666;
-    font-family: 'Do Hyeon', sans-serif;
     text-align: center;
     cursor: pointer;
 }
@@ -179,19 +163,14 @@ tbody tr:hover {
     height: 89.5vh;
     background-color: #4D4D4D;
     color: #ffffff;
-    font-family: 'Do Hyeon', sans-serif;
     text-align: center;
     cursor: pointer;
 }
 
-.superMenu {
-    font-size: 27px;
-    padding: 20px;
-}
-
 .navBarBoxLight p,
 .navBarBoxDark p {
-    font-size: 22px;
+    font-size: 19px;
+    font-weight: 600;
     margin: 0;
     padding: 5px;
 }
@@ -203,11 +182,12 @@ tbody tr:hover {
 .active .superMenu,
 .activelist {
     color: #66D2B3;
-    box-shadow: 5px 0 0 #66D2B3;;
+    box-shadow: 5px 0 0 #66D2B3;
 }
 
 .superMenu {
-    font-size: 25px;
+    font-size: 24px;
+    font-weight: 600;
     padding: 20px;
 }
 
@@ -229,7 +209,7 @@ tbody tr:hover {
     left: 50%; 
     transform: translate(-50%, -50%);
     background-color: white;
-    border: 1px solid #343434;
+    border: 1px solid #969696;
     border-radius: 20px;
     padding: 50px 70px;
 }
@@ -245,7 +225,6 @@ tbody tr:hover {
 }
 
 .logoutButtonBox button {
-    border: 1px solid #343434;
     font-size: 18px;
     padding: 7px 35px;
     border-radius: 10px;
@@ -255,11 +234,13 @@ tbody tr:hover {
 }
 
 .whiteButton {
+    border: 1px solid #969696;
     background-color: white;
     color: #666666;
 }
 
-.pinkButton {
+.blackButton {
+    border: 1px solid #343434;
     background-color: #343434;
     color: white;
 }

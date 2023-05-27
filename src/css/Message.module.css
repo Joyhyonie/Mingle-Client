@@ -8,9 +8,8 @@
     width: 500px;
     height: 700px;
     background-color: white;
-    border: 2px solid #999;
+    border: 2px solid #343434;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px #DADADA;
 }
 
 /* 쪽지 Layout ---------------------------------------------- */
@@ -21,7 +20,7 @@
 
 .navBar {
     background-color: #343434;
-    border-radius: 18px 0px 0px 18px;
+    border-radius: 16px 0px 0px 16px;
     width: 90px;
     height: 700px;
 }
@@ -37,7 +36,6 @@
 }
 
 .body {
-    /* border: 2px solid #bbabfd; */
     width: 410px;
     height: 650px;
     overflow: scroll;
@@ -50,8 +48,8 @@
 /* 쪽지 내부 ---------------------------------------------- */
 
 .navBar img {
-    margin: 10px;
-    width: 60px;
+    margin: 16px;
+    width: 55px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
 }
@@ -61,8 +59,8 @@
 }
 
 .header p {
-    font-family: 'Do Hyeon', sans-serif;
-    font-size: 25px;
+    font-size: 21px;
+    font-weight: 600;
     color: #666666;
     margin: 8px 15px;
 }
@@ -80,11 +78,11 @@
 
 .deleteButton {
     position: absolute;
-    top: 1.9%;
+    top: 1.5%;
     right: 11%;
     border: none;
-    border-radius: 5px;
-    padding: 3px 15px;
+    border-radius: 10px;
+    padding: 4px 20px 6px 20px;
     background-color: #343434;
     color: white;
     cursor: pointer;
@@ -97,7 +95,7 @@
     position: fixed;
     position: absolute;
     border-radius: 5px;
-    background-color: #DADADA;
+    background-color: #66d2b466;
     display: flex;
     align-items: center; 
     width: 370px;
@@ -130,7 +128,7 @@
 .selectEmployee {
     width: 120px;
     height: 30px;
-    border: 1px solid #343434;
+    border: 1px solid #969696;
     padding: 0px 30px 0px 10px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -146,7 +144,7 @@
 }
 
 .msgSearchWord {
-    border: 1px solid #343434;
+    border: 1px solid #969696;
     width: 240px;
     height: 27px;
     margin-left: 20px;
@@ -229,10 +227,9 @@
 .msgItemBody button {
     border: none;
     border-radius: 10px;
-    background-color: #999;
-    color: #666666;
-    font-weight: 900;
-    padding: 5px 20px;
+    background-color: #343434;
+    color: #FFF;
+    padding: 4px 20px 6px 20px;
     margin: 0px -22px -10px -20px;
     cursor: pointer;
 }
@@ -284,16 +281,16 @@
 .sendButton {
     border: none;
     border-radius: 10px;
-    background-color: #DADADA;
-    color: #666666;
+    background-color: #66d2b3;
+    color: #FFFFFF;
     font-weight: 900;
-    font-size: 15px;
-    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 900;
+    padding: 10px 19px;
     cursor: pointer;
     margin: 13px 160px;
 }
 
 .sendButton:hover {
-    background-color: #999;
-    color: white;
+    background-color: #343434;
 }

@@ -50,7 +50,7 @@ function App() {
         toastOptions={{
           duration: 3000,
           style: {
-            border: '2px solid #ffd7d7',
+            border: '2px solid #66D2B3',
             padding: '20px',
             color: '#343434',
             fontWeight: 'bold'

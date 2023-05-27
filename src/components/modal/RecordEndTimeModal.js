@@ -43,7 +43,7 @@ function RecordEndTimeModal ({setRecordEndTimeModal}) {
                     <button className={ MainCSS.whiteButton } onClick={ () => setRecordEndTimeModal(false)}>
                         취소
                     </button>
-                    <button className={ MainCSS.pinkButton } onClick={ recordEndTimeHandler }>
+                    <button className={ MainCSS.blackButton } onClick={ recordEndTimeHandler }>
                         등록
                     </button>
                 </div>

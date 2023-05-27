@@ -7,7 +7,7 @@ import ReceivedMsgBox from '../pages/message/ReceivedMsgBox';
 import SentMsgBox from '../pages/message/SentMsgBox';
 import { useDispatch } from 'react-redux';
 
-function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClickedState}) {
+function MessageModalLayout ({setMessageModal, setMsgClicked}) {
     
     const dispatch = useDispatch();
     const [replyContent, setReplyContent] = useState('');           // '답장' 클릭 시, 받은 쪽지 내용과 함께 답장시키기 위한 state
@@ -84,12 +84,12 @@ function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClic
             <div className={ MessageCSS.navBar }>
                 {isClickedstate.receiveIsClicked ? (
                     <motion.img
-                        src="/images/receive-hover.png"
+                        src="/images/received-hover.png"
                         whileHover={{ scale: 1.05 }}
                     />
                 ) : (
                     <img
-                        src="/images/receive.png"
+                        src="/images/received.png"
                         onClick={() => {setWhichPage('receivedMsgBox'); stateChangeHandler('receiveIsClicked');}}
                         whileHover={{ scale: 1.05 }}
                     />
@@ -147,7 +147,7 @@ function MessageModalLayout ({setMessageModal, isIconClickedState, setIsIconClic
                         <img 
                             src={`${process.env.PUBLIC_URL}/images/close.png`}
                             onClick={ () => {
-                                setIsIconClickedState(!isIconClickedState.msgIsClicked);
+                                setMsgClicked(false);
                                 setMessageModal(false);
                             }}
                         />
