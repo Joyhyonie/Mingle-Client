@@ -22,7 +22,6 @@ function Layout () {
         },[]
     );
 
-
     // SSE 구독 후 클라이언트별로 알림 받기
     useEffect(
         () => {
@@ -46,7 +45,7 @@ function Layout () {
                     const data = JSON.parse(e.data);
                     const notiTitle = data.notiType.notiTitle;
                     const notiContent = data.notiContent;
-                    toast.custom((t) => customCommonNoti(t, notiTitle, notiContent));
+                    customCommonNoti(notiTitle, notiContent);
                 })
           
                 eventSource.addEventListener("error", (e) => {
@@ -57,22 +56,15 @@ function Layout () {
         },[]
     );
 
-    const click = () => {
-        const senderImg = './images/dummyProfile.png'
-        const senderName = '조효연';
-        const msgContent = '아 제발 되라고 좀 왜 안닫히냐고 ㅡㅡ'
-        customMessageNoti(senderImg, senderName, msgContent);
-    }
-
-    /* 실시간 쪽지 알림을 커스텀하기 위한 함수 */
+    /* 실시간 쪽지 알림 커스텀 함수 */
     const customMessageNoti = (senderImg, senderName, msgContent) => {
 
         toast.custom((t) => (
             <div
                 style={{
                     opacity: t.visible ? 1 : 0,
-                    transition: "opacity 400ms ease-in-out, transform 400ms ease-in-out",
-                    transform: t.visible ? "translateY(0)" : "translateY(-20%)",
+                    transition: "opacity 300ms ease-in-out, transform 300ms ease-in-out",
+                    transform: t.visible ? "translateY(0)" : "translateY(-50%)",
                 }}
             >
                 <div className={ ToastCSS.msgNotiBox }>
@@ -83,7 +75,7 @@ function Layout () {
                             <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
                         </div>
                     </div>
-                    <div className={ ToastCSS.closeBox } onClick={ () => {toast.dismiss(t.id); console.log("클릭됨")}}>
+                    <div className={ ToastCSS.closeBox } onClick={ () => toast.dismiss(t.id)}>
                         <p>close</p>
                     </div>
                 </div>
@@ -93,10 +85,33 @@ function Layout () {
         );
     }
 
-    /* 학사일정, 공지사항  */
+    /* 실시간 학사일정, 공지사항 알림 커스텀 함수  */
     const customCommonNoti = (notiTitle, notiContent) => {
 
-        return <></>
+        toast.custom((t) => (
+            <div
+                style={{
+                    opacity: t.visible ? 1 : 0,
+                    transition: "opacity 300ms ease-in-out, transform 300ms ease-in-out",
+                    transform: t.visible ? "translateY(0)" : "translateY(-50%)",
+                }}
+            >
+                <div className={ ToastCSS.commonNotiBox }>
+                    <div className={ ToastCSS.commonContentBox }>
+                        <div>
+                            <sub>{notiTitle}</sub>
+                            <p>{notiContent ? (notiContent.length > 24 ? notiContent.slice(0, 24) + "..." : notiContent) : ""}</p>
+                        </div>
+                    </div>
+                    <div className={ ToastCSS.closeBox } onClick={ () => toast.dismiss(t.id)}>
+                        <p>close</p>
+                    </div>
+                </div>
+            </div>
+            ),
+            { duration: 5000 }
+        );
+
     }
 
     // 현재 로그인 한 유저가 교수 or 행정직원인지에 따라 Navbar 변경하기 위한 변수
@@ -111,7 +126,6 @@ function Layout () {
 
     return (
         <div>
-            <button onClick={click}>toast</button>
             <Header setActiveIndex={setActiveIndex} isDark={isDark} setIsDark={setIsDark} logoutHandler={logoutHandler}/>
             <div className={ CommonCSS.flex }>
                 <div className={ CommonCSS.navbarCustom }>
