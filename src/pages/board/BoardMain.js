@@ -50,6 +50,7 @@ function BoardMain() {
 
   const clikedStyle = {
     background: '#343434',
+    border: '1px solid #343434',
     color: 'white',
     fontWeight: 'bold'
   }

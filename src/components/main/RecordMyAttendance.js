@@ -67,7 +67,7 @@ function RecordMyAttendance () {
                     <p>{formatTime(attendanceToday.atdStartTime)}</p>
                     <div
                         onClick={ () => toast('이미 오늘의 출근 시각이 기록되었습니다', {icon :'😇'}) }
-                        style={{ background:'#E6E6E6' }}>
+                        style={{ background:'#343434' }}>
                         출근 완료
                     </div>
                 </div>) : 
@@ -84,7 +84,7 @@ function RecordMyAttendance () {
                     <p>{formatTime(attendanceToday.atdEndTime)}</p>
                     <div
                         onClick={ () => toast('이미 오늘의 퇴근 시각이 기록되었습니다', {icon :'😇'}) }
-                        style={{ background:'#E6E6E6' }}>
+                        style={{ background:'#343434' }}>
                         퇴근 완료
                     </div>
                 </div>) : 

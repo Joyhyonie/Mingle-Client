@@ -1,6 +1,6 @@
 import CommonCSS from "../../css/common/Common.module.css"
 
-function LogoutModal ({logoutHandler, setLogoutModal}) {
+function LogoutModal ({logoutHandler, setLogoutModal, setLogoutClicked}) {
 
     return (
         <div className={ CommonCSS.logoutModal } onClick={ () => setLogoutModal(false) }>
@@ -8,14 +8,14 @@ function LogoutModal ({logoutHandler, setLogoutModal}) {
                 <p>로그아웃 하시겠습니까?</p>
                 <div className={ CommonCSS.logoutButtonBox }>
                     <button
-                        className={ CommonCSS.pinkButton }
+                        className={ CommonCSS.blackButton }
                         onClick={ logoutHandler }
                     >
                             로그아웃
                     </button>
                     <button
                         className={ CommonCSS.whiteButton }
-                        onClick={ () => setLogoutModal(false) }
+                        onClick={ () => {setLogoutModal(false); setLogoutClicked(false);} }
                     >
                             취소
                     </button>
