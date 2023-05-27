@@ -6,8 +6,8 @@ import { useState } from 'react';
 import styled from "styled-components";
 
 function AttendanceItem({ attendance }) {
-
-    const SelectBoxWrapper = styled.div`
+    //무조건 한단계 거쳐서 프롭스로 받아야지 리스트를 객체처럼 꺼내쓸수 있다. 
+    const SelectBoxWrapper = styled.div`    
     // display: flex;
     // flex-grow:1;
   `;
@@ -18,8 +18,10 @@ function AttendanceItem({ attendance }) {
     width: 12px;
     height: 12px;
   `;
+    console.log("attendanceITem 배열이 객체로잘 변환 되었는가", attendance)
+    console.log("attendanceITem 배열이 객체로잘 변환 되었는가", attendance.courseCode)
 
-
+    const navigate = useNavigate();
     const handleSelectChange = (event) => {
         const selectedOption = event.target.value;
         console.log('Selected option:', selectedOption);
@@ -30,18 +32,28 @@ function AttendanceItem({ attendance }) {
 
 
 
+    const clickAttendanceHandler = (attendance) => {
+
+
+        navigate(`/attendanceDetail/${attendance}`); //출석
+
+
+    }
+
 
     console.log(attendance);
     return (
         <motion.tr
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
+            onClick={() => clickAttendanceHandler(attendance.courseCode)}
         >
-            <td>201301044</td>
-            <td>{attendance.deptName}</td>
-            <td>{attendance.deptName}</td>
+
+            <td>{attendance.student.stdCode}</td>
+            <td>{attendance.student.department.deptName}</td>
+            <td>{attendance.student.stdName}</td>
 
             <td>
-                <SelectBoxWrapper>
+                <>
                     <select onChange={handleSelectChange}>
                         <option value="출석">출석</option>
                         <option value="결석">결석</option>
@@ -61,7 +73,7 @@ function AttendanceItem({ attendance }) {
                             fill="#1A1A1A"
                         />
                     </IconSVG> */}
-                </SelectBoxWrapper>
+                </>
             </td>
             <td><input type="text" value={attendanceStatus} readOnly /></td>
 

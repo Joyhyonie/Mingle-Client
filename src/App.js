@@ -40,6 +40,7 @@ import EmployeeModify from './pages/academic/EmployeeModify';
 import EmployeeRegist from './pages/academic/EmployeeRegist';
 import MyLeave from './components/lists/MyLeaveDoc';
 import AttendanceDetailList from './components/lists/AttendanceDetailList';
+import AttendanceStdDetail from './pages/lecture/admin/AttendanceStdDetail';
 
 
 function App() {
@@ -85,7 +86,7 @@ function App() {
             <Route path="mypage-update" element={<ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute>} />
             <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>} />
             <Route path='MyLeave' element={<ProtectedRoute loginCheck={true}> <MyLeave /> </ProtectedRoute>}>
-              <Route path='search' element={<MyLeave/>}/>
+              <Route path='search' element={<MyLeave />} />
             </Route>
             <Route path="organization" element={<Organization />} />
 
@@ -93,28 +94,29 @@ function App() {
 
 
             <Route path="certi-doc-applied" element={<AppliedCertidocs />}>
-              <Route path='search' element={<AppliedCertidocs/>}/>
+              <Route path='search' element={<AppliedCertidocs />} />
             </Route>
-            <Route path="certi-doc-apply" element={<ApplyCertiDoc />}/>
+            <Route path="certi-doc-apply" element={<ApplyCertiDoc />} />
             <Route path="certi-doc-mine" element={<MyCertiDoc />}>
-              <Route path='search' element={<MyCertiDoc/>}/>
+              <Route path='search' element={<MyCertiDoc />} />
             </Route>
 
             <Route path="attendance-employee" element={<EmployeeAttendance />}>
-              <Route path='search' element={<EmployeeAttendance/>}/>
+              <Route path='search' element={<EmployeeAttendance />} />
             </Route>
             <Route path="attendance-employee/:empCode" element={<AttendanceDetail />} />
 
             <Route path="leave-doc-applied" element={<AppliedLeaveList />}>
-              <Route path='search' element={<AppliedLeaveList/>}/>
+              <Route path='search' element={<AppliedLeaveList />} />
             </Route>
 
             <Route path="subject" element={<SubjectList />}>
-              <Route path='search' element={<SubjectList/>}/>
+              <Route path='search' element={<SubjectList />} />
             </Route>
 
             <Route path="lecture-student-admin" element={<StudentAttendanceForAdmin />} />
-            <Route path="/attendance/:lectureCode" element={<AttendanceDetailList />} />
+            <Route path="/attendance/:lecCode" element={<AttendanceDetailList />} />
+            <Route path="/attendanceDetail/:attendance" element={<AttendanceStdDetail />} />
             <Route path="lecture-regist-admin" element={<RegistLectureForAdmin />} />
             <Route path="lecture-student-prof" element={<StudentAttendanceForProf />} />
             <Route path="lecture-regist-prof" element={<RegistLectureForProf />} />
