@@ -4,7 +4,10 @@ import AttendanceItem from '../items/AttendanceItem';
 import SearchBarCss from "../../css/common/SearchBar.module.css";
 import SearchBar from "../../components/common/SearchBar";
 import styled from "styled-components";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { callCourceStdListAPI } from "../../apis/LectureAPICalls";
+import { useNavigate, useParams } from 'react-router-dom';
 
 function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수가 api에 넣을 것인가?
 
@@ -13,11 +16,15 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         { value: "deptName", label: "학과명" }
 
     ];
-
+    const { attendance } = useSelector(state => state.SubjectInfoReducer);
+    const { lecCode } = useParams();
     const SelectBoxWrapper = styled.div`
     // display: flex;
     // flex-grow:1;
   `;
+
+    console.log("여기는 출첵attendance", attendance);
+
 
     const handleSelectChange = (event) => {
         const selectedOption = event.target.value;
@@ -25,11 +32,20 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         setAttendanceStatus(selectedOption)
     };
     const [attendanceStatus, setAttendanceStatus] = useState('');
+    const dispatch = useDispatch();
+
+    useEffect(
+        () => {
+            console.log("코드코드코드코드", lecCode);
+            dispatch(callCourceStdListAPI({ lecCode }));
+
+
+        }, []);
 
 
 
 
-    console.log("AttendanceDetailList :", attendanceDetailList);
+
     return (<motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
     >
@@ -59,52 +75,37 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
                 </tr>
             </thead>
             <tbody>
-                <th>201301044</th>
-                <th>경영학과</th>
-                <th>이현재</th>
-                <td>
+                {/* <td>
                     <SelectBoxWrapper>
                         <select onChange={handleSelectChange}>
                             <option value="출석">출석</option>
                             <option value="결석">결석</option>
                             <option value="지각">지각</option>
                         </select>
-                        {/* <IconSVG
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M10 14L16 6H4L10 14Z"
-                            fill="#1A1A1A"
-                        />
-                    </IconSVG> */}
+                        <IconSVG
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M10 14L16 6H4L10 14Z"
+                                fill="#1A1A1A"
+                            />
+                        </IconSVG>
                     </SelectBoxWrapper>
                 </td>
-                <td><input type="text" value={attendanceStatus} readOnly /></td>
+                <td><input type="text" value={attendanceStatus} readOnly /></td> */}
 
-                {/* {Array.isArray(attendanceDetailList)
-                    && attendanceDetailList.map(attendance => <AttendanceItem key={attendance.lectureCode} attendance={attendance} />)
-                } */}
+                {Array.isArray(attendance)
+                    && attendance.map(attendance => <AttendanceItem key={attendance.courseCode} attendance={attendance} />)
+                }
 
-                {/* 아래는 dummy ----------------------------------------------------------- */}
 
-                {/* {Array.isArray(attendanceDetailList)
-                    && attendanceDetailList.map(attendance => <AttendanceItem key={attendance.lectureCode} attendance={attendance} />)
-                }
-                {Array.isArray(attendanceDetailList)
-                    && attendanceDetailList.map(attendance => <AttendanceItem key={attendance.lectureCode} attendance={attendance} />)
-                }
-                {Array.isArray(attendanceDetailList)
-                    && attendanceDetailList.map(attendance => <AttendanceItem key={attendance.lectureCode} attendance={attendance} />)
-                }
-                {Array.isArray(attendanceDetailList)
-                    && attendanceDetailList.map(attendance => <AttendanceItem key={attendance.lectureCode} attendance={attendance} />)
-                } */}
+
             </tbody>
         </table>
 

@@ -1,11 +1,14 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
-import { getSubjectInfo, getLectureInfo, getMylecture } from "../modules/LectureModule";
+
+import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture } from "../modules/LectureModule";
+
 import { wait } from '@testing-library/user-event/dist/utils';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const SUBJECT_URL = `http://${SERVER_IP}:${SERVER_PORT}/subject`;
 const LECTURE_URL = `http://${SERVER_IP}:${SERVER_PORT}/lecture`;
+const ATTENDANCE_URL = `http://${SERVER_IP}:${SERVER_PORT}/stdattendance`;
 
 export const callSubjectsAPI = ({ currentPage = 1 }) => {
     const requestURL = `${SUBJECT_URL}/list?page=${currentPage}`;
@@ -168,5 +171,32 @@ export const callLectureListAPI = ({ currentPage = 1 }) => {
 }
 
 
+/*출석 정보 불러오는 API */
+
+export const callCourceStdListAPI = ({ lecCode }) => {
+
+    console.log(lecCode)
+
+    const requestURL = `${ATTENDANCE_URL}/stdlist/${lecCode}`;
+    /*필요한값 생각해보자  */
+
+    //요청 url 이 안에서 비동기적으로 호출된다.. 
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: 'GET'
+        }).then(response => response.json());
+        console.log('[callsubjectList]:callSubjectListAPI result:', result);
+        if (result.status === 200) {
+
+
+            //api를 통해 데이터를 꺼내와서 store에 저장하자(내가 원하는값을 액션과 페이로드 )
+            //store에 있는 값들을 다루는것은 action이라는 
+            dispatch(getAttendanceListInfo(result));
+            console.log(result);
+
+
+        }
+    }
+}
 
 
