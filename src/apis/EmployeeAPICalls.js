@@ -1,10 +1,12 @@
 import { toast } from "react-hot-toast";
 import { getEmployee, postLogin, patchEmployee, postId, postPwd, postPwdchange, resetEmployee } from "../modules/EmployeeModule";
+import { useNavigate } from "react-router-dom";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`;
+
 
 /* 로그인 API 호출 */
 export const callLoginAPI = (form) => {
@@ -45,7 +47,7 @@ export const callGetEmployeeAPI = () => {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
@@ -97,35 +99,48 @@ export const callIdAPI = (form) => {
         console.log('[EmployeeCalls] callIdAPI result : ', result);
               dispatch(postId(result));
               return result;
+              
+        }else{
+            toast.error("입력하신 정보와 일치하는 아이디가 존재하지 않습니다.");
         }
+
+        
         
     };
 };
 
 
 export const callPwdAPI = (form) => {
-
     const requestURL = `${PRE_URL}/auth/sendemail`;
-
-    return async (dispatch, getState) => {
-
+  
+    return async (dispatch) => {
+      try {
         const result = await fetch(requestURL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(form)
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(form)
         })
-            .then(response => response.json());
-
-            if( result.status === 200){
-        console.log('[EmployeeCalls] callIdAPI result : ', result);
-              dispatch(postPwd(result));
-              return result;
+        .then(response => response.json());
+  
+        if ( result.status === 200) {
+          console.log('[EmployeeCalls] callPwdAPI result:', result);
+          dispatch(resetEmployee());
+          // postPwd 액션 디스패치
+          toast.success(result.message);
+          dispatch(resetEmployee());
+          return result;
+        } else {
+          toast.error("해당 아이디와 일치하는 사용자가 없습니다.");
         }
-        
+      } catch (error) {
+        console.error('An error occurred:', error);
+        toast.error('요청을 처리하는 중에 오류가 발생했습니다.');
+      }
     };
-};
+  };
+  
 
 
 export const callPwdChangeAPI = (form) => {
@@ -136,8 +151,8 @@ export const callPwdChangeAPI = (form) => {
         const result = await fetch(requestURL, {
           method: 'POST',
           headers: {
-            "Authorization": "Bearer " + window.localStorage.getItem('accessToken'),
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem('accessToken')
           },
           body: JSON.stringify(form)
         }).then(response => response.json());

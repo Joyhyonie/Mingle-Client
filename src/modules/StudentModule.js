@@ -24,7 +24,7 @@ export const { student :
 /* 리듀서 */
 const StudentReducer = handleActions({
   [GET_STUDENTS] : (state, {payload}) => payload,
-  [GET_STUDENT] : (state, {payload}) => payload,
+  [GET_STUDENT] : (state, {payload}) =>  ({ student : payload}),
   [POST_STUDENT] : (state, {payload}) => ({regist : payload}),
   [PUT_STUDENT] : (state, {payload}) => ({modify : payload}),
   [DELETE_STUDENT] : (state, {payload}) => ({delete : payload}),

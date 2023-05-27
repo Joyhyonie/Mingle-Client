@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { callAcScheduleListAPI, callAcScheduleRegistAPI, callAcScheduleByDateAPI } from '../../apis/ScheduleAPICalls';
+import { callAcScheduleListAPI, callAcScheduleRegistAPI, callAcScheduleByDateAPI, callAcScheduleDeleteAPI } from '../../apis/ScheduleAPICalls';
 import { toast } from "react-hot-toast";
 import AcademicScheduleCss from "../../css/AcademicSchedule.module.css";
 import CommonCSS from '../../css/common/Common.module.css';
@@ -13,7 +13,7 @@ function AcademicSchedule() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { allAcSchedule, registAcSche } = useSelector((state) => state.ScheduleReducer);
+  const { allAcSchedule, registAcSche, acSchedule } = useSelector((state) => state.ScheduleReducer);
   const { employee } = useSelector(state => state.EmployeeReducer);
   const [form, setForm] = useState({
     empCode: employee.empCode || '',
@@ -29,8 +29,8 @@ function AcademicSchedule() {
   );
 
   /* 학사 일정 항목 클릭 이벤트 */
-  const onScheduleItemClickHandler = async (schedule) => {
-    setSelectedSchedule(schedule);
+  const onScheduleItemClickHandler = async (acSchedule) => {
+    setSelectedSchedule(acSchedule);
   }
 
 
@@ -61,7 +61,7 @@ function AcademicSchedule() {
     }
   }, [registAcSche]);
 
-  /* 학생 등록 버튼 클릭 이벤트 */
+  /* 학사일정 등록 버튼 클릭 이벤트 */
   const onClickAcademicScheduleRegistHandler = () => {
 
     const formData = new FormData();
@@ -77,6 +77,18 @@ function AcademicSchedule() {
 
     dispatch(callAcScheduleRegistAPI(formData));
   }
+  
+  /* 학사일정 삭제 버튼 클릭 이벤트 */
+  const onClickAcademicScheduleDeleteHandler = async () => {
+    if (selectedSchedule) {
+      await dispatch(callAcScheduleDeleteAPI(selectedSchedule.scheCode));
+      // 학사일정 조회 업데이트
+      dispatch(callAcScheduleListAPI({}));
+      toast.success("일정이 성공적으로 삭제되었습니다.");
+      setSelectedSchedule(null)
+    }
+   
+  };
 
 
   return (
@@ -88,7 +100,7 @@ function AcademicSchedule() {
       <div></div>
       <div className={AcademicScheduleCss.acScheLeft}>
         <div className={AcademicScheduleCss.acScheRead}>
-          <p className={AcademicScheduleCss.acScheTitle}><img src="/images/cal.png"></img>전체 학사 일정</p>
+          <p>전체 학사 일정</p>
           {allAcSchedule &&
             allAcSchedule.map((schedule) => (
               <div
@@ -97,8 +109,11 @@ function AcademicSchedule() {
               >
                 <p className={AcademicScheduleCss.acScheListDate}>
                   <span>•</span>
-                  <span className={AcademicScheduleCss.acScheStartDate}>{new Date(schedule.scheStartDate).toISOString().split('T')[0]}</span> ~ {new Date(schedule.scheEndDate).toISOString().split('T')[0]}</p>
-                <p className={AcademicScheduleCss.acScheListName}><span>•</span> <span className={AcademicScheduleCss.acScheName}>{schedule.scheName}</span> <span className={AcademicScheduleCss.acScheType}>{schedule.scheType}</span></p>
+                  <span className={AcademicScheduleCss.acScheStartDate}>{new Date(schedule.scheStartDate).toISOString().split('T')[0]}</span>
+                  ~
+                  <span className={AcademicScheduleCss.acScheEndDate}>{new Date(schedule.scheEndDate).toISOString().split('T')[0]}</span>
+                  <span className={AcademicScheduleCss.acScheType}>{schedule.scheType}</span></p>
+                <p className={AcademicScheduleCss.acScheListName}><span className={AcademicScheduleCss.acScheName}>{schedule.scheName}</span></p>
               </div>
             ))}
         </div>
@@ -109,7 +124,7 @@ function AcademicSchedule() {
         /* 학사일정 상세 조회 컴포넌트 */
         <div className={AcademicScheduleCss.acScheRegist}>
           <div className={AcademicScheduleCss.acScheRead}>
-            <p><img src="/images/cal.png"></img>일정 상세 조회</p>
+            <p>일정 상세 조회</p>
           </div>
           <div className={AcademicScheduleCss.acScheRegistName}>
             <span>일정명</span>
@@ -168,23 +183,23 @@ function AcademicSchedule() {
           </div>
           <br />
           <button onClick={() => setSelectedSchedule(null)} className={AcademicScheduleCss.acScheRegistBtn}>돌아가기</button>
+          <button onClick={onClickAcademicScheduleDeleteHandler} className={AcademicScheduleCss.acScheRegistBtn}>삭제</button>
         </div>
         :
         <div className={AcademicScheduleCss.acScheRegist}>
           <div className={AcademicScheduleCss.acScheRead}>
-            <p><img src="/images/cal.png"></img>일정 등록</p>
+            <p>일정 등록</p>
           </div>
-          <div className={AcademicScheduleCss.acScheRegistName}>
-            <span>일정명</span>
-            <input
-              type='text'
-              name="scheName"
-              required
-              onChange={onChangeHandler}></input>
-            <br />
-          </div>
-
           <div className={AcademicScheduleCss.acScheRegistDevide}>
+            <div className={AcademicScheduleCss.acScheRegistName}>
+              <span>일정명</span>
+              <input
+                type='text'
+                name="scheName"
+                required
+                onChange={onChangeHandler}></input>
+              <br />
+            </div>
             <div className={AcademicScheduleCss.acScheRegistType}>
               <span>구분</span>
               <input type="text"
@@ -192,18 +207,7 @@ function AcademicSchedule() {
                 name="scheType"
                 value={form.scheType}></input>
             </div>
-            <div className={AcademicScheduleCss.acScheRegistEmployee}>
-              <span>등록자</span>
-              <input
-                type="text"
-                readOnly
-                name="empCode"
-                value={form.empCode}>
-              </input>
-            </div>
           </div>
-
-
 
           <div className={AcademicScheduleCss.acScheRegistDate}>
             <span>일시</span>
@@ -235,7 +239,7 @@ function AcademicSchedule() {
           <button onClick={onClickAcademicScheduleRegistHandler} className={AcademicScheduleCss.acScheRegistBtn}>등록</button>
         </div>
       }
-    </motion.div>
+    </motion.div >
   );
 }
 

@@ -52,6 +52,12 @@ function PwdChangeForm() {
         confirmPassword: '',
       };
 
+      const onKeyPressHandler = (e) => {
+        if (e.key === "Enter") {
+          onClickHandler();
+        }
+      };
+
     return (
         <>
         <div className={ PwdchangeCSS.backgroundDiv }>
@@ -66,6 +72,7 @@ function PwdChangeForm() {
                                     autoComplete='off'
                                     onChange={ onChangeHandler }
                                     value={form.existingPassword} 
+                                    onKeyUp={onKeyPressHandler}
                                             />
                                 <input
                                     type="password"
@@ -74,6 +81,7 @@ function PwdChangeForm() {
                                     autoComplete='off'
                                     onChange={ onChangeHandler }
                                     value={form.newPassword} 
+                                    onKeyUp={onKeyPressHandler}
                                 />
                                 <input
                                     type="password"
@@ -82,6 +90,7 @@ function PwdChangeForm() {
                                     autoComplete='off'
                                     onChange={ onChangeHandler }
                                     value={form.confirmPassword} 
+                                    onKeyUp={onKeyPressHandler}
                                 />
                                 </div>
                         <span>

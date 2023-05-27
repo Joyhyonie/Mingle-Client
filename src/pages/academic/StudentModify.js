@@ -8,12 +8,12 @@ import { callStudentDetailAPI, callStudentUpdateAPI } from "../../apis/AcademicA
 import { useNavigate, useParams } from 'react-router-dom';
 import DaumPostcode from "react-daum-postcode";
 
-function StudentModify() {
+function StudentModify(data) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const data = useSelector(state => state.StudentReducer);
   const { stdCode } = useParams();
+  const { data: student } = useSelector((state) => state.StudentReducer);
   const { modify } = useSelector((state) => state.StudentReducer);
   const [form, setForm] = useState({});
 
@@ -30,14 +30,14 @@ function StudentModify() {
   const [modifyMode, setModifyMode] = useState(false);
 
   /* 수정모드 변경 이벤트 */
-  const onClickModifyHandler = () => {
+  const onClickModifyHandler = (e) => {
     setModifyMode(true);
-    setForm({ ...data });
-  }
+    setForm({ ...data })
+  };
 
   /* 최초 랜더링 시 학생 상세 정보 조회 */
   useEffect(() => {
-    dispatch(callStudentDetailAPI({ stdCode }));
+    dispatch(callStudentDetailAPI({stdCode}));
   }, []);
 
   useEffect(() => {
@@ -121,8 +121,6 @@ function StudentModify() {
   const onClickStudentUpdateHandler = () => {
 
     const formData = new FormData();
-
-    formData.append("stdCode", form.stdCode);
     formData.append("stdName", form.stdName);
     formData.append("stdNameEn", form.stdNameEn);
     formData.append("stdLevel", form.stdLevel);
@@ -172,14 +170,21 @@ function StudentModify() {
                 src="/images/person.png"
               /></button>
           )}
-          <input
+          {!modifyMode && <input
+            style={{ display: 'none' }}
+            type="file"
+            name='stdProfile'
+            accept='image/jpg, img/png, image/jpeg, image/gif'
+            ref={imageInput}
+          />}
+          {modifyMode && <input
             style={{ display: 'none' }}
             type="file"
             name='stdProfile'
             accept='image/jpg, img/png, image/jpeg, image/gif'
             ref={imageInput}
             onChange={onChangeImageUpload}
-          />
+          />}
           <div className={StudentRegistCss.buttonContainer}>
             {!modifyMode &&
               <button
@@ -206,7 +211,7 @@ function StudentModify() {
               type="text"
               name="stdName"
               className={StudentRegistCss.StudentRegistName}
-              value={!modifyMode ? data.stdName : form.stdName}
+              value={!modifyMode ? student?.stdName : form?.stdName}
               readOnly={!modifyMode}
               onChange={onChangeHandler}
             />
@@ -216,7 +221,7 @@ function StudentModify() {
               name="stdNameEn"
               className={StudentRegistCss.StudentRegistNameEn}
               onChange={onChangeHandler}
-              value={!modifyMode ? data.stdNameEn : form.stdNameEn}
+              value={!modifyMode ? student?.stdNameEn : form?.stdNameEn}
               readOnly={!modifyMode}
             />
             학년
@@ -225,7 +230,7 @@ function StudentModify() {
               name="stdLevel"
               className={StudentRegistCss.StudentRegistLevel}
               onChange={onChangeHandler}
-              value={!modifyMode ? data.stdLevel : form.stdLevel}
+              value={!modifyMode ? student?.stdLevel : form?.stdLevel}
               readOnly={!modifyMode}
             />
             학과
@@ -234,7 +239,7 @@ function StudentModify() {
               name="deptCode"
               className={StudentRegistCss.StudentRegistDeptCode}
               onChange={onChangeDeptCodeHandler}
-              value={!modifyMode ? data.deptCode : form.deptCode}
+              value={!modifyMode ? student?.deptCode : form?.deptCode}
               readOnly={!modifyMode}
             />
           </div>
@@ -245,7 +250,7 @@ function StudentModify() {
               name="stdEmail"
               className={StudentRegistCss.StudentRegistEmail}
               onChange={onChangeHandler}
-              value={!modifyMode ? data.stdEmail : form.stdEmail}
+              value={!modifyMode ? student?.stdEmail : form?.stdEmail}
               readOnly={!modifyMode}
             />
             비밀번호
@@ -254,7 +259,7 @@ function StudentModify() {
               name="stdPwd"
               className={StudentRegistCss.StudentRegistPwd}
               onChange={onChangeHandler}
-              value={!modifyMode ? data.stdPwd : form.stdPwd}
+              value={!modifyMode ? student?.stdPwd : form?.stdPwd}
               readOnly={!modifyMode}
             />
           </div>
@@ -265,14 +270,15 @@ function StudentModify() {
               name="stdPhone"
               className={StudentRegistCss.StudentRegistPhone}
               onChange={onChangeHandler}
-              value={!modifyMode ? data.stdPhone : form.stdPhone}
+              value={!modifyMode ? student?.stdPhone : form?.stdPhone}
               readOnly={!modifyMode}
             />
             상태
             <select className={StudentRegistCss.StudentRegistStatus}
               name="stdStatus" onChange={onChangeHandler}
-              value={!modifyMode ? data.stdStatus : form.stdStatus}
-              readOnly={!modifyMode}>
+              value={!modifyMode ? student?.stdStatus : form?.stdStatus}
+              readOnly={!modifyMode}
+              disabled={!modifyMode}>
               <option value="1" onChange={onChangeHandler}>재학</option>
               <option value="2" onChange={onChangeHandler}>휴학</option>
               <option value="3" onChange={onChangeHandler}>자퇴/중퇴</option>
@@ -284,7 +290,7 @@ function StudentModify() {
               name="stdSsn"
               className={StudentRegistCss.StudentRegistSsd}
               onChange={onChangeHandler}
-              value={!modifyMode ? data.stdSsn : form.stdSsn}
+              value={!modifyMode ? student?.stdSsn : form?.stdSsn}
               readOnly={!modifyMode}
             />
           </div>
@@ -296,7 +302,7 @@ function StudentModify() {
               name="stdAddress"
               className={StudentRegistCss.StudentRegistAddress}
               onClick={onChangeOpenPost}
-              value={!modifyMode ? data.stdAddress : form.stdAddress}
+              value={!modifyMode ? student?.stdAddress : form?.stdAddress}
               readOnly={!modifyMode}
             />
             {isOpenPost ? (
@@ -319,7 +325,7 @@ function StudentModify() {
               name="stdEntDate"
               className={StudentRegistCss.StudentRegistEntDate}
               onChange={onChangeHandler}
-              value={!modifyMode ? data.stdEntDate : form.stdEntDate}
+              value={!modifyMode ? student?.stdEntDate : form?.stdEntDate}
               readOnly={!modifyMode}
             />
             휴학일
@@ -328,7 +334,7 @@ function StudentModify() {
               name="stdAbDate"
               className={StudentRegistCss.StudentRegistAbDate}
               onChange={onChangeHandler}
-              value={!modifyMode ? data.stdAbDate : form.stdAbDate}
+              value={!modifyMode ? student?.stdAbDate : form?.stdAbDate}
               readOnly={!modifyMode}
             />
             <div>
@@ -338,7 +344,7 @@ function StudentModify() {
                 name="stdDropDate"
                 className={StudentRegistCss.StudentRegistDropDate}
                 onChange={onChangeHandler}
-                value={!modifyMode ? data.stdDropDate : form.stdDropDate}
+                value={!modifyMode ? student?.stdDropDate : form?.stdDropDate}
                 readOnly={!modifyMode}
               />
               졸업일
@@ -347,7 +353,7 @@ function StudentModify() {
                 name="stdLeaveDate"
                 className={StudentRegistCss.StudentRegistLeaveDate}
                 onChange={onChangeHandler}
-                value={!modifyMode ? data.stdLeaveDate : form.stdLeaveDate}
+                value={!modifyMode ? student?.stdLeaveDate : form?.stdLeaveDate}
                 readOnly={!modifyMode}
               />
             </div>

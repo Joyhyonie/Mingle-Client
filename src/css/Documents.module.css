@@ -71,7 +71,7 @@
 .date {
     position: absolute;
     right: 46%;
-    bottom: 28%;
+    bottom: 20%;
     font-size: 18px;
 }
 
@@ -99,4 +99,14 @@
     border: 1px solid black;
     font-size: 20px;
     height: 0px;
+}
+
+.thTable {
+    border: 1px solid black;
+    height: 20px;
+}
+
+.thEmpName  {
+    width: 30px;
+    height: 7px;
 }

@@ -40,6 +40,16 @@ function LoginForm() {
     const onClickPwdHandler = () => {
         navigate("/pwdsearch")
     }
+    
+    
+    const onKeyPressHandler = (e) => {
+        if (e.key === "Enter") {
+          onClickHandler();
+        }
+      };
+    
+
+
     return (
         <>
             <h1><span id="title">M</span>ingle</h1>
@@ -49,14 +59,16 @@ function LoginForm() {
                 name="empId"
                 placeholder="아이디를 입력하세요."
                 autoComplete='off'
-                onChange={ onChangeHandler }
+                onChange={onChangeHandler}
+                onKeyUp={onKeyPressHandler}
             />
             <input
                 type="password"
                 name="empPwd"
                 placeholder="패스워드를 입력하세요."
                 autoComplete='off'
-                onChange={ onChangeHandler }
+                onChange={onChangeHandler}
+                onKeyUp={onKeyPressHandler}
             />
             <div>
           <a onClick={ onClickIdHandler }><span style={style.id_title}>아이디 찾기 </span></a>

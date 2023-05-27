@@ -58,13 +58,13 @@
 }
 
 .clickedSchedule {
-    background-color: #FF9797;
+    background-color: #343434;
     color: white;
 }
 
 .unclickedSchedule {
     background-color: white;
-    color: #FF9797;
+    color: #999;
 }
 
 
@@ -88,7 +88,7 @@
     font-size: 23px;
     font-weight: 600;
     margin: 15px;
-    color: #FF9797; 
+    color: #999; 
 }
 
 .dateBox div {
@@ -163,7 +163,7 @@
 }
 
 .academicItemBox div {
-    background-color: #FF9797;
+    background-color: #999;
     padding: 5px 15px;
     border-radius: 10px;
     margin-right: 15px;
@@ -224,7 +224,7 @@
 .recordBox div div {
     border-radius: 20px;
     margin: 10px;
-    background-color: #FFD7D7;
+    background-color: #999;
     color: white;
     font-size: 23px;
     font-weight: 600;
@@ -232,7 +232,7 @@
 }
 
 .recordBox p {
-    color: #FF9797;
+    color: #999;
     text-align: center;
     margin: -10px 0px;
     font-size: 15px;
@@ -258,7 +258,7 @@
     left: 50%; 
     transform: translate(-50%, -50%);
     background-color: white;
-    border: 1px solid #FF9797;
+    border: 1px solid #999;
     border-radius: 20px;
     padding: 50px;
 }
@@ -286,7 +286,7 @@
 }
 
 .scheduleModalContainer input {
-    border: 1px solid #FF9797;
+    border: 1px solid #999;
     height: 40px;
     border-radius: 10px;
 }
@@ -316,7 +316,7 @@
 
 .timeNow {
     margin: 0px 0px -30px 0px;
-    color: #FF9797;
+    color: #999;
 }
 
 .attendanceModalContainer text {
@@ -327,8 +327,8 @@
 }
 
 .acScheduleModalContainer .title {
-    border-top: 1px solid #FF9797;
-    border-bottom: 1px solid #FF9797;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
     background: #fff7f7;
     text-align: center;
     padding: 10px;
@@ -347,11 +347,11 @@
 }
 
 .acScheduleModalContainer .info text {
-    color: #FF9797;
+    color: #999;
 }
 
 .acScheduleModalContainer .content {
-    border: 1px solid #FF9797;
+    border: 1px solid #999;
     border-radius: 20px;
     padding: 10px 30px;
     height: 280px;
@@ -375,7 +375,7 @@
 
 .buttonBox button,
 .centerButtonBox button {
-    border: 1px solid #FF9797;
+    border: 1px solid #999;
     font-size: 18px;
     padding: 5px 39.5px;
     border-radius: 10px;
@@ -394,7 +394,7 @@
 }
 
 .pinkButton {
-    background-color: #FF9797;
+    background-color: #999;
     color: white;
 }
 

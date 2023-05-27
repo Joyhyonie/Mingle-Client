@@ -4,6 +4,7 @@ import LoginCSS from '../../css/Login.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { resetEmployee } from "../../modules/EmployeeModule";
+import { toast } from "react-hot-toast";
 
 function Login(){
 
@@ -18,7 +19,7 @@ function Login(){
             navigate("/", { replace : true });
             dispatch(resetEmployee());
         }else if(login?.state === 500){
-            alert(login.message);
+            toast.error(login.message);
             dispatch(resetEmployee());
         }
     },

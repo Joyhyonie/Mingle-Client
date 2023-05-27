@@ -14,7 +14,7 @@
 
 .ApplyCertiDocCSSTable button {
     width: 50px;
-    background-color: #FFD7D7;
+    background-color: #dadada;
     margin-top: 5px;
     border-radius: 20px;
     color: #4D4D4D;
@@ -25,13 +25,13 @@
 
 .ApplyCertiDocCSSTable input {
     width: 80%;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     height: 20px;
     border-radius: 2px;
 }
 
 .ApplyCertiDocCSSTable input:focus {
-    border-color: #FF9797;
+    border-color: #343434;
     outline: none;
 }
 
@@ -39,14 +39,14 @@
     text-align: center;
     width: 70%;
     border-radius: 2px;
-    border: 1px solid #FF9797;
+    border: 1px solid #343434;
     font-size: 17px;
     outline: none;
 }
 
 .ApplyCertiDocCSSTable button:hover{
     color: white;
-    background-color: #FF9797;
+    background-color: #343434;
 }
 
 .inputAtdEtc {

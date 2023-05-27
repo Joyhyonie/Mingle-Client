@@ -28,7 +28,7 @@
     margin-bottom: 10px;
     height: 50px;
     width: 436px;
-    border: 3px solid  #FF9797;
+    border: 3px solid  #343434;
     text-indent: 20px;
     border-radius: 31px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -41,9 +41,9 @@
     width: 154px;
     height: 49px;
     border-radius: 50px;
-    background-color: #FFD7D7;
+    background-color: #999;
     font-weight: bold;
-    border: solid rgba(255, 151, 151, 0.79);
+    border: solid #343434;
     color: #343434;
     font-family: 'Paytone One';
     font-style: normal;
@@ -63,7 +63,7 @@ align-items: center;
 
 .loginDiv h1{
     font-family: 'Do Hyeon', sans-serif;
-    color: #FF9797;
+    color: #343434;
 font-style: normal;
 font-weight: 400;
 font-size: 57px;
@@ -80,7 +80,7 @@ text-align: center;
 
 .loginDiv h2{
     font-family: 'Do Hyeon', sans-serif;
-    color: #FF9797;
+    color: #343434;
 font-style: normal;
 font-weight: 400;
 font-size: 57px;

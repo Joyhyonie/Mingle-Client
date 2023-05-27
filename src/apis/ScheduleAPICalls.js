@@ -1,7 +1,5 @@
-import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule, putAcSchedule } from "../modules/ScheduleModule";
+import { deleteMySchedule, getAcSchedule, getAllAcSchedule, getMySchedule, getAllMySchedule, patchMyScheduleCheck, postMySchedule, putMySchedule, postAcSchedule, putAcSchedule, deleteAcSchedule } from "../modules/ScheduleModule";
 import { request } from "./Api";
-
-const accessToken = window.localStorage.getItem('accessToken');
 
 /* 나의 일정 전체 조회 */
 export function callMyScheduleListAPI() {
@@ -9,8 +7,8 @@ export function callMyScheduleListAPI() {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem('accessToken')
         };
 
         // axios 라이브러리 활용
@@ -30,8 +28,8 @@ export function callMyScheduleByDateAPI(date) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem('accessToken')
         };
 
         const result = await request('GET', `/schedule/mine/${date}`, headers);
@@ -63,8 +61,8 @@ export function callMyScheduleRegistAPI(formData) {
     return async (dispatch, getState) => {
 
         const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem('accessToken')
         };
 
         const result = await request('POST', `/schedule/mine`, headers, formData);
@@ -152,8 +150,8 @@ export function callAcScheduleRegistAPI(formData) {
   return async (dispatch, getState) => {
 
       const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + window.localStorage.getItem('accessToken')
       };
 
       const result = await request('POST', `/schedule/academic`, headers, formData);
@@ -180,4 +178,17 @@ export function callAcScheduleModifyAPI(formData) {
       }
   }
 
+}
+
+/* 학사 일정 삭제 */
+export function callAcScheduleDeleteAPI(scheCode) {
+
+  return async (dispatch, getState) => {
+
+      const result = await request('DELETE', `/schedule/academic/${scheCode}`);
+
+      if(result.status == 200) {
+          dispatch(deleteAcSchedule(result));
+      }
+  }
 }

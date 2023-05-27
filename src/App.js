@@ -31,7 +31,7 @@ import PwdSearch from './pages/login/PwdSearch';
 import MyPageLayout from './layouts/MypageLayout';
 import PwdChange from './pages/login/Pwdchange';
 
-import MypageUpdate from './pages/employee/MypageUpdate';
+
 
 import AttendanceDetail from './components/items/AttendanceDetail';
 import StudentModify from './pages/academic/StudentModify';
@@ -83,7 +83,7 @@ function App() {
 
             </Route> {/* <MyPageLayout/>의 Route */}
 
-            <Route path="mypage-update" element={<ProtectedRoute loginCheck={true}><MypageUpdate /></ProtectedRoute>} />
+       
             <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>} />
             <Route path='MyLeave' element={<ProtectedRoute loginCheck={true}> <MyLeave /> </ProtectedRoute>}>
               <Route path='search' element={<MyLeave />} />
@@ -125,9 +125,10 @@ function App() {
             <Route path="regist-employee" element={<EmployeeRegist />} />
             <Route path="modify-employee/:empCode" element={<EmployeeModify />} />
             <Route path="search-employee" element={<EmployeeManagement />} />
+
             <Route path="management-student" element={<StudentManagement />} />
             <Route path="regist-student" element={<StudentRegist />} />
-            <Route path=":stdCode/modify" element={<StudentModify />} />
+            <Route path="modify-student/:stdCode" element={<StudentModify />} />
             <Route path="search-student" element={<StudentManagement />} />
 
             <Route path="schedule-academic" element={<AcademicSchedule />} />
