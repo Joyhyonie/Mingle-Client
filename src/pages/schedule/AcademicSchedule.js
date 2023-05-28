@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { callAcScheduleListAPI, callAcScheduleRegistAPI, callAcScheduleByDateAPI, callAcScheduleDeleteAPI } from '../../apis/ScheduleAPICalls';
+import { callAcScheduleListAPI, callAcScheduleRegistAPI, callAcScheduleModifyAPI, callAcScheduleByDateAPI, callAcScheduleDeleteAPI } from '../../apis/ScheduleAPICalls';
 import { toast } from "react-hot-toast";
 import AcademicScheduleCss from "../../css/AcademicSchedule.module.css";
 import CommonCSS from '../../css/common/Common.module.css';
@@ -16,10 +16,11 @@ function AcademicSchedule() {
   const { allAcSchedule, registAcSche, acSchedule } = useSelector((state) => state.ScheduleReducer);
   const { employee } = useSelector(state => state.EmployeeReducer);
   const [form, setForm] = useState({
-    empCode: employee.empCode || '',
     scheType: '학사',
   });
   const [selectedSchedule, setSelectedSchedule] = useState(null);
+  const [sortedAcSchedule, setSortedAcSchedule] = useState([]);
+  const [isEditable, setIsEditable] = useState(false); // 추가: 수정 모드 상태
 
 
   useEffect(() => {
@@ -61,6 +62,28 @@ function AcademicSchedule() {
     }
   }, [registAcSche]);
 
+  /* 돌아가기를 눌렀을 때, 새로고침 */
+  const onBackButtonClickHandler = () => {
+    setForm({
+      scheType: '학사',
+      scheName: '',
+      scheStartDate: '',
+      scheEndDate: '',
+      scheContent: '',
+    });
+    setSelectedSchedule(null);
+  }
+
+  /* allAcSchedule 배열을 scheStartDate 필드 기준으로 오름차순 정렬 */
+  useEffect(() => {
+    if (allAcSchedule) {
+      let sortedData = [...allAcSchedule];
+      sortedData.sort((a, b) => new Date(a.scheStartDate) - new Date(b.scheStartDate));
+      setSortedAcSchedule(sortedData);
+    }
+  }, [allAcSchedule]);
+
+
   /* 학사일정 등록 버튼 클릭 이벤트 */
   const onClickAcademicScheduleRegistHandler = () => {
 
@@ -77,7 +100,27 @@ function AcademicSchedule() {
 
     dispatch(callAcScheduleRegistAPI(formData));
   }
-  
+
+  /* 학사일정 수정 버튼 클릭 이벤트 */
+  const onClickAcademicScheduleModifyHandler = async () => {
+    if (selectedSchedule) {
+      const formData = new FormData();
+      formData.append("empCode", employee.empCode); // 로그인한 사용자의 empCode
+      formData.append("scheName", form.scheName);
+      formData.append("scheStartDate", formatDate(form.scheStartDate));
+      formData.append("scheEndDate", formatDate(form.scheEndDate));
+      formData.append("scheType", form.scheType);
+      formData.append("scheContent", form.scheContent);
+
+      await dispatch(callAcScheduleModifyAPI(formData));
+      // 학사일정 조회 업데이트
+      dispatch(callAcScheduleListAPI({}));
+      toast.success("일정이 성공적으로 수정되었습니다.");
+      navigate('/schedule-academic', { replace: true });
+      setIsEditable(false);
+    }
+  };
+
   /* 학사일정 삭제 버튼 클릭 이벤트 */
   const onClickAcademicScheduleDeleteHandler = async () => {
     if (selectedSchedule) {
@@ -85,9 +128,10 @@ function AcademicSchedule() {
       // 학사일정 조회 업데이트
       dispatch(callAcScheduleListAPI({}));
       toast.success("일정이 성공적으로 삭제되었습니다.");
+      navigate('/schedule-academic', { replace: true });
       setSelectedSchedule(null)
     }
-   
+
   };
 
 
@@ -105,7 +149,7 @@ function AcademicSchedule() {
             allAcSchedule.map((schedule) => (
               <div
                 key={schedule.scheCode}
-                onClick={onScheduleItemClickHandler}
+                onClick={() => onScheduleItemClickHandler(schedule)}
               >
                 <p className={AcademicScheduleCss.acScheListDate}>
                   <span>•</span>
@@ -126,32 +170,21 @@ function AcademicSchedule() {
           <div className={AcademicScheduleCss.acScheRead}>
             <p>일정 상세 조회</p>
           </div>
-          <div className={AcademicScheduleCss.acScheRegistName}>
-            <span>일정명</span>
-            <input
-              type='text'
-              name="scheName"
-              value={selectedSchedule.scheName}
-              readOnly></input>
-            <br />
-          </div>
-
-          <div className={AcademicScheduleCss.acScheRegistDevide}>
+          <div className={AcademicScheduleCss.acScheRegistDetailTitle}>
+            <div className={AcademicScheduleCss.acScheRegistName}>
+              <span>일정명</span>
+              <input
+                type='text'
+                name="scheName"
+                value={selectedSchedule.scheName}
+                readOnly></input>
+            </div>
             <div className={AcademicScheduleCss.acScheRegistType}>
               <span>구분</span>
               <input type="text"
                 readOnly
                 name="scheType"
                 value={selectedSchedule.scheType}></input>
-            </div>
-            <div className={AcademicScheduleCss.acScheRegistEmployee}>
-              <span>등록자</span>
-              <input
-                type="text"
-                readOnly
-                name="empCode"
-                value={selectedSchedule.empCode}>
-              </input>
             </div>
           </div>
 
@@ -182,8 +215,9 @@ function AcademicSchedule() {
               readOnly></textarea>
           </div>
           <br />
-          <button onClick={() => setSelectedSchedule(null)} className={AcademicScheduleCss.acScheRegistBtn}>돌아가기</button>
+          <button onClick={onBackButtonClickHandler} className={AcademicScheduleCss.acScheRegistBtn}>돌아가기</button>
           <button onClick={onClickAcademicScheduleDeleteHandler} className={AcademicScheduleCss.acScheRegistBtn}>삭제</button>
+          <button onClick={() => setIsEditable(true)} className={AcademicScheduleCss.acScheRegistBtn}>수정</button>
         </div>
         :
         <div className={AcademicScheduleCss.acScheRegist}>

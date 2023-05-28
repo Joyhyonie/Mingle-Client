@@ -5,7 +5,6 @@ import { callStudentsAPI, callStudentsDeleteAPI } from '../../apis/AcademicAPICa
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-// import EmployeeInsertModal from "../../components/modal/EmployeeInsertModal";
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import StudentListCss from '../../css/StudentList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
