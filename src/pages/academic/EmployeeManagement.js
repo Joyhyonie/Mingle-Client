@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from 'react';
 import { callEmployeesAPI, callEmployeesDeleteAPI } from '../../apis/AcademicAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import SearchBar from '../../components/common/SearchBar';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import EmployeeListCss from '../../css/EmployeeList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { toast } from "react-hot-toast";
+
 
 const employeeOptions = [
   { value: 'option1', label: 'option 1' },
