@@ -78,7 +78,7 @@
     align-items: center;
     border-top: 3px solid #999;
     border-bottom: 1px solid #999;
-    background-color: #f8f8f8;
+    background-color: #FBFBFB;
     margin-top: 90px;
     height: 70px;
     font-size: 20px;
@@ -163,7 +163,7 @@
 }
 
 .boardContent {
-    /* background-color: #f8f8f8; */
+    background-color: #FBFBFB;
     overflow: scroll;
     margin: 0 auto;
     width: 1300px;

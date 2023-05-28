@@ -1,4 +1,5 @@
-.msgNotiBox {
+.msgNotiBox,
+.commonNotiBox {
     border: 2px solid #66D2B3;
     background-color: white;
     border-radius: 15px;
@@ -8,9 +9,17 @@
     height: 130px;
 }
 
+.commonNotiBox {
+    width: 500px;
+}
+
 .msgContentBox {
     width: 500px;
     display: flex;
+}
+
+.commonContentBox {
+    width: 400px;
 }
 
 .msgContentBox img {
@@ -25,12 +34,18 @@
     margin-top: 13px;
 }
 
-.msgContentBox div sub {
+.commonContentBox div {
+    margin: 15px 40px;
+}
+
+.msgContentBox div sub,
+.commonContentBox div sub {
     font-size: 19px;
     font-weight: 900;
 }
 
-.msgContentBox div p {
+.msgContentBox div p,
+.commonContentBox div p {
     font-size: 17px;
     color: #999999;
     margin-top: 7px;

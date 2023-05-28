@@ -8,7 +8,6 @@ import NavbarForProfessor from '../components/common/NavbarForProfessor';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { callGetEmployeeAPI } from '../apis/EmployeeAPICalls';
-import { AnimatePresence, motion } from 'framer-motion';
 
 function Layout () {
 
@@ -39,14 +38,14 @@ function Layout () {
                     const senderImg = data.sender.empProfile;
                     const senderName = data.sender.empName;
                     const msgContent = data.msgContent;
-                    toast.custom((t) => customMessageNoti(t, senderImg, senderName, msgContent));
+                    customMessageNoti(senderImg, senderName, msgContent);
                 });
 
                 eventSource.addEventListener("commonNoti", (e) => {
                     const data = JSON.parse(e.data);
                     const notiTitle = data.notiType.notiTitle;
                     const notiContent = data.notiContent;
-                    toast.custom((notiTitle, notiContent) => customCommonNoti());
+                    customCommonNoti(notiTitle, notiContent);
                 })
           
                 eventSource.addEventListener("error", (e) => {
@@ -57,39 +56,62 @@ function Layout () {
         },[]
     );
 
-    /* 실시간 쪽지 알림을 커스텀하기 위한 함수 */
-    const customMessageNoti = (t, senderImg, senderName, msgContent) => {
+    /* 실시간 쪽지 알림 커스텀 함수 */
+    const customMessageNoti = (senderImg, senderName, msgContent) => {
 
-        return (
-            <AnimatePresence>
-                {t.visible && (
-                <motion.div initial={{ opacity: 0, y: -50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -50 }}
-                            transition={{ duration: 0.3 }}
-                >
-                    <div className={ ToastCSS.msgNotiBox }>
-                        <div className={ ToastCSS.msgContentBox }>
-                            <img src={senderImg}/>
-                            <div>
-                                <sub><span>{senderName}</span>님의 쪽지가 도착했습니다 :)</sub>
-                                <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
-                            </div>
-                        </div>
-                        <div className={ ToastCSS.closeBox }>
-                            <p onClick={ () => toast.dismiss(t.id) }>close</p>
+        toast.custom((t) => (
+            <div
+                style={{
+                    opacity: t.visible ? 1 : 0,
+                    transition: "opacity 300ms ease-in-out, transform 300ms ease-in-out",
+                    transform: t.visible ? "translateY(0)" : "translateY(-50%)",
+                }}
+            >
+                <div className={ ToastCSS.msgNotiBox }>
+                    <div className={ ToastCSS.msgContentBox }>
+                        <img src={senderImg}/>
+                        <div>
+                            <sub><span>{senderName}</span>님의 쪽지가 도착했습니다 :)</sub>
+                            <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
                         </div>
                     </div>
-                </motion.div>
-                )}
-            </AnimatePresence>
+                    <div className={ ToastCSS.closeBox } onClick={ () => toast.dismiss(t.id)}>
+                        <p>close</p>
+                    </div>
+                </div>
+            </div>
+            ),
+            { duration: 5000 }
         );
     }
 
-    /* 학사일정, 공지사항  */
+    /* 실시간 학사일정, 공지사항 알림 커스텀 함수  */
     const customCommonNoti = (notiTitle, notiContent) => {
 
-        return <></>
+        toast.custom((t) => (
+            <div
+                style={{
+                    opacity: t.visible ? 1 : 0,
+                    transition: "opacity 300ms ease-in-out, transform 300ms ease-in-out",
+                    transform: t.visible ? "translateY(0)" : "translateY(-50%)",
+                }}
+            >
+                <div className={ ToastCSS.commonNotiBox }>
+                    <div className={ ToastCSS.commonContentBox }>
+                        <div>
+                            <sub>{notiTitle}</sub>
+                            <p>{notiContent ? (notiContent.length > 24 ? notiContent.slice(0, 24) + "..." : notiContent) : ""}</p>
+                        </div>
+                    </div>
+                    <div className={ ToastCSS.closeBox } onClick={ () => toast.dismiss(t.id)}>
+                        <p>close</p>
+                    </div>
+                </div>
+            </div>
+            ),
+            { duration: 5000 }
+        );
+
     }
 
     // 현재 로그인 한 유저가 교수 or 행정직원인지에 따라 Navbar 변경하기 위한 변수
