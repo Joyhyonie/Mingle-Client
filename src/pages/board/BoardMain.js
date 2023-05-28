@@ -3,22 +3,18 @@ import CommonCSS from '../../css/common/Common.module.css'
 import SearchBarCss from '../../css/common/SearchBar.module.css';
 import BoardCSS from '../../css/Board.module.css';
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PagingBar from "../../components/common/PagingBar";
 import BoardList from "../../components/lists/BoardList";
 import SearchBar from "../../components/common/SearchBar";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { callBoardListAPI } from "../../apis/BoardAPICalls";
 
 function BoardMain() {
 
-  /* (임시용 데이터) */
-  const boardList = [{ boardCode: 20001, boardType: '학사', boardTitle: '[봉사활동] 지구를 위한 플로깅, 쓰담달리기 자원봉사자 모집', boardContent: '우왕앙', boardWriteDate: '2023-05-16', boardCount: 109, empCode: 12345, empName: '허멈머', boardModifyDate: '2023-05-19' },
-  { boardCode: 20002, boardType: '장학', boardTitle: '[집중근로] 2023학년도 한국장학재단 하계방학 집중근로 프로그램 희망근로지 신청 안내', boardContent: '우왕앙', boardWriteDate: '2023-05-14', boardCount: 203, empCode: 12346, empName: '허꼬순', boardModifyDate: null }
-  ]
-  const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { boardList } = useSelector(state => state.BoardReducer);
   const [searchParams] = useSearchParams();
   const [boardType, setBoardType] = useState('전체');
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,25 +24,21 @@ function BoardMain() {
 
   useEffect(
     () => {
+      dispatch(callBoardListAPI({currentPage}));
+    },[currentPage]
+  );
+
+  useEffect(
+    () => {
         // dispatch(call());
-    }, [condition, word]
+    }, [boardType, condition, word]
   );
 
   const options = [
     { value: "title", label: "제목" },
-    { value: "content", label: "내용" }
+    { value: "content", label: "내용" },
+    { value: "writer", label: "작성자" }
   ];
-
-  useEffect(
-    () => {
-      if (boardType) {
-        // boardType에 따른 공지사항 조회 API
-        // dispatch(callGetBoardListByTypeAPI(boardType))
-      }
-
-
-    }, [boardType]
-  );
 
   const clikedStyle = {
     background: '#343434',
@@ -110,10 +102,10 @@ function BoardMain() {
         </button>
       </div>
       <div>
-        {boardList && <BoardList boardList={boardList} />}
+        {boardList && <BoardList boardList={boardList.data} />}
       </div>
       <div>
-        {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+        {boardList && <PagingBar pageInfo={boardList.pageInfo} setCurrentPage={setCurrentPage} />}
       </div>
     </motion.div>
   );
