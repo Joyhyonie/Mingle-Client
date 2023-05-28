@@ -15,8 +15,8 @@ export const { lecture:
     { getSubjectInfo, getLectureInfo, getMylecture, getAttendanceListInfo } } = createActions({
         [GET_SUBJECT_INFO]: (res) => res.data, //액션이 발생할댸 => res라는 값이 넘어어올때 res.data를 꺼내기 
         [GET_LECTURE_INFO]: (res) => res.data,
-        [GET_MYLECTURE] : res => res.data
-        [GET_ATTENDANCELIST_INFO]: (res) => res.data
+        [GET_MYLECTURE] : res => res.data,
+        [GET_ATTENDANCELIST_INFO]: (res) => res.data,
 
     });
 
@@ -25,8 +25,8 @@ const SubjectInfoReducer = handleActions({
 
     [GET_SUBJECT_INFO]: (state, { payload }) => payload,
     [GET_LECTURE_INFO]: (state, { payload }) => payload,
-    [GET_ATTENDANCELIST_INFO]: (state, { payload }) => ({ attendance: payload })
-    [GET_MYLECTURE] : (state, {payload}) => ({myLecture : payload})
+    [GET_ATTENDANCELIST_INFO]: (state, { payload }) => ({ attendance: payload }),
+    [GET_MYLECTURE] : (state, {payload}) => ({myLecture : payload}),
 
 }, initialState)
 
