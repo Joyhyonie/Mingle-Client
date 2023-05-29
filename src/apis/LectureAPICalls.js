@@ -1,6 +1,6 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
-import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo } from "../modules/LectureModule";
 
 import { wait } from '@testing-library/user-event/dist/utils';
 
@@ -9,6 +9,7 @@ const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const SUBJECT_URL = `http://${SERVER_IP}:${SERVER_PORT}/subject`;
 const LECTURE_URL = `http://${SERVER_IP}:${SERVER_PORT}/lecture`;
 const ATTENDANCE_URL = `http://${SERVER_IP}:${SERVER_PORT}/stdattendance`;
+const NEWATTENDANCE_URL = `http://${SERVER_IP}:${SERVER_PORT}/attendance`;
 
 export const callSubjectsAPI = ({ currentPage = 1 }) => {
     const requestURL = `${SUBJECT_URL}/list?page=${currentPage}`;
@@ -114,15 +115,15 @@ export const callMyLectureCallAPI = () => {
     const requestURL = `${LECTURE_URL}/myLecture`;
 
     return async (dispatch, getState) => {
-        const result = await fetch(requestURL,{
-            method : "GET",
-            headers : {
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
-        if(result.status === 200){
+        if (result.status === 200) {
             dispatch(getMylecture(result));
         }
     }
@@ -192,6 +193,28 @@ export const callCourceStdListAPI = ({ lecCode }) => {
             //api를 통해 데이터를 꺼내와서 store에 저장하자(내가 원하는값을 액션과 페이로드 )
             //store에 있는 값들을 다루는것은 action이라는 
             dispatch(getAttendanceListInfo(result));
+            console.log(result);
+
+
+        }
+    }
+}
+
+export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
+
+    console.log(lecCode)
+    const requestURL = `${NEWATTENDANCE_URL}/list/${lecCode}?stdAtdDate=${stdAtdDate}`;
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: 'GET'
+        }).then(response => response.json());
+        console.log('[callNewAttendanceList]:callNewAttendanceListAPI result:', result);
+        if (result.status === 200) {
+
+
+            //api를 통해 데이터를 꺼내와서 store에 저장하자(내가 원하는값을 액션과 페이로드 )
+            //store에 있는 값들을 다루는것은 action이라는 
+            dispatch(getNewAttendancelistInfo(result));
             console.log(result);
 
 
