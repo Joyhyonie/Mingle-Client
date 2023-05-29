@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { motion } from "framer-motion"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { callBoardCountUpAPI } from "../../apis/BoardAPICalls";
 
 function BoardItem ({board}) {
 
@@ -11,7 +12,7 @@ function BoardItem ({board}) {
     const clickBoardHandler = (boardCode) => {
 
         /* 해당 공지사항을 클릭 시, 조회수를 업데이트 해주는 API 호출 */
-        // dispatch(callPatchBoardCountAPI(boardCode));
+        dispatch(callBoardCountUpAPI(boardCode));
         navigate(`/board/${boardCode}`);
         
     }
