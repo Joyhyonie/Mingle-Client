@@ -217,3 +217,14 @@
   background-color: #343434;
   color: white;
 }
+
+/* 행에 마우스 올렸을 때 (hover) */
+.acScheList:hover {
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+/* 행 클릭 시 글씨 색상 변화 */
+.acScheList:focus {
+  color: #0000FF;
+}

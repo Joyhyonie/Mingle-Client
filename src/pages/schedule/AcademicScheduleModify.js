@@ -66,21 +66,25 @@ function AcademicSchedule() {
   }
 
   /* 학사일정 수정 버튼 클릭 이벤트 */
-  const onClickAcademicScheduleModifyHandler = () => {
-
-    const formData = new FormData();
-    // formData.append("empCode", form.empCode);
-    formData.append("empCode", employee.empCode); // 로그인한 사용자의 empCode
-    formData.append("scheName", form.scheName);
-    formData.append("scheStartDate", formatDate(form.scheStartDate));
-    formData.append("scheEndDate", formatDate(form.scheEndDate));
-    formData.append("scheType", form.scheType);
-    formData.append("scheContent", form.scheContent);
-    console.log('regist form ', form)
-    console.log('regist formdata ', formData)
-
-    dispatch(callAcScheduleModifyAPI(formData));
-  }
+  const onClickAcademicScheduleModifyHandler = async () => {
+    if (selectedSchedule) {
+      const formData = new FormData();
+      formData.append("empCode", employee.empCode); // 로그인한 사용자의 empCode
+      formData.append("scheName", form.scheName);
+      formData.append("scheStartDate", formatDate(form.scheStartDate));
+      formData.append("scheEndDate", formatDate(form.scheEndDate));
+      formData.append("scheType", form.scheType);
+      formData.append("scheContent", form.scheContent);
+  
+      await dispatch(callAcScheduleModifyAPI(formData));
+      // 학사일정 조회 업데이트
+      dispatch(callAcScheduleListAPI({}));
+      toast.success("일정이 성공적으로 수정되었습니다.");
+      navigate('/schedule-academic', { replace: true });
+      setIsEditable(false); // 수정 후에는 다시 읽기 전용 상태로 변경
+    }
+  };
+  
 
 
   return (

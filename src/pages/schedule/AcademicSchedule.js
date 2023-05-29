@@ -22,7 +22,7 @@ function AcademicSchedule() {
   const [sortedAcSchedule, setSortedAcSchedule] = useState([]);
   const [isEditable, setIsEditable] = useState(false); // 추가: 수정 모드 상태
 
-
+  /* 학사 일정 리스트 */
   useEffect(() => {
     dispatch(callAcScheduleListAPI());
   },
@@ -32,8 +32,13 @@ function AcademicSchedule() {
   /* 학사 일정 항목 클릭 이벤트 */
   const onScheduleItemClickHandler = async (acSchedule) => {
     setSelectedSchedule(acSchedule);
+    setForm(acSchedule);
   }
 
+  /* 수정버튼 클릭 시 수정모드로 전환 */
+  const onClickEditButtonHandler = () => {
+    setIsEditable(true);
+  }
 
 
   /* 입력 양식의 값이 변경될 때 */
@@ -117,7 +122,7 @@ function AcademicSchedule() {
       dispatch(callAcScheduleListAPI({}));
       toast.success("일정이 성공적으로 수정되었습니다.");
       navigate('/schedule-academic', { replace: true });
-      setIsEditable(false);
+      setIsEditable(false); // 수정 후에는 다시 읽기 전용 상태로 변경
     }
   };
 
@@ -150,13 +155,16 @@ function AcademicSchedule() {
               <div
                 key={schedule.scheCode}
                 onClick={() => onScheduleItemClickHandler(schedule)}
+                className={AcademicScheduleCss.acScheList}
+                tabIndex="0"
               >
                 <p className={AcademicScheduleCss.acScheListDate}>
                   <span>•</span>
                   <span className={AcademicScheduleCss.acScheStartDate}>{new Date(schedule.scheStartDate).toISOString().split('T')[0]}</span>
                   ~
                   <span className={AcademicScheduleCss.acScheEndDate}>{new Date(schedule.scheEndDate).toISOString().split('T')[0]}</span>
-                  <span className={AcademicScheduleCss.acScheType}>{schedule.scheType}</span></p>
+                  <span className={AcademicScheduleCss.acScheType}>{schedule.scheType}</span>
+                </p>
                 <p className={AcademicScheduleCss.acScheListName}><span className={AcademicScheduleCss.acScheName}>{schedule.scheName}</span></p>
               </div>
             ))}
@@ -164,7 +172,7 @@ function AcademicSchedule() {
 
       </div>
 
-      {selectedSchedule ?
+      {selectedSchedule && !isEditable ?
         /* 학사일정 상세 조회 컴포넌트 */
         <div className={AcademicScheduleCss.acScheRegist}>
           <div className={AcademicScheduleCss.acScheRead}>
@@ -217,61 +225,62 @@ function AcademicSchedule() {
           <br />
           <button onClick={onBackButtonClickHandler} className={AcademicScheduleCss.acScheRegistBtn}>돌아가기</button>
           <button onClick={onClickAcademicScheduleDeleteHandler} className={AcademicScheduleCss.acScheRegistBtn}>삭제</button>
-          <button onClick={() => setIsEditable(true)} className={AcademicScheduleCss.acScheRegistBtn}>수정</button>
+          <button onClick={onClickEditButtonHandler} className={AcademicScheduleCss.acScheRegistBtn}>수정</button>
         </div>
-        :
-        <div className={AcademicScheduleCss.acScheRegist}>
-          <div className={AcademicScheduleCss.acScheRead}>
-            <p>일정 등록</p>
-          </div>
-          <div className={AcademicScheduleCss.acScheRegistDevide}>
-            <div className={AcademicScheduleCss.acScheRegistName}>
-              <span>일정명</span>
-              <input
-                type='text'
-                name="scheName"
-                required
-                onChange={onChangeHandler}></input>
+          :
+          /* 학사일정 등록 모드 컴포넌트 */
+          <div className={AcademicScheduleCss.acScheRegist}>
+            <div className={AcademicScheduleCss.acScheRead}>
+              <p>일정 등록</p>
+            </div>
+            <div className={AcademicScheduleCss.acScheRegistDevide}>
+              <div className={AcademicScheduleCss.acScheRegistName}>
+                <span>일정명</span>
+                <input
+                  type='text'
+                  name="scheName"
+                  required
+                  onChange={onChangeHandler}></input>
+                <br />
+              </div>
+              <div className={AcademicScheduleCss.acScheRegistType}>
+                <span>구분</span>
+                <input type="text"
+                  readOnly
+                  name="scheType"
+                  value={form.scheType}></input>
+              </div>
+            </div>
+
+            <div className={AcademicScheduleCss.acScheRegistDate}>
+              <span>일시</span>
+              <div className={AcademicScheduleCss.acScheDateInput}>
+                <input
+                  type='date'
+                  name="scheStartDate"
+                  required
+                  onChange={onChangeHandler}>
+                </input>
+                <span>~</span>
+                <input
+                  type='date'
+                  name="scheEndDate"
+                  required
+                  onChange={onChangeHandler}></input>
+              </div>
               <br />
             </div>
-            <div className={AcademicScheduleCss.acScheRegistType}>
-              <span>구분</span>
-              <input type="text"
-                readOnly
-                name="scheType"
-                value={form.scheType}></input>
-            </div>
-          </div>
 
-          <div className={AcademicScheduleCss.acScheRegistDate}>
-            <span>일시</span>
-            <div className={AcademicScheduleCss.acScheDateInput}>
-              <input
-                type='date'
-                name="scheStartDate"
+            <div className={AcademicScheduleCss.acScheDetail}>
+              <span>일정 상세</span>
+              <textarea
+                name="scheContent"
                 required
-                onChange={onChangeHandler}>
-              </input>
-              <span>~</span>
-              <input
-                type='date'
-                name="scheEndDate"
-                required
-                onChange={onChangeHandler}></input>
+                onChange={onChangeHandler}></textarea>
             </div>
             <br />
+            <button onClick={onClickAcademicScheduleRegistHandler} className={AcademicScheduleCss.acScheRegistBtn}>등록</button>
           </div>
-
-          <div className={AcademicScheduleCss.acScheDetail}>
-            <span>일정 상세</span>
-            <textarea
-              name="scheContent"
-              required
-              onChange={onChangeHandler}></textarea>
-          </div>
-          <br />
-          <button onClick={onClickAcademicScheduleRegistHandler} className={AcademicScheduleCss.acScheRegistBtn}>등록</button>
-        </div>
       }
     </motion.div >
   );
