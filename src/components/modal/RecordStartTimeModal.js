@@ -43,7 +43,7 @@ function RecordStartTimeModal ({setRecordStartTimeModal}) {
                     <button className={ MainCSS.whiteButton } onClick={ () => setRecordStartTimeModal(false)}>
                         취소
                     </button>
-                    <button className={ MainCSS.pinkButton } onClick={ recordStartTimeHandler }>
+                    <button className={ MainCSS.blackButton } onClick={ recordStartTimeHandler }>
                         등록
                     </button>
                 </div>

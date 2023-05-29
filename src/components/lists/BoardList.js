@@ -31,21 +31,6 @@ function BoardList ({boardList}) {
                     { Array.isArray(boardList)
                     && boardList.map(board => <BoardItem key={ board.boardCode } board={ board }/>) 
                     }
-
-                    {/* 아래는 dummy ----------------------------------------------------------- */}
-
-                    { Array.isArray(boardList)
-                    && boardList.map(board => <BoardItem key={ board.boardCode } board={ board }/>) 
-                    }
-                    { Array.isArray(boardList)
-                    && boardList.map(board => <BoardItem key={ board.boardCode } board={ board }/>) 
-                    }
-                    { Array.isArray(boardList)
-                    && boardList.map(board => <BoardItem key={ board.boardCode } board={ board }/>) 
-                    }
-                    { Array.isArray(boardList)
-                    && boardList.map(board => <BoardItem key={ board.boardCode } board={ board }/>) 
-                    }
                 </tbody>
             </table>
         </motion.div>

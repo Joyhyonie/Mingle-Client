@@ -1,0 +1,65 @@
+.msgNotiBox,
+.commonNotiBox {
+    border: 2px solid #66D2B3;
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    width: 600px;
+    height: 130px;
+}
+
+.commonNotiBox {
+    width: 500px;
+}
+
+.msgContentBox {
+    width: 500px;
+    display: flex;
+}
+
+.commonContentBox {
+    width: 400px;
+}
+
+.msgContentBox img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin: 0px 30px;
+}
+
+.msgContentBox div {
+    margin-top: 13px;
+}
+
+.commonContentBox div {
+    margin: 15px 40px;
+}
+
+.msgContentBox div sub,
+.commonContentBox div sub {
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.msgContentBox div p,
+.commonContentBox div p {
+    font-size: 17px;
+    color: #999999;
+    margin-top: 7px;
+}
+
+.closeBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 130px;
+    background: #66D2B3;
+    color: white;
+    font-size: 18px;
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+}

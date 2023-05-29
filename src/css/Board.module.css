@@ -1,3 +1,7 @@
+.boardSize {
+    height: 520px;
+}
+
 .boardButtonBox {
     display: flex;
     justify-content: space-around;
@@ -5,7 +9,7 @@
 }
 
 .boardButtonBox button {
-    border: 1px solid #969696;
+    border: 1px solid #999;
     border-radius: 10px;
     background-color:white;
     padding: 8px 80px;
@@ -23,7 +27,7 @@
     right: 70px;
     border-radius: 10px;
     border: none;
-    background-color:#999;
+    background-color:#343434;
     color: white;
     padding: 8px 30px;
     font-size: 18px;
@@ -44,7 +48,7 @@
 
 .buttonBox button,
 .deleteButtonBox button {
-    border: 1px solid #999;
+    border: 1px solid #343434;
     font-size: 18px;
     padding: 7px 35px;
     border-radius: 10px;
@@ -59,7 +63,7 @@
 }
 
 .pinkButton {
-    background-color: #999;
+    background-color: #343434;
     color: white;
 }
 
@@ -78,7 +82,7 @@
     align-items: center;
     border-top: 3px solid #999;
     border-bottom: 1px solid #999;
-    background-color: #f8f8f8;
+    background-color: #FBFBFB;
     margin-top: 90px;
     height: 70px;
     font-size: 20px;
@@ -163,12 +167,13 @@
 }
 
 .boardContent {
-    /* background-color: #f8f8f8; */
+    background-color: #FBFBFB;
     overflow: scroll;
     margin: 0 auto;
-    width: 1300px;
+    width: 1250px;
     height: 550px;
-    text-align: center; /* 컨텐츠 내부 모두 가운데 정렬해서 노출 */
+    padding: 0px 30px;
+    /* text-align: center; 컨텐츠 내부 모두 가운데 정렬해서 노출 */
 }
 
 .boardContent::-webkit-scrollbar {

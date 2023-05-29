@@ -8,16 +8,27 @@ import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-hot-toast';
+import { callBoardRegistAPI } from "../../apis/BoardAPICalls";
 
 function BoardRegist () {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const textRef = useRef(null);
+    const { regist } = useSelector(state => state.BoardReducer);
     const [editorValue, setEditorValue] = useState('');
-    const[form, setForm] = useState({});
+    const [form, setForm] = useState({});
+
+    useEffect(
+        () => {
+            if(regist?.status === 200) {
+                toast.success("공지가 성공적으로 등록되었습니다 :)");
+                navigate('/board', { replace : true });
+            }
+        },[regist]
+    );
 
     function EditorBox() {
 
@@ -68,28 +79,27 @@ function BoardRegist () {
     /* '등록' 버튼을 누를 시, 해당 게시글이 등록되는 이벤트 함수 */
     const registBoardHandler = () => {
 
-        if(form.boardTitle === undefined || form.boardTitle === '') {
+        if(!form.boardTitle || form.boardTitle.trim() === '') {
             toast.error("공지의 제목을 입력해주세요 !");
-        } else if(form.boardType === undefined) {
+        } else if(!form.boardType) {
             toast.error("분류를 선택해주세요 !");
-        } else if(form.boardContent === undefined) {
+        } else if(!form.boardContent || form.boardContent.trim() === '') {
             toast.error("내용을 입력해주세요 !");
-        } else if (true) { // status === 200일 때로 변경 예정
-            toast.success("공지가 성공적으로 등록되었습니다");
-            navigate('/board', { replace : true });
+        } else {
+            // 서버로 전달 할 FormData형태의 객체 설정
+            const formData = new FormData();
+            formData.append("boardTitle", form.boardTitle);
+            formData.append("boardType", form.boardType);
+            formData.append("boardContent", form.boardContent);
+
+            console.log(form.boardTitle);
+            console.log(form.boardType);
+            console.log(form.boardContent);
+
+            dispatch(callBoardRegistAPI(formData));
         }
 
-        // 서버로 전달 할 FormData형태의 객체 설정
-        const formData = new FormData();
-        formData.append("boardTitle", form.boardTitle);
-        formData.append("boardType", form.boardType);
-        formData.append("boardContent", form.boardContent);
-
-        console.log(form.boardTitle);
-        console.log(form.boardType);
-        console.log(form.boardContent);
-
-        // dispatch(callRegistBoardAPI(formData))
+        
     }
     
     return (

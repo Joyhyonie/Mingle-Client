@@ -16,26 +16,15 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
     const dispatch = useDispatch();
     const location = useLocation();
     const { employee } = useSelector(state => state.EmployeeReducer);
-    const [isIconClickedState, setIsIconClickedState] = useState({      // 클릭된 아이콘 컨트롤 state
-        mpgIsClicked: false,
-        notiIsClicked: false,
-        msgIsClicked: false,
-    });
+
+    const [mpgClicked, setMpgClicked] = useState(false);
+    const [notiClicked, setNotiClicked] = useState(false);
+    const [msgClicked, setMsgClicked] = useState(false);
+    const [logoutClicked, setLogoutClicked] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [notificationModal, setNotificationModal] = useState(false);  // 알림 모달 컨트롤 state
     const [messageModal, setMessageModal] = useState(false);            // 쪽지 모달 컨트롤 state
     const [logoutModal, setLogoutModal] = useState(false);              // 로그아웃 모달 컨트롤 state
-
-    /* 클릭된 아이콘을 컨트롤 하기 위한 이벤트 함수 */
-    const stateChangeHandler = (stateName) => {
-        setIsIconClickedState(prevState => ({
-          ...prevState,
-          [stateName]: true,
-          mpgIsClicked: stateName === 'mpgIsClicked' ? true : false,
-          notiIsClicked: stateName === 'notiIsClicked' ? true : false,
-          msgIsClicked: stateName === 'msgIsClicked' ? true : false,
-        }));
-    }
     
     /* 다크모드/라이트모드를 제어하기 위한 이벤트 함수 */
     const darkModeHandler = () => {
@@ -53,18 +42,15 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
     /* 알림 모달창 핸들러 함수 */
     const notificationModalHandler = () => setNotificationModal(!notificationModal);
 
+    /* 로그아웃 모달창 핸들러 함수 */
+    const logoutModalHandler = () => setLogoutModal(!logoutModal);
+
     /* mypage에서 다른 페이지로 이동되면 mypage의 아이콘을 다시 기본 아이콘으로 돌려놓기 위한 useEffect */
     useEffect(() => {
-        if (location.pathname === "/mypage") { // pathname이 mypage일 때만 true
-            setIsIconClickedState(prevState => ({
-                ...prevState,
-                mpgIsClicked: true
-            }));
+        if (location.pathname === "/mypage/profile") { // pathname이 mypage일 때만 true
+            setMpgClicked(true);
         } else {
-            setIsIconClickedState(prevState => ({
-                ...prevState,
-                mpgIsClicked: false
-            }));
+            setMpgClicked(false);
         }
     }, [location]);
 
@@ -74,7 +60,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
             <div className={ CommonCSS.msgModalDiv }>
                 <motion.div drag dragConstraints={{ left: 0, right: 1200, top: 0, bottom: 200}}>
                     { messageModal ? 
-                        (<MessageModalLayout setMessageModal={setMessageModal} isIconClickedState={isIconClickedState} setIsIconClickedState={setIsIconClickedState}/>) : null
+                        (<MessageModalLayout setMessageModal={setMessageModal} setMsgClicked={setMsgClicked}/>) : null
                     }
                 </motion.div>
             </div>
@@ -91,7 +77,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
             {/* 로그아웃 모달창 */}
             <div className={ CommonCSS.logoutModalDiv }>
                 { logoutModal ?
-                    (<LogoutModal logoutHandler={logoutHandler} setLogoutModal={setLogoutModal}/>) : null
+                    (<LogoutModal logoutHandler={logoutHandler} setLogoutModal={setLogoutModal} setLogoutClicked={setLogoutClicked}/>) : null
                 }
             </div>
 
@@ -108,9 +94,9 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
                 >
                     <span>M</span>ingle
                 </p>
-                <p className={ CommonCSS.hello }>{employee && employee.empName}님 안녕하세요 :)</p>
+                <p className={ CommonCSS.hello }><span>{employee && employee.empName}</span>님 안녕하세요 :)</p>
                 <div className={ CommonCSS.iconBox }>
-                    {isIconClickedState.mpgIsClicked ? (
+                    {mpgClicked ? (
                         <motion.img
                             src="/images/mypage-hover.png"
                             whileHover={{ scale: 1.05 }}
@@ -121,15 +107,17 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
                             onClick={() => {
                                 setActiveIndex('');
                                 navigate('/mypage'); 
-                                stateChangeHandler('mpgIsClicked');}}
+                                setMpgClicked(true);
+                            }}
                             whileHover={{ scale: 1.05 }}
                         />
                     )}
-                    {isIconClickedState.notiIsClicked ? (
+
+                    {notiClicked ? (
                         <motion.img
                             src="/images/notification-hover.png"
                             onClick={() => {
-                                setIsIconClickedState(!isIconClickedState.notiIsClicked);
+                                setNotiClicked(false);
                                 setNotificationModal(!notificationModal)
                             }}
                             whileHover={{ scale: 1.05 }}
@@ -138,17 +126,18 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
                         <img
                             src="/images/notification.png"
                             onClick={() => {
-                                stateChangeHandler('notiIsClicked');
+                                setNotiClicked(true);
                                 notificationModalHandler();
                             }}
                             whileHover={{ scale: 1.05 }}
                         />
                     )}
-                    {isIconClickedState.msgIsClicked ? (
+                    
+                    {msgClicked ? (
                         <motion.img
                             src="/images/message-hover.png"
                             onClick={() => {
-                                setIsIconClickedState(!isIconClickedState.msgIsClicked);
+                                setMsgClicked(false);
                                 setMessageModal(false);
                             }}
                             whileHover={{ scale: 1.05 }}
@@ -157,7 +146,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
                         <img
                             src="/images/message.png"
                             onClick={() => {
-                                stateChangeHandler('msgIsClicked');
+                                setMsgClicked(true);
                                 messageModalHandler();
                             }}
                             whileHover={{ scale: 1.05 }}
@@ -166,9 +155,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
 
                     { isDark ? (
                         <motion.img
-                        src={isHovered ? "/images/whitemode-hover.png" : "/images/whitemode.png"}
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
+                        src={"/images/darkmode-hover.png"}
                         onClick={darkModeHandler}
                         whileHover={{ scale: 1.05 }}
                         />
@@ -180,16 +167,27 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
                         onClick={darkModeHandler}
                         whileHover={{ scale: 1.05 }}
                         />
-                    )
-                    }
-                </div>
-                <div className={ isDark ? CommonCSS.buttonBoxDark : CommonCSS.buttonBoxLight }>
-                    <motion.button
-                        onClick={ () => setLogoutModal(true) }
-                        whileHover={{ scale: 1.03 }}
-                    >
-                        logout
-                    </motion.button>
+                    )}
+
+                    {logoutClicked ? (
+                        <motion.img
+                            src="/images/logout-hover.png"
+                            onClick={() => {
+                                setLogoutClicked(false);
+                                setLogoutModal(false);
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                        />
+                    ) : (
+                        <img
+                            src="/images/logout.png"
+                            onClick={() => {
+                                setLogoutClicked(true);
+                                logoutModalHandler();
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                        />
+                    )}
                 </div>
             </motion.div>
         </>

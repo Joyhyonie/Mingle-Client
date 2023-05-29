@@ -204,6 +204,7 @@ function StudentModify(data) {
           </div>
 
         </div>
+        { data &&
         <div className={StudentRegistCss.StudentRegistInformation}>
           <div className={StudentRegistCss.StudentRegistFormFirst}>
             이름
@@ -359,6 +360,7 @@ function StudentModify(data) {
             </div>
           </div>
         </div>
+        }
       </div>
     </div>
   )
