@@ -166,9 +166,10 @@
     background-color: #FBFBFB;
     overflow: scroll;
     margin: 0 auto;
-    width: 1300px;
+    width: 1250px;
     height: 550px;
-    text-align: center; /* 컨텐츠 내부 모두 가운데 정렬해서 노출 */
+    padding: 0px 30px;
+    /* text-align: center; 컨텐츠 내부 모두 가운데 정렬해서 노출 */
 }
 
 .boardContent::-webkit-scrollbar {

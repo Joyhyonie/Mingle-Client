@@ -8,13 +8,13 @@ import PagingBar from "../../components/common/PagingBar";
 import BoardList from "../../components/lists/BoardList";
 import SearchBar from "../../components/common/SearchBar";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { callBoardListAPI } from "../../apis/BoardAPICalls";
+import { callBoardListAPI, callBoardSearchAPI } from "../../apis/BoardAPICalls";
 
 function BoardMain() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { boardList } = useSelector(state => state.BoardReducer);
+  const { boardList, boardSearch } = useSelector(state => state.BoardReducer);
   const [searchParams] = useSearchParams();
   const [boardType, setBoardType] = useState('전체');
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,17 +22,14 @@ function BoardMain() {
   const condition = searchParams.get('condition');
   const word = searchParams.get('word');
 
-  useEffect(
-    () => {
-      dispatch(callBoardListAPI({currentPage}));
-    },[currentPage]
-  );
-
-  useEffect(
-    () => {
-        // dispatch(call());
-    }, [boardType, condition, word]
-  );
+  useEffect(() => {
+    // boardType이 초기값인 '전체'이면서 검색기준이 존재하지 않을 때는 모든 공지사항 조회
+    if (boardType === '전체' && !condition && !word) {
+      dispatch(callBoardListAPI({ currentPage }));
+    } else {
+      dispatch(callBoardSearchAPI({ currentPage, boardType, condition, word }));
+    }
+  }, [currentPage, boardType, condition, word]);
 
   const options = [
     { value: "title", label: "제목" },
@@ -102,10 +99,10 @@ function BoardMain() {
         </button>
       </div>
       <div>
-        {boardList && <BoardList boardList={boardList.data} />}
+      {(boardSearch && boardSearch.data) ? <BoardList boardList={boardSearch.data} /> : (boardList && boardList.data) ? <BoardList boardList={boardList.data} /> : null}
       </div>
       <div>
-        {boardList && <PagingBar pageInfo={boardList.pageInfo} setCurrentPage={setCurrentPage} />}
+      {(boardSearch && boardSearch.data) ? <PagingBar pageInfo={boardSearch.pageInfo} setCurrentPage={setCurrentPage} /> : (boardList && boardList.data) ? <PagingBar pageInfo={boardList.pageInfo} setCurrentPage={setCurrentPage} /> : null}
       </div>
     </motion.div>
   );
