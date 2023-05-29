@@ -30,7 +30,7 @@ function Layout () {
             const token = window.localStorage.getItem('accessToken');
 
             if (token != null) {
-                const eventSource = new EventSource(`${url}/noti/${token}`);
+                const eventSource = new EventSource(`${url}/noti/${token}`, { retry : 3000 });
                 console.log("서버로 이벤트 구독 완🥳")
 
                 eventSource.addEventListener("receivedMsg", (e) => {

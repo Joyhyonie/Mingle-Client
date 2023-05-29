@@ -1,3 +1,7 @@
+.boardSize {
+    height: 520px;
+}
+
 .boardButtonBox {
     display: flex;
     justify-content: space-around;

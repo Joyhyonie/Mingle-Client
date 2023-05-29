@@ -29,7 +29,7 @@ export function callNotificationRemoveAPI (notiCode) {
 
         const headers = {
             "Content-Type": "application/json",
-                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
         const result = await request('POST', `/notification/remove/${notiCode}`, headers);

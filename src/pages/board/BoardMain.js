@@ -98,7 +98,7 @@ function BoardMain() {
           기타
         </button>
       </div>
-      <div>
+      <div className={ BoardCSS.boardSize }>
       {(boardSearch && boardSearch.data) ? <BoardList boardList={boardSearch.data} /> : (boardList && boardList.data) ? <BoardList boardList={boardList.data} /> : null}
       </div>
       <div>
