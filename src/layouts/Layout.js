@@ -13,8 +13,9 @@ function Layout () {
 
     const dispatch = useDispatch();
     const { employee } = useSelector(state => state.EmployeeReducer);
-    const [activeIndex, setActiveIndex] = useState();   // 활성화된 화면을 컨트롤하기 위한 state
-    const [isDark, setIsDark] = useState(false);        // 다크모드 설정을 위한 state
+    const [activeIndex, setActiveIndex] = useState();                   // 활성화된 화면을 컨트롤하기 위한 state
+    const [isDark, setIsDark] = useState(false);                        // 다크모드 설정을 위한 state
+    const [messageModal, setMessageModal] = useState(false);            // 쪽지 모달 컨트롤 state
 
     useEffect(
         () => {
@@ -61,7 +62,9 @@ function Layout () {
 
         toast.custom((t) => (
             <div
+                onClick={ () => setMessageModal(true)} // 쪽지 알림 클릭 시, 쪽지 모달 open
                 style={{
+                    cursor: "pointer",
                     opacity: t.visible ? 1 : 0,
                     transition: "opacity 300ms ease-in-out, transform 300ms ease-in-out",
                     transform: t.visible ? "translateY(0)" : "translateY(-50%)",
@@ -75,7 +78,7 @@ function Layout () {
                             <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
                         </div>
                     </div>
-                    <div className={ ToastCSS.closeBox } onClick={ () => toast.dismiss(t.id)}>
+                    <div className={ ToastCSS.closeBox } onClick={ (e) => {toast.dismiss(t.id); e.stopPropagation()}}>
                         <p>close</p>
                     </div>
                 </div>
@@ -126,7 +129,7 @@ function Layout () {
 
     return (
         <div>
-            <Header setActiveIndex={setActiveIndex} isDark={isDark} setIsDark={setIsDark} logoutHandler={logoutHandler}/>
+            <Header setActiveIndex={setActiveIndex} isDark={isDark} setIsDark={setIsDark} logoutHandler={logoutHandler} messageModal={messageModal} setMessageModal={setMessageModal}/>
             <div className={ CommonCSS.flex }>
                 <div className={ CommonCSS.navbarCustom }>
                 { isAdmin ? 
