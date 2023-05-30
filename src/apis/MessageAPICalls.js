@@ -2,7 +2,7 @@ import { getDepartmentForSend, getEmployeeForSend, getLikedMsg, getLikedMsgSearc
 import { request } from "./Api";
 
 /* 받은 쪽지함 조회 */
-export function callReceivedMsgListAPI() {
+export function callReceivedMsgListAPI(currentSize) {
 
     return async (dispatch, getState) => {
 
@@ -11,7 +11,7 @@ export function callReceivedMsgListAPI() {
             Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
-        const result = await request('GET', `/message/received`, headers);
+        const result = await request('GET', `/message/received?size=${currentSize}`, headers);
 
         if(result.status == 200) {
             dispatch(getReceivedMsg(result));
@@ -22,7 +22,7 @@ export function callReceivedMsgListAPI() {
 }
 
 /* 교직원명/내용으로 쪽지 검색 후 조회 (받은 쪽지함) */
-export function callReceivedMsgSearchAPI(condition, word) {
+export function callReceivedMsgSearchAPI(condition, word, searchedCurrentSize) {
 
     return async (dispatch, getState) => {
 
@@ -31,7 +31,7 @@ export function callReceivedMsgSearchAPI(condition, word) {
             Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
-        const result = await request('GET', `/message/received/search?condition=${condition}&word=${word}`, headers);
+        const result = await request('GET', `/message/received/search?condition=${condition}&word=${word}&size=${searchedCurrentSize}`, headers);
 
         if(result.status == 200) {
             dispatch(getReceivedMsgSearch(result));

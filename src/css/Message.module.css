@@ -88,6 +88,20 @@
     cursor: pointer;
 }
 
+.moreBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #66d2b409;/ */
+    border: 1.5px solid #66d2b3;
+    border-radius: 5px;
+    color: #66d2b3;
+    width: 365px;
+    height: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
 
 /* 검색바, 교직원 선택바 --------------------------------------------------- */
 .msgSearchBox,
