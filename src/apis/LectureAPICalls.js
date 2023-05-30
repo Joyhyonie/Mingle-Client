@@ -1,6 +1,6 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
-import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLectureCount } from "../modules/LectureModule";
 
 import { wait } from '@testing-library/user-event/dist/utils';
 
@@ -172,7 +172,7 @@ export const callLectureListAPI = ({ currentPage = 1 }) => {
 }
 
 
-/*출석 정보 불러오는 API */
+/*출석 정보 불러오는 API lecCount 포함 */
 
 export const callCourceStdListAPI = ({ lecCode }) => {
 
@@ -186,7 +186,7 @@ export const callCourceStdListAPI = ({ lecCode }) => {
         const result = await fetch(requestURL, {
             method: 'GET'
         }).then(response => response.json());
-        console.log('[callsubjectList]:callSubjectListAPI result:', result);
+        console.log('출석 정보 불러오기 API lecCount 포함', result);
         if (result.status === 200) {
 
 
@@ -200,6 +200,7 @@ export const callCourceStdListAPI = ({ lecCode }) => {
     }
 }
 
+/*해당 주차에 해당 강의에 대한 출석 정보 조회  */
 export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
 
     console.log(lecCode)
@@ -221,5 +222,21 @@ export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
         }
     }
 }
+// export const callLectureCountAPI = ({ lecCode }) => {
+
+//     const requestURL = `${LECTURE_URL}/lectureCount/${lecCode}`;
+//     return async (dispatch, getState) => {
+//         const result = await fetch(requestURL, {
+//             method: 'GET'
+//         }).then(response => response.json());
+//         console.log('lecCount를 위한 api calssLectureCountAPI', result);
+//         if (result.status === 200) {
+
+//             dispatch(getLectureCount(result));
+
+
+//         }
+//     }
+// }
 
 
