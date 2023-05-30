@@ -26,7 +26,7 @@ function MyAttendance(){
         >
            
              <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
-                <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
+                <table className={ApplideCertidocCSS.ApplyTable}>
                     <colgroup>
                     <col width="25%" />
                     <col width="40%" />

@@ -50,7 +50,7 @@ function Layout () {
                 })
           
                 eventSource.addEventListener("error", (e) => {
-                    eventSource.close();
+                    /*eventSource.close();*/
                 });
             }
 

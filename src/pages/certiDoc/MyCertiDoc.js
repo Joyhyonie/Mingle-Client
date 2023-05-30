@@ -4,7 +4,7 @@ import CommonCSS from "../../css/common/Common.module.css";
 import PagingBar from "../../components/common/PagingBar";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callCertiDocSearchName, callMyCertiDocListAPI, callMyCertiDocSearchName } from "../../apis/CertiDocAPICalls";
+import { callMyCertiDocListAPI, callMyCertiDocSearchName } from "../../apis/CertiDocAPICalls";
 import CareerCerti from "../../components/documents/CareerCerti";
 import EmploymentCerti from "../../components/documents/EmploymentCerti";
 import LectureExperienceCerti from "../../components/documents/LectureExperienceCerti";
