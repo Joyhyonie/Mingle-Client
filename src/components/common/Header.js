@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { callReceivedMsgListAPI } from "../../apis/MessageAPICalls";
 import { callNotificationListAPI } from '../../apis/NotificationAPICalls';
 
-function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModal, setMessageModal }) {
+function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModal, setMessageModal, updateNotiCount, updateMsgCount }) {
 
     /*  setActiveIndex : 로고 및 마이페이지 아이콘을 클릭 시, Nav바 활성화 취소 */
 
@@ -41,8 +41,12 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
     /* 읽지 않은 쪽지 및 알림 갯수를 노출시키기 위한 API 호출 */
     useEffect(() => {
         dispatch(callReceivedMsgListAPI());
+    }, [updateMsgCount]);
+
+    useEffect(() => {
         dispatch(callNotificationListAPI());
-    }, []); // 새로운 쪽지 및 알림이 추가될 때 렌더링 시켜주고 싶은데.. 어떻게 하면 될까?
+    }, [updateNotiCount]);
+
 
     /* 다크모드/라이트모드를 제어하기 위한 이벤트 함수 */
     const darkModeHandler = () => {
