@@ -22,17 +22,17 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
     } else if(type == "board") {
       navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
     } else if(type == "attendance") {
-        navigate(`/attendance-employee?condtion=${selectedOption}&search=${inputValue}`);
+        navigate(`/attendance-employee?condition=${selectedOption}&search=${inputValue}`);
     } else if(type == "subject"){
-        navigate(`/subject?condtion=${selectedOption}&search=${inputValue}`);
+        navigate(`/subject?condition=${selectedOption}&search=${inputValue}`);
     } else if(type == "certiDoc"){
-       navigate(`/certi-doc-applied?condtion=${selectedOption}&search=${inputValue}`);
+       navigate(`/certi-doc-applied?condition=${selectedOption}&search=${inputValue}`);
     } else if(type == "leaveDoc"){
-      navigate(`/leave-doc-applied?condtion=${selectedOption}&search=${inputValue}`);
+      navigate(`/leave-doc-applied?condition=${selectedOption}&search=${inputValue}`);
     } else if(type == "MyLeaveDoc"){
-      navigate(`/Myleave?condtion=${selectedOption}&search=${inputValue}`);
+      navigate(`/Myleave?condition=${selectedOption}&search=${inputValue}`);
     } else if(type == "myCertiDoc"){
-      navigate(`/certi-doc-mine?condtion=${selectedOption}&search=${inputValue}`);
+      navigate(`/certi-doc-mine?condition=${selectedOption}&search=${inputValue}`);
     }
 
   };

@@ -9,7 +9,6 @@
 
 .MyCertiDocCSSTable {
     border-collapse: collapse;
-    table-layout: fixed;
 }
 
 .MyCertiDocCSSTable button {
