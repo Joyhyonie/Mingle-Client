@@ -9,14 +9,16 @@ import styles from '../../css/ReactDatePicker.module.css';
 function LectureInsertModal({ setIsInsertModalOpen }) {
     const dispatch = useDispatch();
     const subjectInfo = useSelector(state => state.SubjectInfoReducer);
-    const regist = useSelector(state => state.SubjectReducer);
+    const { regist } = useSelector(state => state.SubjectReducer);
 
     useEffect(
         () => {
-            if (regist.status === 200) {
-                toast.success('ㅎㅇ');
+            if (regist?.status === 200) {
+                toast.success('강의등록이 완료되었습니다.');
+                setIsInsertModalOpen(false);
             }
-        }
+        },
+        [subjectInfo, regist]
     )
 
 

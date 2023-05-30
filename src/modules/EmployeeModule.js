@@ -6,7 +6,7 @@ const initialState = {};
 /* 액션 */
 const POST_LOGIN = 'employee/POST_LOGIN';
 const RESET_EMPLOYEE = 'employee/RESET_EMPLOYEE';
-const GET_EMPLOYEES = 'employee/GET_ACA_EMPLOYEES';
+const GET_EMPLOYEES = 'employee/GET_EMPLOYEES';
 const GET_AC_EMPLOYEE = 'employee/GET_AC_EMPLOYEE';
 const GET_EMPLOYEE = 'employee/GET_EMPLOYEE';
 const PATCH_EMPLOYEE = 'employee/PATCH_EMPLOYEE';
