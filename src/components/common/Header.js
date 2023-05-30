@@ -40,7 +40,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
 
     /* 읽지 않은 쪽지 및 알림 갯수를 노출시키기 위한 API 호출 */
     useEffect(() => {
-        dispatch(callReceivedMsgListAPI());
+        dispatch(callReceivedMsgListAPI(10));
     }, [updateMsgCount]);
 
     useEffect(() => {
@@ -68,7 +68,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
     const logoutModalHandler = () => setLogoutModal(!logoutModal);
 
     /* 읽지 않은 쪽지의 갯수 */
-    const unreadMsgCount = receivedMsg ? receivedMsg.filter(msg => msg.msgReadYn == 'N').length : 0;
+    // const unreadMsgCount = receivedMsg.data ? receivedMsg.data.filter(msg => msg.msgReadYn == 'N').length : 0;
 
     return (
         <>
@@ -205,7 +205,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
                         />
                     )}
                     {notifications && notifications.length > 0 ? <div className={ CommonCSS.notiCount }>{notifications.length}</div> : null}
-                    {unreadMsgCount > 0 ? <div className={ CommonCSS.msgCount }>{unreadMsgCount}</div> : null}
+                    {/* {unreadMsgCount > 0 ? <div className={ CommonCSS.msgCount }>{unreadMsgCount}</div> : null} */}
                 </div>
             </motion.div>
         </>
