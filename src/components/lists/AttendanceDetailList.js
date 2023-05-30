@@ -6,7 +6,7 @@ import AteendanceSearchBar from "../../components/common/AteendanceSearchBar";
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { callCourceStdListAPI, callNewAttendanceListAPI } from "../../apis/LectureAPICalls";
+import { callCourceStdListAPI, callLectureCountAPI, callNewAttendanceListAPI } from "../../apis/LectureAPICalls";
 import { useNavigate, useParams } from 'react-router-dom';
 
 function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수가 api에 넣을 것인가?
@@ -16,15 +16,26 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         { value: "deptName", label: "학과명" }
 
     ];
-    const { attendance, newAttendance } = useSelector(state => state.SubjectInfoReducer);
+    const { attendance, newAttendance, lecCount } = useSelector(state => state.SubjectInfoReducer);
     const { lecCode } = useParams();
     const SelectBoxWrapper = styled.div`
     // display: flex;
     // flex-grow:1;
   `;
 
+
     console.log("여기는 출첵attendance", attendance);
+
     console.log("여기는뉴뉴뉴 newAttendance", newAttendance);
+    console.log("여기는뉴뉴뉴 lecCount", lecCount);
+
+
+    const handleSelectChange2 = (event) => {
+        const selectedOption2 = event.target.value;
+        console.log('Selected option:', selectedOption2);
+        setAttendanceStatus2(selectedOption2)
+    };
+
 
 
     const handleSelectChange = (event) => {
@@ -33,6 +44,7 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         setAttendanceStatus(selectedOption)
     };
     const [attendanceStatus, setAttendanceStatus] = useState('');
+    const [attendanceStatus2, setAttendanceStatus2] = useState('');
     const dispatch = useDispatch();
 
 
@@ -42,10 +54,12 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         () => {
             console.log("코드코드코드코드", lecCode);
             dispatch(callCourceStdListAPI({ lecCode }));
-            dispatch(callNewAttendanceListAPI({ lecCode }));
+            //  dispatch(callNewAttendanceListAPI({ lecCode }));
+            //   dispatch(callLectureCountAPI({ lecCode }))
 
 
-        }, []);
+        },
+        []);
 
 
 
@@ -80,14 +94,34 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
                 </tr>
             </thead>
             <tbody>
+                {attendance && (
+                    attendance.courseStudentList
+                        .map((lecture) => (
+                            <tr key={lecture.student.stdCode}>
+                                <td>{lecture.student.stdCode}</td>
+                                <td>{lecture.student.department.deptName}</td>
+
+                                <td>{lecture.student.stdName}</td>
+
+                                <td>
+                                    <>
+                                        <select onChange={handleSelectChange2}>
+                                            <option value="출석">출석</option>
+                                            <option value="결석">결석</option>
+                                            <option value="지각">지각</option>
+                                        </select>
+
+                                    </>
+                                </td>
+                                <td><input type="text" value={attendanceStatus2} readOnly /></td>
+
+                            </tr>
+                        )))}
 
 
                 {Array.isArray(attendance)
                     && attendance.map(attendance => <AttendanceItem key={attendance.courseCode} attendance={attendance} />)
                 }
-
-
-
             </tbody>
         </table>
 
