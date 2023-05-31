@@ -1,5 +1,5 @@
 import { getEmployees, postEmployee, putEmployee, deleteEmployee, getAcEmployee } from '../modules/EmployeeModule';
-import { getList } from '../modules/OrganizationModule';
+import { getList, getSearch } from '../modules/OrganizationModule';
 import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
 
 
@@ -58,16 +58,15 @@ export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
 }
 
 // 조직도 서치
-export const callEmployeeOrgSearchListAPI = ({ search, currentPage = 1 }) => {
-  const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
-  const requestURL = `${EMPLOYEE_URL}/organization/search?search=${search}&page=${currentPage}`;
+export const callEmployeeOrgSearchListAPI = ({ search, condition, currentPage = 1 }) => {
+  const requestURL = `${EMPLOYEE_URL}/organization?condition=${condition}&search=${search}&page=${currentPage}`;
 
   return async (dispatch, getState) => {
     const result = await fetch(requestURL).then(response => response.json());
 
     if (result.status === 200) {
       console.log("[EmployeeAPICalls] callEmployeeOrgSearchListAPI result : ", result);
-      dispatch(getList(result));
+      dispatch(getSearch(result));
     }
   }
 }

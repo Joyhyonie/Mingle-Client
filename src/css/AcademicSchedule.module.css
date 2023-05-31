@@ -53,7 +53,7 @@
 .acScheRegistDevide {
   display: flex;
   justify-content: space-between;
-  height: 80px;
+  height: 83px;
 }
 
 .acScheRegistDetailTitle {
@@ -156,7 +156,7 @@
 
 .acScheRegistDate {
   width: 900px;
-  height: 80px;
+  height: 90px;
 }
 
 .acScheRegistDate input {

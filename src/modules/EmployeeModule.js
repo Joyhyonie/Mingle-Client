@@ -12,11 +12,11 @@ const GET_EMPLOYEE = 'employee/GET_EMPLOYEE';
 const PATCH_EMPLOYEE = 'employee/PATCH_EMPLOYEE';
 const POST_EMPLOYEE = 'employee/POST_EMPLOYEE';
 const PUT_EMPLOYEE = 'employee/PUT_EMPLOYEE';
-const DELETE_STUDENT = 'employee/DELETE_STUDENT'
+const DELETE_EMPLOYEE = 'employee/DELETE_EMPLOYEE';
 const POST_ID = 'employee/POST_ID';
 const POST_PWD = 'employee/POST_PWD';
 const POST_PWDCHANGE = 'employee/POST_PWDCHANGE';
-const GET_SEARCHNAME = 'employee/GET_SEARCHNAME';
+const GET_SEARCH_NAME = 'employee/GET_SEARCH_NAME';
 
 export const { employee : { postLogin, 
                             resetEmployee, 
@@ -29,7 +29,7 @@ export const { employee : { postLogin,
                             deleteEmployee, 
                             postId, 
                             postPwd, 
-                            getSearchname, 
+                            getSearchName, 
                             postPwdchange,
                           }} = createActions
     ({
@@ -44,8 +44,8 @@ export const { employee : { postLogin,
       [PATCH_EMPLOYEE]: (res) => res,
       [POST_EMPLOYEE]: (res) => res,
       [PUT_EMPLOYEE]: (res) => res,
-      [DELETE_STUDENT]: (res) => res,
-      [GET_SEARCHNAME]: (res) => res,
+      [DELETE_EMPLOYEE]: (res) => res,
+      [GET_SEARCH_NAME]: (res) => res,
     });
 
 /* 리듀서 */
@@ -57,12 +57,12 @@ const EmployeeReducer = handleActions({
   [GET_EMPLOYEE]: (state, { payload }) => ({ ...state, employee: payload }),
   [POST_EMPLOYEE]: (state, { payload }) => ({ ...state, regist: payload }),
   [PUT_EMPLOYEE]: (state, { payload }) => ({ ...state, modify: payload }),
-  [DELETE_STUDENT] : (state, {payload}) => ({ ...state, delete : payload }),
+  [DELETE_EMPLOYEE] : (state, {payload}) => ({ ...state, delete : payload }),
   [PATCH_EMPLOYEE]: (state, { payload }) => payload,
   [POST_ID]:(state, { payload }) => ({ search : payload}),
   [POST_PWD]:(state, { payload }) => ({ search : payload}),
   [POST_PWDCHANGE]:(state, { payload }) => ({ change : payload }),
-  [GET_SEARCHNAME] : (state, { payload }) => ({ nameSearch : payload }),
+  [GET_SEARCH_NAME] : (state, { payload }) => ({ nameSearch : payload }),
 }, initialState); 
 
 

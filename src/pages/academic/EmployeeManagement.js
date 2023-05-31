@@ -29,16 +29,6 @@ function EmployeeManagement() {
   const [selectAll, setSelectAll] = useState(false);
   const [checkboxes, setCheckboxes] = useState({});
 
-
-
-  // 검색!
-  const handleSearch = (selectedOption, inputValue) => {
-    // 이곳에 검색 로직을 구현해야 합니다
-    // 예를 들어, API 호출 등을 수행할 수 있습니다
-    console.log("Selected option:", selectedOption);
-    console.log("Input value:", inputValue);
-  };
-
   useEffect(
     () => {
       dispatch(callEmployeesAPI({ currentPage }))
@@ -116,15 +106,14 @@ function EmployeeManagement() {
       >
         삭제
       </motion.button>
-      
+
       <p className={CommonCSS.pageDirection}>학사관리 ▸ 교직원</p>
 
 
       <div className={SearchBarCss.basic}>
         <SearchBar
           options={employeeOptions}
-          onSearch={handleSearch}>
-        </SearchBar>
+        />
       </div>
       <table className={EmployeeListCss.employeeTable}>
         <colgroup>
