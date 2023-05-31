@@ -14,9 +14,12 @@ const GET_LECTURE_INFO = "lecture/GET_LECTURE_INFO"
 const GET_ATTENDANCELIST_INFO = "lecture/GET_ATTENDANCE_LIST_INFO"
 const GET_NEW_ATTENDANCELIST_INFO = "lecture/GET_NEW_ATTENDANCELIST_INFO"
 const GET_LECTURE_COUNT = "lecture/GET_LECTURE_COUNT"
+const PATCH_ATTENDANCELIST_MODIFY = "lecture/PATCH_STDATTENDANCE_MODIFY"
+
 
 export const { lecture:
-    { getSubjectInfo, getLectureInfo, getMylecture, getAttendanceListInfo, getNewAttendancelistInfo,getLecnameMylecture,getMylectureCerti, getSearchName } } = createActions({
+
+    { getSubjectInfo, getLectureInfo, getMylecture, getAttendanceListInfo, patchStdattendanceModify, getNewAttendancelistInfo, getLectureCount,getLecnameMylecture,getMylectureCerti ,getSearchName} } = createActions({
 
         [GET_SUBJECT_INFO]: (res) => res.data, //액션이 발생할댸 => res라는 값이 넘어어올때 res.data를 꺼내기 
         [GET_LECTURE_INFO]: (res) => res.data,
@@ -26,7 +29,11 @@ export const { lecture:
         [GET_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_NEW_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_LECTURE_COUNT]: (res) => res.data,
+
+        [PATCH_ATTENDANCELIST_MODIFY]: (res) => res.data,
+
         [GET_SEARCH_NAME] : res => res.data
+
 
 
     });
@@ -40,9 +47,12 @@ const SubjectInfoReducer = handleActions({
     [GET_ATTENDANCELIST_INFO]: (state, { payload }) => ({ attendance: payload }),
     [GET_LECNAME_MYLECTURE] : (state, {payload}) => ({lecName : payload}),
     [GET_MYLECTURE]: (state, { payload }) => ({ myLecture: payload }),
-    [GET_NEW_ATTENDANCELIST_INFO]: (state, { payload }) => ({ newAttendance: payload }),
+
+    [GET_NEW_ATTENDANCELIST_INFO]: (state, { payload }) => ({ ...state, newAttendance: payload }),
     [GET_LECTURE_COUNT]: (state, { payload }) => ({ lecCount: payload }),
+    [PATCH_ATTENDANCELIST_MODIFY]: (state, { payload }) => ({ modify: payload }),
     [GET_SEARCH_NAME] : (state, {payload}) => ({searchName : payload})
+
 
 
 }, initialState)
