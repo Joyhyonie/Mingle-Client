@@ -4,6 +4,7 @@ import { createActions, handleActions } from "redux-actions";
 const initalState = [];
 
 /* 액션 */
+const GET_COUNT_UNREAD_MSG = "schedule/GET_COUNT_UNREAD_MSG";
 const GET_RECEIVED_MSG = "schedule/GET_RECEIVED_MSG";
 const GET_RECEIVED_MSG_SEARCH = "schedule/GET_RECEIVED_MSG_SEARCH";
 const PATCH_READ_MSG = "schedule/PATCH_READ_MSG";
@@ -17,7 +18,8 @@ const GET_EMPLOYEE_FOR_SEND = "schedule/GET_EMPLOYEE_FOR_SEND";
 const POST_SEND_MSG = "schedule/POST_SEND_MSG";
 const PATCH_REMOVE_MSG = "schedule/PATCH_REMOVE_MSG";
 
-export const { schedule : { getReceivedMsg,
+export const { schedule : { getCountUnreadMsg,
+                            getReceivedMsg,
                             getReceivedMsgSearch,
                             patchReadMsg,
                             getSentMsg,
@@ -30,6 +32,7 @@ export const { schedule : { getReceivedMsg,
                             postSendMsg,
                             patchRemoveMsg
                             } } = createActions({
+    [GET_COUNT_UNREAD_MSG] : (res) => res.data,
     [GET_RECEIVED_MSG] : (res) => res.data,
     [GET_RECEIVED_MSG_SEARCH] : (res) => res.data,
     [PATCH_READ_MSG] : (res) => res,
@@ -47,6 +50,7 @@ export const { schedule : { getReceivedMsg,
 /* 리듀서 */
 const MessageReducer = handleActions(
     {
+        [GET_COUNT_UNREAD_MSG] : (state, { payload }) => ({ countMsg : payload }),
         [GET_RECEIVED_MSG] : (state, { payload }) => ({ receivedMsg : payload }),
         [GET_RECEIVED_MSG_SEARCH] : (state, { payload }) => ({ receivedMsgSearch : payload }),
         [PATCH_READ_MSG] : (state, { payload }) => ({ ...state, readMsg : payload }),

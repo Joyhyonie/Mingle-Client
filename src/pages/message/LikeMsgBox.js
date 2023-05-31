@@ -12,17 +12,21 @@ function LikeMsgBox ({setWhichPage, stateChangeHandler}) {
     const dispatch = useDispatch();
     const { likedMsg, likeMsg, removeMsg, likedMsgSearch } = useSelector(state => state.MessageReducer);
     const [checkedIdList, setCheckedIdList] = useState([]);
+    const [currentSize, setCurrentSize] = useState(10);                     
+    const [searchedCurrentSize, setSearchedCurrentSize] = useState(10);    
+    const likedMsgList = likedMsg && likedMsg.data;
+    const likedMsgSearchList = likedMsgSearch && likedMsgSearch.data;
 
     useEffect(
         () => {
             /* 중요 쪽지함 조회 API 호출 */
-            dispatch(callLikedMsgListAPI());
+            dispatch(callLikedMsgListAPI(currentSize));
 
             if(removeMsg?.status === 200) {
                 toast.success("선택하신 쪽지가 삭제되었습니다 :)");
             }
 
-        },[likeMsg, removeMsg]
+        },[likeMsg, removeMsg, currentSize]
     );
 
     /* 각 checkbox의 상태가 변경될 때 호출되는 이벤트 함수 */
@@ -41,10 +45,10 @@ function LikeMsgBox ({setWhichPage, stateChangeHandler}) {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
-            <MessageSearchBar msgBoxType={ 'liked' }/>
+            <MessageSearchBar msgBoxType={ 'liked' } searchedCurrentSize={searchedCurrentSize}/>
             <div className={ MessageCSS.dummyBox }/>
             <div className={ MessageCSS.msgListBox }>
-                { (likedMsg || []).concat(likedMsgSearch || []).map(message => (
+                { (likedMsgList || []).concat(likedMsgSearchList || []).map(message => (
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }
@@ -58,6 +62,8 @@ function LikeMsgBox ({setWhichPage, stateChangeHandler}) {
                 ))
                 }
             </div>
+            { likedMsgSearch ? (likedMsgSearch.totalElements > searchedCurrentSize ? <div className={MessageCSS.moreBox} onClick={() => setSearchedCurrentSize(searchedCurrentSize + 10)}>More</div> : null) 
+            : (likedMsg && likedMsg.totalElements > currentSize ? <div className={MessageCSS.moreBox} onClick={() => setCurrentSize(currentSize + 10)}>More</div> : null) }
         </motion.div>
     );
 }
