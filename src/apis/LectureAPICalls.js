@@ -1,6 +1,6 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
-import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti } from "../modules/LectureModule";
 
 import { wait } from '@testing-library/user-event/dist/utils';
 
@@ -106,7 +106,24 @@ export const callSubjectListAPI = (deptCode) => {
             //store에 있는 값들을 다루는것은 action이라는 
             dispatch(getSubjectInfo(result));
 
+        }
+    }
+}
 
+export const callMyLectureCertiCallAPI = () => {
+    const requestURL = `${LECTURE_URL}/myLectureCerti`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if (result.status === 200) {
+            dispatch(getMylectureCerti(result));
         }
     }
 }
