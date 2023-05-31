@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 import MessageCSS from "../../css/Message.module.css";
 
 
-function BinMsgBox () {
+function BinMsgBox ({whichPage}) {
 
     const dispatch = useDispatch();
     const { removedMsg, likeMsg, removeMsg } = useSelector(state => state.MessageReducer);
@@ -45,7 +45,7 @@ function BinMsgBox () {
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
             <div className={ MessageCSS.binMsgBoxInfo }><p>휴지통 속 쪽지는 전송일 기준 3개월 뒤 자동 영구 삭제 됩니다 :)</p></div>
-            <div className={ MessageCSS.dummyBox }/>
+            <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
                 { removedMsgList && removedMsgList.map(message => (
                     <MessageItem
@@ -55,6 +55,7 @@ function BinMsgBox () {
                         checkboxChangeHandler={checkboxChangeHandler}
                         checkedIdList={checkedIdList}
                         setCheckedIdList={setCheckedIdList}
+                        whichPage={whichPage}
                     />
                 ))
                 }

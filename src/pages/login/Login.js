@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { resetEmployee } from "../../modules/EmployeeModule";
 import { toast } from "react-hot-toast";
+import SseConnect from "../../utils/SseConnect";
 
 function Login(){
 
@@ -18,6 +19,7 @@ function Login(){
         if(login?.status === 200) {
             navigate("/", { replace : true });
             dispatch(resetEmployee());
+            SseConnect();
         }else if(login?.state === 500){
             toast.error(login.message);
             dispatch(resetEmployee());
