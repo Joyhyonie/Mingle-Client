@@ -63,8 +63,8 @@ const MessageReducer = handleActions(
         [GET_LIKED_MSG_SEARCH] : (state, { payload }) => ({ likedMsgSearch : payload }),
         [GET_REMOVED_MSG] : (state, { payload }) => ({ removedMsg : payload }),
         [PATCH_LIKE_MSG] : (state, { payload }) => ({ ...state, likeMsg : payload }),
-        [GET_DEPARTMENT_FOR_SEND] : (state, { payload }) => ({ department : payload }),
-        [GET_EMPLOYEE_FOR_SEND] : (state, { payload }) => ({ ...state, employee : payload }),
+        [GET_DEPARTMENT_FOR_SEND] : (state, { payload }) => ({ departmentList : payload }),
+        [GET_EMPLOYEE_FOR_SEND] : (state, { payload }) => ({ ...state, employeeList : payload }),
         [POST_SEND_MSG] : (state, { payload }) => ({ sendMsg : payload }),
         [PATCH_REMOVE_MSG] : (state, { payload }) => ({ removeMsg : payload }),
     }

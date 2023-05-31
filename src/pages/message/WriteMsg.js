@@ -9,7 +9,8 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
 
     const dispatch = useDispatch();
     const textareaRef = useRef(null); // 내용이 작성되어있는지 확인하기 위한 Ref
-    const { department, employee, sendMsg } = useSelector(state => state.MessageReducer);
+    const { departmentList, employeeList, sendMsg } = useSelector(state => state.MessageReducer);
+    const { employee } = useSelector(state => state.EmployeeReducer);
     const [pickedDepartment, setPickedDepartment] = useState('');
     const [pickedEmpCode, setPickedEmpCode] = useState('');
     const [pickedEmpId, setPickedEmpId] = useState('');
@@ -60,28 +61,30 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
     const sendMessageHandler = () => {
 
         const messageContent = textareaRef.current.value.trim();
-        console.log("messageContent => ", messageContent);
-
+        
         if (!selectedEmpCode && !pickedEmpCode) {
             toast.error('받는 사람을 선택해주세요 !');
             return;
         } else if (!messageContent) {
             toast.error('내용을 입력해주세요 !');
             return;
+        } else if (employee.empCode == pickedEmpCode) {
+            toast.error('나에게 쪽지를 보낼 수 없습니다 !');
+            return;
+        } else {
+            /* FormData 객체 설정 */
+            // '답장'을 클릭하여 쪽지를 전송할 때에는 picked가 아닌 props로 받아온 selected를 formData에 설정
+            const formData = new FormData();
+            const empCode = selectedEmpCode ? selectedEmpCode : pickedEmpCode;   
+            const empId = selectedEmpId ? selectedEmpId : pickedEmpId;
+
+            formData.append("receiver.empCode", empCode);
+            formData.append("receiver.empId", empId);
+            formData.append("msgContent", messageContent);
+
+            /* 쪽지를 등록하는 API */
+            dispatch(callSendMsgAPI(formData));
         }
-
-        /* FormData 객체 설정 */
-        // '답장'을 클릭하여 쪽지를 전송할 때에는 picked가 아닌 props로 받아온 selected를 formData에 설정
-        const formData = new FormData();
-        const empCode = selectedEmpCode ? selectedEmpCode : pickedEmpCode;   
-        const empId = selectedEmpId ? selectedEmpId : pickedEmpId;
-
-        formData.append("receiver.empCode", empCode);
-        formData.append("receiver.empId", empId);
-        formData.append("msgContent", messageContent);
-
-        /* 쪽지를 등록하는 API */
-        dispatch(callSendMsgAPI(formData));
 
     }
 
@@ -97,8 +100,8 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                     disabled={selectedDeptCode ? true : false}
                 >
                     <option value='' disabled>소속</option>
-                    {/* departments 배열을 option으로 변환 */}
-                    {department && department.map(dept => (
+                    {/* departmentList 배열을 option으로 변환 */}
+                    {departmentList && departmentList.map(dept => (
                     <option key={dept.deptCode} 
                             value={dept.deptCode}
                     >
@@ -114,8 +117,8 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                     disabled={!pickedDepartment}
                 >
                     { selectedEmpName ? <option>{selectedEmpName}</option> : <option value='' disabled>이름</option> }
-                    {/* employees 배열을 option으로 변환 */}
-                    {employee && employee.map(emp => (
+                    {/* employeeList 배열을 option으로 변환 */}
+                    {employeeList && employeeList.map(emp => (
                     <option key={emp.empCode} 
                             id={emp.empId}
                             value={emp.empCode}
