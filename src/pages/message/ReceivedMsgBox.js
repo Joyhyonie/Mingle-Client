@@ -11,30 +11,32 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
 
     const dispatch = useDispatch();
     const { receivedMsg, likeMsg, readMsg, removeMsg, receivedMsgSearch } = useSelector(state => state.MessageReducer);
-    const [checkedIdList, setCheckedIdList] = useState([]);     // check된 쪽지들의 id가 저장되는 state
+    const [checkedIdList, setCheckedIdList] = useState([]);                 // check된 쪽지들의 id가 저장되는 state
+    const [currentSize, setCurrentSize] = useState(10);                     // 전체 쪽지의 더보기 페이징을 위한 state
+    const [searchedCurrentSize, setSearchedCurrentSize] = useState(10);     // 검색된 쪽지의 더보기 페이징을 위한 state
+    const receivedMsgList = receivedMsg && receivedMsg.data;
+    const receivedMsgSearchList = receivedMsgSearch && receivedMsgSearch.data;
 
     useEffect(
         () => {
             /* 받은 쪽지함 조회 API 호출 */
-            dispatch(callReceivedMsgListAPI());
+            dispatch(callReceivedMsgListAPI(currentSize));
 
             if(removeMsg?.status === 200) {
                 toast.success("선택하신 쪽지가 삭제되었습니다 :)");
             }
 
-        },[likeMsg, removeMsg] 
+        },[likeMsg, removeMsg, currentSize] 
     );
 
     /* 검색한 쪽지에서 쪽지의 Header 클릭 시, 읽음처리 API 호출로 인해 re-rendering이 발생하여 검색한 쪽지가 아닌 전체 쪽지 조회가 일어나
        UX에 좋지 않은 영향을 끼치게 되므로 useEffect를 분리하여 검색한 쪽지가 존재하지 않을 경우에만 readMsg의 값이 변경될 때 전체 쪽지 조회가 일어나도록 함 */
     useEffect(
         () => {
-
             if(receivedMsgSearch == undefined) {
                 /* 받은 쪽지함 조회 API 호출 */
-                dispatch(callReceivedMsgListAPI());
+                dispatch(callReceivedMsgListAPI(currentSize));
             }
-
         },[readMsg]
     );
 
@@ -52,15 +54,14 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
         console.log("checkedIdList : {}", checkedIdList);
     }
 
-
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
             
-            <MessageSearchBar msgBoxType={ 'received' }/>
+            <MessageSearchBar msgBoxType={ 'received' } searchedCurrentSize={searchedCurrentSize}/>
             <div className={ MessageCSS.dummyBox }/>
             <div className={ MessageCSS.msgListBox }>
                 {/* receivedMsg와 receivedMsgSearch가 모두 undefined인 경우에는 빈 배열([])을 이용하여 concat() 함수를 호출 (undefined 오류 발생 방지) */}
-                { (receivedMsg || []).concat(receivedMsgSearch || []).map(message => (
+                { (receivedMsgList || []).concat(receivedMsgSearchList || []).map(message => (
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }
@@ -79,6 +80,10 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
                 ))
                 }
             </div>
+            {/* 전체 받은 쪽지 or 검색된 받은 쪽지에 따라 다른 More버튼 노출 */}
+            {/* 현재 pagination.size기 조회된 요소의 총 갯수(totalElements)보다 적을 때만 더보기 버튼 노출 */}
+            { receivedMsgSearch ? (receivedMsgSearch.totalElements > searchedCurrentSize ? <div className={MessageCSS.moreBox} onClick={() => setSearchedCurrentSize(searchedCurrentSize + 10)}>More</div> : null) 
+            : (receivedMsg && receivedMsg.totalElements > currentSize ? <div className={MessageCSS.moreBox} onClick={() => setCurrentSize(currentSize + 10)}>More</div> : null) }
         </motion.div>
     );
 }
