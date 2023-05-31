@@ -81,7 +81,9 @@ function RegistLectureForProf () {
                       <td>{lecture.subject.score}</td>
                       <td>{lecture.lecYear}</td>
                       <td>{lecture.employee.empName}</td>
-                      <td><button className={LectureCSS.button}>강의계획서작성</button></td>
+                      {lecture.lecName == null ? (
+                                <td><button className={LectureCSS.button}>강의계획서작성</button></td>
+                                ): <td><button className={LectureCSS.button}>강의계획서보기</button></td> }
                     </tr>
                   ))
                 )}

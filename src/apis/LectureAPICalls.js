@@ -1,5 +1,5 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
-import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName } from "../modules/LectureModule";
 import { wait } from '@testing-library/user-event/dist/utils';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -158,6 +158,24 @@ export const callLecNameMyLecture = ({ currentPage = 1 }) => {
 
         if (result.status === 200) {
             dispatch(getLecnameMylecture(result));
+        }
+    }
+}
+
+export const callSearchName = ({search, condition ,currentPage = 1}) => {
+    const requestURL = `${LECTURE_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(getSearchName(result));
         }
     }
 }
