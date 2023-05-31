@@ -7,7 +7,7 @@ import NotificationModal from '../modal/NotificationModal';
 import LogoutModal from '../modal/LogoutModal';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { callReceivedMsgListAPI } from "../../apis/MessageAPICalls";
+import { callUnreadMsgCountAPI } from "../../apis/MessageAPICalls";
 import { callNotificationListAPI } from '../../apis/NotificationAPICalls';
 
 function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModal, setMessageModal, updateNotiCount, updateMsgCount }) {
@@ -19,7 +19,9 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
     const location = useLocation();
     const { employee } = useSelector(state => state.EmployeeReducer);
     const { notifications } = useSelector(state => state.NotificationReducer);
-    const { receivedMsg } = useSelector(state => state.MessageReducer);
+    const { countMsg } = useSelector(state => state.MessageReducer);
+
+    console.log("countMsg =>", countMsg);
 
     const [mpgClicked, setMpgClicked] = useState(false);
     const [notiClicked, setNotiClicked] = useState(false);
@@ -40,7 +42,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
 
     /* 읽지 않은 쪽지 및 알림 갯수를 노출시키기 위한 API 호출 */
     useEffect(() => {
-        dispatch(callReceivedMsgListAPI(10));
+        dispatch(callUnreadMsgCountAPI());
     }, [updateMsgCount]);
 
     useEffect(() => {
@@ -68,7 +70,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
     const logoutModalHandler = () => setLogoutModal(!logoutModal);
 
     /* 읽지 않은 쪽지의 갯수 */
-    // const unreadMsgCount = receivedMsg.data ? receivedMsg.data.filter(msg => msg.msgReadYn == 'N').length : 0;
+    // const unreadMsgCount = countMsg ? receivedMsg.data.filter(msg => msg.msgReadYn == 'N').length : 0;
 
     return (
         <>
@@ -205,7 +207,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
                         />
                     )}
                     {notifications && notifications.length > 0 ? <div className={ CommonCSS.notiCount }>{notifications.length}</div> : null}
-                    {/* {unreadMsgCount > 0 ? <div className={ CommonCSS.msgCount }>{unreadMsgCount}</div> : null} */}
+                    {countMsg && countMsg.unreadMsgs > 0 ? <div className={ CommonCSS.msgCount }>{countMsg.unreadMsgs}</div> : null}
                 </div>
             </motion.div>
         </>
