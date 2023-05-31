@@ -59,20 +59,7 @@ function AttendanceItem({ attendance }) {
                         <option value="결석">결석</option>
                         <option value="지각">지각</option>
                     </select>
-                    {/* <IconSVG
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M10 14L16 6H4L10 14Z"
-                            fill="#1A1A1A"
-                        />
-                    </IconSVG> */}
+
                 </>
             </td>
             <td><input type="text" value={attendanceStatus} readOnly /></td>
