@@ -4,6 +4,7 @@ import { createActions, handleActions } from "redux-actions";
 const initalState = [];
 
 /* 액션 */
+const GET_COUNT_UNREAD_MSG = "schedule/GET_COUNT_UNREAD_MSG";
 const GET_RECEIVED_MSG = "schedule/GET_RECEIVED_MSG";
 const GET_RECEIVED_MSG_SEARCH = "schedule/GET_RECEIVED_MSG_SEARCH";
 const PATCH_READ_MSG = "schedule/PATCH_READ_MSG";
@@ -11,25 +12,29 @@ const GET_SENT_MSG = "schedule/GET_SENT_MSG";
 const GET_SENT_MSG_SEARCH = "schedule/GET_SENT_MSG_SEARCH";
 const GET_LIKED_MSG = "schedule/GET_LIKED_MSG";
 const GET_LIKED_MSG_SEARCH = "schedule/GET_LIKED_MSG_SEARCH";
+const GET_REMOVED_MSG = "schedule/GET_REMOVED_MSG";
 const PATCH_LIKE_MSG = "schedule/PATCH_LIKE_MSG";
 const GET_DEPARTMENT_FOR_SEND = "schedule/GET_DEPARTMENT_FOR_SEND";
 const GET_EMPLOYEE_FOR_SEND = "schedule/GET_EMPLOYEE_FOR_SEND";
 const POST_SEND_MSG = "schedule/POST_SEND_MSG";
 const PATCH_REMOVE_MSG = "schedule/PATCH_REMOVE_MSG";
 
-export const { schedule : { getReceivedMsg,
+export const { schedule : { getCountUnreadMsg,
+                            getReceivedMsg,
                             getReceivedMsgSearch,
                             patchReadMsg,
                             getSentMsg,
                             getSentMsgSearch,
                             getLikedMsg,
                             getLikedMsgSearch,
+                            getRemovedMsg,
                             patchLikeMsg,
                             getDepartmentForSend,
                             getEmployeeForSend,
                             postSendMsg,
                             patchRemoveMsg
                             } } = createActions({
+    [GET_COUNT_UNREAD_MSG] : (res) => res.data,
     [GET_RECEIVED_MSG] : (res) => res.data,
     [GET_RECEIVED_MSG_SEARCH] : (res) => res.data,
     [PATCH_READ_MSG] : (res) => res,
@@ -37,6 +42,7 @@ export const { schedule : { getReceivedMsg,
     [GET_SENT_MSG_SEARCH] : (res) => res.data,
     [GET_LIKED_MSG] : (res) => res.data,
     [GET_LIKED_MSG_SEARCH] : (res) => res.data,
+    [GET_REMOVED_MSG] : (res) => res.data,
     [PATCH_LIKE_MSG] : (res) => res,
     [GET_DEPARTMENT_FOR_SEND] : (res) => res.data,
     [GET_EMPLOYEE_FOR_SEND] : (res) => res.data,
@@ -47,6 +53,7 @@ export const { schedule : { getReceivedMsg,
 /* 리듀서 */
 const MessageReducer = handleActions(
     {
+        [GET_COUNT_UNREAD_MSG] : (state, { payload }) => ({ countMsg : payload }),
         [GET_RECEIVED_MSG] : (state, { payload }) => ({ receivedMsg : payload }),
         [GET_RECEIVED_MSG_SEARCH] : (state, { payload }) => ({ receivedMsgSearch : payload }),
         [PATCH_READ_MSG] : (state, { payload }) => ({ ...state, readMsg : payload }),
@@ -54,6 +61,7 @@ const MessageReducer = handleActions(
         [GET_SENT_MSG_SEARCH] : (state, { payload }) => ({ sentMsgSearch : payload }),
         [GET_LIKED_MSG] : (state, { payload }) => ({ likedMsg : payload }),
         [GET_LIKED_MSG_SEARCH] : (state, { payload }) => ({ likedMsgSearch : payload }),
+        [GET_REMOVED_MSG] : (state, { payload }) => ({ removedMsg : payload }),
         [PATCH_LIKE_MSG] : (state, { payload }) => ({ ...state, likeMsg : payload }),
         [GET_DEPARTMENT_FOR_SEND] : (state, { payload }) => ({ department : payload }),
         [GET_EMPLOYEE_FOR_SEND] : (state, { payload }) => ({ ...state, employee : payload }),

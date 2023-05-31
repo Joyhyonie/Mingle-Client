@@ -118,7 +118,9 @@ function App() {
             <Route path="/attendance/:lecCode" element={<AttendanceDetailList />} />
             <Route path="/attendanceDetail/:attendance" element={<AttendanceStdDetail />} />
             <Route path="lecture-regist-admin" element={<RegistLectureForAdmin />} />
-            <Route path="lecture-student-prof" element={<StudentAttendanceForProf />} />
+            <Route path="lecture-student-prof" element={<StudentAttendanceForProf />}>
+              <Route path='search' element={<StudentAttendanceForProf/>}/>
+            </Route>
             <Route path="lecture-regist-prof" element={<RegistLectureForProf />} />
 
             <Route path="management-employee" element={<EmployeeManagement />} />

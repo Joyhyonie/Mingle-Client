@@ -21,7 +21,9 @@ function NotificationItem ({noti}) {
         const diffHours = now.diff(date, 'hour');
         const diffDays = now.diff(date, 'day');
 
-        if (diffDays === 0 && diffHours === 0) {
+        if (diffMinutes === 0) {
+            return '지금'
+        } else if (diffDays === 0 && diffHours === 0) {
             return `${diffMinutes}분 전`
         } else if (diffDays === 0) {
             return `${diffHours}시간 전`

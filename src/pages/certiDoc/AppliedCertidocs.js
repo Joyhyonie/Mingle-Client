@@ -8,6 +8,7 @@ import PagingBar from "../../components/common/PagingBar";
 import SearchBar from "../../components/common/SearchBar";
 import SearchBarCss from "../../css/common/SearchBar.module.css";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 /* 행정직원의 '증명서 발급 신청 내역' */
 
@@ -38,9 +39,9 @@ function AppliedCertidocs () {
         [currentPage,patch,dispatch,name,condition]
     )
 
-    const onClickHandler = (certi) => {      
-        console.log(certi);
+    const onClickHandler = (certi) => {              
         dispatch(callCertiUpdateAPI(certi));
+        toast.success("승인되었습니다.");
     }
 
     return (

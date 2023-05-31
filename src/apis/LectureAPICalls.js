@@ -1,6 +1,8 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
-import { getSubjectInfo, getLectureInfo, patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLectureCount } from "../modules/LectureModule";
+
+
+import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName } from "../modules/LectureModule";
 
 import { wait } from '@testing-library/user-event/dist/utils';
 
@@ -92,13 +94,30 @@ export const callSubjectListAPI = (deptCode) => {
             //store에 있는 값들을 다루는것은 action이라는 
             dispatch(getSubjectInfo(result));
 
-
         }
     }
 }
 
-export const callMyLectureCallAPI = () => {
-    const requestURL = `${LECTURE_URL}/myLecture`;
+export const callMyLectureCertiCallAPI = () => {
+    const requestURL = `${LECTURE_URL}/myLectureCerti`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if (result.status === 200) {
+            dispatch(getMylectureCerti(result));
+        }
+    }
+}
+
+export const callMyLectureCallAPI = ({ currentPage = 1 }) => {
+    const requestURL = `${LECTURE_URL}/myLecture?page=${currentPage}`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
@@ -111,6 +130,44 @@ export const callMyLectureCallAPI = () => {
 
         if (result.status === 200) {
             dispatch(getMylecture(result));
+        }
+    }
+}
+
+
+
+export const callLecNameMyLecture = ({ currentPage = 1 }) => {
+    const requestURL = `${LECTURE_URL}/lecNameMyLecture?page=${currentPage}`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if (result.status === 200) {
+            dispatch(getLecnameMylecture(result));
+        }
+    }
+}
+
+export const callSearchName = ({search, condition ,currentPage = 1}) => {
+    const requestURL = `${LECTURE_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(getSearchName(result));
         }
     }
 }

@@ -108,7 +108,7 @@ function ApplyCertiDoc () {
                 <p className={ CommonCSS.pageDirection }>증명서 ▸ 증명서 발급 신청</p>
             </div>
             <div className={ApplyCertiDocCSS.ApplyCertiDocCSS}>
-                <table className={ApplyCertiDocCSS.ApplyCertiDocCSSTable}>
+                <table className={ApplyCertiDocCSS.ApplyTable}>
                     <colgroup>
                     <col width="10%"/>
                     <col width="20%"/>

@@ -6,6 +6,9 @@ const initialState = {};
 /*액션 */
 
 const GET_MYLECTURE = 'lecture/GET_MYLECTURE';
+const GET_MYLECTURE_CERTI = 'lecture/GET_MYLECTURE_CERTI';
+const GET_SEARCH_NAME = 'lecture/GET_SEARCH_NAME';
+const GET_LECNAME_MYLECTURE = 'lecture/GET_LECNAME_MYLECTURE';
 const GET_SUBJECT_INFO = "lecture/GET_SUBJECT_INFO"
 const GET_LECTURE_INFO = "lecture/GET_LECTURE_INFO"
 const GET_ATTENDANCELIST_INFO = "lecture/GET_ATTENDANCE_LIST_INFO"
@@ -16,15 +19,21 @@ const PATCH_ATTENDANCELIST_MODIFY = "lecture/PATCH_STDATTENDANCE_MODIFY"
 
 export const { lecture:
 
-    { getSubjectInfo, getLectureInfo, getMylecture, getAttendanceListInfo, patchStdattendanceModify, getNewAttendancelistInfo, getLectureCount } } = createActions({
+    { getSubjectInfo, getLectureInfo, getMylecture, getAttendanceListInfo, patchStdattendanceModify, getNewAttendancelistInfo, getLectureCount,getLecnameMylecture,getMylectureCerti ,getSearchName} } = createActions({
+
         [GET_SUBJECT_INFO]: (res) => res.data, //액션이 발생할댸 => res라는 값이 넘어어올때 res.data를 꺼내기 
         [GET_LECTURE_INFO]: (res) => res.data,
-
+        [GET_MYLECTURE_CERTI] : res => res.data,
+        [GET_LECNAME_MYLECTURE] : (res) => res.data,
         [GET_MYLECTURE]: res => res.data,
         [GET_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_NEW_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_LECTURE_COUNT]: (res) => res.data,
-        [PATCH_ATTENDANCELIST_MODIFY]: (res) => res.data
+
+        [PATCH_ATTENDANCELIST_MODIFY]: (res) => res.data,
+
+        [GET_SEARCH_NAME] : res => res.data
+
 
 
     });
@@ -33,13 +42,17 @@ export const { lecture:
 const SubjectInfoReducer = handleActions({
 
     [GET_SUBJECT_INFO]: (state, { payload }) => payload,
+    [GET_MYLECTURE_CERTI] : (state, {payload}) => ({myLectureCerti : payload}),
     [GET_LECTURE_INFO]: (state, { payload }) => payload,
     [GET_ATTENDANCELIST_INFO]: (state, { payload }) => ({ attendance: payload }),
-
+    [GET_LECNAME_MYLECTURE] : (state, {payload}) => ({lecName : payload}),
     [GET_MYLECTURE]: (state, { payload }) => ({ myLecture: payload }),
+
     [GET_NEW_ATTENDANCELIST_INFO]: (state, { payload }) => ({ ...state, newAttendance: payload }),
     [GET_LECTURE_COUNT]: (state, { payload }) => ({ lecCount: payload }),
-    [PATCH_ATTENDANCELIST_MODIFY]: (state, { payload }) => ({ modify: payload })
+    [PATCH_ATTENDANCELIST_MODIFY]: (state, { payload }) => ({ modify: payload }),
+    [GET_SEARCH_NAME] : (state, {payload}) => ({searchName : payload})
+
 
 
 }, initialState)

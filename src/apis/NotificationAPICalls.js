@@ -1,4 +1,3 @@
-import { getBoardPreview } from "../modules/BoardModule";
 import { getNotification, postRemoveAllNoti, postRemoveNoti } from "../modules/NofiticationModule";
 import { request } from "./Api";
 

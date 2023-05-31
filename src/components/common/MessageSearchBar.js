@@ -5,7 +5,7 @@ import { callReceivedMsgSearchAPI } from '../../apis/MessageAPICalls';
 import { callSentMsgSearchAPI } from '../../apis/MessageAPICalls';
 import { callLikedMsgSearchAPI } from '../../apis/MessageAPICalls';
 
-function MessageSearchBar ({msgBoxType}) {
+function MessageSearchBar ({msgBoxType, searchedCurrentSize}) {
 
     const dispatch = useDispatch();
     const [condition, setCondition] = useState('empName');
@@ -18,19 +18,32 @@ function MessageSearchBar ({msgBoxType}) {
         },[condition, word]
     );
 
+    /* 검색된 결과의 더보기를 눌렀을 경우(searchedCurrentSize가 변경될 경우), API 재호출하여 렌더링  */
+    useEffect(
+        () => {
+            if(msgBoxType === 'received') {
+                dispatch(callReceivedMsgSearchAPI(condition, word, searchedCurrentSize));
+            } else if(msgBoxType === 'sent') {
+                dispatch(callSentMsgSearchAPI(condition, word, searchedCurrentSize));
+            } else if(msgBoxType === 'liked') {
+                dispatch(callLikedMsgSearchAPI(condition, word, searchedCurrentSize));
+            }
+        },[searchedCurrentSize]
+    );
+
     /* Enter키를 눌렀을 때의 이벤트 함수 */
     const onEnterHandler = (e) => {
 
         if(e.key === 'Enter') {
             if(msgBoxType === 'received') {
-                dispatch(callReceivedMsgSearchAPI(condition, word));
+                dispatch(callReceivedMsgSearchAPI(condition, word, searchedCurrentSize));
             } else if(msgBoxType === 'sent') {
-                dispatch(callSentMsgSearchAPI(condition, word));
+                dispatch(callSentMsgSearchAPI(condition, word, searchedCurrentSize));
             } else if(msgBoxType === 'liked') {
-                dispatch(callLikedMsgSearchAPI(condition, word));
+                dispatch(callLikedMsgSearchAPI(condition, word, searchedCurrentSize));
             }
         }
-
+        
     }
 
     return (

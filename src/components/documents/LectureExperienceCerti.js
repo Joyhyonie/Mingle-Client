@@ -4,20 +4,20 @@ import { useEffect } from "react";
 import DocumentsCSS from "../../css/Documents.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { callDetailCertiDoc } from "../../apis/CertiDocAPICalls";
-import { callMyLectureCallAPI } from "../../apis/LectureAPICalls";
+import { callMyLectureCertiCallAPI } from "../../apis/LectureAPICalls";
 
 function LectureExperienceCerti({closeModal,myCerti}){
 
     const dispatch = useDispatch();
     const {certi} = useSelector(state => state.CertiReducer);
-    const {myLecture} = useSelector(state => state.SubjectInfoReducer);
+    const {myLectureCerti} = useSelector(state => state.SubjectInfoReducer);
+    console.log(myLectureCerti);
     const code = certi.certiDocCode;
-    console.log(myLecture);
 
     useEffect(
         ()=>{
             dispatch(callDetailCertiDoc(myCerti));
-            dispatch(callMyLectureCallAPI());
+            dispatch(callMyLectureCertiCallAPI());
         },
         [code]
     )
@@ -55,12 +55,12 @@ function LectureExperienceCerti({closeModal,myCerti}){
                         <th className={DocumentsCSS.thLectureETC} colSpan="1">담당과목</th>
                         <th className={DocumentsCSS.thLectureETC} colSpan="2">강의시간</th>
                     </tr>
-                    { (myLecture) ? (
-                        myLecture.map((lecture) => (
-                        <tr key={lecture.lecCode}>
-                        <th colSpan="1" className={DocumentsCSS.thTable}>{lecture.lecStartDate} ~ {lecture.lecEndDate}</th>
-                        <th colSpan="1" className={DocumentsCSS.thTable}>{lecture.subject.sbjName}</th>
-                        <th colSpan="2" className={DocumentsCSS.thTable}>{lecture.lecCount * 2}시간</th>
+                    { (myLectureCerti) ? (
+                        myLectureCerti.map((myCerti) => (
+                        <tr key={myCerti.lecCode}>
+                        <th colSpan="1" className={DocumentsCSS.thTable}>{myCerti.lecStartDate} ~ {myCerti.lecEndDate}</th>
+                        <th colSpan="1" className={DocumentsCSS.thTable}>{myCerti.subject.sbjName}</th>
+                        <th colSpan="2" className={DocumentsCSS.thTable}>{myCerti.lecCount * 2}시간</th>
                         </tr> 
                     ))) 
                     : null

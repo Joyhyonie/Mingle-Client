@@ -64,7 +64,7 @@ function AttendanceDetail(){
                 ))}
             </div>
              <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
-                <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
+                <table className={ApplideCertidocCSS.ApplyTable}>
                     <colgroup>
                     <col width="10%" />
                     <col width="10%" />

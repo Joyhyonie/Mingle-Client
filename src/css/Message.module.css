@@ -88,20 +88,39 @@
     cursor: pointer;
 }
 
+.moreBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #66d2b409;/ */
+    border: 1.5px solid #66d2b3;
+    border-radius: 5px;
+    color: #66d2b3;
+    width: 365px;
+    height: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.binMsgBoxInfo p {
+    font-size: 14px;
+}
+
 
 /* 검색바, 교직원 선택바 --------------------------------------------------- */
 .msgSearchBox,
-.selectReceiverBox {
+.selectReceiverBox,
+.binMsgBoxInfo {
     position: fixed;
     position: absolute;
     border-radius: 5px;
     background-color: #DADADA;
-    /* background-color: #66d2b466; */
     display: flex;
     align-items: center; 
     width: 370px;
     height: 25px;
     margin-top: -10px;
+    justify-content: center;
 }
 
 .selectReceiverBox {

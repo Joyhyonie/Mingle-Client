@@ -13,8 +13,11 @@ function Layout () {
 
     const dispatch = useDispatch();
     const { employee } = useSelector(state => state.EmployeeReducer);
-    const [activeIndex, setActiveIndex] = useState();   // 활성화된 화면을 컨트롤하기 위한 state
-    const [isDark, setIsDark] = useState(false);        // 다크모드 설정을 위한 state
+    const [activeIndex, setActiveIndex] = useState();                   // 활성화된 화면을 컨트롤하기 위한 state
+    const [isDark, setIsDark] = useState(false);                        // 다크모드 설정을 위한 state
+    const [messageModal, setMessageModal] = useState(false);            // 쪽지 모달 컨트롤 state
+    const [updateNotiCount, setUpdateNotiCount] = useState('');         // 새로운 알림 도착 시, Header에서 알림 갯수를 렌더링 하기위한 state
+    const [updateMsgCount, setUpdateMsgCount] = useState('');           // 새로운 쪽지 도착 시, Header에서 쪽지 갯수를 렌더링 하기위한 state
 
     useEffect(
         () => {
@@ -29,8 +32,9 @@ function Layout () {
             const url = "http://localhost:8001";
             const token = window.localStorage.getItem('accessToken');
 
-            if (token != null) {
-                const eventSource = new EventSource(`${url}/noti/${token}`, { retry : 3000 });
+            let eventSource;
+            if (!eventSource && token != null) {
+                eventSource = new EventSource(`${url}/noti/${token}`, { retry : 3000 });
                 console.log("서버로 이벤트 구독 완🥳")
 
                 eventSource.addEventListener("receivedMsg", (e) => {
@@ -39,6 +43,7 @@ function Layout () {
                     const senderName = data.sender.empName;
                     const msgContent = data.msgContent;
                     customMessageNoti(senderImg, senderName, msgContent);
+                    setUpdateMsgCount(data);
                 });
 
                 eventSource.addEventListener("commonNoti", (e) => {
@@ -46,10 +51,13 @@ function Layout () {
                     const notiTitle = data.notiType.notiTitle;
                     const notiContent = data.notiContent;
                     customCommonNoti(notiTitle, notiContent);
+                    setUpdateNotiCount(data);
                 })
           
                 eventSource.addEventListener("error", (e) => {
-                    eventSource.close();
+                    // eventSource.close();
+                    console.error("SSE 연결 오류 원인 => ", e);
+                    console.log("🔥🔥🔥 구독 ... 취소 ... 🔥🔥🔥");
                 });
             }
 
@@ -61,7 +69,9 @@ function Layout () {
 
         toast.custom((t) => (
             <div
+                onClick={ () => setMessageModal(true)} // 쪽지 알림 클릭 시, 쪽지 모달 open
                 style={{
+                    cursor: "pointer",
                     opacity: t.visible ? 1 : 0,
                     transition: "opacity 300ms ease-in-out, transform 300ms ease-in-out",
                     transform: t.visible ? "translateY(0)" : "translateY(-50%)",
@@ -75,7 +85,7 @@ function Layout () {
                             <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
                         </div>
                     </div>
-                    <div className={ ToastCSS.closeBox } onClick={ () => toast.dismiss(t.id)}>
+                    <div className={ ToastCSS.closeBox } onClick={ (e) => {toast.dismiss(t.id); e.stopPropagation()}}>
                         <p>close</p>
                     </div>
                 </div>
@@ -126,7 +136,14 @@ function Layout () {
 
     return (
         <div>
-            <Header setActiveIndex={setActiveIndex} isDark={isDark} setIsDark={setIsDark} logoutHandler={logoutHandler}/>
+            <Header setActiveIndex={setActiveIndex} 
+                    isDark={isDark} 
+                    setIsDark={setIsDark} 
+                    logoutHandler={logoutHandler} 
+                    messageModal={messageModal} 
+                    setMessageModal={setMessageModal}
+                    updateNotiCount={updateNotiCount}
+                    updateMsgCount={updateMsgCount}/>
             <div className={ CommonCSS.flex }>
                 <div className={ CommonCSS.navbarCustom }>
                 { isAdmin ? 

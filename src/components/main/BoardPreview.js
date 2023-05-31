@@ -33,6 +33,7 @@ function BoardPreview () {
             <div className={ MainCSS.boardListBox }>
                 { boardPreview && boardPreview.map( board => (
                     <div 
+                        key={board.boardCode}
                         className={ MainCSS.boardItemBox }
                         onClick={ () => navigate(`/board/${board.boardCode}`) }
                     >
