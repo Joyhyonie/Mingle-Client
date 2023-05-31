@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { callCertiDocSearchName, callMyCertiDocSearchName } from '../../apis/CertiDocAPICalls';
 import { callSubjectSearchName } from '../../apis/LectureAPICalls';
 
-const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
+const AteendanceSearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,33 +15,28 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
   const [selectedOption, setSelectedOption] = useState('');
   const [inputValue, setInputValue] = useState('');
   const handleSearch = () => {
-    
+
     // 구분 해주세용 :)
-    if(type == "employee") {
+    if (type == "employee") {
       dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
-    } else if(type == "board") {
+    } else if (type == "board") {
       navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
-    } else if(type == "attendance") {
-        navigate(`/attendance-employee?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "subject"){
-        navigate(`/subject?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "certiDoc"){
-       navigate(`/certi-doc-applied?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "leaveDoc"){
-      navigate(`/leave-doc-applied?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "MyLeaveDoc"){
-      navigate(`/Myleave?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "myCertiDoc"){
+    } else if (type == "attendance") {
+      navigate(`/attendance-employee?condtion=${selectedOption}&search=${inputValue}`);
+    } else if (type == "subject") {
+      navigate(`/subject?condtion=${selectedOption}&search=${inputValue}`);
+    } else if (type == "certiDoc") {
+      navigate(`/certi-doc-applied?condtion=${selectedOption}&search=${inputValue}`);
+    } else if (type == "leaveDoc") {
+      navigate(`/leave-doc-applied?condtion=${selectedOption}&search=${inputValue}`);
+    } else if (type == "MyLeaveDoc") {
+      navigate(`/Myleave?condtion=${selectedOption}&search=${inputValue}`);
+    } else if (type == "myCertiDoc") {
       navigate(`/certi-doc-mine?condtion=${selectedOption}&search=${inputValue}`);
-    } else if(type == "organization") {
-      navigate(`/organization?condition=${selectedOption}&search=${inputValue}`);
-      navigate(`/certi-doc-mine?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "registLecture"){
-      navigate();
     }
 
   };
-
+  const [readOnlyValue, setReadOnlyValue] = useState('읽기 전용 값');
   const handleEnterKey = (e) => {
     if (e.key === 'Enter') {
       handleSearch();
@@ -61,16 +56,15 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
           </option>
         ))}
       </select>
+
+
       <input
         type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        className={SearchBarCss.searchBar}
-        onKeyUp={handleEnterKey}
+        value={readOnlyValue} readOnly
       />
       <button className={SearchBarCss.searchBarBtn} onClick={handleSearch}>검색</button>
     </div>
   );
 };
 
-export default SearchBar;
+export default AteendanceSearchBar;

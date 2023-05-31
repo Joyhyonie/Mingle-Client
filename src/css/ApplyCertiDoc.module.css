@@ -7,11 +7,6 @@
     margin-top: 20px;
 }
 
-.ApplyCertiDocCSSTable {
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
 .ApplyCertiDocCSSTable button {
     width: 50px;
     background-color: #dadada;
@@ -54,4 +49,45 @@
     border-radius: 4px;
 }
 
+.ApplyTable{
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-top: 20px;
+}
 
+.ApplyTable button {
+    width: 50px;
+    background-color: #dadada;
+    margin-top: 9px;
+    border-radius: 20px;
+    color: #4D4D4D;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+}
+
+.ApplyTable input {
+    width: 80%;
+    border: 1px solid #343434;
+    height: 20px;
+    border-radius: 2px;
+}
+
+.ApplyTable input:focus {
+    border-color: #343434;
+    outline: none;
+}
+
+.ApplyTable select {
+    text-align: center;
+    width: 70%;
+    border-radius: 2px;
+    border: 1px solid #343434;
+    font-size: 17px;
+    outline: none;
+}
+
+.ApplyTable button:hover{
+    color: white;
+    background-color: #343434;
+}

@@ -134,6 +134,28 @@ tbody tr:hover {
     transform: scale(1.1);
 }
 
+.iconBox div {
+    position: absolute;
+    top: 4.5%;
+    display: flex;
+    background-color: #ff7878;
+    color: white;
+    font-weight: 900;
+    border-radius: 50%;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    padding: 1px;
+}
+
+.iconBox .notiCount {
+    right: 18.8%;
+}
+
+.iconBox .msgCount {
+    right: 13.5%;
+}
+
 .buttonBoxLight button {
     border: none;
     border-radius: 20px;
