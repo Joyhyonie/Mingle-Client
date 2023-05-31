@@ -1,6 +1,6 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
-import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture } from "../modules/LectureModule";
 
 import { wait } from '@testing-library/user-event/dist/utils';
 
@@ -111,8 +111,8 @@ export const callSubjectListAPI = (deptCode) => {
     }
 }
 
-export const callMyLectureCallAPI = () => {
-    const requestURL = `${LECTURE_URL}/myLecture`;
+export const callMyLectureCallAPI = ({ currentPage = 1 }) => {
+    const requestURL = `${LECTURE_URL}/myLecture?page=${currentPage}`;
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
@@ -125,6 +125,24 @@ export const callMyLectureCallAPI = () => {
 
         if (result.status === 200) {
             dispatch(getMylecture(result));
+        }
+    }
+}
+
+export const callLecNameMyLecture = ({ currentPage = 1 }) => {
+    const requestURL = `${LECTURE_URL}/lecNameMyLecture?page=${currentPage}`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if (result.status === 200) {
+            dispatch(getLecnameMylecture(result));
         }
     }
 }
