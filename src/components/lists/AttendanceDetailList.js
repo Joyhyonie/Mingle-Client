@@ -11,11 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수가 api에 넣을 것인가?
 
-    const options = [
-        { value: "sbjName", label: "과목명" },
-        { value: "deptName", label: "학과명" }
 
-    ];
     const { attendance, newAttendance, lecCount } = useSelector(state => state.SubjectInfoReducer);
     const { lecCode } = useParams();
     const SelectBoxWrapper = styled.div`
@@ -25,16 +21,17 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
 
 
     console.log("여기는 출첵attendance", attendance);
+    // console.log("여기는 출첵attendance&&&", attendance && attendance.lecturDTO.lecCount)
 
-    console.log("여기는뉴뉴뉴 newAttendance", newAttendance);
-    console.log("여기는뉴뉴뉴 lecCount", lecCount);
+    // console.log("여기는뉴뉴뉴 newAttendance", newAttendance);
+    // console.log("여기는뉴뉴뉴 lecCount", lecCount);
 
 
-    const handleSelectChange2 = (event) => {
-        const selectedOption2 = event.target.value;
-        console.log('Selected option:', selectedOption2);
-        setAttendanceStatus2(selectedOption2)
-    };
+    // const handleSelectChange2 = (event) => {
+    //     const selectedOption2 = event.target.value;
+    //     console.log('Selected option:', selectedOption2);
+    //     setAttendanceStatus2(selectedOption2)
+    // };
 
 
 
@@ -44,8 +41,9 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         setAttendanceStatus(selectedOption)
     };
     const [attendanceStatus, setAttendanceStatus] = useState('');
-    const [attendanceStatus2, setAttendanceStatus2] = useState('');
+    // const [attendanceStatus2, setAttendanceStatus2] = useState('');
     const dispatch = useDispatch();
+
 
 
 
@@ -61,6 +59,8 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         },
         []);
 
+    console.log("sisisisisidjsfhdkㄹㄴ아ㅓㅁ로나얼", attendance && attendance.lectureDTO[0]);
+    const option = attendance && attendance.lectureDTO[0];
 
 
 
@@ -71,7 +71,7 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
 
         <div className={SearchBarCss.basic}>
             {<AteendanceSearchBar
-                options={options}>
+                options={option && option}>
             </AteendanceSearchBar>}
         </div>
         <table className={BoardCSS.boardTable}>
@@ -94,33 +94,19 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
                 </tr>
             </thead>
             <tbody>
-                {attendance && (
-                    attendance.courseStudentList
-                        .map((lecture) => (
-                            <tr key={lecture.student.stdCode}>
-                                <td>{lecture.student.stdCode}</td>
-                                <td>{lecture.student.department.deptName}</td>
-
-                                <td>{lecture.student.stdName}</td>
-
-                                <td>
-                                    <>
-                                        <select onChange={handleSelectChange2}>
-                                            <option value="출석">출석</option>
-                                            <option value="결석">결석</option>
-                                            <option value="지각">지각</option>
-                                        </select>
-
-                                    </>
-                                </td>
-                                <td><input type="text" value={attendanceStatus2} readOnly /></td>
-
-                            </tr>
-                        )))}
+                {(attendance && attendance.data) && (
+                    attendance.data.map((attendan) => (
+                        <tr>
+                            <td>{attendan.stdAtdCode}</td>
+                        </tr>
+                    ))
+                )}
 
 
-                {Array.isArray(attendance)
-                    && attendance.map(attendance => <AttendanceItem key={attendance.courseCode} attendance={attendance} />)
+
+
+                {Array.isArray(attendance?.courseStudentList)
+                    && attendance?.courseStudentList?.map((attendance) => <AttendanceItem key={attendance.student.stdCode} attendance={attendance} />)
                 }
             </tbody>
         </table>
