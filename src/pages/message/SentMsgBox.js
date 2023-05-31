@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { callSentMsgListAPI } from "../../apis/MessageAPICalls";
 
-function SentMsgBox ({setWhichPage, stateChangeHandler}) {
+function SentMsgBox () {
 
     const dispatch = useDispatch();
     const { sentMsg, likeMsg, removeMsg, sentMsgSearch } = useSelector(state => state.MessageReducer);
@@ -52,8 +52,6 @@ function SentMsgBox ({setWhichPage, stateChangeHandler}) {
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }
-                        setWhichPage={setWhichPage} 
-                        stateChangeHandler={stateChangeHandler}
                         isChecked={ checkedIdList.includes(String(message.msgCode)) }
                         checkboxChangeHandler={checkboxChangeHandler}
                         checkedIdList={checkedIdList}

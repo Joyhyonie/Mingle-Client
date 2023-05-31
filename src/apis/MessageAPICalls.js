@@ -1,4 +1,4 @@
-import { getCountUnreadMsg, getDepartmentForSend, getEmployeeForSend, getLikedMsg, getLikedMsgSearch, getReceivedMsg, getReceivedMsgSearch, getSentMsg, getSentMsgSearch, patchLikeMsg, patchReadMsg, patchRemoveMsg, postSendMsg } from "../modules/MessageModule";
+import { getCountUnreadMsg, getDeletedMsg, getDepartmentForSend, getEmployeeForSend, getLikedMsg, getLikedMsgSearch, getReceivedMsg, getReceivedMsgSearch, getRemovedMsg, getSentMsg, getSentMsgSearch, patchLikeMsg, patchReadMsg, patchRemoveMsg, postSendMsg } from "../modules/MessageModule";
 import { request } from "./Api";
 
 /* 읽지 않은 쪽지 갯수 조회 */
@@ -155,6 +155,26 @@ export function callLikedMsgSearchAPI(condition, word, searchedCurrentSize) {
 
         if(result.status == 200) {
             dispatch(getLikedMsgSearch(result));
+        }
+
+    }
+
+}
+
+/* 휴지통 조회 */
+export function callRemovedMsgListAPI(currentSize) {
+
+    return async (dispatch, getState) => {
+
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+        };
+
+        const result = await request('GET', `/message/removed?size=${currentSize}`, headers);
+
+        if(result.status == 200) {
+            dispatch(getRemovedMsg(result));
         }
 
     }

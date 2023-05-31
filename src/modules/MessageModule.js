@@ -12,6 +12,7 @@ const GET_SENT_MSG = "schedule/GET_SENT_MSG";
 const GET_SENT_MSG_SEARCH = "schedule/GET_SENT_MSG_SEARCH";
 const GET_LIKED_MSG = "schedule/GET_LIKED_MSG";
 const GET_LIKED_MSG_SEARCH = "schedule/GET_LIKED_MSG_SEARCH";
+const GET_REMOVED_MSG = "schedule/GET_REMOVED_MSG";
 const PATCH_LIKE_MSG = "schedule/PATCH_LIKE_MSG";
 const GET_DEPARTMENT_FOR_SEND = "schedule/GET_DEPARTMENT_FOR_SEND";
 const GET_EMPLOYEE_FOR_SEND = "schedule/GET_EMPLOYEE_FOR_SEND";
@@ -26,6 +27,7 @@ export const { schedule : { getCountUnreadMsg,
                             getSentMsgSearch,
                             getLikedMsg,
                             getLikedMsgSearch,
+                            getRemovedMsg,
                             patchLikeMsg,
                             getDepartmentForSend,
                             getEmployeeForSend,
@@ -40,6 +42,7 @@ export const { schedule : { getCountUnreadMsg,
     [GET_SENT_MSG_SEARCH] : (res) => res.data,
     [GET_LIKED_MSG] : (res) => res.data,
     [GET_LIKED_MSG_SEARCH] : (res) => res.data,
+    [GET_REMOVED_MSG] : (res) => res.data,
     [PATCH_LIKE_MSG] : (res) => res,
     [GET_DEPARTMENT_FOR_SEND] : (res) => res.data,
     [GET_EMPLOYEE_FOR_SEND] : (res) => res.data,
@@ -58,6 +61,7 @@ const MessageReducer = handleActions(
         [GET_SENT_MSG_SEARCH] : (state, { payload }) => ({ sentMsgSearch : payload }),
         [GET_LIKED_MSG] : (state, { payload }) => ({ likedMsg : payload }),
         [GET_LIKED_MSG_SEARCH] : (state, { payload }) => ({ likedMsgSearch : payload }),
+        [GET_REMOVED_MSG] : (state, { payload }) => ({ removedMsg : payload }),
         [PATCH_LIKE_MSG] : (state, { payload }) => ({ ...state, likeMsg : payload }),
         [GET_DEPARTMENT_FOR_SEND] : (state, { payload }) => ({ department : payload }),
         [GET_EMPLOYEE_FOR_SEND] : (state, { payload }) => ({ ...state, employee : payload }),
