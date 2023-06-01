@@ -20,7 +20,7 @@ function EmployeeAttendance () {
     const [currentPage, setCurrentPage] = useState(1);
     const {employeeList, nameSearch} = useSelector(state => state.AttendanceReducer);
     const [params] = useSearchParams();
-    const condition = params.get('condtion');
+    const condition = params.get('condition');
     const name = params.get('search');
     
     const options = [

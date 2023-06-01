@@ -121,7 +121,9 @@ function App() {
             <Route path="lecture-student-prof" element={<StudentAttendanceForProf />}>
               <Route path='search' element={<StudentAttendanceForProf/>}/>
             </Route>
-            <Route path="lecture-regist-prof" element={<RegistLectureForProf />} />
+            <Route path="lecture-regist-prof" element={<RegistLectureForProf />}>
+              <Route path='search' element={<RegistLectureForProf/>}/>
+            </Route>
 
             <Route path="management-employee" element={<EmployeeManagement />} />
             <Route path="regist-employee" element={<EmployeeRegist />} />

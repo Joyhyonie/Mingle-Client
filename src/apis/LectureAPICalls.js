@@ -168,6 +168,7 @@ export const callSearchName = ({search, condition ,currentPage = 1}) => {
 
         if(result.status === 200){
             dispatch(getSearchName(result));
+            console.log(result);
         }
     }
 }
