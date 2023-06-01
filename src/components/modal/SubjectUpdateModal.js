@@ -37,7 +37,7 @@ function SubjectUpdateModal({subject,closeModal}){
       useEffect(
         ()=>{
             if(modify?.status === 200){
-                closeModal(false);
+                closeModal();
                 toast.success("과목 수정이 완료 되었습니다.");
             }
         },[modify]
@@ -74,7 +74,7 @@ function SubjectUpdateModal({subject,closeModal}){
                     <input type="text" name="sbjName" placeholder={subject.sbjName} onChange={onChangeHandler}
                     className={SubjectUpdateModalCSS.sbjName}/>
                     <button onClick={onClickSubjectUpdateHandler}>수정</button>
-                    <button onClick={()=> closeModal(false)}>취소</button>
+                    <button onClick={()=> closeModal()}>취소</button>
                 </div>
             </div>
         </div>
