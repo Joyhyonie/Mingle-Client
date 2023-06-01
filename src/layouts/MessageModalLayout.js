@@ -6,6 +6,7 @@ import LikeMsgBox from '../pages/message/LikeMsgBox';
 import ReceivedMsgBox from '../pages/message/ReceivedMsgBox';
 import SentMsgBox from '../pages/message/SentMsgBox';
 import { useDispatch } from 'react-redux';
+import BinMsgBox from '../pages/message/BinMsgBox';
 
 function MessageModalLayout ({setMessageModal, setMsgClicked}) {
     
@@ -14,13 +15,14 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
     const [selectedDeptCode, setSelectedDeptCode] = useState('');   // '답장' 클릭 시, Sender의 소속코드
     const [selectedEmpCode, setSelectedEmpCode] = useState('');     // '답장' 클릭 시, Sender의 교번
     const [selectedEmpName, setSelectedEmpName] = useState('');     // '답장' 클릭 시, Sender의 이름
-    const [selectedEmpId, setSelectedEmpId] = useState('');         // '답장' 클릭 시, Sender의 이름
+    const [selectedEmpId, setSelectedEmpId] = useState('');         // '답장' 클릭 시, Sender의 ID
     const [whichPage, setWhichPage] = useState('receivedMsgBox');
     const [isClickedstate, setIsClickedState] = useState({          // 클릭된 메뉴를 컨트롤 하기 위한 state
-        receiveIsClicked: true,
+        receivedIsClicked: true,
         sentIsClicked: false,
         writeIsClicked: false,
-        likeIsClicked: false
+        likedIsClicked: false,
+        binIsClicked: false
     });
 
     /* 각 아이콘이 클릭될 때마다 해당 페이지를 렌더링 */
@@ -32,12 +34,13 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
     /* 클릭된 메뉴를 컨트롤 하기 위한 이벤트 함수 */
     const stateChangeHandler = (stateName) => {
         setIsClickedState(prevState => ({
-          ...prevState,
-          [stateName]: true,
-          receiveIsClicked: stateName === 'receiveIsClicked' ? true : false,
-          sentIsClicked: stateName === 'sentIsClicked' ? true : false,
-          writeIsClicked: stateName === 'writeIsClicked' ? true : false,
-          likeIsClicked: stateName === 'likeIsClicked' ? true : false
+            ...prevState,
+            [stateName]: true,
+            receivedIsClicked: stateName === 'receivedIsClicked' ? true : false,
+            sentIsClicked: stateName === 'sentIsClicked' ? true : false,
+            writeIsClicked: stateName === 'writeIsClicked' ? true : false,
+            likedIsClicked: stateName === 'likedIsClicked' ? true : false,
+            binIsClicked: stateName === 'binIsClicked' ? true : false
         }));
     }
 
@@ -53,7 +56,7 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
                                                 setSelectedEmpCode={setSelectedEmpCode}
                                                 setSelectedEmpName={setSelectedEmpName}
                                                 setSelectedEmpId={setSelectedEmpId} />,
-                sentMsgBox: <SentMsgBox setWhichPage={setWhichPage} stateChangeHandler={stateChangeHandler}/>,
+                sentMsgBox: <SentMsgBox/>,
                 writeMsg: <WriteMsg replyContent={replyContent} 
                                     setReplyContent={setReplyContent} 
                                     selectedDeptCode={selectedDeptCode} 
@@ -63,7 +66,8 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
                                     setWhichPage={setWhichPage}
                                     stateChangeHandler={stateChangeHandler}
                             />,
-                likeMsgBox: <LikeMsgBox setWhichPage={setWhichPage} stateChangeHandler={stateChangeHandler}/>
+                likeMsgBox: <LikeMsgBox whichPage={whichPage} />,
+                binMsgBox: <BinMsgBox whichPage={whichPage} /> 
             };
             return components[whichPage] || null;
 
@@ -72,7 +76,8 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
                 receivedMsgBox: <p>받은 쪽지함</p>,
                 sentMsgBox: <p>보낸 쪽지함</p>,
                 writeMsg: <p>쪽지 작성</p>,
-                likeMsgBox: <p>중요 쪽지함</p>
+                likeMsgBox: <p>중요 쪽지함</p>,
+                binMsgBox: <p>휴지통</p>
             };
             return components[whichPage] || null;
         }
@@ -82,7 +87,7 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
     return (
         <div className={ MessageCSS.modalBox }>
             <div className={ MessageCSS.navBar }>
-                {isClickedstate.receiveIsClicked ? (
+                {isClickedstate.receivedIsClicked ? (
                     <motion.img
                         src="/images/received-hover.png"
                         whileHover={{ scale: 1.05 }}
@@ -90,7 +95,7 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
                 ) : (
                     <img
                         src="/images/received.png"
-                        onClick={() => {setWhichPage('receivedMsgBox'); stateChangeHandler('receiveIsClicked');}}
+                        onClick={() => {setWhichPage('receivedMsgBox'); stateChangeHandler('receivedIsClicked');}}
                         whileHover={{ scale: 1.05 }}
                     />
                 )}
@@ -125,7 +130,7 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
                         whileHover={{ scale: 1.05 }}
                     />
                 )}
-                {isClickedstate.likeIsClicked ? (
+                {isClickedstate.likedIsClicked ? (
                     <motion.img
                         src="/images/like-hover.png"
                         whileHover={{ scale: 1.05 }}
@@ -133,7 +138,19 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
                 ) : (
                     <img
                         src="/images/like.png"
-                        onClick={() => {setWhichPage('likeMsgBox'); stateChangeHandler('likeIsClicked');}}
+                        onClick={() => {setWhichPage('likeMsgBox'); stateChangeHandler('likedIsClicked');}}
+                        whileHover={{ scale: 1.05 }}
+                    />
+                )}
+                {isClickedstate.binIsClicked ? (
+                    <motion.img
+                        src="/images/bin-hover.png"
+                        whileHover={{ scale: 1.05 }}
+                    />
+                ) : (
+                    <img
+                        src="/images/bin.png"
+                        onClick={() => {setWhichPage('binMsgBox'); stateChangeHandler('binIsClicked');}}
                         whileHover={{ scale: 1.05 }}
                     />
                 )}

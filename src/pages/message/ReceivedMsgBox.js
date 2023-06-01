@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName, setSelectedEmpId}) {
 
     const dispatch = useDispatch();
-    const { receivedMsg, likeMsg, readMsg, removeMsg, receivedMsgSearch } = useSelector(state => state.MessageReducer);
+    const { receivedMsg, receivedMsgSearch, likeMsg, readMsg, removeMsg } = useSelector(state => state.MessageReducer);
     const [checkedIdList, setCheckedIdList] = useState([]);                 // check된 쪽지들의 id가 저장되는 state
     const [currentSize, setCurrentSize] = useState(10);                     // 전체 쪽지의 더보기 페이징을 위한 state
     const [searchedCurrentSize, setSearchedCurrentSize] = useState(10);     // 검색된 쪽지의 더보기 페이징을 위한 state
@@ -24,7 +24,7 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
 
             if(removeMsg?.status === 200) {
                 toast.success("선택하신 쪽지가 삭제되었습니다 :)");
-            }
+            } 
 
         },[likeMsg, removeMsg, currentSize] 
     );
@@ -53,12 +53,26 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
 
         console.log("checkedIdList : {}", checkedIdList);
     }
+    
+    /* 쪽지 전체 선택 함수 */
+    const selectAllHandler = (selectAll) => {
+
+        if (selectAll) {
+            // 전체 선택이 되었다면 checkedList에 현재 조회된 요소들의 id를 모두 추가
+            const allIds = (receivedMsgList || []).concat(receivedMsgSearchList || []).map((message) => String(message.msgCode));
+            setCheckedIdList(allIds);
+        } else {
+            // 전체 선택이 취소되었다면 빈 배열 전달
+            setCheckedIdList([]);
+        }
+
+    }
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
             
             <MessageSearchBar msgBoxType={ 'received' } searchedCurrentSize={searchedCurrentSize}/>
-            <div className={ MessageCSS.dummyBox }/>
+            <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
                 {/* receivedMsg와 receivedMsgSearch가 모두 undefined인 경우에는 빈 배열([])을 이용하여 concat() 함수를 호출 (undefined 오류 발생 방지) */}
                 { (receivedMsgList || []).concat(receivedMsgSearchList || []).map(message => (
@@ -74,6 +88,7 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
                         setSelectedEmpId={ setSelectedEmpId }
                         isChecked={ checkedIdList.includes(String(message.msgCode)) }
                         checkboxChangeHandler={ checkboxChangeHandler }
+                        selectAllHandler={ selectAllHandler }
                         checkedIdList={checkedIdList}
                         setCheckedIdList={setCheckedIdList}
                     />
