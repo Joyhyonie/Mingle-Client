@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { callUnreadMsgCountAPI } from "../../apis/MessageAPICalls";
 import { callNotificationListAPI } from '../../apis/NotificationAPICalls';
 
-function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
+function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, updateNoti, updateMsg, messageModal, setMessageModal }) {
 
     /*  setActiveIndex : 로고 및 마이페이지 아이콘을 클릭 시, Nav바 활성화 취소 */
 
@@ -29,7 +29,6 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
     const [logoutClicked, setLogoutClicked] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [notificationModal, setNotificationModal] = useState(false);  // 알림 모달 컨트롤 state
-    const [messageModal, setMessageModal] = useState(false);            // 쪽지 모달 컨트롤 state
     const [logoutModal, setLogoutModal] = useState(false);              // 로그아웃 모달 컨트롤 state
     
     /* mypage에서 다른 페이지로 이동되면 mypage의 아이콘을 다시 기본 아이콘으로 돌려놓기 위한 useEffect */
@@ -44,11 +43,11 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler }) {
     /* 읽지 않은 쪽지 및 알림 갯수를 노출시키기 위한 API 호출 */
     useEffect(() => {
         dispatch(callUnreadMsgCountAPI());
-    }, []);
+    }, [updateMsg]);
 
     useEffect(() => {
         dispatch(callNotificationListAPI());
-    }, []);
+    }, [updateNoti]);
 
 
     /* 다크모드/라이트모드를 제어하기 위한 이벤트 함수 */

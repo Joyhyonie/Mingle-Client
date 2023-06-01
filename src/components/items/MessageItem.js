@@ -4,7 +4,6 @@ import MessageCSS from '../../css/Message.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI, callRestoreMsgAPI } from '../../apis/MessageAPICalls';
 import { toast } from 'react-hot-toast';
-import { useEffect } from 'react';
 
 function MessageItem ({message, whichPage, setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName, setSelectedEmpId,
                        isChecked, checkboxChangeHandler, selectAllHandler, checkedIdList, setCheckedIdList}) {  
