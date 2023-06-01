@@ -10,11 +10,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyLectureCallAPI, callSearchName } from "../../../apis/LectureAPICalls";
 import { useState } from "react";
+import LecPlanModal from "../../../components/modal/LecPlanModal";
 import { useSearchParams } from "react-router-dom";
 
 function RegistLectureForProf () {
 
   const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectLecture, setSelectLecture] = useState();
   const {myLecture, searchName} = useSelector(state => state.SubjectInfoReducer);
   const [currentPage, setCurrentPage] = useState(1);
   const [params] = useSearchParams();
@@ -28,6 +31,17 @@ function RegistLectureForProf () {
         { value: "lecName", label: "강의명" }
       ];
     
+      const openModal = (lecture) => {
+        setSelectLecture(lecture);
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectLecture(null);
+      };
+
+
     useEffect(
       ()=>{
         if(name){
@@ -79,6 +93,7 @@ function RegistLectureForProf () {
                 </tr>
               </thead>
               <tbody>
+
               {
                   (searchName && searchName.data) ? (
                     searchName.data.map((lecture) => (
@@ -94,6 +109,7 @@ function RegistLectureForProf () {
                                 {lecture.lecName == null ? (
                                 <td><button className={LectureCSS.button}>강의계획서작성</button></td>
                                 ): <td><button className={LectureCSS.button}>강의계획서보기</button></td> }
+
                     </tr>
                             ))
                         ) : (
@@ -118,6 +134,14 @@ function RegistLectureForProf () {
                         }
               </tbody>
             </table>
+          {isModalOpen && (
+              <LecPlanModal 
+              lecture={selectLecture}
+              closeModal={closeModal} />
+              
+          )}
+
+
             <div>
             { (searchName && searchName.pageInfo) ? (<PagingBar pageInfo={searchName.pageInfo} setCurrentPage={setCurrentPage} /> ) 
                 : (myLecture && myLecture.pageInfo) ? (<PagingBar pageInfo={myLecture.pageInfo} setCurrentPage={setCurrentPage} /> )

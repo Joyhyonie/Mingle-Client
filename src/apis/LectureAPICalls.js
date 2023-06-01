@@ -1,9 +1,7 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
 
-
-import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName } from "../modules/LectureModule";
-
+import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName,  patchLecPlan  } from "../modules/LectureModule";
 import { wait } from '@testing-library/user-event/dist/utils';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -321,6 +319,28 @@ export const callSubjectUpdateAPI = (formData) => {
 //     }
 // }
 
+export const callLecPlanInsertAPI = (formData) => {
+
+
+    const requestURL = `${LECTURE_URL}/lecturePlan`;
+
+    return async (dispatch, getstate) => {
+
+        const result = await fetch(requestURL,{
+            method : 'PATCH',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(patchLecPlan(result));
+        }
+    }
+
+    
+} 
 
 // /*행정직원의 강의 등록 페이지 */
 // export const callLectureInsertAPI = (form) => {
@@ -348,3 +368,4 @@ export const callSubjectUpdateAPI = (formData) => {
 //         }
 //     }
 // }
+
