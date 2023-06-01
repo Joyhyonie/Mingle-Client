@@ -83,7 +83,7 @@ function Layout () {
                         <img src={senderImg}/>
                         <div>
                             <sub><span>{senderName}</span>님의 쪽지가 도착했습니다 :)</sub>
-                            <p>{msgContent ? (msgContent.length > 22 ? msgContent.slice(0, 22) + "..." : msgContent) : ""}</p>
+                            <p>{msgContent ? (msgContent.length > 23 ? msgContent.slice(0, 23) + "..." : msgContent) : ""}</p>
                         </div>
                     </div>
                     <div className={ ToastCSS.closeBox } onClick={ (e) => {toast.dismiss(t.id); e.stopPropagation()}}>
@@ -111,7 +111,7 @@ function Layout () {
                     <div className={ ToastCSS.commonContentBox }>
                         <div>
                             <sub>{notiTitle}</sub>
-                            <p>{notiContent ? (notiContent.length > 24 ? notiContent.slice(0, 24) + "..." : notiContent) : ""}</p>
+                            <p>{notiContent ? (notiContent.length > 27 ? notiContent.slice(0, 27) + "..." : notiContent) : ""}</p>
                         </div>
                     </div>
                     <div className={ ToastCSS.closeBox } onClick={ () => toast.dismiss(t.id)}>

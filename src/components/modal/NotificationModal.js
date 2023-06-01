@@ -34,13 +34,14 @@ function NotificationModal ({isDark}) {
 
     return (
         <motion.div className={ isDark ? notiCSS.darkNotiModal : notiCSS.whiteNotiModal }
-             animate={{ backgroundColor: isDark ? "#4D4D4D" : "#FFF" }}
+             animate={{ backgroundColor: isDark ? "#343434" : "#FFF" }}
              transition={{ duration: 0.5 }}
         >
             <div >
                 <div className={ notiCSS.notiHeader }>
                     <p style={{color: isDark ? "white" : "#666666"}}>알림 <span>{notifications && notifications.length}</span>건</p>
                     <button
+                        style={{backgroundColor: isDark ? "#666666" : "#343434"}}
                         onClick={ deleteAllHandler }
                     >
                         전체 삭제
