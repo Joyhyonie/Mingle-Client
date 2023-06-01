@@ -8,24 +8,24 @@ import { motion } from "framer-motion"
 import MessageCSS from "../../css/Message.module.css";
 
 
-function BinMsgBox () {
+function BinMsgBox ({whichPage}) {
 
     const dispatch = useDispatch();
-    const { removedMsg, likeMsg, removeMsg } = useSelector(state => state.MessageReducer);
+    const { removedMsg, restoreMsg } = useSelector(state => state.MessageReducer);
     const [checkedIdList, setCheckedIdList] = useState([]);
     const [currentSize, setCurrentSize] = useState(10);                     
     const removedMsgList = removedMsg && removedMsg.data;
 
     useEffect(
         () => {
-            /* 중요 쪽지함 조회 API 호출 */
+            /* 휴지통 조회 API 호출 */
             dispatch(callRemovedMsgListAPI(currentSize));
 
-            if(removeMsg?.status === 200) {
-                toast.success("선택하신 쪽지가 삭제되었습니다 :)");
+            if(restoreMsg?.status === 200) {
+                toast.success("선택하신 쪽지가 복구되었습니다 :)");
             }
 
-        },[likeMsg, removeMsg, currentSize]
+        },[restoreMsg, currentSize]
     );
 
     /* 각 checkbox의 상태가 변경될 때 호출되는 이벤트 함수 */
@@ -42,10 +42,22 @@ function BinMsgBox () {
         console.log("checkedIdList : {}", checkedIdList);
     }
 
+    /* 쪽지 전체 선택 함수 */
+    const selectAllHandler = (selectAll) => {
+
+        if (selectAll) {
+            const allIds = removedMsgList && removedMsgList.map((message) => String(message.msgCode));
+            setCheckedIdList(allIds);
+        } else {
+            setCheckedIdList([]);
+        }
+
+    }
+
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
-            <div className={ MessageCSS.binMsgBoxInfo }><p>휴지통 속 쪽지는 전송일 기준 3개월 뒤 자동 영구 삭제 됩니다 :)</p></div>
-            <div className={ MessageCSS.dummyBox }/>
+            <div className={ MessageCSS.binMsgBoxInfo }><p>휴지통 속 쪽지는 익일 오전 12시, 영구적으로 삭제 됩니다 :)</p></div>
+            <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
                 { removedMsgList && removedMsgList.map(message => (
                     <MessageItem
@@ -53,8 +65,10 @@ function BinMsgBox () {
                         message={ message }
                         isChecked={ checkedIdList.includes(String(message.msgCode)) }
                         checkboxChangeHandler={checkboxChangeHandler}
+                        selectAllHandler={selectAllHandler}
                         checkedIdList={checkedIdList}
                         setCheckedIdList={setCheckedIdList}
+                        whichPage={whichPage}
                     />
                 ))
                 }

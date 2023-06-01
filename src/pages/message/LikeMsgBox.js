@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { callLikedMsgListAPI } from "../../apis/MessageAPICalls";
 
-function LikeMsgBox () {
+function LikeMsgBox ({whichPage}) {
 
     const dispatch = useDispatch();
     const { likedMsg, likeMsg, removeMsg, likedMsgSearch } = useSelector(state => state.MessageReducer);
@@ -19,11 +19,11 @@ function LikeMsgBox () {
 
     useEffect(
         () => {
-            /* 중요 쪽지함 조회 API 호출 */
+             /* 중요 쪽지함 조회 API 호출 */
             dispatch(callLikedMsgListAPI(currentSize));
 
             if(removeMsg?.status === 200) {
-                toast.success("선택하신 쪽지가 삭제되었습니다 :)");
+                 toast.success("선택하신 쪽지가 삭제되었습니다 :)");
             }
 
         },[likeMsg, removeMsg, currentSize]
@@ -43,10 +43,22 @@ function LikeMsgBox () {
         console.log("checkedIdList : {}", checkedIdList);
     }
 
+    /* 쪽지 전체 선택 함수 */
+    const selectAllHandler = (selectAll) => {
+
+        if (selectAll) {
+            const allIds = (likedMsgList || []).concat(likedMsgSearchList || []).map((message) => String(message.msgCode));
+            setCheckedIdList(allIds);
+        } else {
+            setCheckedIdList([]);
+        }
+
+    }
+
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
             <MessageSearchBar msgBoxType={ 'liked' } searchedCurrentSize={searchedCurrentSize}/>
-            <div className={ MessageCSS.dummyBox }/>
+            <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
                 { (likedMsgList || []).concat(likedMsgSearchList || []).map(message => (
                     <MessageItem 
@@ -54,8 +66,10 @@ function LikeMsgBox () {
                         message={ message }
                         isChecked={ checkedIdList.includes(String(message.msgCode)) }
                         checkboxChangeHandler={checkboxChangeHandler}
+                        selectAllHandler={selectAllHandler}
                         checkedIdList={checkedIdList}
                         setCheckedIdList={setCheckedIdList}
+                        whichPage={whichPage}
                     />
                 ))
                 }

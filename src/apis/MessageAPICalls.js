@@ -1,4 +1,4 @@
-import { getCountUnreadMsg, getDeletedMsg, getDepartmentForSend, getEmployeeForSend, getLikedMsg, getLikedMsgSearch, getReceivedMsg, getReceivedMsgSearch, getRemovedMsg, getSentMsg, getSentMsgSearch, patchLikeMsg, patchReadMsg, patchRemoveMsg, postSendMsg } from "../modules/MessageModule";
+import { getCountUnreadMsg, getDeletedMsg, getDepartmentForSend, getEmployeeForSend, getLikedMsg, getLikedMsgSearch, getReceivedMsg, getReceivedMsgSearch, getRemovedMsg, getSentMsg, getSentMsgSearch, patchLikeMsg, patchReadMsg, patchRemoveMsg, patchRestoreMsg, postSendMsg } from "../modules/MessageModule";
 import { request } from "./Api";
 
 /* 읽지 않은 쪽지 갯수 조회 */
@@ -268,6 +268,30 @@ export function callRemoveMsgAPI(msgCodes) {
 
         if(result.status == 200) {
             dispatch(patchRemoveMsg(result));
+        }
+
+    }
+
+}
+
+/* 선택한 쪽지 복구 */
+export function callRestoreMsgAPI(msgCodes) {
+
+    return async (dispatch, getState) => {
+
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+        };
+
+        const messageDTO = {
+            selectedMsgs: msgCodes
+        };
+
+        const result = await request('PATCH', `/message/restore`, headers, messageDTO);
+
+        if(result.status == 200) {
+            dispatch(patchRestoreMsg(result));
         }
 
     }
