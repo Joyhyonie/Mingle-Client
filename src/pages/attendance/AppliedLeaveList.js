@@ -17,7 +17,7 @@ function AppliedLeaveList () {
     const {patch} = useSelector(state => state.AttendanceReducer);
     const dispatch = useDispatch();
     const [params] = useSearchParams();
-    const condition = params.get('condtion');
+    const condition = params.get('condition');
     const name = params.get('search');
 
     const type = "leaveDoc";

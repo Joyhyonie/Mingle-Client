@@ -20,7 +20,7 @@ function StudentAttendanceForProf () {
   const [currentPage, setCurrentPage] = useState(1);
   const {lecName, searchName} = useSelector(state => state.SubjectInfoReducer);
   const [params] = useSearchParams();
-  const condition = params.get('condtion');
+  const condition = params.get('condition');
   const name = params.get('search');
 
   const options = [

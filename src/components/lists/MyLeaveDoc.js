@@ -16,7 +16,7 @@ function MyLeave(){
     const {myleave,searchMyLeaveDoc} = useSelector(state => state.AttendanceReducer);
     const type = "MyLeaveDoc";
     const [params] = useSearchParams();
-    const condition = params.get('condtion');
+    const condition = params.get('condition');
     const name = params.get('search');
     
     const options = [

@@ -8,26 +8,35 @@ import LectureCSS from '../../../css/ProfessorLecture.module.css'
 import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { callMyLectureCallAPI } from "../../../apis/LectureAPICalls";
+import { callMyLectureCallAPI, callSearchName } from "../../../apis/LectureAPICalls";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function RegistLectureForProf () {
 
   const dispatch = useDispatch();
-  const {myLecture} = useSelector(state => state.SubjectInfoReducer);
+  const {myLecture, searchName} = useSelector(state => state.SubjectInfoReducer);
   const [currentPage, setCurrentPage] = useState(1);
+  const [params] = useSearchParams();
+  const condition = params.get('condition');
+  const name = params.get('search');
+
 
     const type = "registLecture";
     const options = [
         { value: "sbjName", label: "과목명" },
-        { value: "deptName", label: "학과명" }
+        { value: "lecName", label: "강의명" }
       ];
     
     useEffect(
       ()=>{
+        if(name){
+          dispatch(callSearchName({search : name, condition: condition, currentPage : currentPage }));
+          return;
+        }
         dispatch(callMyLectureCallAPI(currentPage));
       },
-      [currentPage]
+      [currentPage,name,condition]
     )
     
       
@@ -70,28 +79,49 @@ function RegistLectureForProf () {
                 </tr>
               </thead>
               <tbody>
-                {myLecture && (
-                  myLecture.data.map((lecture)=>(
-                    <tr key={lecture.lecCode}>
-                      <td>{lecture.lecCode}</td>
-                      <td>{lecture.subject.department.deptName}</td>
-                      <td>{lecture.subject.classType}</td>
-                      <td>{lecture.subject.sbjName}</td>
-                      <td>{lecture.lecName ? lecture.lecName : "미정"}</td>
-                      <td>{lecture.subject.score}</td>
-                      <td>{lecture.lecYear}</td>
-                      <td>{lecture.employee.empName}</td>
-                      {lecture.lecName == null ? (
+              {
+                  (searchName && searchName.data) ? (
+                    searchName.data.map((lecture) => (
+                      <tr key={lecture.lecCode}>
+                                <td>{lecture.lecCode}</td>
+                                <td>{lecture.subject.department.deptName}</td>
+                                <td>{lecture.subject.classType}</td>
+                                <td>{lecture.subject.sbjName}</td>
+                                <td>{lecture.lecName ? lecture.lecName : "미정"}</td>
+                                <td>{lecture.subject.score}</td>
+                                <td>{lecture.lecYear}</td>
+                                <td>{lecture.employee.empName}</td>
+                                {lecture.lecName == null ? (
                                 <td><button className={LectureCSS.button}>강의계획서작성</button></td>
                                 ): <td><button className={LectureCSS.button}>강의계획서보기</button></td> }
                     </tr>
-                  ))
-                )}
-              
+                            ))
+                        ) : (
+                            (myLecture && myLecture.data) && (
+                              myLecture.data.map((lecture) => (
+                                <tr key={lecture.lecCode}>
+                                <td>{lecture.lecCode}</td>
+                                <td>{lecture.subject.department.deptName}</td>
+                                <td>{lecture.subject.classType}</td>
+                                <td>{lecture.subject.sbjName}</td>
+                                <td>{lecture.lecName ? lecture.lecName : "미정"}</td>
+                                <td>{lecture.subject.score}</td>
+                                <td>{lecture.lecYear}</td>
+                                <td>{lecture.employee.empName}</td>
+                                {lecture.lecName == null ? (
+                                <td><button className={LectureCSS.button}>강의계획서작성</button></td>
+                                ): <td><button className={LectureCSS.button}>강의계획서보기</button></td> }
+                              </tr>
+                            ))
+                            )
+                        )
+                        }
               </tbody>
             </table>
             <div>
-            { myLecture && (<PagingBar pageInfo={ myLecture.pageInfo } setCurrentPage={ setCurrentPage } />) }
+            { (searchName && searchName.pageInfo) ? (<PagingBar pageInfo={searchName.pageInfo} setCurrentPage={setCurrentPage} /> ) 
+                : (myLecture && myLecture.pageInfo) ? (<PagingBar pageInfo={myLecture.pageInfo} setCurrentPage={setCurrentPage} /> )
+                : null }
             </div>
          
           </div>

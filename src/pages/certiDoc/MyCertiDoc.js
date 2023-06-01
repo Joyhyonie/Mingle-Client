@@ -28,9 +28,8 @@ function MyCertiDoc () {
     const [selectCerti, setSelectCerti] = useState();
     const dispatch = useDispatch();
     const [params] = useSearchParams();
-    const condition = params.get('condtion');
+    const condition = params.get('condition');
     const name = params.get('search');
-
     useEffect(
         ()=>{
             if(name){

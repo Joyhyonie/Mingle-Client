@@ -25,7 +25,7 @@ function SubjectList() {
   const [checkedItems, setCheckedItems] = useState([]);
   const {delete1} = useSelector(state => state.SubjectReducer);
   const [params] = useSearchParams();
-  const condition = params.get('condtion');
+  const condition = params.get('condition');
   const name = params.get('search');
 
 
