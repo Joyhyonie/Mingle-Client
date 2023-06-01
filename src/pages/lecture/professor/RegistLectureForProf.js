@@ -10,11 +10,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyLectureCallAPI } from "../../../apis/LectureAPICalls";
 import { useState } from "react";
+import LecPlanModal from "../../../components/modal/LecPlanModal";
 
 function RegistLectureForProf () {
 
   const dispatch = useDispatch();
   const {myLecture} = useSelector(state => state.SubjectInfoReducer);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectLecture, setSelectLecture] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
     const type = "registLecture";
@@ -23,6 +26,17 @@ function RegistLectureForProf () {
         { value: "deptName", label: "학과명" }
       ];
     
+      const openModal = (lecture) => {
+        setSelectLecture(lecture);
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectLecture(null);
+      };
+
+
     useEffect(
       ()=>{
         dispatch(callMyLectureCallAPI(currentPage));
@@ -81,13 +95,23 @@ function RegistLectureForProf () {
                       <td>{lecture.subject.score}</td>
                       <td>{lecture.lecYear}</td>
                       <td>{lecture.employee.empName}</td>
-                      <td><button className={LectureCSS.button}>강의계획서작성</button></td>
+                      
+                      <td><button className={LectureCSS.button} onClick={() => openModal(lecture)}>강의계획서작성</button></td>
+             
                     </tr>
                   ))
                 )}
               
               </tbody>
             </table>
+          {isModalOpen && (
+              <LecPlanModal 
+              lecture={selectLecture}
+              closeModal={closeModal} />
+              
+          )}
+
+
             <div>
             { myLecture && (<PagingBar pageInfo={ myLecture.pageInfo } setCurrentPage={ setCurrentPage } />) }
             </div>

@@ -1,5 +1,5 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
-import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, patchLecPlan } from "../modules/LectureModule";
 import { wait } from '@testing-library/user-event/dist/utils';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -272,4 +272,24 @@ export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
 //     }
 // }
 
+export const callLecPlanInsertAPI = (formData) => {
 
+    const requestURL = `${LECTURE_URL}/lecturePlan`;
+
+    return async (dispatch, getstate) => {
+
+        const result = await fetch(requestURL,{
+            method : 'PATCH',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(patchLecPlan(result));
+        }
+    }
+
+    
+} 

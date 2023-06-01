@@ -13,15 +13,20 @@
 
 .EmployeeInsertModalContainer {
   position: absolute;
-  width: 1400px;
-  height: 520px;
+  width: 1000px;
+  height: 720px;
   padding: 10px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
   z-index: 1000;
-  display: flex; /* 추가: 수평 배치를 위한 스타일 */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
+
+
 
 .EmployeeInsertModalProfile {
   display: flex;
