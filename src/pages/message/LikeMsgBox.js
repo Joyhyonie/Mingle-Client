@@ -60,7 +60,8 @@ function LikeMsgBox ({whichPage}) {
             <MessageSearchBar msgBoxType={ 'liked' } searchedCurrentSize={searchedCurrentSize}/>
             <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
-                { (likedMsgList || []).concat(likedMsgSearchList || []).map(message => (
+                { (likedMsgList || []).concat(likedMsgSearchList || []).length === 0 ? <p className={ MessageCSS.empty }>텅😶</p> :
+                (likedMsgList || []).concat(likedMsgSearchList || []).map(message => (
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }
@@ -73,6 +74,7 @@ function LikeMsgBox ({whichPage}) {
                     />
                 ))
                 }
+                
             </div>
             { likedMsgSearch ? (likedMsgSearch.totalElements > searchedCurrentSize ? <div className={MessageCSS.moreBox} onClick={() => setSearchedCurrentSize(searchedCurrentSize + 10)}>More</div> : null) 
             : (likedMsg && likedMsg.totalElements > currentSize ? <div className={MessageCSS.moreBox} onClick={() => setCurrentSize(currentSize + 10)}>More</div> : null) }
