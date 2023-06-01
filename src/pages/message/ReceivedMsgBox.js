@@ -75,7 +75,8 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
             <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
                 {/* receivedMsg와 receivedMsgSearch가 모두 undefined인 경우에는 빈 배열([])을 이용하여 concat() 함수를 호출 (undefined 오류 발생 방지) */}
-                { (receivedMsgList || []).concat(receivedMsgSearchList || []).map(message => (
+                { (receivedMsgList || []).concat(receivedMsgSearchList || []).length === 0 ? <p className={ MessageCSS.empty }>텅😶</p> :
+                (receivedMsgList || []).concat(receivedMsgSearchList || []).map(message => (
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }
