@@ -14,10 +14,10 @@ function AddScheduleModal ({setAddScheduleModal}) {
     useEffect(
         () => {
             if(registMySche?.status === 200) {
-                toast.success("일정이 등록되었습니다");
+                toast.success("일정이 등록되었습니다 :)");
                 setAddScheduleModal(false);
             } else if (registMySche?.state === 400) {
-                toast.error("일정 등록에 실패했습니다");
+                toast.error("일정 등록에 실패했습니다 :(");
             }
 
         }, [registMySche]

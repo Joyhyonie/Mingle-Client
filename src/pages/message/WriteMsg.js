@@ -136,7 +136,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                 ref={textareaRef}
                 onChange={ textChangeHandler }
             >
-                {replyContent ? replyContent + '\n\n------------------------------------------\n\n' : null}
+                {replyContent ? '[답장] ' + replyContent + '\n\n\n\n' : null}
             </textarea>
 
             <button
