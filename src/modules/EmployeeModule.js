@@ -1,68 +1,46 @@
 import { createActions, handleActions } from "redux-actions";
 
 /* 초기값 */
-const initialState = {};
+const initialState = {
+  Employees: [],
+};
 
 /* 액션 */
 const POST_LOGIN = 'employee/POST_LOGIN';
 const RESET_EMPLOYEE = 'employee/RESET_EMPLOYEE';
-const GET_EMPLOYEES = 'employee/GET_EMPLOYEES';
-const GET_AC_EMPLOYEE = 'employee/GET_AC_EMPLOYEE';
 const GET_EMPLOYEE = 'employee/GET_EMPLOYEE';
 const PATCH_EMPLOYEE = 'employee/PATCH_EMPLOYEE';
-const POST_EMPLOYEE = 'employee/POST_EMPLOYEE';
-const PUT_EMPLOYEE = 'employee/PUT_EMPLOYEE';
-const DELETE_EMPLOYEE = 'employee/DELETE_EMPLOYEE';
 const POST_ID = 'employee/POST_ID';
 const POST_PWD = 'employee/POST_PWD';
 const POST_PWDCHANGE = 'employee/POST_PWDCHANGE';
-const GET_SEARCH_NAME = 'employee/GET_SEARCH_NAME';
 
 export const { employee : { postLogin, 
                             resetEmployee, 
-                            getEmployees,
-                            getAcEmployee,
                             getEmployee, 
-                            postEmployee, 
-                            putEmployee, 
                             patchEmployee, 
-                            deleteEmployee, 
                             postId, 
                             postPwd, 
-                            getSearchName, 
                             postPwdchange,
                           }} = createActions
     ({
       [POST_LOGIN]: res => res,
       [RESET_EMPLOYEE]: () => { },
-      [GET_EMPLOYEES]: (res) => res.data,
-      [GET_AC_EMPLOYEE]:(res) => res.data,
       [POST_ID]: (res) => res,
       [POST_PWD]: (res) => res,
       [POST_PWDCHANGE]: (res) => res,
       [GET_EMPLOYEE]: res => res.data,
       [PATCH_EMPLOYEE]: (res) => res,
-      [POST_EMPLOYEE]: (res) => res,
-      [PUT_EMPLOYEE]: (res) => res,
-      [DELETE_EMPLOYEE]: (res) => res,
-      [GET_SEARCH_NAME]: (res) => res,
     });
 
 /* 리듀서 */
 const EmployeeReducer = handleActions({
   [POST_LOGIN]: (state, { payload }) => ({ login: payload }),
   [RESET_EMPLOYEE]: (state, { payload }) => payload,
-  [GET_EMPLOYEES]: (state, { payload }) => ({ Employees: payload}),
-  [GET_AC_EMPLOYEE]: (state, { payload }) => ({ ...state, acEmployee: payload }),
   [GET_EMPLOYEE]: (state, { payload }) => ({ ...state, employee: payload }),
-  [POST_EMPLOYEE]: (state, { payload }) => ({ ...state, regist: payload }),
-  [PUT_EMPLOYEE]: (state, { payload }) => ({ ...state, modify: payload }),
-  [DELETE_EMPLOYEE] : (state, {payload}) => ({ ...state, delete : payload }),
   [PATCH_EMPLOYEE]: (state, { payload }) => payload,
   [POST_ID]:(state, { payload }) => ({ search : payload}),
   [POST_PWD]:(state, { payload }) => ({ search : payload}),
   [POST_PWDCHANGE]:(state, { payload }) => ({ change : payload }),
-  [GET_SEARCH_NAME] : (state, { payload }) => ({ nameSearch : payload }),
 }, initialState); 
 
 

@@ -35,7 +35,6 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
       navigate(`/certi-doc-mine?condtion=${selectedOption}&search=${inputValue}`);
     } else if(type == "organization") {
       navigate(`/organization?condition=${selectedOption}&search=${inputValue}`);
-      navigate(`/certi-doc-mine?condition=${selectedOption}&search=${inputValue}`);
     } else if(type == "registLecture"){
       navigate();
     }

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import EmployeeInsertModal from "./EmployeeInsertModal";
+import EmployeeInsertModal from "../../css/EmployeeInsertModal.module.css";
 
 function LecPlanModal({lecture}) {
 

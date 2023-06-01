@@ -204,7 +204,8 @@ function AcademicSchedule() {
                   <span className={AcademicScheduleCss.acScheEndDate}>{new Date(schedule.scheEndDate).toISOString().split('T')[0]}</span>
                   <span className={AcademicScheduleCss.acScheType}>{schedule.scheType}</span>
                 </p>
-                <p className={AcademicScheduleCss.acScheListName}><span className={AcademicScheduleCss.acScheName}>{schedule.scheName}</span></p>
+                
+                <p><span className={AcademicScheduleCss.acScheName}>{schedule.scheName}</span></p>
               </div>
             ))}
         </div>

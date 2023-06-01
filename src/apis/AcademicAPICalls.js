@@ -1,6 +1,6 @@
-import { getEmployees, postEmployee, putEmployee, deleteEmployee, getAcEmployee } from '../modules/EmployeeModule';
 import { getList, getSearch } from '../modules/OrganizationModule';
 import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
+import { getStaffs, getStaff, postStaff, putStaff, deleteStaff, getSearchName } from '../modules/StaffModule';
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -19,7 +19,7 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
     console.log(result);
 
     if (result.status === 200) {
-      dispatch(getEmployees(result));
+      dispatch(getStaffs(result));
       console.log(result);
     }
   }
@@ -44,7 +44,7 @@ export const callAllEmployeesAPI = ({ currentPage = 1}) => {
 
 // 교직원 서치
 export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
-  const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
+  // const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
   const requestURL = `${EMPLOYEE_URL}/employees/search?search=${search}&page=${currentPage}`;
 
   return async (dispatch, getState) => {
@@ -52,7 +52,7 @@ export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
 
     if (result.status === 200) {
       console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
-      dispatch(getEmployees(result));
+      dispatch(getStaffs(result));
     }
   }
 }
@@ -89,7 +89,7 @@ export const callEmployeeDetailAPI = ({ empCode }) => {
 
     if (result.status === 200) {
       console.log("[AcademicAPICalls] callEmployeeDetailAPI result : ", result);
-      dispatch(getAcEmployee(result));
+      dispatch(getStaff(result));
 
 
     }
@@ -112,7 +112,7 @@ export const callEmployeeInsertAPI = (formData) => {
 
     if (result.status === 200) {
       console.log('[AcademicAPICalls] : callEmployeeInsertAPI result : ', result);
-      dispatch(postEmployee(result));
+      dispatch(postStaff(result));
     }
   }
 }
@@ -132,7 +132,7 @@ export const callEmployeeUpdateAPI = (formData) => {
 
     if (result.status === 200) {
       console.log('[AcademicAPICalls] : callEmployeeUpdateAPI result : ', result);
-      dispatch(putEmployee(result));
+      dispatch(putStaff(result));
     }
   }
 }
@@ -154,7 +154,7 @@ export const callEmployeesDeleteAPI = (empCodes) => {
 
     if (result.status === 200) {
       console.log('[AcademicAPICalls] : callEmployeesDeleteAPI result : ', result);
-      dispatch(deleteEmployee(result));
+      dispatch(deleteStaff(result));
     }
   }
 }
