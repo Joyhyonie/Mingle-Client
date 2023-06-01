@@ -10,15 +10,15 @@
 }
 
 .employeeImageBefore {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   border-radius: 70%;
   overflow: hidden;
 }
 
 .employeeImageAfter {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   border-radius: 70%;
   overflow: hidden;
   margin-left: 70px;
@@ -27,22 +27,24 @@
 .ImageUploadBtn {
   border: none;
   background-color: white;
-  margin-left: 70px;
+  margin-left: 140px;
+  margin-right: 140px;
 }
 
 .buttonContainer {
   display: flex;
-  justify-content: center;
-  margin-left: 60px;
+  justify-content: right;
   margin-top: 45px;
+  margin-right: 22px;
 }
 
 .employeeRegistBtn {
+  
   width: 150px;
   height: 40px;
   font-size: 18px;
   border: none;
-  background-color: #FF9797;
+  background-color: #66D2B3;
   border-radius: 10px;
   color: white;
 }
@@ -52,7 +54,7 @@
   height: 40px;
   margin-left: 20px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #66D2B3;
   background-color: white;
   border-radius: 10px;
   color: #666666;
@@ -65,22 +67,26 @@
 .employeeRegistName {
   width: 200px;
   height: 50px;
-  margin: 0 20px 20px 44px;
+  margin: 0 20px 20px 46px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
-  text-align: center;
   border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistNameEn {
-  width: 256px;
+  width: 214px;
   height: 50px;
   margin: 0 20px 20px 20px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
-  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
   border-radius: 10px;
 }
 
@@ -89,54 +95,77 @@
   height: 50px;
   margin: 0 20px 20px 20px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
-  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
   border-radius: 10px;
 }
 
 .employeeRegistDeptCode {
-  width: 100px;
+  width: 80px;
   height: 50px;
   margin: 0 0 20px 20px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
-  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
   border-radius: 10px;
 }
 
 .employeeRegistEmail {
-  width: 450px;
+  width: 304px;
   height: 50px;
   margin: 0 20px 20px 28px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
-  text-align: center;
   border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeRegistId {
+  width: 150px;
+  height: 50px;
+  margin: 0 20px 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistPwd {
-  width: 326px;
+  width: 200px;
   height: 50px;
   margin: 0 0 20px 20px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
-  text-align: center;
   border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistPhone {
-  width: 230px;
+  width: 234px;
   height: 50px;
   margin: 0 20px 20px 12px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
-  text-align: center;
   border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistStatus {
@@ -144,69 +173,79 @@
   height: 50px;
   margin: 0 20px 20px 20px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
-  text-align: center;
   border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistSsd {
-  width: 340px;
+  width: 308px;
   height: 50px;
   margin: 0 0 20px 20px;
   font-size: 20px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
   border-radius: 10px;
-  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistAddress {
-  width: 890px;
+  width: 876px;
   height: 50px;
   margin: 0 0 20px 44px;
   font-size: 20px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
   border-radius: 10px;
-  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistAddressDetail {
-  width: 890px;
+  width: 876px;
   height: 50px;
   margin: 0 0 20px 78px;
   font-size: 20px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
   border-radius: 10px;
-  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistEntDate {
   margin-left: 26px;
   margin-right: 20px;
-  width: 217px;
+  width: 218px;
   height: 50px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  outline: none;
 }
 
 .employeeRegistAbDate,
 .employeeRegistDropDate {
-  width: 217px;
+  width: 218px;
   height: 50px;
   margin: 0 20px 20px 20px;
   font-size: 18px;
-  border: 1px solid #FF9797;
+  border: 1px solid #666666;
   background-color: white;
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  outline: none;
 }
 
 .postCodeStyle {
