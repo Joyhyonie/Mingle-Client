@@ -9,16 +9,17 @@
   justify-content: space-between;
 }
 
+
 .studentImageBefore {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   border-radius: 70%;
   overflow: hidden;
 }
 
 .studentImageAfter {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   border-radius: 70%;
   overflow: hidden;
   margin-left: 70px;
@@ -32,7 +33,7 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   margin-left: 60px;
   margin-top: 45px;
 }
@@ -187,7 +188,7 @@
 .StudentRegistDropDate {
   width: 382px;
   height: 50px;
-  margin: 0 20px 20px 28px;
+  margin: 0 60px 20px 28px;
   font-size: 18px;
   border: 1px solid #FF9797;
   background-color: white;
@@ -200,7 +201,7 @@
 .StudentRegistLeaveDate {
   width: 382px;
   height: 50px;
-  margin: 0 20px 20px 20px;
+  margin: 0 0px 20px 20px;
   font-size: 18px;
   border: 1px solid #FF9797;
   background-color: white;
@@ -215,10 +216,34 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   padding: 7px;
   z-index: 100;
   border: 1px solid;
   background-color: white;
+}
+
+.inputWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.StudentEditBtn {
+  width: 150px;
+  height: 40px;
+  font-size: 18px;
+  border: none;
+  background-color: #FF9797;
+  border-radius: 10px;
+  color: white;
+}
+
+input:disabled {
+  background: #efeeee;
+}
+
+select:disabled{
+  background: #efeeee;
 }

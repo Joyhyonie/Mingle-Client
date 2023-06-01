@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import EmployeeReducer from "./EmployeeModule";
+import StaffReducer from "./StaffModule";
 import SubjectReducer from "./SubjectModule";
 import CertiReducer from "./CertiModule";
 import SubjectInfoReducer from "./LectureModule";
@@ -15,7 +16,7 @@ import OrganizationReducer from "./OrganizationModule";
 /* 여러 모듈을 combine 시키기 */
 const rootReducer = combineReducers({
   SubjectReducer, CertiReducer, EmployeeReducer, StudentReducer, ScheduleReducer, AttendanceReducer,
-  SubjectInfoReducer, BoardReducer, MessageReducer, NotificationReducer, OrganizationReducer
+  SubjectInfoReducer, BoardReducer, MessageReducer, NotificationReducer, OrganizationReducer, StaffReducer,
 });
 
 export default rootReducer;

@@ -10,7 +10,7 @@ import DaumPostcode from "react-daum-postcode";
 function EmployeeModify({ acEmployee }) {
 
   const { empCode } = useParams();
-  const { modify } = useSelector(state => state.EmployeeReducer);
+  const { modify } = useSelector(state => state.StaffReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const imageInput = useRef();

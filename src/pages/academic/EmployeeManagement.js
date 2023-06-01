@@ -23,21 +23,11 @@ function EmployeeManagement() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { Employees } = useSelector((state) => state.EmployeeReducer);
+  const { Employees } = useSelector((state) => state.StaffReducer);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [selectAll, setSelectAll] = useState(false);
   const [checkboxes, setCheckboxes] = useState({});
-
-
-
-  // 검색!
-  const handleSearch = (selectedOption, inputValue) => {
-    // 이곳에 검색 로직을 구현해야 합니다
-    // 예를 들어, API 호출 등을 수행할 수 있습니다
-    console.log("Selected option:", selectedOption);
-    console.log("Input value:", inputValue);
-  };
 
   useEffect(
     () => {
@@ -67,8 +57,8 @@ function EmployeeManagement() {
 
     // 체크박스 상태 통일(전체)
     let newCheckboxes = {};
-    Employees.forEach((employee) => {
-      newCheckboxes[employee.empCode] = e.target.checked;
+    Employees.forEach((staff) => {
+      newCheckboxes[staff.empCode] = e.target.checked;
     });
     setCheckboxes(newCheckboxes);
   };
@@ -116,15 +106,14 @@ function EmployeeManagement() {
       >
         삭제
       </motion.button>
-      
+
       <p className={CommonCSS.pageDirection}>학사관리 ▸ 교직원</p>
 
 
       <div className={SearchBarCss.basic}>
         <SearchBar
           options={employeeOptions}
-          onSearch={handleSearch}>
-        </SearchBar>
+        />
       </div>
       <table className={EmployeeListCss.employeeTable}>
         <colgroup>
@@ -156,25 +145,25 @@ function EmployeeManagement() {
         </thead>
         <tbody>
           {(Employees && Employees.data) &&
-            Employees.data.map((employee) => (
+            Employees.data.map((staff) => (
               <tr
-                key={employee.empCode}
+                key={staff.empCode}
               >
                 <td>
                   <input
                     type="checkbox"
-                    value={employee.empCode}
-                    checked={checkboxes[employee.empCode] || false}
-                    onChange={(e) => handleCheckboxChange(e, employee.empCode)}
+                    value={staff.empCode}
+                    checked={checkboxes[staff.empCode] || false}
+                    onChange={(e) => handleCheckboxChange(e, staff.empCode)}
                   />
                 </td>
-                <td>{employee.empCode}</td>
-                <td>{employee.empName}</td>
-                <td>{employee.department.deptName}</td>
-                <td>{employee.empEmail}</td>
-                <td>{employee.empPhone}</td>
-                <td>{new Date(employee.empEntDate).toISOString().split('T')[0]}</td>
-                <td>{employee.empStatus}</td>
+                <td>{staff.empId}</td>
+                <td>{staff.empName}</td>
+                <td>{staff.department.deptName}</td>
+                <td>{staff.empEmail}</td>
+                <td>{staff.empPhone}</td>
+                <td>{new Date(staff.empEntDate).toISOString().split('T')[0]}</td>
+                <td>{staff.empStatus}</td>
               </tr>
             ))}
         </tbody>

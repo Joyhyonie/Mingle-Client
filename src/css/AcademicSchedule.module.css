@@ -53,7 +53,7 @@
 .acScheRegistDevide {
   display: flex;
   justify-content: space-between;
-  height: 80px;
+  height: 83px;
 }
 
 .acScheRegistDetailTitle {
@@ -156,7 +156,7 @@
 
 .acScheRegistDate {
   width: 900px;
-  height: 80px;
+  height: 90px;
 }
 
 .acScheRegistDate input {
@@ -219,8 +219,8 @@
 }
 
 /* 행에 마우스 올렸을 때 (hover) */
-.acScheList:hover {
-  background-color: #ededed;
+.acScheList p:hover {
+  color: #66D2B3;
   cursor: pointer;
 }
 
