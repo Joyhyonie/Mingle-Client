@@ -1,11 +1,10 @@
 import { motion } from "framer-motion"
 import MainCSS from "../../css/Main.module.css"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddScheduleModal from "../modal/AddScheduleModal";
 import ModifyScheduleModal from "../modal/ModifyScheduleModal";
-import { useDispatch, useSelector } from "react-redux";
-import { callMyScheduleByDateAPI, callMyScheduleCheckAPI } from "../../apis/ScheduleAPICalls";
-import dayjs from "dayjs";
+import { useDispatch } from "react-redux";
+import { callMyScheduleCheckAPI } from "../../apis/ScheduleAPICalls";
 
 function MyCalendarInfo ({dateInMyCal, filteredMySchedule}) {
 

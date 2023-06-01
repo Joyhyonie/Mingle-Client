@@ -9,6 +9,7 @@ import { callLeaveDoc, callLeaveDocSearchName, callLeaveNoUpdateAPI, callLeaveUp
 import SearchBar from "../../components/common/SearchBar";
 import SearchBarCss from "../../css/common/SearchBar.module.css";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function AppliedLeaveList () {
 
@@ -17,7 +18,7 @@ function AppliedLeaveList () {
     const {patch} = useSelector(state => state.AttendanceReducer);
     const dispatch = useDispatch();
     const [params] = useSearchParams();
-    const condition = params.get('condtion');
+    const condition = params.get('condition');
     const name = params.get('search');
 
     const type = "leaveDoc";
@@ -40,11 +41,12 @@ function AppliedLeaveList () {
 
     const onClickHandler = (leave) => {      
         dispatch(callLeaveUpdateAPI(leave));
-        
+        toast.success("승인하였습니다.");
     }
 
     const onClickRejectHandler = (leave) => {
         dispatch(callLeaveNoUpdateAPI(leave));
+        toast.success("반려하였습니다.");
     }
 
     return (

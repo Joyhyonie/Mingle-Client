@@ -36,7 +36,9 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
     } else if(type == "organization") {
       navigate(`/organization?condition=${selectedOption}&search=${inputValue}`);
     } else if(type == "registLecture"){
-      navigate();
+      navigate(`/lecture-regist-prof?condition=${selectedOption}&search=${inputValue}`);
+    } else if(type == "studentAttendance"){
+      navigate(`/lecture-student-prof?condition=${selectedOption}&search=${inputValue}`);
     }
 
   };

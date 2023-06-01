@@ -15,7 +15,7 @@ function NavbarForProfessor ({ activeIndex, setActiveIndex, isDark, setIsDark })
     return (
         <>
             <motion.div className={ isDark ? CommonCSS.navBarBoxDark : CommonCSS.navBarBoxLight }
-                        animate={{ backgroundColor: isDark ? "#4D4D4D" : "#FFF" }}
+                        animate={{ backgroundColor: isDark ? "#343434" : "#FFF" }}
                         transition={{ duration: 0.5 }}
             >
                 <div>

@@ -1,32 +1,31 @@
-import { motion } from "framer-motion"
-import MessageSearchBar from "../../components/common/MessageSearchBar";
-import MessageItem from "../../components/items/MessageItem";
-import MessageCSS from "../../css/Message.module.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { callLikedMsgListAPI, callRemovedMsgListAPI } from "../../apis/MessageAPICalls";
 import { toast } from "react-hot-toast";
-import { callLikedMsgListAPI } from "../../apis/MessageAPICalls";
+import { useState } from "react";
+import MessageItem from "../../components/items/MessageItem";
+import { motion } from "framer-motion"
+import MessageCSS from "../../css/Message.module.css";
 
-function LikeMsgBox ({whichPage}) {
+
+function BinMsgBox ({whichPage}) {
 
     const dispatch = useDispatch();
-    const { likedMsg, likeMsg, removeMsg, likedMsgSearch } = useSelector(state => state.MessageReducer);
+    const { removedMsg, restoreMsg } = useSelector(state => state.MessageReducer);
     const [checkedIdList, setCheckedIdList] = useState([]);
     const [currentSize, setCurrentSize] = useState(10);                     
-    const [searchedCurrentSize, setSearchedCurrentSize] = useState(10);    
-    const likedMsgList = likedMsg && likedMsg.data;
-    const likedMsgSearchList = likedMsgSearch && likedMsgSearch.data;
+    const removedMsgList = removedMsg && removedMsg.data;
 
     useEffect(
         () => {
-             /* 중요 쪽지함 조회 API 호출 */
-            dispatch(callLikedMsgListAPI(currentSize));
+            /* 휴지통 조회 API 호출 */
+            dispatch(callRemovedMsgListAPI(currentSize));
 
-            if(removeMsg?.status === 200) {
-                 toast.success("선택하신 쪽지가 삭제되었습니다 :)");
+            if(restoreMsg?.status === 200) {
+                toast.success("선택하신 쪽지가 복구되었습니다 :)");
             }
 
-        },[likeMsg, removeMsg, currentSize]
+        },[restoreMsg, currentSize]
     );
 
     /* 각 checkbox의 상태가 변경될 때 호출되는 이벤트 함수 */
@@ -47,7 +46,7 @@ function LikeMsgBox ({whichPage}) {
     const selectAllHandler = (selectAll) => {
 
         if (selectAll) {
-            const allIds = (likedMsgList || []).concat(likedMsgSearchList || []).map((message) => String(message.msgCode));
+            const allIds = removedMsgList && removedMsgList.map((message) => String(message.msgCode));
             setCheckedIdList(allIds);
         } else {
             setCheckedIdList([]);
@@ -57,12 +56,12 @@ function LikeMsgBox ({whichPage}) {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
-            <MessageSearchBar msgBoxType={ 'liked' } searchedCurrentSize={searchedCurrentSize}/>
+            <div className={ MessageCSS.binMsgBoxInfo }><p>휴지통 속 쪽지는 익일 오전 12시, 영구적으로 삭제 됩니다 :)</p></div>
             <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
-                { (likedMsgList || []).concat(likedMsgSearchList || []).length === 0 ? <p className={ MessageCSS.empty }>텅😶</p> :
-                (likedMsgList || []).concat(likedMsgSearchList || []).map(message => (
-                    <MessageItem 
+                { removedMsgList && removedMsgList.length === 0 ? <p className={ MessageCSS.empty }>텅😶</p> :
+                removedMsgList && removedMsgList.map(message => (
+                    <MessageItem
                         key={ message.msgCode }
                         message={ message }
                         isChecked={ checkedIdList.includes(String(message.msgCode)) }
@@ -74,12 +73,11 @@ function LikeMsgBox ({whichPage}) {
                     />
                 ))
                 }
-                
             </div>
-            { likedMsgSearch ? (likedMsgSearch.totalElements > searchedCurrentSize ? <div className={MessageCSS.moreBox} onClick={() => setSearchedCurrentSize(searchedCurrentSize + 10)}>More</div> : null) 
-            : (likedMsg && likedMsg.totalElements > currentSize ? <div className={MessageCSS.moreBox} onClick={() => setCurrentSize(currentSize + 10)}>More</div> : null) }
+            { removedMsg && removedMsg.totalElements > currentSize ? <div className={MessageCSS.moreBox} onClick={() => setCurrentSize(currentSize + 10)}>More</div> : null }
         </motion.div>
     );
+
 }
 
-export default LikeMsgBox;
+export default BinMsgBox;

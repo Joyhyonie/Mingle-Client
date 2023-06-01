@@ -1,5 +1,25 @@
-import { getDepartmentForSend, getEmployeeForSend, getLikedMsg, getLikedMsgSearch, getReceivedMsg, getReceivedMsgSearch, getSentMsg, getSentMsgSearch, patchLikeMsg, patchReadMsg, patchRemoveMsg, postSendMsg } from "../modules/MessageModule";
+import { getCountUnreadMsg, getDeletedMsg, getDepartmentForSend, getEmployeeForSend, getLikedMsg, getLikedMsgSearch, getReceivedMsg, getReceivedMsgSearch, getRemovedMsg, getSentMsg, getSentMsgSearch, patchLikeMsg, patchReadMsg, patchRemoveMsg, patchRestoreMsg, postSendMsg } from "../modules/MessageModule";
 import { request } from "./Api";
+
+/* 읽지 않은 쪽지 갯수 조회 */
+export function callUnreadMsgCountAPI() {
+
+    return async (dispatch, getState) => {
+
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+        };
+
+        const result = await request('GET', `/message/unread`, headers);
+
+        if(result.status == 200) {
+            dispatch(getCountUnreadMsg(result));
+        }
+
+    }
+
+}
 
 /* 받은 쪽지함 조회 */
 export function callReceivedMsgListAPI(currentSize) {
@@ -62,7 +82,7 @@ export function callReadMsgAPI(msgCode) {
 }
 
 /* 보낸 쪽지함 조회 */
-export function callSentMsgListAPI() {
+export function callSentMsgListAPI(currentSize) {
 
     return async (dispatch, getState) => {
 
@@ -71,7 +91,7 @@ export function callSentMsgListAPI() {
             Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
-        const result = await request('GET', `/message/sent`, headers);
+        const result = await request('GET', `/message/sent?size=${currentSize}`, headers);
 
         if(result.status == 200) {
             dispatch(getSentMsg(result));
@@ -82,7 +102,7 @@ export function callSentMsgListAPI() {
 }
 
 /* 교직원명/내용으로 쪽지 검색 후 조회 (보낸 쪽지함) */
-export function callSentMsgSearchAPI(condition, word) {
+export function callSentMsgSearchAPI(condition, word, searchedCurrentSize) {
 
     return async (dispatch, getState) => {
 
@@ -91,7 +111,7 @@ export function callSentMsgSearchAPI(condition, word) {
             Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
-        const result = await request('GET', `/message/sent/search?condition=${condition}&word=${word}`, headers);
+        const result = await request('GET', `/message/sent/search?condition=${condition}&word=${word}&size=${searchedCurrentSize}`, headers);
 
         if(result.status == 200) {
             dispatch(getSentMsgSearch(result));
@@ -102,7 +122,7 @@ export function callSentMsgSearchAPI(condition, word) {
 }
 
 /* 중요 쪽지함 조회 */
-export function callLikedMsgListAPI() {
+export function callLikedMsgListAPI(currentSize) {
 
     return async (dispatch, getState) => {
 
@@ -111,7 +131,7 @@ export function callLikedMsgListAPI() {
             Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
-        const result = await request('GET', `/message/liked`, headers);
+        const result = await request('GET', `/message/liked?size=${currentSize}`, headers);
 
         if(result.status == 200) {
             dispatch(getLikedMsg(result));
@@ -122,7 +142,7 @@ export function callLikedMsgListAPI() {
 }
 
 /* 교직원명/내용으로 쪽지 검색 후 조회 (중요 쪽지함) */
-export function callLikedMsgSearchAPI(condition, word) {
+export function callLikedMsgSearchAPI(condition, word, searchedCurrentSize) {
 
     return async (dispatch, getState) => {
 
@@ -131,10 +151,30 @@ export function callLikedMsgSearchAPI(condition, word) {
             Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
         };
 
-        const result = await request('GET', `/message/liked/search?condition=${condition}&word=${word}`, headers);
+        const result = await request('GET', `/message/liked/search?condition=${condition}&word=${word}&size=${searchedCurrentSize}`, headers);
 
         if(result.status == 200) {
             dispatch(getLikedMsgSearch(result));
+        }
+
+    }
+
+}
+
+/* 휴지통 조회 */
+export function callRemovedMsgListAPI(currentSize) {
+
+    return async (dispatch, getState) => {
+
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+        };
+
+        const result = await request('GET', `/message/removed?size=${currentSize}`, headers);
+
+        if(result.status == 200) {
+            dispatch(getRemovedMsg(result));
         }
 
     }
@@ -228,6 +268,30 @@ export function callRemoveMsgAPI(msgCodes) {
 
         if(result.status == 200) {
             dispatch(patchRemoveMsg(result));
+        }
+
+    }
+
+}
+
+/* 선택한 쪽지 복구 */
+export function callRestoreMsgAPI(msgCodes) {
+
+    return async (dispatch, getState) => {
+
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+        };
+
+        const messageDTO = {
+            selectedMsgs: msgCodes
+        };
+
+        const result = await request('PATCH', `/message/restore`, headers, messageDTO);
+
+        if(result.status == 200) {
+            dispatch(patchRestoreMsg(result));
         }
 
     }

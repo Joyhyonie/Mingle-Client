@@ -7,10 +7,10 @@ import NotificationModal from '../modal/NotificationModal';
 import LogoutModal from '../modal/LogoutModal';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { callReceivedMsgListAPI } from "../../apis/MessageAPICalls";
+import { callUnreadMsgCountAPI } from "../../apis/MessageAPICalls";
 import { callNotificationListAPI } from '../../apis/NotificationAPICalls';
 
-function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModal, setMessageModal, updateNotiCount, updateMsgCount }) {
+function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, updateNoti, updateMsg, messageModal, setMessageModal }) {
 
     /*  setActiveIndex : 로고 및 마이페이지 아이콘을 클릭 시, Nav바 활성화 취소 */
 
@@ -19,7 +19,9 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
     const location = useLocation();
     const { employee } = useSelector(state => state.EmployeeReducer);
     const { notifications } = useSelector(state => state.NotificationReducer);
-    const { receivedMsg } = useSelector(state => state.MessageReducer);
+    const { countMsg } = useSelector(state => state.MessageReducer);
+
+    console.log("countMsg =>", countMsg);
 
     const [mpgClicked, setMpgClicked] = useState(false);
     const [notiClicked, setNotiClicked] = useState(false);
@@ -40,12 +42,12 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
 
     /* 읽지 않은 쪽지 및 알림 갯수를 노출시키기 위한 API 호출 */
     useEffect(() => {
-        dispatch(callReceivedMsgListAPI(10));
-    }, [updateMsgCount]);
+        dispatch(callUnreadMsgCountAPI());
+    }, [updateMsg]);
 
     useEffect(() => {
         dispatch(callNotificationListAPI());
-    }, [updateNotiCount]);
+    }, [updateNoti]);
 
 
     /* 다크모드/라이트모드를 제어하기 위한 이벤트 함수 */
@@ -66,9 +68,6 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
 
     /* 로그아웃 모달창 핸들러 함수 */
     const logoutModalHandler = () => setLogoutModal(!logoutModal);
-
-    /* 읽지 않은 쪽지의 갯수 */
-    // const unreadMsgCount = receivedMsg.data ? receivedMsg.data.filter(msg => msg.msgReadYn == 'N').length : 0;
 
     return (
         <>
@@ -98,7 +97,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
             </div>
 
             <motion.div className={ isDark ? CommonCSS.headerBoxDark : CommonCSS.headerBoxLight }
-                        animate={{ backgroundColor: isDark ? "#4D4D4D" : "#FFF" }}
+                        animate={{ backgroundColor: isDark ? "#343434" : "#FFF" }}
                         transition={{ duration: 0.5 }}
             >
                 <p
@@ -205,7 +204,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, messageModa
                         />
                     )}
                     {notifications && notifications.length > 0 ? <div className={ CommonCSS.notiCount }>{notifications.length}</div> : null}
-                    {/* {unreadMsgCount > 0 ? <div className={ CommonCSS.msgCount }>{unreadMsgCount}</div> : null} */}
+                    {countMsg && countMsg.unreadMsgs > 0 ? <div className={ CommonCSS.msgCount }>{countMsg.unreadMsgs}</div> : null}
                 </div>
             </motion.div>
         </>

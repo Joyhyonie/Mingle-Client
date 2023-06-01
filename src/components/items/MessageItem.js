@@ -2,15 +2,16 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from "framer-motion"
 import MessageCSS from '../../css/Message.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI } from '../../apis/MessageAPICalls';
+import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI, callRestoreMsgAPI } from '../../apis/MessageAPICalls';
 import { toast } from 'react-hot-toast';
 
-function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName, setSelectedEmpId,
-                       isChecked, checkboxChangeHandler, checkedIdList, setCheckedIdList}) {  
+function MessageItem ({message, whichPage, setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName, setSelectedEmpId,
+                       isChecked, checkboxChangeHandler, selectAllHandler, checkedIdList, setCheckedIdList}) {  
 
     const dispatch = useDispatch();
     const { employee } = useSelector(state => state.EmployeeReducer);
-    const [isOpen, setIsOpen] = useState(false); // 쪽지들을 열고 닫는 state
+    const [isOpen, setIsOpen] = useState(false);        // 쪽지들을 열고 닫는 state
+    const [selectAll, setSelectAll] = useState(true);   // 전체 선택을 관리하기 위한 state
 
     /* 해당 쪽지가 받은 쪽지인지, 보낸 쪽지인지 확인하여 from/to 표시 */
     const fromOrTo = () => {
@@ -25,7 +26,9 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
     const likeIconHandler = () => {
         if (message.sender.empCode === employee.empCode) {
             /* 현재 로그인 유저가 해당 쪽지의 보낸 사람일 경우, */
-            if (message.msgImpSender === 'Y') {
+            if (whichPage === 'binMsgBox') { // 휴지통에서는 노출 X
+                return null;
+            } else if (message.msgImpSender === 'Y') {
                 return <img onClick={ () => {likeHandler(message.msgCode); toast.success("보낸 쪽지함으로 이동되었습니다 :)");} } src="/images/like-hover.png"/>
             } else {
                 return <img onClick={ () => {likeHandler(message.msgCode); toast.success("중요 쪽지함으로 이동되었습니다 :)");} } src="/images/unlike.png"/>
@@ -33,7 +36,9 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
             
         } else {
             /* 현재 로그인 유저가 해당 쪽지의 받는 사람일 경우, */
-            if (message.msgImpReceiver === 'Y') {
+            if (whichPage === 'binMsgBox') {
+                return null;
+            } else if (message.msgImpReceiver === 'Y') {
                 return <img onClick={ () => {likeHandler(message.msgCode); toast.success("받은 쪽지함으로 이동되었습니다 :)");} } src="/images/like-hover.png"/>
             } else {
                 return <img onClick={ () => {likeHandler(message.msgCode); toast.success("중요 쪽지함으로 이동되었습니다 :)");} }src="/images/unlike.png"/>
@@ -45,11 +50,17 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
     const replyOrReadHandler = () => {
         if (message.sender.empCode === employee.empCode) {
             /* 보낸 쪽지 */
-            if(message.msgReadYn === 'Y') {
+            if (whichPage === 'binMsgBox') {
+                return null;
+            } else if(message.msgReadYn === 'Y') {
                 return <p>읽음</p>
             } else {
                 return <p>읽지않음</p>
             }
+        } else if (whichPage === 'binMsgBox') {
+            return null;
+        } else if (whichPage === 'likeMsgBox') {
+            return <button onClick={ () => toast.error("답장은 받은 쪽지함 내에서만 가능합니다 !") }>답장</button>
         } else {
             /* 받은 쪽지 */
             return <button onClick={ moveToReply }>답장</button>
@@ -104,14 +115,24 @@ function MessageItem ({message, setWhichPage, stateChangeHandler, setReplyConten
 
     }    
 
+    /* 복구할 쪽지 */
+    const restoreMsgHandler = () => {
+
+        if (checkedIdList.length === 0) {
+            toast.error('복구할 쪽지를 선택해주세요 !');
+        } else {
+            /* 해당 id를 가진 쪽지들의 msgDelReveiver를 'N'으로 변경하는 API */
+            dispatch(callRestoreMsgAPI(checkedIdList));
+            setCheckedIdList([]); // 선택되었던 체크박스의 체크 상태 초기화
+        }
+
+    }
+
     return (
         <>
-            <button 
-                className={ MessageCSS.deleteButton }
-                onClick={ deleteMsgHandler }
-            >
-                삭제
-            </button>
+            <button className={ MessageCSS.allSelectButton } onClick={ () => {setSelectAll(!selectAll); selectAllHandler(selectAll); } }>전체 선택</button>
+            { whichPage === 'binMsgBox' ? <button className={ MessageCSS.restoreButton } onClick={ restoreMsgHandler }>복구</button> : null}
+            { whichPage !== 'binMsgBox' ?<button className={ MessageCSS.deleteButton }onClick={ deleteMsgHandler }>삭제</button> : null}
             <div className={ MessageCSS.msgItemBox }>
                 <motion.div 
                     key={message.msgCode}

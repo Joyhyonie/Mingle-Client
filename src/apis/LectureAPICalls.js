@@ -1,5 +1,7 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
-import { getSubjectInfo, getLectureInfo, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti } from "../modules/LectureModule";
+
+
+import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName,  patchLecPlan  } from "../modules/LectureModule";
 import { wait } from '@testing-library/user-event/dist/utils';
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -35,21 +37,7 @@ export const callSubjectSearchName = ({ search, condition, currentPage = 1 }) =>
 }
 
 
-export const callSubjectUpdateAPI = (formData) => {
 
-    const requestURL = `${SUBJECT_URL}/modify`;
-
-    return async (dispatch, getState) => {
-        const result = await fetch(requestURL, {
-            method: 'PUT',
-            body: formData
-        }).then(response => response.json());
-
-        if (result.status === 200) {
-            dispatch(putSubjects(result));
-        }
-    }
-}
 
 export const callSubjectInsertAPI = (formData) => {
 
@@ -144,6 +132,8 @@ export const callMyLectureCallAPI = ({ currentPage = 1 }) => {
     }
 }
 
+
+
 export const callLecNameMyLecture = ({ currentPage = 1 }) => {
     const requestURL = `${LECTURE_URL}/lecNameMyLecture?page=${currentPage}`;
 
@@ -162,6 +152,26 @@ export const callLecNameMyLecture = ({ currentPage = 1 }) => {
     }
 }
 
+export const callSearchName = ({search, condition ,currentPage = 1}) => {
+    const requestURL = `${LECTURE_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
+
+    return async (dispatch,getState) => {
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(getSearchName(result));
+            console.log(result);
+        }
+    }
+}
+
+/*행정직원의 강의 등록 페이지 */
 export const callLectureInsertAPI = (form) => {
 
     const requestURL = `${LECTURE_URL}/officerregistration`;
@@ -255,6 +265,43 @@ export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
         }
     }
 }
+
+/*학생 출석정보 수정  */
+export const callAttendanceModifyAPI = ({ stdAtdCode }, formData) => {
+    console.log(stdAtdCode)
+    const requestURL = `${NEWATTENDANCE_URL}/modify/${stdAtdCode}`;
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: "PATCH",
+            body: formData
+
+        }).then(response => response.json());
+
+        if (result.status === 200) {
+            dispatch(patchStdattendanceModify(result));
+
+        }
+
+    }
+}
+
+
+export const callSubjectUpdateAPI = (formData) => {
+
+    const requestURL = `${SUBJECT_URL}/modify`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: 'PUT',
+            body: formData
+        }).then(response => response.json());
+
+        if (result.status === 200) {
+            dispatch(putSubjects(result));
+        }
+    }
+}
+
 // export const callLectureCountAPI = ({ lecCode }) => {
 
 //     const requestURL = `${LECTURE_URL}/lectureCount/${lecCode}`;
@@ -272,4 +319,53 @@ export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
 //     }
 // }
 
+export const callLecPlanInsertAPI = (formData) => {
+
+
+    const requestURL = `${LECTURE_URL}/lecturePlan`;
+
+    return async (dispatch, getstate) => {
+
+        const result = await fetch(requestURL,{
+            method : 'PATCH',
+            headers : {
+                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+            },
+            body : formData
+        }).then(response => response.json());
+
+        if(result.status === 200){
+            dispatch(patchLecPlan(result));
+        }
+    }
+
+    
+} 
+
+// /*행정직원의 강의 등록 페이지 */
+// export const callLectureInsertAPI = (form) => {
+
+//     const requestURL = `${LECTURE_URL}/officerregistration`;
+
+//     form = {
+//         ...form,
+//         employee: { empCode: form.empCode },
+//         subject: { sbjCode: form.sbjCode }
+
+//     }
+
+//     return async (dispatch, getState) => {
+//         const result = await fetch(requestURL, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(form)
+//         }).then(response => response.json());
+
+//         if (result.status === 200) {
+//             dispatch(postSubjects(result));
+//         }
+//     }
+// }
 
