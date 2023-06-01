@@ -13,7 +13,7 @@ function RecordEndTimeModal ({setRecordEndTimeModal}) {
     useEffect(
         () => {
             if(recordEndTime?.status === 200) {
-                toast.success("오늘의 퇴근 시각이 등록되었습니다");
+                toast.success("오늘의 퇴근 시각이 등록되었습니다 :)");
                 setRecordEndTimeModal(false);
             } 
         }, [recordEndTime]

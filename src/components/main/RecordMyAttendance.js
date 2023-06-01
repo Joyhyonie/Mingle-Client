@@ -5,7 +5,6 @@ import RecordStartTimeModal from "../modal/RecordStartTimeModal";
 import RecordEndTimeModal from "../modal/RecordEndTimeModal";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyAttendanceTodayAPI } from "../../apis/AttendanceAPICalls";
-import { callGetEmployeeAPI } from "../../apis/EmployeeAPICalls";
 
 function RecordMyAttendance () {
 
@@ -66,7 +65,7 @@ function RecordMyAttendance () {
                 (<div>
                     <p>{formatTime(attendanceToday.atdStartTime)}</p>
                     <div
-                        onClick={ () => toast('이미 오늘의 출근 시각이 기록되었습니다', {icon :'😇'}) }
+                        onClick={ () => toast('이미 오늘의 출근 시각이 기록되었습니다!', {icon :'😇'}) }
                         style={{ background:'#343434' }}>
                         출근 완료
                     </div>
@@ -83,7 +82,7 @@ function RecordMyAttendance () {
                 (<div>
                     <p>{formatTime(attendanceToday.atdEndTime)}</p>
                     <div
-                        onClick={ () => toast('이미 오늘의 퇴근 시각이 기록되었습니다', {icon :'😇'}) }
+                        onClick={ () => toast('이미 오늘의 퇴근 시각이 기록되었습니다!', {icon :'😇'}) }
                         style={{ background:'#343434' }}>
                         퇴근 완료
                     </div>

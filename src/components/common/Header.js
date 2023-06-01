@@ -97,7 +97,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, updateNoti,
             </div>
 
             <motion.div className={ isDark ? CommonCSS.headerBoxDark : CommonCSS.headerBoxLight }
-                        animate={{ backgroundColor: isDark ? "#4D4D4D" : "#FFF" }}
+                        animate={{ backgroundColor: isDark ? "#343434" : "#FFF" }}
                         transition={{ duration: 0.5 }}
             >
                 <p
