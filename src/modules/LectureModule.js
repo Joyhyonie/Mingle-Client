@@ -31,7 +31,7 @@ export const { lecture:
         [GET_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_NEW_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_LECTURE_COUNT]: (res) => res.data,
-        [PATCH_LEC_PLAN]: (res) => res.data
+        [PATCH_LEC_PLAN]: (res) => res.data,
         [PATCH_ATTENDANCELIST_MODIFY]: (res) => res.data,
         [GET_SEARCH_NAME] : res => res.data
 

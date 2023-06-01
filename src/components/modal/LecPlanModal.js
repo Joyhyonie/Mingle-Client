@@ -10,7 +10,6 @@ import { callMyLectureCallAPI } from "../../apis/LectureAPICalls";
 
 function LecPlanModal({ lecture,closeModal}) {
 
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [form, setForm] = useState({});
@@ -18,7 +17,7 @@ function LecPlanModal({ lecture,closeModal}) {
     const {myLecture} = useSelector(state => state.SubjectInfoReducer);
     const [currentPage, setCurrentPage] = useState(1);
   
-    
+    console.log(lecture);
     
 
     useEffect( () => {
@@ -57,16 +56,13 @@ function LecPlanModal({ lecture,closeModal}) {
     
     return(
         <div className={EmployeeInsertModalCSS.EmployeeInsertModal}>
-            <div className={EmployeeInsertModalCSS.EmployeeInsertModalContainer}>
-
-              
             
+            <div className={EmployeeInsertModalCSS.EmployeeInsertModalContainer}>          
                 <div className={EmployeeInsertModalCSS.EmployeeInsertModalInput}>
                 <span>
                 강의개설 ▸ 강의 계획서 작성
                 </span>
-                    <div className={EmployeeInsertModalCSS.EmployeeInsertModalFirst}>
-                    
+                    <div className={EmployeeInsertModalCSS.EmployeeInsertModalFirst}>          
                         <input
                             type="text"
                             name="lecYear"
@@ -80,10 +76,7 @@ function LecPlanModal({ lecture,closeModal}) {
                             className={EmployeeInsertModalCSS.EmployeeModalName}
                             onChange={onChangeHandler}
                             value={lecture.lecSeason}
-
-                        />
-                       
-
+                        />               
                     </div>
                   
                 
@@ -135,7 +128,6 @@ function LecPlanModal({ lecture,closeModal}) {
                             className={EmployeeInsertModalCSS.EmployeeModalName}
                             onChange={onChangeHandler}
                             value={ lecture.lecCount }
-
                         />
                         수업시작일
                          <input
@@ -144,7 +136,6 @@ function LecPlanModal({ lecture,closeModal}) {
                             className={EmployeeInsertModalCSS.EmployeeModalName}
                             onChange={onChangeHandler}
                             value={ lecture.lecStartDate }
-
                         />
                           수업종료일
                             <input
@@ -153,7 +144,6 @@ function LecPlanModal({ lecture,closeModal}) {
                             className={EmployeeInsertModalCSS.EmployeeModalName}
                             onChange={onChangeHandler}
                             value={ lecture.lecEndDate }
-
                         />
                     </div>
                     <div>
@@ -163,7 +153,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.lecName }
-
                         />
                         과목명
                         <input 
@@ -171,7 +160,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.subject.sbjName }
-
                         />
                     </div>
                     <div>
@@ -181,7 +169,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.lecGoal }
-
                         />
                     </div>
                     <div>
@@ -191,7 +178,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.lecMethod }
-
                         />
                     </div>
                     <div>
@@ -201,7 +187,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.lecPerMiddle }
-
                         />
                         기말
                         <input 
@@ -209,7 +194,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.lecPerFinal }
-
                         />
                         출석
                         <input 
@@ -217,7 +201,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.lecPerAtd }
-
                         />
                         과제
                         <input 
@@ -225,7 +208,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.lecPerTask }
-
                         />
                     </div>
                     <div>
@@ -235,7 +217,6 @@ function LecPlanModal({ lecture,closeModal}) {
                         name=""
                         onChange={onChangeHandler}
                         value={ lecture.lecPerTask }
-
                         />
                     </div>
                     <div>
@@ -247,7 +228,6 @@ function LecPlanModal({ lecture,closeModal}) {
                             name=""
                             onChange={onChangeHandler}
                            value={ lecture.lecBookMain }
-
                             />
                             부교재
                             <input 
@@ -255,25 +235,15 @@ function LecPlanModal({ lecture,closeModal}) {
                             name=""
                             onChange={onChangeHandler}
                              value={ lecture.lecBookSub }
-
                             />
                         </div>
-
-
                     </div>
-
- 
                     <button className={EmployeeInsertModalCSS.EmployeeBtnFirst} onClick={onClickLecPlanInsertHandler}>등록</button>
                         <button className={EmployeeInsertModalCSS.EmployeeBtnSecond} onClick={() => closeModal()}>취소</button>
                 </div>
-
-
-
             </div>
-
         </div>
     );
-
 }
 
 export default LecPlanModal;
