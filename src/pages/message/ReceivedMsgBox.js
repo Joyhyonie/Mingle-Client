@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, setSelectedDeptCode, setSelectedEmpCode, setSelectedEmpName, setSelectedEmpId}) {
 
     const dispatch = useDispatch();
-    const { receivedMsg, likeMsg, readMsg, removeMsg, receivedMsgSearch } = useSelector(state => state.MessageReducer);
+    const { receivedMsg, receivedMsgSearch, likeMsg, readMsg, removeMsg } = useSelector(state => state.MessageReducer);
     const [checkedIdList, setCheckedIdList] = useState([]);                 // check된 쪽지들의 id가 저장되는 state
     const [currentSize, setCurrentSize] = useState(10);                     // 전체 쪽지의 더보기 페이징을 위한 state
     const [searchedCurrentSize, setSearchedCurrentSize] = useState(10);     // 검색된 쪽지의 더보기 페이징을 위한 state
@@ -19,18 +19,12 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
 
     useEffect(
         () => {
-            console.log("checkedIdList => ", checkedIdList);
-        },[checkedIdList]
-    );
-
-    useEffect(
-        () => {
             /* 받은 쪽지함 조회 API 호출 */
             dispatch(callReceivedMsgListAPI(currentSize));
 
             if(removeMsg?.status === 200) {
                 toast.success("선택하신 쪽지가 삭제되었습니다 :)");
-            }
+            } 
 
         },[likeMsg, removeMsg, currentSize] 
     );
@@ -60,16 +54,17 @@ function ReceivedMsgBox ({setWhichPage, stateChangeHandler, setReplyContent, set
         console.log("checkedIdList : {}", checkedIdList);
     }
     
-    
     /* 쪽지 전체 선택 함수 */
     const selectAllHandler = (selectAll) => {
 
-       if (selectAll) {
-        const allIds = (receivedMsgList || []).concat(receivedMsgSearchList || []).map((message) => String(message.msgCode));
-        setCheckedIdList(allIds);
-      } else {
-        setCheckedIdList([]);
-      }
+        if (selectAll) {
+            // 전체 선택이 되었다면 checkedList에 현재 조회된 요소들의 id를 모두 추가
+            const allIds = (receivedMsgList || []).concat(receivedMsgSearchList || []).map((message) => String(message.msgCode));
+            setCheckedIdList(allIds);
+        } else {
+            // 전체 선택이 취소되었다면 빈 배열 전달
+            setCheckedIdList([]);
+        }
 
     }
 

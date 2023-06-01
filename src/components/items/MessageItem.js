@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from "framer-motion"
 import MessageCSS from '../../css/Message.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI } from '../../apis/MessageAPICalls';
+import { callLikeMsgAPI, callReadMsgAPI, callRemoveMsgAPI, callRestoreMsgAPI } from '../../apis/MessageAPICalls';
 import { toast } from 'react-hot-toast';
 import { useEffect } from 'react';
 
@@ -123,7 +123,7 @@ function MessageItem ({message, whichPage, setWhichPage, stateChangeHandler, set
             toast.error('복구할 쪽지를 선택해주세요 !');
         } else {
             /* 해당 id를 가진 쪽지들의 msgDelReveiver를 'N'으로 변경하는 API */
-            // dispatch(callRestoreMsgAPI(checkedIdList));
+            dispatch(callRestoreMsgAPI(checkedIdList));
             setCheckedIdList([]); // 선택되었던 체크박스의 체크 상태 초기화
         }
 
