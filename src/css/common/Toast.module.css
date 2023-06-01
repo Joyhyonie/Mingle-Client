@@ -2,11 +2,11 @@
 .commonNotiBox {
     border: 2px solid #66D2B3;
     background-color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     width: 600px;
-    height: 130px;
+    height: 120px;
 }
 
 .commonNotiBox {
@@ -40,13 +40,13 @@
 
 .msgContentBox div sub,
 .commonContentBox div sub {
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 900;
 }
 
 .msgContentBox div p,
 .commonContentBox div p {
-    font-size: 17px;
+    font-size: 15px;
     color: #999999;
     margin-top: 7px;
 }
@@ -56,10 +56,10 @@
     justify-content: center;
     align-items: center;
     width: 100px;
-    height: 130px;
+    height: 120px;
     background: #66D2B3;
     color: white;
     font-size: 18px;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0px 7px 7px 0px;
     cursor: pointer;
 }

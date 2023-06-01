@@ -11,12 +11,13 @@ import BoardReducer from "./BoardModule";
 import MessageReducer from "./MessageModule";
 import NotificationReducer from "./NofiticationModule";
 import OrganizationReducer from "./OrganizationModule";
+import CalendarReducer from "./CalendarModule";
 
 
 /* 여러 모듈을 combine 시키기 */
 const rootReducer = combineReducers({
   SubjectReducer, CertiReducer, EmployeeReducer, StudentReducer, ScheduleReducer, AttendanceReducer,
-  SubjectInfoReducer, BoardReducer, MessageReducer, NotificationReducer, OrganizationReducer, StaffReducer,
+  SubjectInfoReducer, BoardReducer, MessageReducer, NotificationReducer, OrganizationReducer, StaffReducer, CalendarReducer
 });
 
 export default rootReducer;
