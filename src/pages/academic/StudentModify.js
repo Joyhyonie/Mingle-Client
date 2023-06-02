@@ -4,7 +4,10 @@ import StudentModifyCss from '../../css/StudentModify.module.css';
 import StudentRegistCss from '../../css/StudentRegist.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
 import { toast } from "react-hot-toast";
-import { callStudentDetailAPI, callStudentUpdateAPI } from "../../apis/AcademicAPICalls";
+import {
+  callStudentDetailAPI,
+  callStudentUpdateAPI,
+} from "../../apis/AcademicAPICalls";
 import { useNavigate, useParams } from 'react-router-dom';
 import DaumPostcode from "react-daum-postcode";
 
@@ -23,8 +26,8 @@ function StudentModify(data) {
   const [deptCode, setDeptCode] = useState(); // 
 
   const [isOpenPost, setIsOpenPost] = useState(false); // 주소 업데이트
-  const [stdAddressBase, setStdAddressBase] = useState('');
-  const [stdAddressDetail, setStdAddressDetail] = useState('');
+  const [stdAddressBase, setStdAddressBase] = useState("");
+  const [stdAddressDetail, setStdAddressDetail] = useState("");
 
   /* 읽기 / 수정 구분 */
   const [modifyMode, setModifyMode] = useState(false);
@@ -37,7 +40,7 @@ function StudentModify(data) {
 
   /* 최초 랜더링 시 학생 상세 정보 조회 */
   useEffect(() => {
-    dispatch(callStudentDetailAPI({stdCode}));
+    dispatch(callStudentDetailAPI({ stdCode }));
   }, []);
 
   useEffect(() => {
@@ -45,10 +48,7 @@ function StudentModify(data) {
       toast.success("학생 정보가 성공적으로 수정 되었습니다.");
       navigate('/management-student');
     }
-  }
-    ,
-    [modify]
-  )
+  }, [modify]);
 
   /* deptCode 값 변경 */
   const onChangeDeptCodeHandler = (e) => {
@@ -74,7 +74,7 @@ function StudentModify(data) {
     if (e.target.name === 'stdAddressDetail') {
       setStdAddressDetail(e.target.value);
     }
-  }
+  };
 
   /* 칸을 눌렀을 때 팝업이 열리도록 */
   const onChangeOpenPost = () => {
@@ -102,8 +102,7 @@ function StudentModify(data) {
   };
 
   /* image 값이 변경될 때마다 preview 랜더링 */
-  useEffect(
-    () => {
+  useEffect(() => {
       if (image) {
         const fileReader = new FileReader();
         fileReader.onload = (e) => {
@@ -112,14 +111,11 @@ function StudentModify(data) {
         }
         fileReader.readAsDataURL(image);
       }
-    },
-    [image]
-  );
+    }, [image]);
 
 
   /* 학생 수정 버튼 클릭 이벤트 */
   const onClickStudentUpdateHandler = () => {
-
     const formData = new FormData();
     formData.append("stdName", form.stdName);
     formData.append("stdNameEn", form.stdNameEn);
@@ -204,162 +200,162 @@ function StudentModify(data) {
           </div>
 
         </div>
-        { data &&
-        <div className={StudentRegistCss.StudentRegistInformation}>
-          <div className={StudentRegistCss.StudentRegistFormFirst}>
-            이름
-            <input
-              type="text"
-              name="stdName"
-              className={StudentRegistCss.StudentRegistName}
-              value={!modifyMode ? student?.stdName : form?.stdName}
-              readOnly={!modifyMode}
-              onChange={onChangeHandler}
-            />
-            영문명
-            <input
-              type="text"
-              name="stdNameEn"
-              className={StudentRegistCss.StudentRegistNameEn}
-              onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdNameEn : form?.stdNameEn}
-              readOnly={!modifyMode}
-            />
-            학년
-            <input
-              type="number"
-              name="stdLevel"
-              className={StudentRegistCss.StudentRegistLevel}
-              onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdLevel : form?.stdLevel}
-              readOnly={!modifyMode}
-            />
-            학과
-            <input
-              type="text"
-              name="deptCode"
-              className={StudentRegistCss.StudentRegistDeptCode}
-              onChange={onChangeDeptCodeHandler}
-              value={!modifyMode ? student?.deptCode : form?.deptCode}
-              readOnly={!modifyMode}
-            />
-          </div>
-          <div className={StudentRegistCss.StudentRegistFormSecond}>
-            이메일
-            <input
-              type="text"
-              name="stdEmail"
-              className={StudentRegistCss.StudentRegistEmail}
-              onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdEmail : form?.stdEmail}
-              readOnly={!modifyMode}
-            />
-            비밀번호
-            <input
-              type="text"
-              name="stdPwd"
-              className={StudentRegistCss.StudentRegistPwd}
-              onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdPwd : form?.stdPwd}
-              readOnly={!modifyMode}
-            />
-          </div>
-          <div className={StudentRegistCss.StudentRegistFormThird}>
-            휴대전화
-            <input
-              type="tel"
-              name="stdPhone"
-              className={StudentRegistCss.StudentRegistPhone}
-              onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdPhone : form?.stdPhone}
-              readOnly={!modifyMode}
-            />
-            상태
-            <select className={StudentRegistCss.StudentRegistStatus}
-              name="stdStatus" onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdStatus : form?.stdStatus}
-              readOnly={!modifyMode}
-              disabled={!modifyMode}>
-              <option value="1" onChange={onChangeHandler}>재학</option>
-              <option value="2" onChange={onChangeHandler}>휴학</option>
-              <option value="3" onChange={onChangeHandler}>자퇴/중퇴</option>
-              <option value="4" onChange={onChangeHandler}>졸업</option>
-            </select>
-            주민등록번호
-            <input
-              type="text"
-              name="stdSsn"
-              className={StudentRegistCss.StudentRegistSsd}
-              onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdSsn : form?.stdSsn}
-              readOnly={!modifyMode}
-            />
-          </div>
-
-          <div className={StudentRegistCss.StudentRegistFormFourth}>
-            주소
-            <input
-              type="text"
-              name="stdAddress"
-              className={StudentRegistCss.StudentRegistAddress}
-              onClick={onChangeOpenPost}
-              value={!modifyMode ? student?.stdAddress : form?.stdAddress}
-              readOnly={!modifyMode}
-            />
-            {isOpenPost ? (
-              <div className={StudentRegistCss.postCodeStyle}><DaumPostcode autoClose onComplete={onCompletePost} /></div>
-            ) : null}
-          </div>
-          <div>
-            <input
-              type="text"
-              name="stdAddressDetail"
-              className={StudentRegistCss.StudentRegistAddressDetail}
-              onChange={onChangeHandler}
-              readOnly={!modifyMode}
-            />
-          </div>
-          <div className={StudentRegistCss.StudentRegistFormFifth}>
-            입학일
-            <input
-              type="date"
-              name="stdEntDate"
-              className={StudentRegistCss.StudentRegistEntDate}
-              onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdEntDate : form?.stdEntDate}
-              readOnly={!modifyMode}
-            />
-            휴학일
-            <input
-              type="date"
-              name="stdAbDate"
-              className={StudentRegistCss.StudentRegistAbDate}
-              onChange={onChangeHandler}
-              value={!modifyMode ? student?.stdAbDate : form?.stdAbDate}
-              readOnly={!modifyMode}
-            />
-            <div>
-              자퇴일
+        {data &&
+          <div className={StudentRegistCss.StudentRegistInformation}>
+            <div className={StudentRegistCss.StudentRegistFormFirst}>
+              이름
               <input
-                type="date"
-                name="stdDropDate"
-                className={StudentRegistCss.StudentRegistDropDate}
+                type="text"
+                name="stdName"
+                className={StudentRegistCss.StudentRegistName}
+                value={!modifyMode ? student?.stdName : form?.stdName}
+                readOnly={!modifyMode}
                 onChange={onChangeHandler}
-                value={!modifyMode ? student?.stdDropDate : form?.stdDropDate}
+              />
+              영문명
+              <input
+                type="text"
+                name="stdNameEn"
+                className={StudentRegistCss.StudentRegistNameEn}
+                onChange={onChangeHandler}
+                value={!modifyMode ? student?.stdNameEn : form?.stdNameEn}
                 readOnly={!modifyMode}
               />
-              졸업일
+              학년
               <input
-                type="date"
-                name="stdLeaveDate"
-                className={StudentRegistCss.StudentRegistLeaveDate}
+                type="number"
+                name="stdLevel"
+                className={StudentRegistCss.StudentRegistLevel}
                 onChange={onChangeHandler}
-                value={!modifyMode ? student?.stdLeaveDate : form?.stdLeaveDate}
+                value={!modifyMode ? student?.stdLevel : form?.stdLevel}
+                readOnly={!modifyMode}
+              />
+              학과
+              <input
+                type="text"
+                name="deptCode"
+                className={StudentRegistCss.StudentRegistDeptCode}
+                onChange={onChangeDeptCodeHandler}
+                value={!modifyMode ? student?.deptCode : form?.deptCode}
                 readOnly={!modifyMode}
               />
             </div>
+            <div className={StudentRegistCss.StudentRegistFormSecond}>
+              이메일
+              <input
+                type="text"
+                name="stdEmail"
+                className={StudentRegistCss.StudentRegistEmail}
+                onChange={onChangeHandler}
+                value={!modifyMode ? student?.stdEmail : form?.stdEmail}
+                readOnly={!modifyMode}
+              />
+              비밀번호
+              <input
+                type="text"
+                name="stdPwd"
+                className={StudentRegistCss.StudentRegistPwd}
+                onChange={onChangeHandler}
+                value={!modifyMode ? student?.stdPwd : form?.stdPwd}
+                readOnly={!modifyMode}
+              />
+            </div>
+            <div className={StudentRegistCss.StudentRegistFormThird}>
+              휴대전화
+              <input
+                type="tel"
+                name="stdPhone"
+                className={StudentRegistCss.StudentRegistPhone}
+                onChange={onChangeHandler}
+                value={!modifyMode ? student?.stdPhone : form?.stdPhone}
+                readOnly={!modifyMode}
+              />
+              상태
+              <select className={StudentRegistCss.StudentRegistStatus}
+                name="stdStatus" onChange={onChangeHandler}
+                value={!modifyMode ? student?.stdStatus : form?.stdStatus}
+                readOnly={!modifyMode}
+                disabled={!modifyMode}>
+                <option value="1" onChange={onChangeHandler}>재학</option>
+                <option value="2" onChange={onChangeHandler}>휴학</option>
+                <option value="3" onChange={onChangeHandler}>자퇴/중퇴</option>
+                <option value="4" onChange={onChangeHandler}>졸업</option>
+              </select>
+              주민등록번호
+              <input
+                type="text"
+                name="stdSsn"
+                className={StudentRegistCss.StudentRegistSsd}
+                onChange={onChangeHandler}
+                value={!modifyMode ? student?.stdSsn : form?.stdSsn}
+                readOnly={!modifyMode}
+              />
+            </div>
+
+            <div className={StudentRegistCss.StudentRegistFormFourth}>
+              주소
+              <input
+                type="text"
+                name="stdAddress"
+                className={StudentRegistCss.StudentRegistAddress}
+                onClick={onChangeOpenPost}
+                value={!modifyMode ? student?.stdAddress : form?.stdAddress}
+                readOnly={!modifyMode}
+              />
+              {isOpenPost ? (
+                <div className={StudentRegistCss.postCodeStyle}><DaumPostcode autoClose onComplete={onCompletePost} /></div>
+              ) : null}
+            </div>
+            <div>
+              <input
+                type="text"
+                name="stdAddressDetail"
+                className={StudentRegistCss.StudentRegistAddressDetail}
+                onChange={onChangeHandler}
+                readOnly={!modifyMode}
+              />
+            </div>
+            <div className={StudentRegistCss.StudentRegistFormFifth}>
+              입학일
+              <input
+                type="date"
+                name="stdEntDate"
+                className={StudentRegistCss.StudentRegistEntDate}
+                onChange={onChangeHandler}
+                value={!modifyMode ? student?.stdEntDate : form?.stdEntDate}
+                readOnly={!modifyMode}
+              />
+              휴학일
+              <input
+                type="date"
+                name="stdAbDate"
+                className={StudentRegistCss.StudentRegistAbDate}
+                onChange={onChangeHandler}
+                value={!modifyMode ? student?.stdAbDate : form?.stdAbDate}
+                readOnly={!modifyMode}
+              />
+              <div>
+                자퇴일
+                <input
+                  type="date"
+                  name="stdDropDate"
+                  className={StudentRegistCss.StudentRegistDropDate}
+                  onChange={onChangeHandler}
+                  value={!modifyMode ? student?.stdDropDate : form?.stdDropDate}
+                  readOnly={!modifyMode}
+                />
+                졸업일
+                <input
+                  type="date"
+                  name="stdLeaveDate"
+                  className={StudentRegistCss.StudentRegistLeaveDate}
+                  onChange={onChangeHandler}
+                  value={!modifyMode ? student?.stdLeaveDate : form?.stdLeaveDate}
+                  readOnly={!modifyMode}
+                />
+              </div>
+            </div>
           </div>
-        </div>
         }
       </div>
     </div>

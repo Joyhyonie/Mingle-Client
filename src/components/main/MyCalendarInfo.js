@@ -1,18 +1,20 @@
 import { motion } from "framer-motion"
 import MainCSS from "../../css/Main.module.css"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddScheduleModal from "../modal/AddScheduleModal";
 import ModifyScheduleModal from "../modal/ModifyScheduleModal";
 import { useDispatch, useSelector } from "react-redux";
-import { callMyScheduleByDateAPI, callMyScheduleCheckAPI } from "../../apis/ScheduleAPICalls";
-import dayjs from "dayjs";
+import { callMyScheduleCheckAPI } from "../../apis/ScheduleAPICalls";
 
-function MyCalendarInfo ({dateInMyCal, filteredMySchedule}) {
+function MyCalendarInfo () {
 
     const dispatch = useDispatch();
+    const { dateInMyCal, filteredMySchedule } = useSelector(state => state.CalendarReducer);
     const [addScheduleModal, setAddScheduleModal] = useState(false);        // 나의 일정 추가 modal관리용 state
     const [modifyScheduleModal, setModifyScheduleModal] = useState(false);  // 나의 일정 수정 modal관리용 state
     const [selectedSchedule, setSelectedSchedule] = useState(null);         // 일정 수정 모달창에 클릭된 일정의 정보를 담아 보내기 위한 state
+
+    console.log("필터된 스케줄... => ", filteredMySchedule);
 
     /* 클릭된 날짜의 월/일/요일을 변경시키는 이벤트 함수 */
     const clickedDateHandler = () => {

@@ -63,37 +63,37 @@ function BoardMain() {
       <div className={BoardCSS.boardButtonBox}>
         <button
           style={boardType === '전체' ? clikedStyle : null}
-          onClick={(e) => { setBoardType(e.target.textContent); }}
+          onClick={(e) => { setBoardType(e.target.textContent); setCurrentPage(1); }}
         >
           전체
         </button>
         <button
           style={boardType === '학사' ? clikedStyle : null}
-          onClick={(e) => { setBoardType(e.target.textContent); }}
+          onClick={(e) => { setBoardType(e.target.textContent); setCurrentPage(1); }}
         >
           학사
         </button>
         <button
           style={boardType === '장학' ? clikedStyle : null}
-          onClick={(e) => { setBoardType(e.target.textContent); }}
+          onClick={(e) => { setBoardType(e.target.textContent); setCurrentPage(1); }}
         >
           장학
         </button>
         <button
           style={boardType === '행사' ? clikedStyle : null}
-          onClick={(e) => { setBoardType(e.target.textContent); }}
+          onClick={(e) => { setBoardType(e.target.textContent); setCurrentPage(1); }}
         >
           행사
         </button>
         <button
           style={boardType === '취업' ? clikedStyle : null}
-          onClick={(e) => { setBoardType(e.target.textContent); }}
+          onClick={(e) => { setBoardType(e.target.textContent); setCurrentPage(1); }}
         >
           취업
         </button>
         <button
           style={boardType === '기타' ? clikedStyle : null}
-          onClick={(e) => { setBoardType(e.target.textContent); }}
+          onClick={(e) => { setBoardType(e.target.textContent); setCurrentPage(1); }}
         >
           기타
         </button>

@@ -11,8 +11,10 @@ function EmployeeRegist() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { regist } = useSelector((state) => state.EmployeeReducer);
-  const [form, setForm] = useState({});
+  const { regist } = useSelector((state) => state.StaffReducer);
+  const [form, setForm] = useState({
+    empStatus: "선택"
+  });
   const imageInput = useRef(); // 이미지 삽입
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
@@ -158,10 +160,6 @@ function EmployeeRegist() {
             ref={imageInput}
             onChange={onChangeImageUpload}
           />
-          <div className={EmployeeRegistCss.buttonContainer}>
-            <button onClick={onClickEmployeeRegistHandler} className={EmployeeRegistCss.employeeRegistBtn}>등록</button>
-            <button onClick={() => navigate(-1)} className={EmployeeRegistCss.employeeCancelBtn}>취소</button>
-          </div>
 
         </div>
         <div className={EmployeeRegistCss.employeeRegistInformation}>
@@ -227,10 +225,11 @@ function EmployeeRegist() {
               onChange={onChangeHandler}
             />
             상태
-            <select className={EmployeeRegistCss.employeeRegistStatus} name="stdStatus" onChange={onChangeHandler} value={form.stdStatus}>
-              <option value="1" onChange={onChangeHandler}>재직</option>
-              <option value="2" onChange={onChangeHandler}>휴직</option>
-              <option value="3" onChange={onChangeHandler}>퇴직</option>
+            <select className={EmployeeRegistCss.employeeRegistStatus} name="empStatus" onChange={onChangeHandler} value={form.empStatus}>
+              <option value="선택">선택</option>
+              <option value="재직" onChange={onChangeHandler}>재직</option>
+              <option value="휴직" onChange={onChangeHandler}>휴직</option>
+              <option value="퇴직" onChange={onChangeHandler}>퇴직</option>
             </select>
             주민등록번호
             <input
@@ -285,6 +284,10 @@ function EmployeeRegist() {
               className={EmployeeRegistCss.employeeRegistDropDate}
               onChange={onChangeHandler}
             />
+          </div>
+          <div className={EmployeeRegistCss.buttonContainer}>
+            <button onClick={onClickEmployeeRegistHandler} className={EmployeeRegistCss.employeeRegistBtn}>등록</button>
+            <button onClick={() => navigate(-1)} className={EmployeeRegistCss.employeeCancelBtn}>취소</button>
           </div>
         </div>
       </div>

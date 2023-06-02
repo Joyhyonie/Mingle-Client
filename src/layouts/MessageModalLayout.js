@@ -66,8 +66,8 @@ function MessageModalLayout ({setMessageModal, setMsgClicked}) {
                                     setWhichPage={setWhichPage}
                                     stateChangeHandler={stateChangeHandler}
                             />,
-                likeMsgBox: <LikeMsgBox/>,
-                binMsgBox: <BinMsgBox/>
+                likeMsgBox: <LikeMsgBox whichPage={whichPage} />,
+                binMsgBox: <BinMsgBox whichPage={whichPage} /> 
             };
             return components[whichPage] || null;
 

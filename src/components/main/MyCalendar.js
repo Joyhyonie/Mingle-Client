@@ -7,13 +7,15 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
 import { callMyScheduleListAPI } from "../../apis/ScheduleAPICalls";
 import dayjs from "dayjs";
+import { setDateInMyCal, setFilteredMySchedule } from "../../modules/CalendarModule";
 
-function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
+function MyCalendar () {
 
     const dispatch = useDispatch();
     const { allMySchedule, checkSchedule, registMySche, modifyMySche, removeMySche } = useSelector(state => state.ScheduleReducer);
+    const { dateInMyCal } = useSelector(state => state.CalendarReducer);
     const [selectInfo, setSelectInfo] = useState(); // 선택한 날짜의 정보를 저장하기 위한 state
-
+    
     useEffect(
       () => {
         /* 나의 일정 전체 조회 API 호출 */
@@ -45,7 +47,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
         const clickedDate = selectInfo.startStr;
         console.log(`현재 나의 일정 날짜 ? ${clickedDate}`)
         // 선택한 날짜 set
-        setDateInMyCal(clickedDate);
+        dispatch(setDateInMyCal(clickedDate));
         // 선택한 날짜의 정보 set (MyCalendarInfo 컴포넌트도 리렌더링 시키기 위해)
         setSelectInfo(selectInfo);
 
@@ -63,7 +65,7 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
           });
         
         console.log('filteredSchedule => ', filteredSchedule);
-        setFilteredMySchedule(filteredSchedule); // 선택된 날짜의 나의 일정을 조회시키기 위한 state에 set
+        dispatch(setFilteredMySchedule(filteredSchedule)); // 선택된 날짜의 나의 일정을 조회시키기 위한 state에 set
         }
     };
 
@@ -196,7 +198,8 @@ function MyCalendar ({setDateInMyCal, setFilteredMySchedule}) {
             selectMirror={true}
             dayMaxEvents={3}
             events={allMySchedule && myEvents()}
-            displayEventTime={false} // 12a 보이지 않도록 하는 속성
+            displayEventTime={false}  // 12a 보이지 않도록 하는 속성
+            initialDate={dateInMyCal} // 클릭한 날짜가 속한 월을 유지하기 위한 설정 (기본값은 오늘 날짜)
             />
           </FullCalendarContainer>
         </motion.div>

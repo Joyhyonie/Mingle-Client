@@ -76,16 +76,26 @@
     padding: 10px;
 }
 
+.allSelectButton,
+.restoreButton,
 .deleteButton {
     position: absolute;
     top: 1.5%;
-    right: 11%;
     border: none;
     border-radius: 10px;
-    padding: 4px 20px 6px 20px;
+    padding: 4px 15px 6px 15px;
     background-color: #343434;
     color: white;
     cursor: pointer;
+}
+
+.allSelectButton {
+    right: 24%;
+}
+
+.deleteButton,
+.restoreButton {
+    right: 11%;
 }
 
 .moreBox {
@@ -103,7 +113,8 @@
 }
 
 .binMsgBoxInfo p {
-    font-size: 14px;
+    margin: 0 auto;
+    font-size: 15px;
 }
 
 
@@ -113,6 +124,7 @@
 .binMsgBoxInfo {
     position: fixed;
     position: absolute;
+    z-index: 3;
     border-radius: 5px;
     background-color: #DADADA;
     display: flex;
@@ -120,7 +132,10 @@
     width: 370px;
     height: 25px;
     margin-top: -10px;
-    justify-content: center;
+}
+
+.binMsgBoxInfo {
+    background-color: #eeeeee;
 }
 
 .selectReceiverBox {
@@ -180,8 +195,24 @@
 }
 
 /* 쪽지 아이템 ------------------------------------------------ */
-.dummyBox {
-    height: 10px;
+.empty {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.dummyBox1 {
+    position: fixed;
+    background-color: #ffffff;
+    width: 370px;
+    height: 35px;
+    margin-bottom: -20px;
+}
+
+.dummyBox2 {
+    height: 20px;
 }
 
 .msgItemBox {

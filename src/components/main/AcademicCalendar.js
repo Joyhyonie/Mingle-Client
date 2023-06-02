@@ -5,13 +5,15 @@ import interactionPlugin from "@fullcalendar/interaction"; // interaction 패키
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
-import { callAcScheduleByDateAPI, callAcScheduleListAPI } from "../../apis/ScheduleAPICalls";
+import { callAcScheduleListAPI } from "../../apis/ScheduleAPICalls";
 import dayjs from "dayjs";
+import { setDateInAcCal, setFilteredAcSchedule } from "../../modules/CalendarModule";
 
-function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
+function AcademicCalendar () {
 
     const dispatch = useDispatch();
     const { allAcSchedule } = useSelector(state => state.ScheduleReducer);
+    const { dateInAcCal } = useSelector(state => state.CalendarReducer);
     const [selectInfo, setSelectInfo] = useState();
 
     useEffect(
@@ -39,7 +41,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
     const dateSelectHanlder = (selectInfo) => {
       const clickedDate = selectInfo.startStr;
       console.log(`현재 학사일정 날짜 ? ${clickedDate}`)
-      setDateInAcCal(clickedDate);
+      dispatch(setDateInAcCal(clickedDate));
       setSelectInfo(selectInfo);
         
       if(allAcSchedule) {
@@ -55,7 +57,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
         });
       
       console.log('filteredSchedule => ', filteredSchedule);
-      setFilteredAcSchedule(filteredSchedule); // 선택된 날짜의 나의 일정을 조회시키기 위한 state에 set
+      dispatch(setFilteredAcSchedule(filteredSchedule)); // 선택된 날짜의 나의 일정을 조회시키기 위한 state에 set
       }
     };
 
@@ -192,6 +194,7 @@ function AcademicCalendar ({setDateInAcCal, setFilteredAcSchedule}) {
             eventTextColor={'#343434'}
             events={allAcSchedule && acEvents()}
             displayEventTime={false}
+            initialDate={dateInAcCal} // 클릭한 날짜가 속한 월을 유지하기 위한 설정 (기본값은 오늘 날짜)
             />
           </FullCalendarContainer>
         </motion.div>

@@ -42,7 +42,7 @@ function BoardPreview () {
                         <p
                             className={ MainCSS.boardTitle }
                         >
-                            { board.boardTitle.length > 18 ? board.boardTitle.slice(0, 18) + '...' : board.boardTitle }
+                            { board.boardTitle.length > 17 ? board.boardTitle.slice(0, 17) + '...' : board.boardTitle }
                         </p>
                         <p>{formatDate(board.boardWriteDate)}</p>
                     </div>

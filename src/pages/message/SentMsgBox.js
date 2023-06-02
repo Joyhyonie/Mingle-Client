@@ -43,17 +43,31 @@ function SentMsgBox () {
         console.log("checkedIdList : {}", checkedIdList);
     }
 
+    /* 쪽지 전체 선택 함수 */
+    const selectAllHandler = (selectAll) => {
+
+        if (selectAll) {
+            const allIds = (sentMsgList || []).concat(sentMsgSearchList || []).map((message) => String(message.msgCode));
+            setCheckedIdList(allIds);
+        } else {
+            setCheckedIdList([]);
+        }
+
+    }
+
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}>
             <MessageSearchBar msgBoxType={ 'sent' } searchedCurrentSize={searchedCurrentSize} />
-            <div className={ MessageCSS.dummyBox }/>
+            <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
-                { (sentMsgList || []).concat(sentMsgSearchList || []).map(message => (
+                { (sentMsgList || []).concat(sentMsgSearchList || []).length === 0 ? <p className={ MessageCSS.empty }>텅😶</p> :
+                (sentMsgList || []).concat(sentMsgSearchList || []).map(message => (
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }
                         isChecked={ checkedIdList.includes(String(message.msgCode)) }
                         checkboxChangeHandler={checkboxChangeHandler}
+                        selectAllHandler={selectAllHandler}
                         checkedIdList={checkedIdList}
                         setCheckedIdList={setCheckedIdList}
                     />
