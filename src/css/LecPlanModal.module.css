@@ -298,13 +298,15 @@
   border: 1px solid #343434;
 }
 
-.EmployeeInsertModalTable th, tr, td {
+/* .EmployeeInsertModalTable th, tr, td {
   border: 1px solid #343434;
   font-size: 16px;
-}
+} */
 
 .EmployeeInsertModalTableTitle {
   background-color: #DADADA;
+  border: 1px solid #343434;
+  font-size: 16px;
 }
 
 .EmployeeInsertModalTable input {
@@ -313,4 +315,8 @@
   font-size: 16px;
   outline: none;
   border: none;
+}
+
+.EmployeeInsertModalTableTr {
+  border: 1px solid #343434;
 }
