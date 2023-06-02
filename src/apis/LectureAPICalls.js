@@ -15,7 +15,11 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
     const requestURL = `${SUBJECT_URL}/list?page=${currentPage}`;
 
     return async (dispatch, getState) => {
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL,{
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
         console.log(result);
         if (result.status === 200) {
             dispatch(getSubjects(result));
