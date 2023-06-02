@@ -2,7 +2,7 @@ import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from
 
 
 
-import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName } from "../modules/LectureModule";
 
 import { wait } from '@testing-library/user-event/dist/utils';
 
@@ -154,19 +154,19 @@ export const callLecNameMyLecture = ({ currentPage = 1 }) => {
     }
 }
 
-export const callSearchName = ({search, condition ,currentPage = 1}) => {
+export const callSearchName = ({ search, condition, currentPage = 1 }) => {
     const requestURL = `${LECTURE_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
 
-    return async (dispatch,getState) => {
-        const result = await fetch(requestURL,{
-            method : "GET",
-            headers : {
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
-        if(result.status === 200){
+        if (result.status === 200) {
             dispatch(getSearchName(result));
         }
     }
@@ -268,14 +268,18 @@ export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
 }
 
 /*학생 출석정보 수정  */
-export const callAttendanceModifyAPI = ({ stdAtdCode }, formData) => {
-    console.log(stdAtdCode)
+export const callAttendanceModifyAPI = (formData, { stdAtdCode }) => {
+    console.log("출석코드", stdAtdCode)
+    console.log("출석변경상태", formData)
+
     const requestURL = `${NEWATTENDANCE_URL}/modify/${stdAtdCode}`;
+
+
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
-            method: "PATCH",
-            body: formData
 
+            method: 'PATCH',
+            body: formData
         }).then(response => response.json());
 
         if (result.status === 200) {
@@ -291,6 +295,7 @@ export const callSubjectUpdateAPI = (formData) => {
 
     const requestURL = `${SUBJECT_URL}/modify`;
 
+
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method: 'PUT',
@@ -303,47 +308,3 @@ export const callSubjectUpdateAPI = (formData) => {
     }
 }
 
-// export const callLectureCountAPI = ({ lecCode }) => {
-
-//     const requestURL = `${LECTURE_URL}/lectureCount/${lecCode}`;
-//     return async (dispatch, getState) => {
-//         const result = await fetch(requestURL, {
-//             method: 'GET'
-//         }).then(response => response.json());
-//         console.log('lecCount를 위한 api calssLectureCountAPI', result);
-//         if (result.status === 200) {
-
-//             dispatch(getLectureCount(result));
-
-
-//         }
-//     }
-// }
-
-
-// /*행정직원의 강의 등록 페이지 */
-// export const callLectureInsertAPI = (form) => {
-
-//     const requestURL = `${LECTURE_URL}/officerregistration`;
-
-//     form = {
-//         ...form,
-//         employee: { empCode: form.empCode },
-//         subject: { sbjCode: form.sbjCode }
-
-//     }
-
-//     return async (dispatch, getState) => {
-//         const result = await fetch(requestURL, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(form)
-//         }).then(response => response.json());
-
-//         if (result.status === 200) {
-//             dispatch(postSubjects(result));
-//         }
-//     }
-// }

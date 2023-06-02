@@ -8,11 +8,12 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { callCourceStdListAPI, callLectureCountAPI, callNewAttendanceListAPI } from "../../apis/LectureAPICalls";
 import { useNavigate, useParams } from 'react-router-dom';
+import CommonCSS from '../../css/common/Common.module.css'
 
 function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수가 api에 넣을 것인가?
 
 
-    const { attendance, newAttendance, lecCount } = useSelector(state => state.SubjectInfoReducer);
+    const { attendance, newAttendance, lecCount, modify } = useSelector(state => state.SubjectInfoReducer);
     const { lecCode } = useParams();
     const SelectBoxWrapper = styled.div`
     // display: flex;
@@ -21,17 +22,7 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
 
 
     console.log("여기는 출첵attendance", attendance);
-    // console.log("여기는 출첵attendance&&&", attendance && attendance.lecturDTO.lecCount)
 
-    // console.log("여기는뉴뉴뉴 newAttendance", newAttendance);
-    // console.log("여기는뉴뉴뉴 lecCount", lecCount);
-
-
-    // const handleSelectChange2 = (event) => {
-    //     const selectedOption2 = event.target.value;
-    //     console.log('Selected option:', selectedOption2);
-    //     setAttendanceStatus2(selectedOption2)
-    // };
 
 
 
@@ -41,7 +32,7 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         setAttendanceStatus(selectedOption)
     };
     const [attendanceStatus, setAttendanceStatus] = useState('');
-    // const [attendanceStatus2, setAttendanceStatus2] = useState('');
+
     const dispatch = useDispatch();
 
 
@@ -52,22 +43,21 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
         () => {
             console.log("코드코드코드코드", lecCode);
             dispatch(callCourceStdListAPI({ lecCode }));
-            //  dispatch(callNewAttendanceListAPI({ lecCode }));
-            //   dispatch(callLectureCountAPI({ lecCode }))
 
 
         },
         []);
 
-    console.log("sisisisisidjsfhdkㄹㄴ아ㅓㅁ로나얼", attendance && attendance.lectureDTO[0]);
+    console.log("냐얼", attendance && attendance.lectureDTO[0]);
     const option = attendance && attendance.lectureDTO[0];
 
+    console.log("attendance22", attendance);
 
 
 
     return (<motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
-    >
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }} style={{ width: "100%" }}
+    ><p className={CommonCSS.pageDirection}>출결 및 성적관리 ▸ 출결관리 </p>
 
         <div className={SearchBarCss.basic}>
             {<AteendanceSearchBar
@@ -88,7 +78,7 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
                     <th>학번</th>
                     <th>학과명</th>
                     <th>성명</th>
-                    <th>출석 입력</th>
+                    {/* <th>출석 입력</th> */}
                     <th>출석 상태</th>
 
                 </tr>
