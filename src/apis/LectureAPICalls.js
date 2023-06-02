@@ -3,6 +3,7 @@ import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from
 
 import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName,  patchLecPlan  } from "../modules/LectureModule";
 
+
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
 const SUBJECT_URL = `http://${SERVER_IP}:${SERVER_PORT}/subject`;
@@ -151,19 +152,19 @@ export const callLecNameMyLecture = ({ currentPage = 1 }) => {
     }
 }
 
-export const callSearchName = ({search, condition ,currentPage = 1}) => {
+export const callSearchName = ({ search, condition, currentPage = 1 }) => {
     const requestURL = `${LECTURE_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
 
-    return async (dispatch,getState) => {
-        const result = await fetch(requestURL,{
-            method : "GET",
-            headers : {
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
-        if(result.status === 200){
+        if (result.status === 200) {
             dispatch(getSearchName(result));
             console.log(result);
         }
@@ -266,14 +267,18 @@ export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
 }
 
 /*학생 출석정보 수정  */
-export const callAttendanceModifyAPI = ({ stdAtdCode }, formData) => {
-    console.log(stdAtdCode)
+export const callAttendanceModifyAPI = (formData, { stdAtdCode }) => {
+    console.log("출석코드", stdAtdCode)
+    console.log("출석변경상태", formData)
+
     const requestURL = `${NEWATTENDANCE_URL}/modify/${stdAtdCode}`;
+
+
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
-            method: "PATCH",
-            body: formData
 
+            method: 'PATCH',
+            body: formData
         }).then(response => response.json());
 
         if (result.status === 200) {
@@ -289,6 +294,7 @@ export const callSubjectUpdateAPI = (formData) => {
 
     const requestURL = `${SUBJECT_URL}/modify`;
 
+
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method: 'PUT',
@@ -300,6 +306,7 @@ export const callSubjectUpdateAPI = (formData) => {
         }
     }
 }
+
 
 // export const callLectureCountAPI = ({ lecCode }) => {
 
@@ -367,4 +374,5 @@ export const callLecPlanInsertAPI = (formData) => {
 //         }
 //     }
 // }
+
 

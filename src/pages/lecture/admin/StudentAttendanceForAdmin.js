@@ -10,11 +10,7 @@ import { callLectureListAPI } from "../../../apis/LectureAPICalls";
 import { useDispatch, useSelector } from "react-redux";
 
 function StudentAttendanceForAdmin() {
-    /* (임시용 데이터) */
-    // const lectureInfoList = [{ lectureNo: 1, lectureCode: 87512, lectureName: '거시경제학', lectureYear: '2023', lectureSeason: 2, empCode: 12345, empName: '최지원', lectureAttendence: '출석' },
-    // { lectureNo: 2, lectureCode: 137512, lectureName: '미시경제학', lectureYear: '2023', lectureSeason: 2, empCode: 42345, empName: '최지원', lectureAttendence: '출석' },
 
-    // ]
 
     const [currentPage, setCurrentPage] = useState(1);
     const { data, pageInfo } = useSelector(state => state.SubjectInfoReducer);
@@ -24,9 +20,6 @@ function StudentAttendanceForAdmin() {
     console.log("getInfo", data);
 
 
-    // console.log("studentAttenace :", lectureInfoList);
-
-    // const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
 
 
 
@@ -58,7 +51,7 @@ function StudentAttendanceForAdmin() {
                     options={options}>
                 </SearchBar>}
 
-                {/* <SearchAndListLayout options={options}/> */}
+
             </div>
             <div>
                 {data && <AttendanceList LectureInfoList={data} />}
