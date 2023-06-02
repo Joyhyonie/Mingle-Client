@@ -240,30 +240,30 @@ function LecPlanModal({ lecture, closeModal }) {
             <table className={EmployeeInsertModalCSS.EmployeeInsertModalTable}>
               <thead>
                 <tr className={EmployeeInsertModalCSS.EmployeeInsertModalTableTitle}>
-                  <th></th>
-                  <th>도서명</th>
-                  <th>저자</th>
-                  <th>출판사</th>
+                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}></th>
+                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>도서명</th>
+                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>저자</th>
+                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>출판사</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>주교재</th>
-                  <td>
+                <tr className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
+                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>주교재</th>
+                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
                     <input
                       type="text"
                       name=""
                       onChange={onChangeHandler}
                       value={lecture.lecBookMain}></input>
                   </td>
-                  <td>
+                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
                     <input
                       type="text"
                       name=""
                       onChange={onChangeHandler}
                       value={lecture.lecBookMain}></input>
                   </td>
-                  <td>
+                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
                     <input
                       type="text"
                       name=""
@@ -272,22 +272,22 @@ function LecPlanModal({ lecture, closeModal }) {
                   </td>
                 </tr>
                 <tr>
-                  <th>부교재</th>
-                  <td>
+                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>부교재</th>
+                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
                     <input
                       type="text"
                       name=""
                       onChange={onChangeHandler}
                       value={lecture.lecBookSub}></input>
                   </td>
-                  <td>
+                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
                     <input
                       type="text"
                       name=""
                       onChange={onChangeHandler}
                       value={lecture.lecBookSub}></input>
                   </td>
-                  <td>
+                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
                     <input
                       type="text"
                       name=""
