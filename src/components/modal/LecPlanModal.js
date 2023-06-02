@@ -9,7 +9,7 @@ function LecPlanModal({ lecture, closeModal }) {
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
   const { employee } = useSelector((state => state.EmployeeReducer));
-  const [currentPage, setCurrentPage] = useState(1);
+  const {lecplan} = useSelector(state => state.SubjectInfoReducer);
 
   const onChangeHandler = (e) => {
     setForm({
@@ -22,15 +22,25 @@ function LecPlanModal({ lecture, closeModal }) {
   const onClickLecPlanInsertHandler = () => {
 
     const formData = new FormData();
-    formData.append("lecName", form.lecName);
-    formData.append("lecSummary", form.lecSummary);
-    formData.append("lecGoal", form.lecGoal);
-    formData.append("lecMethod", form.lecMethod);
-    formData.append("lecBookMain", form.lecBookMain);
-    formData.append("lecBookSub", form.lecBookSub);
+        formData.append("lecName", form.lecName);
+        formData.append("lecSummary", form.lecSummary);
+        formData.append("lecGoal",form.lecGoal);
+        formData.append("lecMethod",form.lecMethod);
+        formData.append("lecBookMain",form.lecBookMain);
+        formData.append("lecBookSub",form.lecBookSub);
 
-    dispatch(callLecPlanInsertAPI(formData));
+        dispatch(callLecPlanInsertAPI(formData, lecture.lecCode));
   };
+
+  useEffect(
+    ()=>{
+        if(lecplan?.status === 200){
+            closeModal();
+            toast.success("강의등록성공");               
+        }
+    },
+    [lecplan]
+)
 
   return (
     <div className={EmployeeInsertModalCSS.EmployeeInsertModal}>
@@ -46,7 +56,6 @@ function LecPlanModal({ lecture, closeModal }) {
               type="text"
               name="lecYear"
               className={EmployeeInsertModalCSS.EmployeeModalMain}
-              onChange={onChangeHandler}
               value={lecture.lecYear}
             />
             <span>학기</span>
@@ -54,7 +63,6 @@ function LecPlanModal({ lecture, closeModal }) {
               type="text"
               name="lecSeason"
               className={EmployeeInsertModalCSS.EmployeeModalMain}
-              onChange={onChangeHandler}
               value={lecture.lecSeason}
             />
             <div className={EmployeeInsertModalCSS.EmployeeModalButtonContainer}>
@@ -62,15 +70,12 @@ function LecPlanModal({ lecture, closeModal }) {
               <button className={EmployeeInsertModalCSS.EmployeeBtnSecond} onClick={() => closeModal()}>취소</button>
             </div>
           </div>
-
-
           <div className={EmployeeInsertModalCSS.EmployeeInsertModalSecond}>
             <span>교수명</span>
             <input
               type="text"
               name="empName"
               className={EmployeeInsertModalCSS.EmployeeInsertPfName}
-              onChange={onChangeHandler}
               value={employee.empName}
             />
             <span>영문명</span>
@@ -78,7 +83,6 @@ function LecPlanModal({ lecture, closeModal }) {
               type="text"
               name="empName"
               className={EmployeeInsertModalCSS.EmployeeInsertPfNameEn}
-              onChange={onChangeHandler}
               value={employee.empNameEn}
             />
             <span>학과</span>
@@ -86,7 +90,6 @@ function LecPlanModal({ lecture, closeModal }) {
               type="text"
               name="department"
               className={EmployeeInsertModalCSS.EmployeeInsertDeptName}
-              onChange={onChangeHandler}
               value={employee.department.deptName}
             />
           </div>
@@ -97,7 +100,6 @@ function LecPlanModal({ lecture, closeModal }) {
               type="text"
               name="empEmail"
               className={EmployeeInsertModalCSS.EmployeeInsertEmail}
-              onChange={onChangeHandler}
               value={employee.empEmail}
             />
             H.P
@@ -105,7 +107,6 @@ function LecPlanModal({ lecture, closeModal }) {
               type="text"
               name="empPhone"
               className={EmployeeInsertModalCSS.EmployeeInsertPhone}
-              onChange={onChangeHandler}
               value={employee.empPhone}
             />
           </div>
@@ -116,23 +117,20 @@ function LecPlanModal({ lecture, closeModal }) {
               type="text"
               name="lecCount"
               className={EmployeeInsertModalCSS.EmployeeModalName}
-              onChange={onChangeHandler}
               value={lecture.lecCount}
             />
             수업 시작일
             <input
               type="text"
-              name="lecSeason"
+              name="lecStartDate"
               className={EmployeeInsertModalCSS.EmployeeModalName}
-              onChange={onChangeHandler}
               value={lecture.lecStartDate}
             />
             수업 종료일
             <input
               type="text"
-              name="lecSeason"
+              name="lecEndDate"
               className={EmployeeInsertModalCSS.EmployeeModalName}
-              onChange={onChangeHandler}
               value={lecture.lecEndDate}
             />
           </div>
@@ -140,7 +138,7 @@ function LecPlanModal({ lecture, closeModal }) {
             강의명
             <input
               type="text"
-              name=""
+              name="lecName"
               className={EmployeeInsertModalCSS.EmployeeModalLecture}
               onChange={onChangeHandler}
               value={lecture.lecName}
@@ -148,27 +146,26 @@ function LecPlanModal({ lecture, closeModal }) {
             과목명
             <input
               type="text"
-              name=""
+              name="sbjName"
               className={EmployeeInsertModalCSS.EmployeeModalSubject}
-              onChange={onChangeHandler}
               value={lecture.subject.sbjName}
             />
           </div>
           <div className={EmployeeInsertModalCSS.EmployeeInsertModalSixth}>
             <span>교과목 개요</span>
             <textarea
-              name=""
+              name="lecSummary"
               className={EmployeeInsertModalCSS.EmployeeModalOutline}
               onChange={onChangeHandler}
-              value={lecture.lecGoal}
+              value={lecture.lecSummary}
             />
           </div>
           <div className={EmployeeInsertModalCSS.EmployeeInsertModalSeven}>
             강좌 목표
             <textarea
-              name=""
+              name="lecGoal"
               onChange={onChangeHandler}
-              value={lecture.lecMethod}
+              value={lecture.lecGoal}
             />
           </div>
           <div className={EmployeeInsertModalCSS.EmployeeInsertModalEight}>
@@ -177,29 +174,25 @@ function LecPlanModal({ lecture, closeModal }) {
               <span>중간</span>
               <input
                 type="text"
-                name=""
-                onChange={onChangeHandler}
+                name="lecPerMiddle"
                 value={lecture.lecPerMiddle}
               />
               <span>기말</span>
               <input
                 type="text"
-                name=""
-                onChange={onChangeHandler}
+                name="lecPerFinal"
                 value={lecture.lecPerFinal}
               />
               <span>출석</span>
               <input
                 type="text"
-                name=""
-                onChange={onChangeHandler}
+                name="lecPerAtd"
                 value={lecture.lecPerAtd}
               />
               <span>과제</span>
               <input
                 type="text"
-                name=""
-                onChange={onChangeHandler}
+                name="lecPerTask"
                 value={lecture.lecPerTask}
               />
             </div>
@@ -208,7 +201,7 @@ function LecPlanModal({ lecture, closeModal }) {
             <span>강의운영<br />방법</span>
             <textarea
               type="text"
-              name=""
+              name="lecMethod"
               onChange={onChangeHandler}
               value={lecture.lecMethod}
             />
@@ -219,9 +212,7 @@ function LecPlanModal({ lecture, closeModal }) {
               <thead>
                 <tr className={EmployeeInsertModalCSS.EmployeeInsertModalTableTitle}>
                   <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}></th>
-                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>도서명</th>
-                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>저자</th>
-                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>출판사</th>
+                  <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>도서명</th>                  
                 </tr>
               </thead>
               <tbody>
@@ -230,48 +221,20 @@ function LecPlanModal({ lecture, closeModal }) {
                   <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
                     <input
                       type="text"
-                      name=""
+                      name="lecBookMain"
                       onChange={onChangeHandler}
                       value={lecture.lecBookMain}></input>
-                  </td>
-                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
-                    <input
-                      type="text"
-                      name=""
-                      onChange={onChangeHandler}
-                      value={lecture.lecBookMain}></input>
-                  </td>
-                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
-                    <input
-                      type="text"
-                      name=""
-                      onChange={onChangeHandler}
-                      value={lecture.lecBookMain}></input>
-                  </td>
+                  </td>                  
                 </tr>
                 <tr>
                   <th className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>부교재</th>
                   <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
                     <input
                       type="text"
-                      name=""
+                      name="lecBookSub"
                       onChange={onChangeHandler}
                       value={lecture.lecBookSub}></input>
-                  </td>
-                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
-                    <input
-                      type="text"
-                      name=""
-                      onChange={onChangeHandler}
-                      value={lecture.lecBookSub}></input>
-                  </td>
-                  <td className={EmployeeInsertModalCSS.EmployeeInsertModalTableTr}>
-                    <input
-                      type="text"
-                      name=""
-                      onChange={onChangeHandler}
-                      value={lecture.lecBookSub}></input>
-                  </td>
+                  </td>                  
                 </tr>
               </tbody>
             </table>
