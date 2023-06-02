@@ -318,10 +318,10 @@ export const callSubjectUpdateAPI = (formData) => {
 //     }
 // }
 
-export const callLecPlanInsertAPI = (formData) => {
+export const callLecPlanInsertAPI = (formData,lecCode) => {
 
-
-    const requestURL = `${LECTURE_URL}/lecturePlan`;
+console.log("lecCode" , lecCode);
+    const requestURL = `${LECTURE_URL}/lecturePlan/${lecCode}`;
 
     return async (dispatch, getstate) => {
 

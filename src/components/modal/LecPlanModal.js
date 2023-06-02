@@ -44,7 +44,7 @@ function LecPlanModal({ lecture,closeModal}) {
         formData.append("lecBookMain",form.lecBookMain);
         formData.append("lecBookSub",form.lecBookSub);
 
-        dispatch(callLecPlanInsertAPI(formData));
+        dispatch(callLecPlanInsertAPI(formData, lecture.lecCode));
     };
     useEffect(
         ()=>{
