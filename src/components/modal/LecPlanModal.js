@@ -1,30 +1,15 @@
-import { useSelect } from "downshift";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import EmployeeInsertModalCSS from "../../css/LecPlanModal.module.css"
 import { callLecPlanInsertAPI } from "../../apis/LectureAPICalls";
-import { callMyLectureCallAPI } from "../../apis/LectureAPICalls";
-
+import { toast } from "react-hot-toast";
 
 function LecPlanModal({ lecture, closeModal }) {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [form, setForm] = useState({});
   const { employee } = useSelector((state => state.EmployeeReducer));
-  const { myLecture } = useSelector(state => state.SubjectInfoReducer);
   const [currentPage, setCurrentPage] = useState(1);
-
-  console.log(lecture);
-
-
-  useEffect(() => {
-    if (myLecture?.status === 200) {
-      closeModal();
-    }
-  }, [myLecture]);
 
   const onChangeHandler = (e) => {
     setForm({
@@ -46,13 +31,6 @@ function LecPlanModal({ lecture, closeModal }) {
 
     dispatch(callLecPlanInsertAPI(formData));
   };
-  useEffect(
-    () => {
-      dispatch(callMyLectureCallAPI(currentPage));
-    },
-    [currentPage]
-  )
-
 
   return (
     <div className={EmployeeInsertModalCSS.EmployeeInsertModal}>
@@ -299,9 +277,7 @@ function LecPlanModal({ lecture, closeModal }) {
             </table>
           </div>
         </div>
-      </div>
-    </div>
-  );
+
 }
 
 export default LecPlanModal;
