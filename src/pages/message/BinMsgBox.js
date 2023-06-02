@@ -59,7 +59,8 @@ function BinMsgBox ({whichPage}) {
             <div className={ MessageCSS.binMsgBoxInfo }><p>휴지통 속 쪽지는 익일 오전 12시, 영구적으로 삭제 됩니다 :)</p></div>
             <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
-                { removedMsgList && removedMsgList.map(message => (
+                { removedMsgList && removedMsgList.length === 0 ? <p className={ MessageCSS.empty }>텅😶</p> :
+                removedMsgList && removedMsgList.map(message => (
                     <MessageItem
                         key={ message.msgCode }
                         message={ message }

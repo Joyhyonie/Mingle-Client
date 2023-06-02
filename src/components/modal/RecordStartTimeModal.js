@@ -13,7 +13,7 @@ function RecordStartTimeModal ({setRecordStartTimeModal}) {
     useEffect(
         () => {
             if(recordStartTime?.status === 200) {
-                toast.success("오늘의 출근 시각이 등록되었습니다");
+                toast.success("오늘의 출근 시각이 등록되었습니다 :)");
                 setRecordStartTimeModal(false);
             } 
         }, [recordStartTime]

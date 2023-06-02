@@ -33,7 +33,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
         () => {
             
             if(sendMsg?.status === 200) {
-                toast.success('쪽지가 정상적으로 전송되었습니다');
+                toast.success('쪽지가 정상적으로 전송되었습니다 :)');
                 setWhichPage('sentMsgBox');             // '보낸 쪽지함'으로 페이지 이동
                 stateChangeHandler('sentIsClicked');    // Nav바를 '보낸 쪽지함'으로 설정
             }
@@ -136,7 +136,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                 ref={textareaRef}
                 onChange={ textChangeHandler }
             >
-                {replyContent ? replyContent + '\n\n------------------------------------------\n\n' : null}
+                {replyContent ? '[답장] ' + replyContent + '\n\n\n\n' : null}
             </textarea>
 
             <button

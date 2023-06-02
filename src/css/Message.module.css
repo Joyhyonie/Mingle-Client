@@ -195,6 +195,14 @@
 }
 
 /* 쪽지 아이템 ------------------------------------------------ */
+.empty {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    font-size: 40px;
+    font-weight: 900;
+}
+
 .dummyBox1 {
     position: fixed;
     background-color: #ffffff;

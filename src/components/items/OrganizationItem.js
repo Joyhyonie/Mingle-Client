@@ -19,7 +19,7 @@ function OrganizationItem({ employee }) {
           <br />
         </div>
       </div>
-      <img src="/images/goyoonjeong.png" alt={empName} />
+      <img src={empProfile} alt={empName} />
     </div>
   )
 }

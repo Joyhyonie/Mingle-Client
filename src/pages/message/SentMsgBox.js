@@ -60,7 +60,8 @@ function SentMsgBox () {
             <MessageSearchBar msgBoxType={ 'sent' } searchedCurrentSize={searchedCurrentSize} />
             <div className={ MessageCSS.dummyBox1 }/><div className={ MessageCSS.dummyBox2 }/>
             <div className={ MessageCSS.msgListBox }>
-                { (sentMsgList || []).concat(sentMsgSearchList || []).map(message => (
+                { (sentMsgList || []).concat(sentMsgSearchList || []).length === 0 ? <p className={ MessageCSS.empty }>텅😶</p> :
+                (sentMsgList || []).concat(sentMsgSearchList || []).map(message => (
                     <MessageItem 
                         key={ message.msgCode }
                         message={ message }

@@ -20,10 +20,10 @@ function ModifyScheduleModal ({selectedSchedule, setModifyScheduleModal}) {
     useEffect(
         () => {
             if(modifyMySche?.status === 200) {
-                toast.success("일정이 수정되었습니다");
+                toast.success("일정이 수정되었습니다 :)");
                 setModifyScheduleModal(false);
             } else if(removeMySche?.status === 200) {
-                toast.success("일정이 삭제되었습니다");
+                toast.success("일정이 삭제되었습니다 :)");
                 setModifyScheduleModal(false);
             }
         }, [modifyMySche, removeMySche]
