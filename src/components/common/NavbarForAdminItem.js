@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from 'framer-motion';
 import CommonCSS from '../../css/common/Common.module.css'
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 
 
 function NavbarForAdminItem ({ title, index, list, active, activeIndex, setActiveIndex }) {
@@ -9,6 +11,7 @@ function NavbarForAdminItem ({ title, index, list, active, activeIndex, setActiv
     const navigate = useNavigate();
     const [clickedIndex, setClickedIndex] = useState();
     const [isOpen, setIsOpen] = useState(false);
+    const { employee } = useSelector(state => state.EmployeeReducer);
     
     // 상위 메뉴 클릭 시, activeIndex에 index 저장
     const clickHandler = () => {
@@ -37,7 +40,7 @@ function NavbarForAdminItem ({ title, index, list, active, activeIndex, setActiv
             case '증명서 발급 신청' : return navigate('/certi-doc-apply');
             case '증명서 발급 이력' : return navigate('/certi-doc-mine');
             case '교직원 근태 기록' : return navigate('/attendance-employee');
-            case '휴가 신청 내역' : return navigate('/leave-doc-applied');
+            case '휴가 신청 내역' : if(employee.department.deptName == "교무처") {return navigate('/leave-doc-applied')} else {toast.error("접근 권한이 없습니다 :(")}; break;
             case '출결 및 성적관리' : return navigate('/lecture-student-admin');
             case '강의 개설' : return navigate('/lecture-regist-admin');
             case '교직원' : return navigate('/management-employee');

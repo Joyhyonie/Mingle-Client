@@ -21,7 +21,7 @@ function LectureItem({ lecture }) {
     const clickBoardHandler2 = (lecture) => {
 
 
-        navigate(`/attendance/${lecture.lecCode}`); //출석
+        navigate(`/lecture-student-admin/${lecture.lecCode}`); //출석
 
 
     }
