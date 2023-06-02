@@ -31,7 +31,7 @@ export const { lecture:
         [GET_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_NEW_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_LECTURE_COUNT]: (res) => res.data,
-        [PATCH_LEC_PLAN]: (res) => res.data,
+        [PATCH_LEC_PLAN]: res => res,
         [PATCH_ATTENDANCELIST_MODIFY]: (res) => res.data,
         [GET_SEARCH_NAME] : res => res.data
 
@@ -50,7 +50,7 @@ const SubjectInfoReducer = handleActions({
     [GET_LECTURE_COUNT]: (state, { payload }) => ({ lecCount: payload }),
     [PATCH_ATTENDANCELIST_MODIFY]: (state, { payload }) => ({ modify: payload }),
     [GET_SEARCH_NAME] : (state, {payload}) => ({searchName : payload}),
-    [PATCH_LEC_PLAN]: (state, {payload}) => payload
+    [PATCH_LEC_PLAN]: (state, {payload}) => ({lecplan : payload})
 
 
 }, initialState)

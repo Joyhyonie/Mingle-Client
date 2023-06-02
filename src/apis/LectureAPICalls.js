@@ -319,27 +319,22 @@ export const callSubjectUpdateAPI = (formData) => {
 //     }
 // }
 
-export const callLecPlanInsertAPI = (formData) => {
+export const callLecPlanInsertAPI = (formData ,lecCode) => {
 
-
-    const requestURL = `${LECTURE_URL}/lecturePlan`;
+    const requestURL = `${LECTURE_URL}/lecturePlan/${lecCode}`;
 
     return async (dispatch, getstate) => {
 
         const result = await fetch(requestURL,{
-            method : 'PATCH',
-            headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            },
+            method : 'PATCH',                       
             body : formData
         }).then(response => response.json());
 
-        if(result.status === 200){
+        if(result.status ===200){
+            console.log(result);
             dispatch(patchLecPlan(result));
         }
-    }
-
-    
+    }    
 } 
 
 // /*행정직원의 강의 등록 페이지 */
