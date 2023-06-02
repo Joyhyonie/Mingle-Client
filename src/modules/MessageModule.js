@@ -57,7 +57,7 @@ export const { schedule : { getCountUnreadMsg,
 const MessageReducer = handleActions(
     {
         // 읽지 않은 쪽지(countMsg)는 다른 함수(GET)가 호출되어도 유지하고자 하므로 `countMsg : state.countMsg`를 추가하여 덮어쓰기 방지
-        [GET_COUNT_UNREAD_MSG] : (state, { payload }) => ({ countMsg : payload }),
+        [GET_COUNT_UNREAD_MSG] : (state, { payload }) => ({ ...state, countMsg : payload }), // 쪽지를 읽을 때마다 안 읽은 쪽지의 갯수를 리렌더링 하고자 state 복사
         [GET_RECEIVED_MSG] : (state, { payload }) => ({ countMsg : state.countMsg, receivedMsg : payload }),
         [GET_RECEIVED_MSG_SEARCH] : (state, { payload }) => ({ countMsg : state.countMsg, receivedMsgSearch : payload }),
         [PATCH_READ_MSG] : (state, { payload }) => ({ ...state, readMsg : payload }),

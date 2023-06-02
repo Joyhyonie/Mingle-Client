@@ -1,15 +1,20 @@
 import { Navigate } from "react-router-dom";
-import { isAdmin, isLogin } from "../../utils/TokenUtils";
+import { isAdmin, isLogin, isProf } from "../../utils/TokenUtils";
 
 
 /* ex : 로그인이 된 상태에서 url로 회원가입이나 로그인 페이지로 이동 되지 않도록 처리하기 위한 함수 */
-function ProtectedRoute({ loginCheck, authCheck, children }) {
+function ProtectedRoute({ loginCheck, adminCheck, profCheck, children }) {
 
     /* children : <ProtectedRoute>children</ProtectedRoute> */
 
-    if(authCheck) {
-        /* 권한 없이 접근 불가 기능(ex. 상품 등록, 수정) -> props로 authCheck 값을 true로 전달 */
-        return isAdmin() ? children : <Navigate to="/"/>
+    if(adminCheck) {
+        /* 권한 없이 접근 불가 기능(ex. 상품 등록, 수정) -> props로 adminCheck 값을 true로 전달 */
+        return isAdmin() ? children : <Navigate to="/error"/>
+    }
+
+    if(profCheck) {
+        console.log("props 잘 받아옴")
+        return isProf() ? children : <Navigate to="/error"/>
     }
 
     if(loginCheck) {

@@ -40,6 +40,7 @@ import EmployeeRegist from './pages/academic/EmployeeRegist';
 import MyLeave from './components/lists/MyLeaveDoc';
 import AttendanceDetailList from './components/lists/AttendanceDetailList';
 import AttendanceStdDetail from './pages/lecture/admin/AttendanceStdDetail';
+import Error from './pages/error/Error';
 
 
 function App() {
@@ -59,13 +60,7 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute loginCheck={true}>
-                <Layout />
-              </ProtectedRoute>
-            }
+          <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}
           >
             <Route element={<MainPageLayout />}>
               <Route index element={<MyCalendar />} />
@@ -82,40 +77,17 @@ function App() {
             </Route>
             {/* <BoardLayout/>의 Route */}
             <Route path="mypage" element={<MyPageLayout />}>
-              <Route
-                index
-                element={<Navigate to="/mypage/profile" replace />}
-              />
-              <Route
-                path="profile"
-                element={<ProtectedRoute loginCheck={true}>
-                  <Mypage />
-                </ProtectedRoute>
-                }
-              />
+              <Route index element={<Navigate to="/mypage/profile" replace />}/>
+              <Route path="profile" element={<ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute>}/>
             </Route>
             {/* <MyPageLayout/>의 Route */}
-            <Route
-              path="pwdchange"
-              element={
-                <ProtectedRoute loginCheck={true}>
-                  <PwdChange />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='MyLeave'
-              element={
-                <ProtectedRoute loginCheck={true}>
-                  <MyLeave />
-                </ProtectedRoute>
-              }
-            >
+            <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>}/>
+            <Route path='MyLeave' element={<ProtectedRoute loginCheck={true}><MyLeave /></ProtectedRoute>}>
               <Route path='search' element={<MyLeave />} />
             </Route>
             <Route path="organization" element={<Organization />} />
 
-            <Route path="certi-doc-applied" element={<AppliedCertidocs />}>
+            <Route path="certi-doc-applied" element={<ProtectedRoute adminCheck={true}><AppliedCertidocs /></ProtectedRoute>}>
               <Route path='search' element={<AppliedCertidocs />} />
             </Route>
             <Route path="certi-doc-apply" element={<ApplyCertiDoc />} />
@@ -136,38 +108,34 @@ function App() {
               <Route path='search' element={<SubjectList />} />
             </Route>
 
-            <Route path="lecture-student-admin" element={<StudentAttendanceForAdmin />} />
-            <Route path="/attendance/:lecCode" element={<AttendanceDetailList />} />
-            <Route path="/attendanceDetail/:attendance" element={<AttendanceStdDetail />} />
+            <Route path="lecture-student-admin" element={<StudentAttendanceForAdmin />} >
+              <Route path=":lecCode" element={<AttendanceDetailList />} />
+            </Route>
             <Route path="lecture-regist-admin" element={<RegistLectureForAdmin />} />
             <Route path="lecture-student-prof" element={<StudentAttendanceForProf />}>
               <Route path='search' element={<StudentAttendanceForProf/>}/>
             </Route>
-            <Route path="lecture-regist-prof" element={<RegistLectureForProf />}>
+            <Route path="lecture-regist-prof" element={<ProtectedRoute profCheck={true}><RegistLectureForProf /></ProtectedRoute>}>
               <Route path='search' element={<RegistLectureForProf/>}/>
             </Route>
 
-            <Route
-              path="management-employee"
-              element={<EmployeeManagement />}
-            />
+            <Route path="management-employee" element={<EmployeeManagement />}/>
             <Route path="regist-employee" element={<EmployeeRegist />} />
-            <Route
-              path="modify-employee/:empCode"
-              element={<EmployeeModify />}
-            />
+            <Route path="modify-employee/:empCode" element={<EmployeeModify />}/>
             <Route path="search-employee" element={<EmployeeManagement />} />
             <Route path="management-student" element={<StudentManagement />} />
             <Route path="regist-student" element={<StudentRegist />} />
             <Route path="modify-student/:stdCode" element={<StudentModify />} />
             <Route path="search-student" element={<StudentManagement />} />
             <Route path="schedule-academic" element={<AcademicSchedule />} />
-          </Route>{" "}
+          </Route>
           {/* <Layout/>의 Route */}
           <Route path="/login" element={<ProtectedRoute loginCheck={false}><Login /></ProtectedRoute>} />
           <Route path="/idsearch" element={<ProtectedRoute loginCheck={false}><IdSearch /></ProtectedRoute>} />
           <Route path="/pwdsearch" element={<ProtectedRoute loginCheck={false}><PwdSearch /></ProtectedRoute>} />
 
+          {/* 설정해둔 path가 아닐 경우 모두 Error 페이지로 이동 */}
+          <Route path="*" element={ <Error/>}/>
         </Routes>
       </BrowserRouter>
     </>
