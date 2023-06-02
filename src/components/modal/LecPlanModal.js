@@ -109,7 +109,7 @@ function LecPlanModal({ lecture, closeModal }) {
               value={employee.empPhone}
             />
           </div>
-          <div className={EmployeeInsertModalCSS.EmployeeInsertModalMiddle}>> 강의 정보</div>
+          <div className={EmployeeInsertModalCSS.EmployeeInsertModalMiddle}> 강의 정보</div>
           <div className={EmployeeInsertModalCSS.EmployeeInsertModalFourth}>
             총 수업회차
             <input
@@ -277,7 +277,9 @@ function LecPlanModal({ lecture, closeModal }) {
             </table>
           </div>
         </div>
+    </div>
+    </div>
 
-}
+)}
 
 export default LecPlanModal;
