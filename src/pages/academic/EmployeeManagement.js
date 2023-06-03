@@ -1,7 +1,7 @@
 /* 행정직원의 '교직원 관리' */
 import { motion } from "framer-motion";
 import { useEffect, useState } from 'react';
-import { callEmployeesAPI, callEmployeesDeleteAPI } from '../../apis/AcademicAPICalls';
+import { callEmployeesAPI, callEmployeesDeleteAPI, callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -11,30 +11,50 @@ import EmployeeListCss from '../../css/EmployeeList.module.css';
 import CommonCSS from '../../css/common/Common.module.css';
 import PagingBar from '../../components/common/PagingBar';
 
-
-const employeeOptions = [
-  { value: 'option1', label: 'option 1' },
-  { value: 'option2', label: 'option 2' },
+const options = [
+  { value: 'empName', label: '직원명' },
+  { value: 'deptName', label: '소속명' },
 ];
-
-const pageInfo = { startPage: 1, endPage: 10, currentPage: 1, maxPage: 10 }
 
 function EmployeeManagement() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { Employees } = useSelector((state) => state.StaffReducer);
+  const { Employees, search } = useSelector((state) => state.StaffReducer);
   const [currentPage, setCurrentPage] = useState(1);
 
+  // checkbox
   const [selectAll, setSelectAll] = useState(false);
   const [checkboxes, setCheckboxes] = useState({});
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  // search
+  const [params] = useSearchParams();
+  const condition = params.get('condition');
+  const name = params.get('search');
+  const type = "employee";
+  
 
   useEffect(
     () => {
+      if (name) {
+        dispatch(callEmployeeSearchListAPI({ search: name, condition: condition, currentPage: currentPage }))
+        return;
+      }
       dispatch(callEmployeesAPI({ currentPage }))
     },
-    [currentPage]
+    [currentPage, condition, name]
   );
+
+  /* 교직원 테이블 항목 클릭 이벤트 */
+  const onEmployeeItemClickHandler = async (empCode) => {
+    navigate(`/modify-employee/${empCode}`);
+  }
+
+  /* 교직원 체크박스 클릭과 테이블 항목 클릭 이벤트 버블링 중지 이벤트 */
+  const handleCheckboxClick = (e) => {
+    e.stopPropagation();
+  };
 
 
   // 각 교직원의 체크박스
@@ -57,7 +77,7 @@ function EmployeeManagement() {
 
     // 체크박스 상태 통일(전체)
     let newCheckboxes = {};
-    Employees.forEach((staff) => {
+    Employees.data.forEach((staff) => {
       newCheckboxes[staff.empCode] = e.target.checked;
     });
     setCheckboxes(newCheckboxes);
@@ -111,9 +131,7 @@ function EmployeeManagement() {
 
 
       <div className={SearchBarCss.basic}>
-        <SearchBar
-          options={employeeOptions}
-        />
+        <SearchBar options={options} type={type} />
       </div>
       <table className={EmployeeListCss.employeeTable}>
         <colgroup>
@@ -144,10 +162,11 @@ function EmployeeManagement() {
           </tr>
         </thead>
         <tbody>
-          {(Employees && Employees.data) &&
-            Employees.data.map((staff) => (
+          {(search && search.data) ? (
+            search.data.map((staff) => (
               <tr
                 key={staff.empCode}
+                onClick={() => onEmployeeItemClickHandler(staff.empCode)}
               >
                 <td>
                   <input
@@ -155,6 +174,7 @@ function EmployeeManagement() {
                     value={staff.empCode}
                     checked={checkboxes[staff.empCode] || false}
                     onChange={(e) => handleCheckboxChange(e, staff.empCode)}
+                    onClick={handleCheckboxClick}
                   />
                 </td>
                 <td>{staff.empId}</td>
@@ -165,11 +185,40 @@ function EmployeeManagement() {
                 <td>{new Date(staff.empEntDate).toISOString().split('T')[0]}</td>
                 <td>{staff.empStatus}</td>
               </tr>
-            ))}
+            ))
+          )
+            :
+            (Employees && Employees.data) &&
+            Employees.data.map((staff) => (
+                <tr
+                  key={staff.empCode}
+                  onClick={() => onEmployeeItemClickHandler(staff.empCode)}
+                >
+                  <td>
+                    <input
+                      type="checkbox"
+                      value={staff.empCode}
+                      checked={checkboxes[staff.empCode] || false}
+                      onChange={(e) => handleCheckboxChange(e, staff.empCode)}
+                      onClick={handleCheckboxClick}
+                    />
+                  </td>
+                  <td>{staff.empId}</td>
+                  <td>{staff.empName}</td>
+                  <td>{staff.department.deptName}</td>
+                  <td>{staff.empEmail}</td>
+                  <td>{staff.empPhone}</td>
+                  <td>{new Date(staff.empEntDate).toISOString().split('T')[0]}</td>
+                  <td>{staff.empStatus}</td>
+                </tr>
+              ))
+          }
         </tbody>
       </table>
       <div>
-        {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+        {(search && search.pageInfo) ? (<PagingBar pageInfo={search.pageInfo} setCurrentPage={setCurrentPage} />)
+          : (Employees && Employees.pageInfo) ? (<PagingBar pageInfo={Employees.pageInfo} setCurrentPage={setCurrentPage} />)
+            : null}
       </div>
 
     </motion.div>

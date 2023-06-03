@@ -1,4 +1,4 @@
-.studentList {
+.StudentList {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -7,25 +7,9 @@
   font-size: 18px;
 }
 
-.studentListTable {
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-
-.studentListTable th,
-td {
-  height: 10px;
-  text-align: center;
-  word-break: break-all;
-  table-layout: fixed;
-  flex-direction: column;
-  align-items: center;
-  font-size: 18px;
-}
-
 .studentTable {
-  margin-top: 30px;
-  border-collapse: collapse;
+  margin-top: 10px;
+  overflow: scroll;
 }
 
 .studentTable th {
@@ -34,11 +18,11 @@ td {
   padding: 20px;
 }
 
-.studentTable td {
-  padding: 20px;
+.studentTable tr {
+  height: 52px;
 }
 
-.studentRegistButton {
+.StudentRegistButton {
   position: absolute;
   right: 170px;
   border-radius: 10px;
@@ -51,7 +35,7 @@ td {
   transition: transform 0.2s ease-in-out;
 }
 
-.studentDeleteButton {
+.StudentDeleteButton {
   position: absolute;
   right: 70px;
   border-radius: 10px;

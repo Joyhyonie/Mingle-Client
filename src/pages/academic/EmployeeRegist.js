@@ -13,7 +13,9 @@ function EmployeeRegist() {
   const navigate = useNavigate();
   const { regist } = useSelector((state) => state.StaffReducer);
   const [form, setForm] = useState({
-    empStatus: "선택"
+    empStatus: "선택",
+    empPwd: '$2a$10$COvazywgZPXseeKaYhruh.pAYYfcSeGO5aSrHOsLZN0X8joNwW2dW',
+    empAnnual: '12',
   });
   const imageInput = useRef(); // 이미지 삽입
   const [image, setImage] = useState(null);
@@ -21,12 +23,13 @@ function EmployeeRegist() {
   const [deptCode, setDeptCode] = useState(); // 
   const [isOpenPost, setIsOpenPost] = useState(false); // 주소 업데이트
   const [empAddressBase, setEmpAddressBase] = useState('');
-  const [empAddressDetail, setEmpAddressDetail] = useState('');
+  const [errors, setErrors] = useState({});
 
   /* deptCode 값 변경 */
   const onChangeDeptCodeHandler = (e) => {
     setDeptCode(e.target.value);
   }
+
 
   /* 이미지 업로드 버튼 클릭 이벤트 */
   const onClickImageUpload = () => {
@@ -44,10 +47,7 @@ function EmployeeRegist() {
       ...form,
       [e.target.name]: e.target.value
     });
-    if (e.target.name === 'empAddressDetail') {
-      setEmpAddressDetail(e.target.value);
-    }
-  }
+  };
 
   /* 칸을 눌렀을 때 팝업이 열리도록 */
   const onChangeOpenPost = () => {
@@ -74,10 +74,10 @@ function EmployeeRegist() {
     return `${year}-${month}-${day}`;
   };
 
-  /* 학생 정보 등록 후 regist 값이 확인되면 학생 목록으로 이동 */
+  /* 교직원 정보 등록 후 regist 값이 확인되면 학생 목록으로 이동 */
   useEffect(() => {
     if (regist?.status === 200) {
-      toast.success("신규 교직원 등록이 완료 되었습니다. 교번은 " + regist?.data?.empCode + " 입니다.");
+      toast.success("신규 교직원 등록이 완료 되었습니다.");
       navigate('/management-employee', { replace: true });
       console.log(regist);
     }
@@ -103,6 +103,58 @@ function EmployeeRegist() {
   /* 학생 등록 버튼 클릭 이벤트 */
   const onClickEmployeeRegistHandler = () => {
 
+    const validations = [
+      { key: "empId", message: "ex ) 교직원 : AD0000, 교수 : PF0000 과 같은 형식을 지켜주세요.", customCheck: (value) => !isValidEmpId(value)},
+      { key: "empName", message: "성함을 기입해주세요. ☑️" },
+      { key: "empNameEn", message: "영문 이름을 기입해주세요. ☑️" },
+      { key: "deptCode", message: "부서 코드를 기입해주세요. ☑️" },
+      { key: "empEmail", message: "이메일을 기입해주세요. ☑️" },
+      { key: "empEmail", message: "이메일은 (아이디)@mingle.ac.kr 형식이어야 합니다.", customCheck: (value) => !isValidEmail(value) },
+      { key: "empPhone", message: "전화번호를 기입해주세요. ☑️" },
+      { key: "empPhone", message: "전화번호는 010 혹은 011로 시작하는 숫자 형식이어야 합니다.", customCheck: (value) => !isValidPhone(value) },
+      { key: "empStatus", message: "상태를 선택해주세요. ☑️", customCheck: (value) => value === "선택" },
+      { key: "empSsn", message: "주민등록번호를 기입해주세요. ☑️" },
+      { key: "empSsn", message: "올바른 주민등록번호를 입력해주세요. ☑️", customCheck: (value) => !isValidSsn(value) },
+      { key: "empAddress", message: "주소를 기입해주세요. ☑️" },
+      { key: "empEntDate", message: "입사일을 선택해주세요. ☑️" },
+    ];
+
+    // 이메일 유효성 검사 함수
+    const isValidEmail = (value) => {
+      const emailRegex = /^[^\s@]+@mingle\.ac\.kr$/;
+      return emailRegex.test(value);
+    };
+
+    // 전화번호 유효성 검사 함수
+    const isValidPhone = (value) => {
+      const phoneRegex = /^(010|011)\d{7,8}$/;
+      return phoneRegex.test(value);
+    };
+
+    // 주민등록번호 유효성 검사 함수
+    const isValidSsn = (value) => {
+      const ssnRegex = /^(0[0-9]|[1-9][0-9])(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])-[1-4]\d{6}$/;
+      return ssnRegex.test(value);
+    };
+
+    // empId 유효성 검사 함수
+    const isValidEmpId = (value) => {
+      const empIdRegex = /^(AD|PF)\d{1,4}$/;
+      return empIdRegex.test(value);
+    };
+
+
+    for (let i = 0; i < validations.length; i++) {
+      const validation = validations[i];
+      const value = form[validation.key] || (validation.key === "deptCode" && deptCode);
+
+      if ((!value || (validation.customCheck && validation.customCheck(value))) && validation.message) {
+        toast.error(validation.message);
+        return;
+      }
+    }
+
+
     const formData = new FormData();
     // formData.append("empCode", form.empCode);
     formData.append("empId", form.empId);
@@ -116,8 +168,6 @@ function EmployeeRegist() {
     formData.append("empPhone", form.empPhone);
     formData.append("empStatus", form.empStatus);
     formData.append("empAddress", form.empAddress);
-    const detailAddress = empAddressDetail ? empAddressDetail : '';
-    formData.append("empAddress", form.empAddressBase + ' ' + detailAddress); // 기본 주소와 상세 주소 합치기
     formData.append("empEntDate", formatDate(form.empEntDate));
     if (form.empAbDate) formData.append("empAbDate", formatDate(form.empAbDate));
     if (form.empDropDate) formData.append("empDropDate", formatDate(form.empDropDate));
@@ -182,16 +232,27 @@ function EmployeeRegist() {
             <input
               type="number"
               name="empAnnual"
+              readOnly
               className={EmployeeRegistCss.employeeRegistLevel}
-              onChange={onChangeHandler}
+              value={form.empAnnual}
             />
             소속
-            <input
-              type="text"
-              name="deptCode"
-              className={EmployeeRegistCss.employeeRegistDeptCode}
-              onChange={onChangeDeptCodeHandler}
-            />
+            <select className={EmployeeRegistCss.employeeRegistDeptCode} name="deptCode" onChange={onChangeDeptCodeHandler} value={deptCode}>
+              <option value="선택">선택</option>
+              <option value="13" onChange={onChangeDeptCodeHandler}>IT공학과</option>
+              <option value="14" onChange={onChangeDeptCodeHandler}>간호학과</option>
+              <option value="15" onChange={onChangeDeptCodeHandler}>경제학과</option>
+              <option value="16" onChange={onChangeDeptCodeHandler}>경영학과</option>
+              <option value="17" onChange={onChangeDeptCodeHandler}>환경공학과</option>
+              <option value="18" onChange={onChangeDeptCodeHandler}>외식조리학과</option>
+              <option value="19" onChange={onChangeDeptCodeHandler}>아동교육학과</option>
+              <option value="20" onChange={onChangeDeptCodeHandler}>시각디자인학과</option>
+              <option value="21" onChange={onChangeDeptCodeHandler}>교무처</option>
+              <option value="22" onChange={onChangeDeptCodeHandler}>학생처</option>
+              <option value="23" onChange={onChangeDeptCodeHandler}>입학처</option>
+              <option value="24" onChange={onChangeDeptCodeHandler}>취업처</option>
+              <option value="25" onChange={onChangeDeptCodeHandler}>총무처</option>
+            </select>
           </div>
           <div className={EmployeeRegistCss.employeeRegistFormSecond}>
             이메일
@@ -212,15 +273,17 @@ function EmployeeRegist() {
             <input
               type="text"
               name="empPwd"
+              readOnly
               className={EmployeeRegistCss.employeeRegistPwd}
-              onChange={onChangeHandler}
-            />
+              placeholder='자동기입! 추후 수정 가능'>
+            </input>
           </div>
           <div className={EmployeeRegistCss.employeeRegistFormThird}>
             휴대전화
             <input
-              type="tel"
+              type="text"
               name="empPhone"
+              placeholder='숫자만 입력하세요.'
               className={EmployeeRegistCss.employeeRegistPhone}
               onChange={onChangeHandler}
             />
@@ -254,14 +317,7 @@ function EmployeeRegist() {
               <div className={EmployeeRegistCss.postCodeStyle}><DaumPostcode autoClose onComplete={onCompletePost} /></div>
             ) : null}
           </div>
-          <div>
-            <input
-              type="text"
-              name="empAddressDetail"
-              className={EmployeeRegistCss.employeeRegistAddressDetail}
-              onChange={onChangeHandler}
-            />
-          </div>
+
           <div className={EmployeeRegistCss.employeeRegistFormFifth}>
             입사일
             <input

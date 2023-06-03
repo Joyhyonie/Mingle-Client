@@ -37,6 +37,7 @@ import StudentModify from './pages/academic/StudentModify';
 import StudentRegist from './pages/academic/StudentRegist';
 import EmployeeModify from './pages/academic/EmployeeModify';
 import EmployeeRegist from './pages/academic/EmployeeRegist';
+import EmployeeDetail from './pages/academic/EmployeeModify';
 import MyLeave from './components/lists/MyLeaveDoc';
 import AttendanceDetailList from './components/lists/AttendanceDetailList';
 import AttendanceStdDetail from './pages/lecture/admin/AttendanceStdDetail';
@@ -147,20 +148,15 @@ function App() {
               <Route path='search' element={<RegistLectureForProf/>}/>
             </Route>
 
-            <Route
-              path="management-employee"
-              element={<EmployeeManagement />}
-            />
+            <Route path="management-employee" element={<EmployeeManagement />}/>
             <Route path="regist-employee" element={<EmployeeRegist />} />
-            <Route
-              path="modify-employee/:empCode"
-              element={<EmployeeModify />}
-            />
-            <Route path="search-employee" element={<EmployeeManagement />} />
+            <Route path="modify-employee/:empCode" element={<EmployeeModify />}/>
+            <Route path='search' element={<EmployeeManagement />} />
+
             <Route path="management-student" element={<StudentManagement />} />
             <Route path="regist-student" element={<StudentRegist />} />
             <Route path="modify-student/:stdCode" element={<StudentModify />} />
-            <Route path="search-student" element={<StudentManagement />} />
+            <Route path='search' element={<StudentManagement />} />
             <Route path="schedule-academic" element={<AcademicSchedule />} />
           </Route>{" "}
           {/* <Layout/>의 Route */}
