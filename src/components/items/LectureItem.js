@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import buttonCSS from "../../css/Button.module.css";
+import LectureItemButtonCss from "../../css/LectureItemButton.module.css";
 
 function LectureItem({ lecture }) {
 
@@ -20,7 +21,7 @@ function LectureItem({ lecture }) {
     const clickBoardHandler2 = (lecture) => {
 
 
-        navigate(`/attendance/${lecture.lecCode}`); //출석
+        navigate(`/lecture-student-admin/${lecture.lecCode}`); //출석
 
 
     }
@@ -44,8 +45,8 @@ function LectureItem({ lecture }) {
             <td>{lecture.lecYear + '-' + lecture.lecSeason}</td>
             <td>{lecture.employee.empName}</td>
             <td>
-                <button className={buttonCSS.btn} type="button" onClick={(e) => { clickBoardHandler2(lecture); e.stopPropagation(); }}>출석</button>
-                <button className={buttonCSS.btn} type="button" onClick={(e) => { clickBoardHandler3(lecture); e.stopPropagation(); }}>성적</button>
+                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickBoardHandler2(lecture); e.stopPropagation(); }}>출석</button>
+                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickBoardHandler3(lecture); e.stopPropagation(); }}>성적</button>
             </td>
 
         </motion.tr>

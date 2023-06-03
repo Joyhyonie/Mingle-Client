@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import buttonCSS from "../../css/Button.module.css";
 import { useState } from 'react';
 import styled from "styled-components";
+import StdAttendanceUpdateModal from "../../components/modal/StdAttendanceUpdateModal";
 
 
 function AttendanceItem({ attendance }) {
@@ -14,6 +15,8 @@ function AttendanceItem({ attendance }) {
   `;
 
     const { newAttendance } = useSelector(state => state.SubjectInfoReducer);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedSubject, setSelectedSubject] = useState(null);
 
     const IconSVG = styled.svg`
     margin-left: -22px;
@@ -40,36 +43,45 @@ function AttendanceItem({ attendance }) {
 
 
 
-    const clickAttendanceHandler = (attendance) => {
+    const openModal = () => {
+
+        setIsModalOpen(true);
+    };
+    // const closeModal = () => {
+    //     setSelectedSubject(null);
+    //     setIsModalOpen(false);
+    // };
 
 
-        navigate(`/attendanceDetail/${attendance}`); //출석
-
-
-    }
 
 
     console.log(attendance);
     return (
-        <motion.tr
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
-        // onClick={() => clickAttendanceHandler(attendance.courseCode)}
-        >
-            {matchingAttendance ? (
-                <>
+        <>
+            <motion.tr
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
+                onClick={() => openModal()}
+            >
+                {matchingAttendance && (
                     <>
-                        <td>{matchingAttendance.course.student.stdCode}</td>
-                        <td>{matchingAttendance.course.student.department.deptName}</td>
-                        <td>{matchingAttendance.course.student.stdName}</td>
+                        <>
+                            <td>{matchingAttendance.course.student.stdCode}</td>
+                            <td>{matchingAttendance.course.student.department.deptName}</td>
+                            <td>{matchingAttendance.course.student.stdName}</td>
+                            <td><input type="text" style={{ textAlign: 'center', fontSize: '15px', fontWeight: 'bold' }} value={matchingAttendance.stdAtdStatus} readOnly /></td>
+                        </>
                     </>
-                </>
-            ) :
-                <>
-                    {/* <td>{attendance}&&{attendance.course.student.stdCode}</td>
-                    <td>{attendance}&&{attendance.student.department.deptName}</td>
-                    <td>{attendance}&&{attendance.student.stdName}</td> */}
-                </>}
-            <td>
+
+                )}
+                {/* ) :
+                    <>
+                        <td>가나</td>
+                        <td>가나</td>
+                        <td>가나</td>
+
+                    </>} */}
+
+                {/* <td>
                 <>
                     <select onChange={handleSelectChange}>
                         <option value="출석">출석</option>
@@ -77,11 +89,18 @@ function AttendanceItem({ attendance }) {
                         <option value="지각">지각</option>
                     </select>
                 </>
-            </td>
-            <td><input type="text" value={matchingAttendance.stdAtdStatus} readOnly /></td>
+            </td> */}
 
 
-        </motion.tr>
+
+            </motion.tr>
+            {isModalOpen && (
+                <StdAttendanceUpdateModal
+                    subject={matchingAttendance}
+                    setIsModalOpen={setIsModalOpen}
+                />
+            )}
+        </>
     );
 }
 

@@ -5,8 +5,9 @@ import AcScheduleDetailModal from "../modal/AcScheduleDetailModal";
 import { useDispatch, useSelector } from "react-redux";
 import { callAcScheduleByDateAPI } from "../../apis/ScheduleAPICalls";
 
-function AcademicCalendarInfo ({dateInAcCal, filteredAcSchedule}) {
+function AcademicCalendarInfo () {
 
+    const { dateInAcCal, filteredAcSchedule } = useSelector(state => state.CalendarReducer);
     const [acScheduleDetailModal, setAcScheduleDetailModal] = useState(false);
     const [selectedSchedule, setSelectedSchedule] = useState(null);         // 일정 상세 모달창에 클릭된 일정의 정보를 담아 보내기 위한 state
 

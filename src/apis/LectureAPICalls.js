@@ -2,7 +2,7 @@ import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from
 
 
 import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName,  patchLecPlan  } from "../modules/LectureModule";
-import { wait } from '@testing-library/user-event/dist/utils';
+
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -15,7 +15,11 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
     const requestURL = `${SUBJECT_URL}/list?page=${currentPage}`;
 
     return async (dispatch, getState) => {
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL,{
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
         console.log(result);
         if (result.status === 200) {
             dispatch(getSubjects(result));
@@ -152,19 +156,19 @@ export const callLecNameMyLecture = ({ currentPage = 1 }) => {
     }
 }
 
-export const callSearchName = ({search, condition ,currentPage = 1}) => {
+export const callSearchName = ({ search, condition, currentPage = 1 }) => {
     const requestURL = `${LECTURE_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
 
-    return async (dispatch,getState) => {
-        const result = await fetch(requestURL,{
-            method : "GET",
-            headers : {
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             }
         }).then(response => response.json());
 
-        if(result.status === 200){
+        if (result.status === 200) {
             dispatch(getSearchName(result));
             console.log(result);
         }
@@ -267,14 +271,18 @@ export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
 }
 
 /*학생 출석정보 수정  */
-export const callAttendanceModifyAPI = ({ stdAtdCode }, formData) => {
-    console.log(stdAtdCode)
+export const callAttendanceModifyAPI = (formData, { stdAtdCode }) => {
+    console.log("출석코드", stdAtdCode)
+    console.log("출석변경상태", formData)
+
     const requestURL = `${NEWATTENDANCE_URL}/modify/${stdAtdCode}`;
+
+
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
-            method: "PATCH",
-            body: formData
 
+            method: 'PATCH',
+            body: formData
         }).then(response => response.json());
 
         if (result.status === 200) {
@@ -290,6 +298,7 @@ export const callSubjectUpdateAPI = (formData) => {
 
     const requestURL = `${SUBJECT_URL}/modify`;
 
+
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method: 'PUT',
@@ -301,6 +310,7 @@ export const callSubjectUpdateAPI = (formData) => {
         }
     }
 }
+
 
 // export const callLectureCountAPI = ({ lecCode }) => {
 
@@ -319,27 +329,22 @@ export const callSubjectUpdateAPI = (formData) => {
 //     }
 // }
 
-export const callLecPlanInsertAPI = (formData) => {
+export const callLecPlanInsertAPI = (formData ,lecCode) => {
 
-
-    const requestURL = `${LECTURE_URL}/lecturePlan`;
+    const requestURL = `${LECTURE_URL}/lecturePlan/${lecCode}`;
 
     return async (dispatch, getstate) => {
 
         const result = await fetch(requestURL,{
-            method : 'PATCH',
-            headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-            },
+            method : 'PATCH',                       
             body : formData
         }).then(response => response.json());
 
-        if(result.status === 200){
+        if(result.status ===200){
+            console.log(result);
             dispatch(patchLecPlan(result));
         }
-    }
-
-    
+    }    
 } 
 
 // /*행정직원의 강의 등록 페이지 */
@@ -368,4 +373,5 @@ export const callLecPlanInsertAPI = (formData) => {
 //         }
 //     }
 // }
+
 
