@@ -59,10 +59,10 @@ function MyCalendar () {
             const endDate = dayjs(schedule.scheEndDate).endOf('day'); // 해당 날짜의 자정 이후까지 조회
 
             return dayjs(clickedDate).isSame(startDate) || 
-                  dayjs(clickedDate).isSame(endDate) || 
-                  (dayjs(clickedDate).isAfter(startDate) && dayjs(clickedDate).isBefore(endDate));
+                   dayjs(clickedDate).isSame(endDate) || 
+                   (dayjs(clickedDate).isAfter(startDate) && dayjs(clickedDate).isBefore(endDate));
 
-          });
+        });
         
         console.log('filteredSchedule => ', filteredSchedule);
         dispatch(setFilteredMySchedule(filteredSchedule)); // 선택된 날짜의 나의 일정을 조회시키기 위한 state에 set
