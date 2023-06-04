@@ -6,38 +6,42 @@ import AttendanceList from "../../../components/lists/AttendanceList";
 import PagingBar from "../../../components/common/PagingBar";
 import { useEffect, useState } from "react";
 import SearchBar from "../../../components/common/SearchBar";
-import { callLectureListAPI } from "../../../apis/LectureAPICalls";
+import { callLectureListAPI, callLectureSearchNameAPI } from "../../../apis/LectureAPICalls";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from 'react-router-dom';
 
 function StudentAttendanceForAdmin() {
 
 
     const [currentPage, setCurrentPage] = useState(1);
-    const { data, pageInfo } = useSelector(state => state.SubjectInfoReducer);
+    const { data, pageInfo, search } = useSelector(state => state.SubjectInfoReducer);
     const dispatch = useDispatch();
+    const [params] = useSearchParams();
+    const condition = params.get('condition');
+    const name = params.get('search');
 
-
+    console.log("name1", name);
     console.log("getInfo", data);
-
-
-
-
-
-
-    const options = [//프롭스
-        { value: "title", name: "주차" },
-        { value: "content", name: "1주차" }//어떻게 처리해야할까나
-
+    console.log("lectureserach", search);
+    const type = "lectureStudentAdmin";
+    const options = [
+        { value: "empName", label: "교수명" },
+        { value: "lecName", label: "강의명" }
     ];
 
 
     useEffect(
         () => {
-            /*lectureList APi 호출  () 함수를 전달해줘야 미들웨어에서 호출되고 넘어갈 것. */
+            console.log("name2", name);
+            if (name) {
+
+                dispatch(callLectureSearchNameAPI({ search: name, condition: condition, currentPage: currentPage }))
+
+            }
 
             dispatch(callLectureListAPI({ currentPage }))
         },
-        [currentPage]
+        [currentPage, condition, name]
     );
 
 
@@ -47,14 +51,15 @@ function StudentAttendanceForAdmin() {
         >
             <p className={CommonCSS.pageDirection}>출결 및 성적관리</p>
             <div className={SearchBarCSS.basic}>
-                {<SearchBar
-                    options={options}>
-                </SearchBar>}
-
-
+                {<SearchBar options={options} type={type} />}
             </div>
             <div>
-                {data && <AttendanceList LectureInfoList={data} />}
+
+                {search && search.data ? (
+                    <AttendanceList LectureInfoList={search.data} />
+                ) : (
+                    data && data && <AttendanceList LectureInfoList={data} />
+                )}
             </div>
 
             <div>

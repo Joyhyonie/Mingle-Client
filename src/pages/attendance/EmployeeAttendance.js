@@ -12,56 +12,58 @@ import SearchBarCss from '../../css/common/SearchBar.module.css';
 import SearchBar from "../../components/common/SearchBar";
 
 
-function EmployeeAttendance () {
+function EmployeeAttendance() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const type = "attendance";
     const [currentPage, setCurrentPage] = useState(1);
-    const {employeeList, nameSearch} = useSelector(state => state.AttendanceReducer);
+    const { employeeList, nameSearch } = useSelector(state => state.AttendanceReducer);
     const [params] = useSearchParams();
     const condition = params.get('condition');
     const name = params.get('search');
-    
+
     const options = [
         { value: "deptName", label: "소속" },
         { value: "empName", label: "이름" }
     ];
 
+
+
     useEffect(
-        ()=>{
-            if(name){
-                dispatch(callAttendanceSearchName({search : name, condition: condition, currentPage : currentPage }));
+        () => {
+            if (name) {
+                dispatch(callAttendanceSearchName({ search: name, condition: condition, currentPage: currentPage }));
                 return;
-            } 
-            dispatch(callEmployeeList({currentPage}));
-            
-            },        
-            [currentPage,name,condition]
-    )    
+            }
+            dispatch(callEmployeeList({ currentPage }));
+
+        },
+        [currentPage, name, condition]
+    )
 
     const onClickHandler = (empCode) => {
         navigate(`/attendance-employee/${empCode}`);
     }
-
+    console.log("진호lectureserach", nameSearch);
     return (
         <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
             <div>
-                <p className={ CommonCSS.pageDirection }>근태관리 ▸ 교직원 근태 기록</p>
+                <p className={CommonCSS.pageDirection}>근태관리 ▸ 교직원 근태 기록</p>
             </div>
             <div className={SearchBarCss.basic}>
-            {<SearchBar options={options} type={type}/>}
+                {<SearchBar options={options} type={type} />}
             </div>
             <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
-                    <col width="15%"/>
-                    <col width="15%"/>
-                    <col width="15%"/>
-                    <col width="15%"/>
-                    <col width="15%"/>
+                        <col width="15%" />
+                        <col width="15%" />
+                        <col width="15%" />
+                        <col width="15%" />
+                        <col width="15%" />
                     </colgroup>
                     <thead>
                         <tr>
@@ -73,44 +75,44 @@ function EmployeeAttendance () {
                         </tr>
                     </thead>
                     <tbody>
-                    {
-                        (nameSearch && nameSearch.data) ? (
-                            nameSearch.data.map((employee) => (
-                            <tr
-                                key={employee.empCode}
-                                onClick={() => onClickHandler(employee.empCode)}
-                            >
-                                <td>{employee.empCode}</td>
-                                <td>{employee.department.deptName}</td>
-                                <td>{employee.empName}</td>
-                                <td>{employee.empStatus}</td>
-                                <td>{employee.empAnnual}</td>
-                            </tr>
-                            ))
-                        ) : (
-                            (employeeList && employeeList.data) && (
-                                employeeList.data.map((employee) => (
-                                <tr
-                                key={employee.empCode}
-                                onClick={() => onClickHandler(employee.empCode)}
-                                >
-                                <td>{employee.empCode}</td>
-                                <td>{employee.department.deptName}</td>
-                                <td>{employee.empName}</td>
-                                <td>{employee.empStatus}</td>
-                                <td>{employee.empAnnual}</td>
-                                </tr>
-                            ))
+                        {
+                            (nameSearch && nameSearch.data) ? (
+                                nameSearch.data.map((employee) => (
+                                    <tr
+                                        key={employee.empCode}
+                                        onClick={() => onClickHandler(employee.empCode)}
+                                    >
+                                        <td>{employee.empCode}</td>
+                                        <td>{employee.department.deptName}</td>
+                                        <td>{employee.empName}</td>
+                                        <td>{employee.empStatus}</td>
+                                        <td>{employee.empAnnual}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                (employeeList && employeeList.data) && (
+                                    employeeList.data.map((employee) => (
+                                        <tr
+                                            key={employee.empCode}
+                                            onClick={() => onClickHandler(employee.empCode)}
+                                        >
+                                            <td>{employee.empCode}</td>
+                                            <td>{employee.department.deptName}</td>
+                                            <td>{employee.empName}</td>
+                                            <td>{employee.empStatus}</td>
+                                            <td>{employee.empAnnual}</td>
+                                        </tr>
+                                    ))
+                                )
                             )
-                        )
                         }
                     </tbody>
                 </table>
                 <div>
-                { (nameSearch && nameSearch.pageInfo) ? (<PagingBar pageInfo={nameSearch.pageInfo} setCurrentPage={setCurrentPage} /> ) 
-                : (employeeList && employeeList.pageInfo) ? (<PagingBar pageInfo={employeeList.pageInfo} setCurrentPage={setCurrentPage} /> )
-                : null }
-                </div>     
+                    {(nameSearch && nameSearch.pageInfo) ? (<PagingBar pageInfo={nameSearch.pageInfo} setCurrentPage={setCurrentPage} />)
+                        : (employeeList && employeeList.pageInfo) ? (<PagingBar pageInfo={employeeList.pageInfo} setCurrentPage={setCurrentPage} />)
+                            : null}
+                </div>
             </div>
         </motion.div>
     );

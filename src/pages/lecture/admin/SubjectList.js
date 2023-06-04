@@ -18,12 +18,12 @@ function SubjectList() {
   const dispatch = useDispatch();
   const type = "subject";
   const [currentPage, setCurrentPage] = useState(1);
-  const {subjects,search} = useSelector((state) => state.SubjectReducer);
+  const { subjects, search } = useSelector((state) => state.SubjectReducer);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [checkedItems, setCheckedItems] = useState([]);
-  const {delete1} = useSelector(state => state.SubjectReducer);
+  const { delete1 } = useSelector(state => state.SubjectReducer);
   const [params] = useSearchParams();
   const condition = params.get('condition');
   const name = params.get('search');
@@ -35,15 +35,17 @@ function SubjectList() {
   ];
 
   useEffect(
-    ()=>{
-      if(name){
-        dispatch(callSubjectSearchName({search : name, condition: condition, currentPage : currentPage }))
+    () => {
+      if (name) {
+        dispatch(callSubjectSearchName({ search: name, condition: condition, currentPage: currentPage }))
         return;
       }
-      dispatch(callSubjectsAPI({currentPage}))
+      dispatch(callSubjectsAPI({ currentPage }))
     },
-    [currentPage,isModalOpen,isInsertModalOpen,checkedItems,delete1,name,condition]
+    [currentPage, isModalOpen, isInsertModalOpen, checkedItems, delete1, name, condition]
   );
+
+
 
   const openModal = (subject) => {
     setSelectedSubject(subject);
@@ -63,9 +65,9 @@ function SubjectList() {
       setCheckedItems(checkedItems.filter(item => item !== value));
     }
   }
-  
+
   const onClickDelete = () => {
-    if(checkedItems.length === 0){
+    if (checkedItems.length === 0) {
       toast.error("과목을 선택해주세요");
       return;
     }
@@ -77,24 +79,24 @@ function SubjectList() {
   const onCLickInsert = () => {
     setIsInsertModalOpen(true);
   }
-  
+
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
     >
       <div className={SubjectListCSS.container}>
-      <div>
-      <p className={ CommonCSS.pageDirection }>과목관리 ▸ 과목관리</p>
-      </div>
+        <div>
+          <p className={CommonCSS.pageDirection}>과목관리 ▸ 과목관리</p>
+        </div>
         <motion.button className={SubjectListCSS.deleteButton}
-         onClick={onClickDelete}
-         whileHover={{scale:1.05}}>선택 삭제</motion.button>
-        <motion.button className={SubjectListCSS.insertButton}        
-         onClick={onCLickInsert}
-         whileHover={{scale:1.05}}>과목 등록</motion.button>
+          onClick={onClickDelete}
+          whileHover={{ scale: 1.05 }}>선택 삭제</motion.button>
+        <motion.button className={SubjectListCSS.insertButton}
+          onClick={onCLickInsert}
+          whileHover={{ scale: 1.05 }}>과목 등록</motion.button>
       </div>
       <div className={SubjectListCSS.SubjectList}>
-      <div className={SearchBarCss.basic}>
+        <div className={SearchBarCss.basic}>
           {<SearchBar options={options} type={type} />}
         </div>
         <table className={SubjectListCSS.SubjectListTable}>
@@ -108,7 +110,7 @@ function SubjectList() {
           </colgroup>
           <thead>
             <tr>
-              <th><input type="checkbox"/></th>
+              <th><input type="checkbox" /></th>
               <th>과목코드</th>
               <th>학과명</th>
               <th>과목명</th>
@@ -119,54 +121,54 @@ function SubjectList() {
             </tr>
           </thead>
           <tbody>
-          {
-             (search && search.data) ? (
-              search.data.map((subject) => (
-                <tr key={subject.sbjCode}>
-                <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange}/></td>
-                <td>{subject.sbjCode}</td>
-                <td>{subject.department.deptName}</td>
-                <td>{subject.sbjName}</td>
-                <td>{subject.classType}</td>
-                <td>{subject.score}</td>
-                <td><button 
-                onClick={()=> openModal(subject)}>수정</button></td>
-              </tr>
+            {
+              (search && search.data) ? (
+                search.data.map((subject) => (
+                  <tr key={subject.sbjCode}>
+                    <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange} /></td>
+                    <td>{subject.sbjCode}</td>
+                    <td>{subject.department.deptName}</td>
+                    <td>{subject.sbjName}</td>
+                    <td>{subject.classType}</td>
+                    <td>{subject.score}</td>
+                    <td><button
+                      onClick={() => openModal(subject)}>수정</button></td>
+                  </tr>
+                ))
+              ) : (
+                (subjects && subjects.data) && (
+                  subjects.data.map((subject) => (
+                    <tr key={subject.sbjCode}>
+                      <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange} /></td>
+                      <td>{subject.sbjCode}</td>
+                      <td>{subject.department.deptName}</td>
+                      <td>{subject.sbjName}</td>
+                      <td>{subject.classType}</td>
+                      <td>{subject.score}</td>
+                      <td><button
+                        onClick={() => openModal(subject)}>수정</button></td>
+                    </tr>
                   ))
-                ) : (
-                      (subjects && subjects.data) && (
-                        subjects.data.map((subject) => (
-                        <tr key={subject.sbjCode}>
-                          <td><input type="checkbox" value={subject.sbjCode} onChange={handleChange}/></td>
-                          <td>{subject.sbjCode}</td>
-                          <td>{subject.department.deptName}</td>
-                          <td>{subject.sbjName}</td>
-                          <td>{subject.classType}</td>
-                          <td>{subject.score}</td>
-                          <td><button 
-                               onClick={()=> openModal(subject)}>수정</button></td>
-                        </tr>
-                 ))
                 )
               )
-             } 
+            }
           </tbody>
         </table>
         <div>
-        { (search && search.pageInfo) ? (<PagingBar pageInfo={search.pageInfo} setCurrentPage={setCurrentPage} /> ) 
-            : (subjects && subjects.pageInfo) ? (<PagingBar pageInfo={subjects.pageInfo} setCurrentPage={setCurrentPage} /> )
-            : null }
+          {(search && search.pageInfo) ? (<PagingBar pageInfo={search.pageInfo} setCurrentPage={setCurrentPage} />)
+            : (subjects && subjects.pageInfo) ? (<PagingBar pageInfo={subjects.pageInfo} setCurrentPage={setCurrentPage} />)
+              : null}
         </div>
         {isModalOpen && (
-        <SubjectUpdateModal
-          subject={selectedSubject}
-          closeModal={closeModal}
-        />
-      )}
-      {isInsertModalOpen && (
-        <SubjectInsertModal
-        setIsInsertModalOpen={setIsInsertModalOpen}/>
-      )}
+          <SubjectUpdateModal
+            subject={selectedSubject}
+            closeModal={closeModal}
+          />
+        )}
+        {isInsertModalOpen && (
+          <SubjectInsertModal
+            setIsInsertModalOpen={setIsInsertModalOpen} />
+        )}
       </div>
     </motion.div>
   );

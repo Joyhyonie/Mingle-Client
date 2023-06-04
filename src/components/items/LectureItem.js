@@ -16,7 +16,8 @@ function LectureItem({ lecture }) {
     const [selectedLecName, setSelectedLecName] = useState('');
 
 
-    const clickBoardHandler = (lecture) => {
+
+    const clickBoardHandler = (lecture) => {   //lecture 랑 subject 가 들어옴 (dto에 있는 date)
 
         /* 해당 공지사항을 클릭 시, 조회수를 업데이트 해주는 API 호출 */
         // dispatch(callPatchBoardCountAPI(boardCode)); 버튼 두개 만들고 이벤트 여기다가 주고 버튼 css 주면 되겠다. 
@@ -40,6 +41,8 @@ function LectureItem({ lecture }) {
     }
 
     return (
+
+
         <motion.tr
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
             onClick={() => clickBoardHandler(lecture)}
@@ -47,7 +50,7 @@ function LectureItem({ lecture }) {
             { gradeModal ? <GradeModal setGradeModal={setGradeModal} lecCode={selectedLecCode} lecName={selectedLecName} /> : null}
 
             <td>{lecture.lecCode}</td>
-            <td>{lecture.subject.sbjName}</td>
+            <td>{lecture.lecName}</td>
             <td>{lecture.lecYear + '-' + lecture.lecSeason}</td>
             <td>{lecture.employee.empName}</td>
             <td>
