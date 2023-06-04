@@ -1,7 +1,10 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
 
-import { getSubjectInfo, getLectureInfo, getOpenLectureSearch, getOpenLectureInfo, patchStdattendanceModify, getLectureSearch, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName, patchLecPlan } from "../modules/LectureModule";
+
+import { getSubjectInfo, getLectureInfo,getOpenLectureInfo,getLectureSearch,getOpenLectureSearch,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName,  patchLecPlan, getStudentAttendance  } from "../modules/LectureModule";
+import { request } from "./Api";
+
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -15,7 +18,11 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
     const requestURL = `${SUBJECT_URL}/list?page=${currentPage}`;
 
     return async (dispatch, getState) => {
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL,{
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
         console.log(result);
         if (result.status === 200) {
             dispatch(getSubjects(result));
@@ -30,7 +37,7 @@ export const callSubjectSearchName = ({ search, condition, currentPage = 1 }) =>
         const result = await fetch(requestURL).then(response => response.json());
 
         if (result.status === 200) {
-            console.log("진호검색", result);
+           
             dispatch(getSearch(result));
         }
     }
@@ -325,33 +332,29 @@ export const callSubjectUpdateAPI = (formData) => {
 
 
 
-export const callLecPlanInsertAPI = (formData) => {
+export const callLecPlanInsertAPI = (formData ,lecCode) => {
 
-
-    const requestURL = `${LECTURE_URL}/lecturePlan`;
+    const requestURL = `${LECTURE_URL}/lecturePlan/${lecCode}`;
 
     return async (dispatch, getstate) => {
 
-        const result = await fetch(requestURL, {
-            method: 'PATCH',
-            headers: {
-                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
-            },
-            body: formData
+        const result = await fetch(requestURL,{
+            method : 'PATCH',                       
+            body : formData
         }).then(response => response.json());
 
-        if (result.status === 200) {
+        if(result.status ===200){
+            console.log(result);
             dispatch(patchLecPlan(result));
         }
-    }
+    }    
+} 
 
 
 }
 
 export const callLectureSearchNameAPI = ({ search, condition, currentPage = 1 }) => {
-    console.log("search2", search)
-    console.log("condition2", condition)
-    console.log("currentPage2", currentPage)
+   
 
     const requestURL = `${LECTURE_URL}/listSearch?condition=${condition}&search=${search}&page=${currentPage}`;
     console.log("requestURL", requestURL);
@@ -359,7 +362,7 @@ export const callLectureSearchNameAPI = ({ search, condition, currentPage = 1 })
         const result = await fetch(requestURL).then(response => response.json());
         console.log("callLectureSearchNameAPIresult1", result);
         if (result.status === 200) {
-            console.log("현재검색", result);
+           
             dispatch(getLectureSearch(result));
 
         }
@@ -375,10 +378,24 @@ export const callOpenLectureSearchNameAPI = ({ search, condition, currentPage = 
         const result = await fetch(requestURL).then(response => response.json());
         console.log("callLectureSearchNameAPIresult1", result);
         if (result.status === 200) {
-            console.log("현재검색2", result);
+           
             dispatch(getOpenLectureSearch(result));
 
         }
     }
 }
 
+/* 수강코드로 해당 강의를 수강하는 학생들의 출결 조회 (성적표 조회를 위함) */
+export function callStudentAttendanceGetAPI(courseCode) {
+
+    return async (dispatch, getState) => {
+
+        const result = await request('GET', `/attendance/std-attendance/${courseCode}`);
+
+        if(result.status == 200) {
+            dispatch(getStudentAttendance(result));
+        }
+
+    }
+
+}

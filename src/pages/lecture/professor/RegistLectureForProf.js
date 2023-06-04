@@ -18,7 +18,7 @@ function RegistLectureForProf () {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectLecture, setSelectLecture] = useState();
-  const {myLecture, searchName} = useSelector(state => state.SubjectInfoReducer);
+  const {myLecture, searchName, lecplan} = useSelector(state => state.SubjectInfoReducer);
   const [currentPage, setCurrentPage] = useState(1);
   const [params] = useSearchParams();
   const condition = params.get('condition');
@@ -50,7 +50,7 @@ function RegistLectureForProf () {
         }
         dispatch(callMyLectureCallAPI(currentPage));
       },
-      [currentPage,name,condition]
+      [currentPage,name,condition,lecplan]
     )
     
       

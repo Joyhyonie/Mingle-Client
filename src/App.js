@@ -1,5 +1,4 @@
 import { Toaster } from 'react-hot-toast';
-// import "antd/dist/antd.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from './layouts/Layout';
 import Mypage from "./pages/employee/Mypage";
@@ -39,7 +38,7 @@ import EmployeeModify from './pages/academic/EmployeeModify';
 import EmployeeRegist from './pages/academic/EmployeeRegist';
 import MyLeave from './components/lists/MyLeaveDoc';
 import AttendanceDetailList from './components/lists/AttendanceDetailList';
-import AttendanceStdDetail from './pages/lecture/admin/AttendanceStdDetail';
+import Error from './pages/error/Error';
 
 
 function App() {
@@ -59,13 +58,7 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute loginCheck={true}>
-                <Layout />
-              </ProtectedRoute>
-            }
+          <Route path="/" element={<ProtectedRoute loginCheck={true}><Layout /></ProtectedRoute>}
           >
             <Route element={<MainPageLayout />}>
               <Route index element={<MyCalendar />} />
@@ -82,40 +75,17 @@ function App() {
             </Route>
             {/* <BoardLayout/>의 Route */}
             <Route path="mypage" element={<MyPageLayout />}>
-              <Route
-                index
-                element={<Navigate to="/mypage/profile" replace />}
-              />
-              <Route
-                path="profile"
-                element={<ProtectedRoute loginCheck={true}>
-                  <Mypage />
-                </ProtectedRoute>
-                }
-              />
+              <Route index element={<Navigate to="/mypage/profile" replace />}/>
+              <Route path="profile" element={<ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute>}/>
             </Route>
             {/* <MyPageLayout/>의 Route */}
-            <Route
-              path="pwdchange"
-              element={
-                <ProtectedRoute loginCheck={true}>
-                  <PwdChange />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path='MyLeave'
-              element={
-                <ProtectedRoute loginCheck={true}>
-                  <MyLeave />
-                </ProtectedRoute>
-              }
-            >
+            <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>}/>
+            <Route path='MyLeave' element={<ProtectedRoute loginCheck={true}><MyLeave /></ProtectedRoute>}>
               <Route path='search' element={<MyLeave />} />
             </Route>
             <Route path="organization" element={<Organization />} />
 
-            <Route path="certi-doc-applied" element={<AppliedCertidocs />}>
+            <Route path="certi-doc-applied" element={<ProtectedRoute adminCheck={true}><AppliedCertidocs /></ProtectedRoute>}>
               <Route path='search' element={<AppliedCertidocs />} />
             </Route>
             <Route path="certi-doc-apply" element={<ApplyCertiDoc />} />
@@ -123,58 +93,52 @@ function App() {
               <Route path='search' element={<MyCertiDoc />} />
             </Route>
 
-            <Route path="attendance-employee" element={<EmployeeAttendance />}>
+            <Route path="attendance-employee" element={<ProtectedRoute adminCheck={true}><EmployeeAttendance /></ProtectedRoute>}>
               <Route path='search' element={<EmployeeAttendance />} />
+              <Route path=":empCode" element={<AttendanceDetail />} />
             </Route>
-            <Route path="attendance-employee/:empCode" element={<AttendanceDetail />} />
 
-            <Route path="leave-doc-applied" element={<AppliedLeaveList />}>
+            <Route path="leave-doc-applied" element={<ProtectedRoute adminCheck={true}><AppliedLeaveList /></ProtectedRoute>}>
               <Route path='search' element={<AppliedLeaveList />} />
             </Route>
 
-            <Route path="subject" element={<SubjectList />}>
+            <Route path="subject" element={<ProtectedRoute adminCheck={true}><SubjectList /></ProtectedRoute>}>
               <Route path='search' element={<SubjectList />} />
             </Route>
 
-            <Route path="lecture-student-admin" element={<StudentAttendanceForAdmin />}>
+
+            <Route path="lecture-student-admin" element={<ProtectedRoute adminCheck={true}><StudentAttendanceForAdmin /></ProtectedRoute>} >
+            <Route path=":lecCode" element={<AttendanceDetailList />} />
               <Route path='search' element={<StudentAttendanceForAdmin />} />
             </Route>
-            <Route path="/attendance/:lecCode" element={<AttendanceDetailList />} />
-            <Route path="/attendanceDetail/:attendance" element={<AttendanceStdDetail />} />
-
-            <Route path="lecture-regist-admin" element={<RegistLectureForAdmin />} >
+            <Route path="lecture-regist-admin" element={<ProtectedRoute adminCheck={true}><RegistLectureForAdmin /></ProtectedRoute>} >
               <Route path='search' element={<RegistLectureForAdmin />} />
+            </Route> 
+            <Route path="lecture-student-prof" element={<ProtectedRoute profCheck={true}><StudentAttendanceForProf /></ProtectedRoute>}>
+              <Route path='search' element={<StudentAttendanceForProf/>}/>
+            </Route>
+            <Route path="lecture-regist-prof" element={<ProtectedRoute profCheck={true}><RegistLectureForProf /></ProtectedRoute>}>
+              <Route path='search' element={<RegistLectureForProf/>}/>
+
             </Route>
 
-
-            <Route path="lecture-student-prof" element={<StudentAttendanceForProf />}>
-              <Route path='search' element={<StudentAttendanceForProf />} />
-            </Route>
-            <Route path="lecture-regist-prof" element={<RegistLectureForProf />}>
-              <Route path='search' element={<RegistLectureForProf />} />
-            </Route>
-
-            <Route
-              path="management-employee"
-              element={<EmployeeManagement />}
-            />
-            <Route path="regist-employee" element={<EmployeeRegist />} />
-            <Route
-              path="modify-employee/:empCode"
-              element={<EmployeeModify />}
-            />
-            <Route path="search-employee" element={<EmployeeManagement />} />
-            <Route path="management-student" element={<StudentManagement />} />
-            <Route path="regist-student" element={<StudentRegist />} />
-            <Route path="modify-student/:stdCode" element={<StudentModify />} />
-            <Route path="search-student" element={<StudentManagement />} />
-            <Route path="schedule-academic" element={<AcademicSchedule />} />
-          </Route>{" "}
+            <Route path="management-employee" element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>}/>
+            <Route path="regist-employee" element={<ProtectedRoute adminCheck={true}><EmployeeRegist /></ProtectedRoute>} />
+            <Route path="modify-employee/:empCode" element={<ProtectedRoute adminCheck={true}><EmployeeModify /></ProtectedRoute>}/>
+            <Route path="search-employee" element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>} />
+            <Route path="management-student" element={<ProtectedRoute adminCheck={true}><StudentManagement /></ProtectedRoute>} />
+            <Route path="regist-student" element={<ProtectedRoute adminCheck={true}><StudentRegist /></ProtectedRoute>} />
+            <Route path="modify-student/:stdCode" element={<ProtectedRoute adminCheck={true}><StudentModify /></ProtectedRoute>} />
+            <Route path="search-student" element={<ProtectedRoute adminCheck={true}><StudentManagement /></ProtectedRoute>} />
+            <Route path="schedule-academic" element={<ProtectedRoute adminCheck={true}><AcademicSchedule /></ProtectedRoute>} />
+          </Route>
           {/* <Layout/>의 Route */}
           <Route path="/login" element={<ProtectedRoute loginCheck={false}><Login /></ProtectedRoute>} />
           <Route path="/idsearch" element={<ProtectedRoute loginCheck={false}><IdSearch /></ProtectedRoute>} />
           <Route path="/pwdsearch" element={<ProtectedRoute loginCheck={false}><PwdSearch /></ProtectedRoute>} />
 
+          {/* 설정해둔 path가 아닐 경우 모두 Error 페이지로 이동 */}
+          <Route path="*" element={ <Error/>}/>
         </Routes>
       </BrowserRouter >
     </>

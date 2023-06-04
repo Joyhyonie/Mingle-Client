@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,16 +12,21 @@
 }
 
 
-.modalContainer{
+.modalContainer,
+.gradeModalContainer {
     position: flex;
     width: 740px;
     height: 430px;
     text-align: center;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);    
-    z-index: 1000;
+    z-index: 5;
     border-radius: 25px;
+}
+
+.gradeModalContainer {
+    width: 1700px;
+    height: 800px;
 }
 
 .SubjectModalDiv{    
@@ -171,5 +176,83 @@
 
 }
 
+
+/* --------------------------------------- 성적 조회 및 수정 ---------------------------------------- */
+.gradeHeader {
+    display: flex;
+    width: 1600px;
+    height: 80px;
+    background-color: #DADADA;
+    margin: 30px auto;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.gradeHeader div {
+    display: flex;
+    justify-content: left;
+    background-color: white;
+    width: 600px;
+    height: 45px;
+    border: 1px solid #969696;
+    margin-left: 30px;
+    align-items: center;
+}
+
+.gradeHeader div sub {
+    font-size: 17px;
+    font-weight: 900;
+    margin: 0px 20px;
+}
+
+.gradeHeader div p {
+    margin-bottom: 18px;
+    margin-left: 10px;
+}
+
+.gradeHeader button {
+    border: none;
+    background-color: #343434;
+    color: white;
+    padding: 11px 40px;
+    font-size: 16px;
+    font-weight: 900;
+    margin-left: 200px;
+    cursor: pointer;
+}
+
+.gradeTable {
+    width: 1600px;
+    height: 625px;
+    margin: 0 auto;
+    overflow: scroll;
+}
+
+.gradeTable::-webkit-scrollbar {
+    display: none;
+}
+
+.gradeTable th {
+    background-color: #DADADA;
+    border: 1px solid #888888;
+    font-size: 16px;
+}
+
+.gradeTable td {
+    border: 1px solid #888888;
+    font-size: 15px;
+}
+
+.gradeTable td input {
+    font-size: 15px;
+    font-weight: 600;
+    width: 23px;
+    border: none;
+    text-align: center;
+}
+
+.gradeTable td input:focus {
+    outline: none;
+}
 
 

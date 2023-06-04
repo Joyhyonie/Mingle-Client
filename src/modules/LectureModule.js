@@ -23,11 +23,27 @@ const GET_OPEN_LECTURE_SEARCH = "lecture/GET_OPEN_LECTURE_SEARCH"
 
 
 
-export const { lecture:
 
+const GET_STUDENT_ATTENDANCE = "lecture/GET_STUDENT_ATTENDANCE";
 
+export const { lecture : { getSubjectInfo, 
+                           patchStdattendanceModify,
+                           getLectureInfo, 
+                           getMylecture, 
+                           getLectureSearch,
+                           getOpenLectureSearch,
+                           getOpenLectureInfo,
+                           getAttendanceListInfo, 
+                           patchStdattendanceModify, 
+                           getNewAttendancelistInfo,
+                           initModify, 
+                           getLectureCount,
+                           getLecnameMylecture,
+                           getMylectureCerti ,
+                           getSearchName, 
+                           patchLecPlan,
+                           getStudentAttendance } } = createActions({
 
-    { getSubjectInfo, getLectureInfo, getOpenLectureSearch, getOpenLectureInfo, getMylecture, getAttendanceListInfo, getLectureSearch, patchStdattendanceModify, getNewAttendancelistInfo, initModify, getLectureCount, getLecnameMylecture, getMylectureCerti, getSearchName, patchLecPlan } } = createActions({
 
 
 
@@ -41,20 +57,15 @@ export const { lecture:
         [GET_NEW_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_LECTURE_COUNT]: (res) => res.data,
         [GET_LECTURE_SEARCH]: res => res.data,
-        [GET_OPEN_LECTURE_SEARCH]: res => res.data,
-
-
-
-
-
-
-
-        [PATCH_LEC_PLAN]: (res) => res.data,
-        [PATCH_ATTENDANCELIST_MODIFY]: (res) => res,
+        [GET_OPEN_LECTURE_SEARCH]: res => res.data,   
+          
         [INIT_MODIFY]: () => { },
-        [GET_SEARCH_NAME]: res => res.data
-
-
+      
+        [PATCH_LEC_PLAN]: res => res,
+        [PATCH_ATTENDANCELIST_MODIFY]: (res) => res.data,
+          
+        [GET_SEARCH_NAME] : res => res.data,
+        [GET_STUDENT_ATTENDANCE] : res => res.data
 
     });
 
@@ -64,19 +75,22 @@ const SubjectInfoReducer = handleActions({
     [GET_SUBJECT_INFO]: (state, { payload }) => payload,
     [GET_MYLECTURE_CERTI]: (state, { payload }) => ({ myLectureCerti: payload }),
     [GET_LECTURE_INFO]: (state, { payload }) => payload,
-    [GET_ATTENDANCELIST_INFO]: (state, { payload }) => ({ attendance: payload }),
+    [GET_ATTENDANCELIST_INFO]: (state, { payload }) => ({ ...state, attendance: payload }),
     [GET_LECNAME_MYLECTURE]: (state, { payload }) => ({ lecName: payload }),
     [GET_MYLECTURE]: (state, { payload }) => ({ myLecture: payload }),
     [GET_NEW_ATTENDANCELIST_INFO]: (state, { payload }) => ({ ...state, newAttendance: payload }),
     [GET_LECTURE_COUNT]: (state, { payload }) => ({ lecCount: payload }),
     [PATCH_ATTENDANCELIST_MODIFY]: (state, { payload }) => ({ ...state, modify: payload }),
-    [GET_SEARCH_NAME]: (state, { payload }) => ({ searchName: payload }),
-    [PATCH_LEC_PLAN]: (state, { payload }) => payload,
+
+       
     [INIT_MODIFY]: (state, { payload }) => ({ ...state, modify: null }),
     [GET_LECTURE_SEARCH]: (state, { payload }) => ({ search: payload }),
     [GET_OPEN_LECTURE_INFO]: (state, { payload }) => payload,
     [GET_OPEN_LECTURE_SEARCH]: (state, { payload }) => ({ openSearch: payload }),
-
+    [GET_SEARCH_NAME] : (state, {payload}) => ({searchName : payload}),
+    [PATCH_LEC_PLAN]: (state, {payload}) => ({lecplan : payload}),
+    [GET_STUDENT_ATTENDANCE] : (state, {payload}) => ({ ...state, stdAttendance : payload})
+  
 
 }, initialState)
 

@@ -4,7 +4,7 @@ import CheckBoxColumns from "./CheckBoxColumns";
 
 export const columnStudent = () => [
   {
-    // title: <AllCheckedBoxColumn />,
+    title: <AllCheckedBoxColumn />,
     dataIndex: "readAt",
     key: "readAt",
     width: 100,

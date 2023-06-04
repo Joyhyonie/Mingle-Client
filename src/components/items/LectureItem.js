@@ -3,12 +3,18 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import buttonCSS from "../../css/Button.module.css";
 import LectureItemButtonCss from "../../css/LectureItemButton.module.css";
+import { useState } from "react";
+import GradeModal from "../modal/GradeModal";
 
 function LectureItem({ lecture }) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const index = 0;
+    const [gradeModal, setGradeModal] = useState(false);
+    const [selectedLecCode, setSelectedLecCode] = useState(0);
+    const [selectedLecName, setSelectedLecName] = useState('');
+
 
 
     const clickBoardHandler = (lecture) => {   //lecture 랑 subject 가 들어옴 (dto에 있는 date)
@@ -22,19 +28,18 @@ function LectureItem({ lecture }) {
     const clickBoardHandler2 = (lecture) => {
 
 
-        navigate(`/attendance/${lecture.lecCode}`); //출석
+        navigate(`/lecture-student-admin/${lecture.lecCode}`); //출석
 
 
     }
-    const clickBoardHandler3 = (lecture) => {
-
-
-        navigate(`/score/${lecture.lecCode}`); //성적
-
-
+    
+    /* '성적' 버튼을 클릭 시, 실행되는 함수 */
+    const clickGradeHandler = (lecture) => {
+        setSelectedLecCode(lecture.lecCode); 
+        setSelectedLecName(lecture.lecName);
+        setGradeModal(true); 
     }
-    console.log("LectureItem에서 확인하고 싶다.", lecture);
-    //lecture.subject.sbjName -> lecture.lecture.lecName으로 바꿔야함.  근데 조건문을 lecname이 없으면 하지 않도록
+
     return (
 
 
@@ -42,7 +47,7 @@ function LectureItem({ lecture }) {
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
             onClick={() => clickBoardHandler(lecture)}
         >
-
+            { gradeModal ? <GradeModal setGradeModal={setGradeModal} lecCode={selectedLecCode} lecName={selectedLecName} /> : null}
 
             <td>{lecture.lecCode}</td>
             <td>{lecture.lecName}</td>
@@ -50,7 +55,7 @@ function LectureItem({ lecture }) {
             <td>{lecture.employee.empName}</td>
             <td>
                 <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickBoardHandler2(lecture); e.stopPropagation(); }}>출석</button>
-                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickBoardHandler3(lecture); e.stopPropagation(); }}>성적</button>
+                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickGradeHandler(lecture); e.stopPropagation(); }}>성적</button>
             </td>
 
         </motion.tr>
