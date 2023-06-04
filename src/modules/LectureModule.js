@@ -26,23 +26,22 @@ const GET_OPEN_LECTURE_SEARCH = "lecture/GET_OPEN_LECTURE_SEARCH"
 
 const GET_STUDENT_ATTENDANCE = "lecture/GET_STUDENT_ATTENDANCE";
 
-export const { lecture : { getSubjectInfo, 
-                           patchStdattendanceModify,
-                           getLectureInfo, 
-                           getMylecture, 
-                           getLectureSearch,
-                           getOpenLectureSearch,
-                           getOpenLectureInfo,
-                           getAttendanceListInfo, 
-                           patchStdattendanceModify, 
-                           getNewAttendancelistInfo,
-                           initModify, 
-                           getLectureCount,
-                           getLecnameMylecture,
-                           getMylectureCerti ,
-                           getSearchName, 
-                           patchLecPlan,
-                           getStudentAttendance } } = createActions({
+export const { lecture: { getSubjectInfo,
+    getLectureInfo,
+    getMylecture,
+    getLectureSearch,
+    getOpenLectureSearch,
+    getOpenLectureInfo,
+    getAttendanceListInfo,
+    patchStdattendanceModify,
+    getNewAttendancelistInfo,
+    initModify,
+    getLectureCount,
+    getLecnameMylecture,
+    getMylectureCerti,
+    getSearchName,
+    patchLecPlan,
+    getStudentAttendance } } = createActions({
 
 
 
@@ -57,15 +56,15 @@ export const { lecture : { getSubjectInfo,
         [GET_NEW_ATTENDANCELIST_INFO]: (res) => res.data,
         [GET_LECTURE_COUNT]: (res) => res.data,
         [GET_LECTURE_SEARCH]: res => res.data,
-        [GET_OPEN_LECTURE_SEARCH]: res => res.data,   
-          
+        [GET_OPEN_LECTURE_SEARCH]: res => res.data,
+
         [INIT_MODIFY]: () => { },
-      
+
         [PATCH_LEC_PLAN]: res => res,
         [PATCH_ATTENDANCELIST_MODIFY]: (res) => res.data,
-          
-        [GET_SEARCH_NAME] : res => res.data,
-        [GET_STUDENT_ATTENDANCE] : res => res.data
+
+        [GET_SEARCH_NAME]: res => res.data,
+        [GET_STUDENT_ATTENDANCE]: res => res.data
 
     });
 
@@ -82,15 +81,15 @@ const SubjectInfoReducer = handleActions({
     [GET_LECTURE_COUNT]: (state, { payload }) => ({ lecCount: payload }),
     [PATCH_ATTENDANCELIST_MODIFY]: (state, { payload }) => ({ ...state, modify: payload }),
 
-       
+
     [INIT_MODIFY]: (state, { payload }) => ({ ...state, modify: null }),
     [GET_LECTURE_SEARCH]: (state, { payload }) => ({ search: payload }),
     [GET_OPEN_LECTURE_INFO]: (state, { payload }) => payload,
     [GET_OPEN_LECTURE_SEARCH]: (state, { payload }) => ({ openSearch: payload }),
-    [GET_SEARCH_NAME] : (state, {payload}) => ({searchName : payload}),
-    [PATCH_LEC_PLAN]: (state, {payload}) => ({lecplan : payload}),
-    [GET_STUDENT_ATTENDANCE] : (state, {payload}) => ({ ...state, stdAttendance : payload})
-  
+    [GET_SEARCH_NAME]: (state, { payload }) => ({ searchName: payload }),
+    [PATCH_LEC_PLAN]: (state, { payload }) => ({ lecplan: payload }),
+    [GET_STUDENT_ATTENDANCE]: (state, { payload }) => ({ ...state, stdAttendance: payload })
+
 
 }, initialState)
 
