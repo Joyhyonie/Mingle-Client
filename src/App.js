@@ -106,9 +106,8 @@ function App() {
               <Route path='search' element={<SubjectList />} />
             </Route>
 
-            <Route path="lecture-student-admin" element={<ProtectedRoute adminCheck={true}><StudentAttendanceForAdmin /></ProtectedRoute>} >
-              <Route path=":lecCode" element={<AttendanceDetailList />} />
-            </Route>
+            <Route path="lecture-student-admin" element={<ProtectedRoute adminCheck={true}><StudentAttendanceForAdmin /></ProtectedRoute>}/>
+            <Route path="lecture-student-admin/:lecCode" element={<AttendanceDetailList />} />
             <Route path="lecture-regist-admin" element={<ProtectedRoute adminCheck={true}><RegistLectureForAdmin /></ProtectedRoute>} />
             <Route path="lecture-student-prof" element={<ProtectedRoute profCheck={true}><StudentAttendanceForProf /></ProtectedRoute>}>
               <Route path='search' element={<StudentAttendanceForProf/>}/>
