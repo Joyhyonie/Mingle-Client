@@ -76,11 +76,11 @@ function App() {
             </Route>
             {/* <BoardLayout/>의 Route */}
             <Route path="mypage" element={<MyPageLayout />}>
-              <Route index element={<Navigate to="/mypage/profile" replace />}/>
-              <Route path="profile" element={<ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute>}/>
+              <Route index element={<Navigate to="/mypage/profile" replace />} />
+              <Route path="profile" element={<ProtectedRoute loginCheck={true}><Mypage /></ProtectedRoute>} />
             </Route>
             {/* <MyPageLayout/>의 Route */}
-            <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>}/>
+            <Route path="pwdchange" element={<ProtectedRoute loginCheck={true}><PwdChange /></ProtectedRoute>} />
             <Route path='MyLeave' element={<ProtectedRoute loginCheck={true}><MyLeave /></ProtectedRoute>}>
               <Route path='search' element={<MyLeave />} />
             </Route>
@@ -108,17 +108,22 @@ function App() {
             </Route>
 
             <Route path="lecture-student-admin" element={<ProtectedRoute adminCheck={true}><StudentAttendanceForAdmin /></ProtectedRoute>} >
-              <Route path=":lecCode" element={<AttendanceDetailList />} />
+
+              <Route path='search' element={<StudentAttendanceForAdmin />} />
             </Route>
-            <Route path="lecture-regist-admin" element={<ProtectedRoute adminCheck={true}><RegistLectureForAdmin /></ProtectedRoute>} />
+            <Route path="lecture-student-admin/:lecCode" element={<ProtectedRoute adminCheck={true}><AttendanceDetailList /></ProtectedRoute>} />
+            <Route path="lecture-regist-admin" element={<ProtectedRoute adminCheck={true}><RegistLectureForAdmin /></ProtectedRoute>} >
+              <Route path='search' element={<RegistLectureForAdmin />} />
+            </Route>
             <Route path="lecture-student-prof" element={<ProtectedRoute profCheck={true}><StudentAttendanceForProf /></ProtectedRoute>}>
-              <Route path='search' element={<StudentAttendanceForProf/>}/>
+              <Route path='search' element={<StudentAttendanceForProf />} />
             </Route>
             <Route path="lecture-regist-prof" element={<ProtectedRoute profCheck={true}><RegistLectureForProf /></ProtectedRoute>}>
-              <Route path='search' element={<RegistLectureForProf/>}/>
+              <Route path='search' element={<RegistLectureForProf />} />
+
             </Route>
 
-            <Route path="management-employee" element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>}/>
+            <Route path="management-employee" element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>} />
             <Route path="regist-employee" element={<ProtectedRoute adminCheck={true}><EmployeeRegist /></ProtectedRoute>} />
             <Route path="modify-employee/:empCode" element={<ProtectedRoute adminCheck={true}><EmployeeModify /></ProtectedRoute>}/>
             <Route path='search' element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>} />
@@ -127,6 +132,7 @@ function App() {
             <Route path="regist-student" element={<ProtectedRoute adminCheck={true}><StudentRegist /></ProtectedRoute>} />
             <Route path="modify-student/:stdCode" element={<ProtectedRoute adminCheck={true}><StudentModify /></ProtectedRoute>} />
             <Route path='search' element={<ProtectedRoute adminCheck={true}><StudentManagement /></ProtectedRoute>} />
+              
             <Route path="schedule-academic" element={<ProtectedRoute adminCheck={true}><AcademicSchedule /></ProtectedRoute>} />
           </Route>
 
@@ -136,9 +142,9 @@ function App() {
           <Route path="/pwdsearch" element={<ProtectedRoute loginCheck={false}><PwdSearch /></ProtectedRoute>} />
 
           {/* 설정해둔 path가 아닐 경우 모두 Error 페이지로 이동 */}
-          <Route path="*" element={ <Error/>}/>
+          <Route path="*" element={<Error />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter >
     </>
   );
 }

@@ -3,50 +3,58 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import buttonCSS from "../../css/Button.module.css";
 import LectureItemButtonCss from "../../css/LectureItemButton.module.css";
+import { useState } from "react";
+import GradeModal from "../modal/GradeModal";
 
 function LectureItem({ lecture }) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const index = 0;
+    const [gradeModal, setGradeModal] = useState(false);
+    const [selectedLecCode, setSelectedLecCode] = useState(0);
+    const [selectedLecName, setSelectedLecName] = useState('');
 
-    const clickBoardHandler = (lecture) => {
 
-        /* 해당 공지사항을 클릭 시, 조회수를 업데이트 해주는 API 호출 */
-        // dispatch(callPatchBoardCountAPI(boardCode)); 버튼 두개 만들고 이벤트 여기다가 주고 버튼 css 주면 되겠다. 
+
+    const clickPlanHandler = (lecture) => {
+
+
         navigate(`/lectureplan/${lecture.lecCode}`); //강의 계획서 네이게이터
 
 
     }
-    const clickBoardHandler2 = (lecture) => {
+    const clickAttendanceHandler = (lecture) => {
 
 
         navigate(`/lecture-student-admin/${lecture.lecCode}`); //출석
 
 
     }
-    const clickBoardHandler3 = (lecture) => {
 
-
-        navigate(`/score/${lecture.lecCode}`); //성적
-
-
+    /* '성적' 버튼을 클릭 시, 실행되는 함수 */
+    const clickGradeHandler = (lecture) => {
+        setSelectedLecCode(lecture.lecCode);
+        setSelectedLecName(lecture.lecName);
+        setGradeModal(true);
     }
-    console.log("LectureItem에서 확인하고 싶다.", lecture);
+
     return (
+
+
         <motion.tr
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
-            onClick={() => clickBoardHandler(lecture)}
+            onClick={() => clickPlanHandler(lecture)}
         >
-
+            {gradeModal ? <GradeModal setGradeModal={setGradeModal} lecCode={selectedLecCode} lecName={selectedLecName} /> : null}
 
             <td>{lecture.lecCode}</td>
-            <td>{lecture.subject.sbjName}</td>
+            <td>{lecture.lecName}</td>
             <td>{lecture.lecYear + '-' + lecture.lecSeason}</td>
             <td>{lecture.employee.empName}</td>
             <td>
-                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickBoardHandler2(lecture); e.stopPropagation(); }}>출석</button>
-                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickBoardHandler3(lecture); e.stopPropagation(); }}>성적</button>
+                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickAttendanceHandler(lecture); e.stopPropagation(); }}>출석</button>
+                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickGradeHandler(lecture); e.stopPropagation(); }}>성적</button>
             </td>
 
         </motion.tr>

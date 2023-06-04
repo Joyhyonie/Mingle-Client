@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import SearchBarCss from '../../css/common/SearchBar.module.css';
+import OpenLectureSearchBarCss from '../../css/common/OpenLectureSearchBar.module.css';
 import { callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
 import { callAttendanceSearchName, callLeaveDocSearchName, callMyLeaveDocSearchName } from '../../apis/AttendanceAPICalls';
 import { useNavigate } from 'react-router-dom';
 import { callCertiDocSearchName, callMyCertiDocSearchName } from '../../apis/CertiDocAPICalls';
 import { callSubjectSearchName } from '../../apis/LectureAPICalls';
 
-const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
+const OpenLectureSearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,10 +17,9 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
   const handleSearch = () => {
 
     // 구분 해주세용 :)
-    if(type == "employee") {
-      // dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
-      navigate(`/management-employee?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "board") {
+    if (type == "employee") {
+      dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
+    } else if (type == "board") {
       navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
     } else if (type == "attendance") {
       navigate(`/attendance-employee?condition=${selectedOption}&search=${inputValue}`);
@@ -40,8 +39,6 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
       navigate(`/lecture-regist-prof?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "studentAttendance") {
       navigate(`/lecture-student-prof?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "student") {
-      navigate(`/management-student?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "lectureStudentAdmin") {
       navigate(`/lecture-student-admin?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "registLectureForAdmin") {
@@ -57,11 +54,11 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
   };
 
   return (
-    <div className={SearchBarCss.searchBarWhole}>
+    <div className={OpenLectureSearchBarCss.searchBarWhole2}>
       <select
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
-        className={SearchBarCss.searchBarSelect}>
+        className={OpenLectureSearchBarCss.searchBarSelect2}>
         <option value="">화 이 팅 ୧( "̮ )୨✧</option> {/* default option */}
         {options.map((option) => (
           <option key={option.value} value={option.value}>
@@ -73,12 +70,12 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        className={SearchBarCss.searchBar}
+        className={OpenLectureSearchBarCss.searchBar2}
         onKeyUp={handleEnterKey}
       />
-      <button className={SearchBarCss.searchBarBtn} onClick={handleSearch}>검색</button>
+      <button className={OpenLectureSearchBarCss.searchBarBtn2} onClick={handleSearch}>검색</button>
     </div>
   );
 };
 
-export default SearchBar;
+export default OpenLectureSearchBar;

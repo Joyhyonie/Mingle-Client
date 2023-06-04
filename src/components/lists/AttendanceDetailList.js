@@ -6,52 +6,34 @@ import AteendanceSearchBar from "../../components/common/AteendanceSearchBar";
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { callCourceStdListAPI, callLectureCountAPI, callNewAttendanceListAPI } from "../../apis/LectureAPICalls";
-import { useNavigate, useParams } from 'react-router-dom';
+import { callCourceStdListAPI } from "../../apis/LectureAPICalls";
+import { useParams } from 'react-router-dom';
 import CommonCSS from '../../css/common/Common.module.css'
 
-function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수가 api에 넣을 것인가?
+function AttendanceDetailList({ attendanceDetailList }) {
 
 
-    const { attendance, newAttendance, lecCount, modify } = useSelector(state => state.SubjectInfoReducer);
+    const { attendance } = useSelector(state => state.SubjectInfoReducer);
     const { lecCode } = useParams();
     const SelectBoxWrapper = styled.div`
     // display: flex;
     // flex-grow:1;
   `;
-
-
-    console.log("여기는 출첵attendance", attendance);
-
-
-
-
-    const handleSelectChange = (event) => {
-        const selectedOption = event.target.value;
-        console.log('Selected option:', selectedOption);
-        setAttendanceStatus(selectedOption)
-    };
-    const [attendanceStatus, setAttendanceStatus] = useState('');
-
     const dispatch = useDispatch();
-
-
-
-
 
     useEffect(
         () => {
-            console.log("코드코드코드코드", lecCode);
+
             dispatch(callCourceStdListAPI({ lecCode }));
 
 
         },
         []);
 
-    console.log("냐얼", attendance && attendance.lectureDTO[0]);
+
     const option = attendance && attendance.lectureDTO[0];
 
-    console.log("attendance22", attendance);
+
 
 
 
@@ -78,7 +60,6 @@ function AttendanceDetailList({ attendanceDetailList }) {//매개객체 변수�
                     <th>학번</th>
                     <th>학과명</th>
                     <th>성명</th>
-                    {/* <th>출석 입력</th> */}
                     <th>출석 상태</th>
 
                 </tr>

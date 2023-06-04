@@ -45,6 +45,8 @@ function SubjectList() {
     [currentPage, isModalOpen, isInsertModalOpen, checkedItems, delete1, name, condition]
   );
 
+
+
   const openModal = (subject) => {
     setSelectedSubject(subject);
     setIsModalOpen(true);

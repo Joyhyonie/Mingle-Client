@@ -24,6 +24,8 @@ function StudentAttendanceForProf () {
   const [params] = useSearchParams();
   const condition = params.get('condition');
   const name = params.get('search');
+  const [selectedLecCode, setSelectedLecCode] = useState(0);
+  const [selectedLecName, setSelectedLecName] = useState('');
 
   const options = [
         { value: "sbjName", label: "과목명" },
@@ -40,15 +42,19 @@ function StudentAttendanceForProf () {
       },
       [currentPage,name,condition]
     )
+
+    /* '성적' 버튼을 클릭 시, 실행되는 함수 */
+    const clickGradeHandler = (lecture) => {
+      setSelectedLecCode(lecture.lecCode); 
+      setSelectedLecName(lecture.lecName);
+      setGradeModal(true); 
+    }
     
-      
       return (
         <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
-          { gradeModal ? <GradeModal setGradeModal={setGradeModal}/> : null}
-
-          <button onClick={ () => setGradeModal(true) }>성적Test</button>
+          { gradeModal ? <GradeModal setGradeModal={setGradeModal} lecCode={selectedLecCode} lecName={selectedLecName} /> : null}
           <div className={LectureCSS.container}>
           <div>
           <p className={ CommonCSS.pageDirection }>강의관리 ▸ 출결 및 성적관리</p>
@@ -93,7 +99,8 @@ function StudentAttendanceForProf () {
                       <td>{lecture.lecStartDate}</td>
                       <td>{lecture.lecEndDate}</td>
                       <td><button className={LectureCSS.button}>출결</button></td>
-                      <td><button className={LectureCSS.button}>성적</button></td>
+                      <td><button className={LectureCSS.button} onClick={ () => clickGradeHandler(lecture) }>성적</button></td>
+                      
                     </tr>
                             ))
                         ) : (
@@ -107,7 +114,7 @@ function StudentAttendanceForProf () {
                                 <td>{lecture.lecStartDate}</td>
                                 <td>{lecture.lecEndDate}</td>
                                 <td><button className={LectureCSS.button}>출결</button></td>
-                                <td><button className={LectureCSS.button}>성적</button></td>
+                                <td><button className={LectureCSS.button} onClick={ () => clickGradeHandler(lecture) }>성적</button></td>
                               </tr>
                             ))
                             )

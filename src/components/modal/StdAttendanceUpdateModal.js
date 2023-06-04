@@ -1,5 +1,5 @@
 import SubjectUpdateModalCSS from "../../css/StdAttendanceUpdateModal.module.css";
-import { callSubjectUpdateAPI, callAttendanceModifyAPI } from "../../apis/LectureAPICalls";
+import { callAttendanceModifyAPI } from "../../apis/LectureAPICalls";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
@@ -7,7 +7,7 @@ import { initModify } from '../../modules/LectureModule';
 
 function StdAttendanceUpdateModal({ subject, setIsModalOpen }) {
 
-    //subject 은 "모달창을 만들자" 안에 있는 객체 
+
     const dispatch = useDispatch();
 
     const [form, setForm] = useState(subject);
@@ -24,7 +24,7 @@ function StdAttendanceUpdateModal({ subject, setIsModalOpen }) {
     const onClickSubjectUpdateHandler = () => {
 
         if (!form.stdAtdStatus) {
-            console.log('formdata2222222:', form)
+
             toast.error("출석 정보를 입력해주세요.")
         }
 
@@ -36,20 +36,12 @@ function StdAttendanceUpdateModal({ subject, setIsModalOpen }) {
 
         dispatch(callAttendanceModifyAPI(formData, { stdAtdCode }));
 
-        // if (form.subject && form.stdAtdStatus == null) {
-        //     toast.error("출석 정보를 입력해주세요.")
-        // }
-        // const formData = new FormData();
-        // const stdAtdCode = form.subject && form.subject.stdAtdCode;
-        // formData.append("stdAtdStatus", form.stdAtdStatus);
 
-
-        // dispatch(callAttendanceModifyAPI({ stdAtdCode }, formData));
     };
 
     useEffect(
         () => {
-            console.log("모디파파", modify);
+            console.log("modify", modify);
             if (modify?.status === 200) {
                 toast.success("출석 수정이 완료 되었습니다.");
                 setIsModalOpen(false);

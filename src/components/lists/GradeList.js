@@ -2,7 +2,7 @@ import LectureCSS from "../../css/LectureInsertModal.module.css";
 import { motion } from "framer-motion"
 import GradeItem from "../items/GradeItem";
 
-function GradeList ({gradeList}) {
+function GradeList ({courseList}) {
 
     return (
         <motion.div
@@ -11,21 +11,21 @@ function GradeList ({gradeList}) {
         >
             <table>
                 <colgroup>
-                <col width="5%"/>   {/* No */}
-                <col width="10%"/>  {/* 학과 */}
-                <col width="5%"/>   {/* 학년 */}
-                <col width="10%"/>  {/* 학번 */}
-                <col width="5%"/>   {/* 이름 */}
-                <col width="5%"/>   {/* 출석 */}
-                <col width="5%"/>   {/* 결석 */}
-                <col width="5%"/>   {/* 지각 */}
-                <col width="7%"/>   {/* 출석 점수 */}
-                <col width="7%"/>   {/* 과제 */}
-                <col width="7%"/>   {/* 중간 */}
-                <col width="7%"/>   {/* 기말 */}
-                <col width="7%"/>   {/* 총점 */}
-                <col width="5%"/>  {/* 등급 */}
-                <col width="5%"/>   {/* 비고 */}
+                <col width="5%"/>
+                <col width="10%"/>
+                <col width="5%"/>
+                <col width="10%"/>
+                <col width="5%"/>
+                <col width="5%"/> 
+                <col width="5%"/>
+                <col width="5%"/>
+                <col width="7%"/>
+                <col width="7%"/> 
+                <col width="7%"/>
+                <col width="7%"/>
+                <col width="7%"/> 
+                <col width="5%"/> 
+                <col width="5%"/> 
                 </colgroup>
                 <thead>
                 <tr>
@@ -51,7 +51,9 @@ function GradeList ({gradeList}) {
                 </tr>
                 </thead>
                 <tbody>
-                    <GradeItem/>
+                { Array.isArray(courseList)
+                && courseList.map((course, index) => <GradeItem key={ course.courseCode } course={ course } index={ index + 1 }/>) 
+                }
                 </tbody>
             </table>
         </motion.div>
