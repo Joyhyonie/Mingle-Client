@@ -2,15 +2,11 @@
 import { motion } from "framer-motion"
 import CommonCSS from "../../../css/common/Common.module.css"
 import LectureRegist from "../../../css/RegistLectureForAdmin.module.css";
-import LectureRegistSearchbar from '../../../layouts/LectureRegistSearchbar.js';
-import SearchBarCss from '../../../css/LectureSearchBar.module.css'
 import LectureListCSS from '../../../css/LectureList.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { callLectureListAPI, callOpenLectureListAPI, callOpenLectureSearchNameAPI } from "../../../apis/LectureAPICalls";
-import { toast } from "react-hot-toast";
+import { callOpenLectureListAPI, callOpenLectureSearchNameAPI } from "../../../apis/LectureAPICalls";
 import PagingBar from "../../../components/common/PagingBar";
-import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
 import LectureInsertModal from "../../../components/modal/LectureInsertModal";
 import OpenLectureSearchBar from "../../../components/common/OpenLectureSearchBar ";
 import SearchBarCSS from '../../../css/common/SearchBar.module.css';
@@ -48,7 +44,7 @@ function RegistLectureForAdmin() {
         dispatch(callOpenLectureSearchNameAPI({ search: name, condition: condition, currentPage: currentPage }))
         return;
       }
-      /*lectureList APi 호출  () 함수를 전달해줘야 미들웨어에서 호출되고 넘어갈 것. */
+
 
       dispatch(callOpenLectureListAPI({ currentPage }))
     },
@@ -61,7 +57,7 @@ function RegistLectureForAdmin() {
 
 
 
-  //
+
 
 
 

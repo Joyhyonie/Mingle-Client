@@ -17,15 +17,14 @@ function LectureItem({ lecture }) {
 
 
 
-    const clickBoardHandler = (lecture) => {   //lecture 랑 subject 가 들어옴 (dto에 있는 date)
+    const clickPlanHandler = (lecture) => {
 
-        /* 해당 공지사항을 클릭 시, 조회수를 업데이트 해주는 API 호출 */
-        // dispatch(callPatchBoardCountAPI(boardCode)); 버튼 두개 만들고 이벤트 여기다가 주고 버튼 css 주면 되겠다. 
+
         navigate(`/lectureplan/${lecture.lecCode}`); //강의 계획서 네이게이터
 
 
     }
-    const clickBoardHandler2 = (lecture) => {
+    const clickAttendanceHandler = (lecture) => {
 
 
         navigate(`/lecture-student-admin/${lecture.lecCode}`); //출석
@@ -45,7 +44,7 @@ function LectureItem({ lecture }) {
 
         <motion.tr
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
-            onClick={() => clickBoardHandler(lecture)}
+            onClick={() => clickPlanHandler(lecture)}
         >
             {gradeModal ? <GradeModal setGradeModal={setGradeModal} lecCode={selectedLecCode} lecName={selectedLecName} /> : null}
 
@@ -54,7 +53,7 @@ function LectureItem({ lecture }) {
             <td>{lecture.lecYear + '-' + lecture.lecSeason}</td>
             <td>{lecture.employee.empName}</td>
             <td>
-                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickBoardHandler2(lecture); e.stopPropagation(); }}>출석</button>
+                <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickAttendanceHandler(lecture); e.stopPropagation(); }}>출석</button>
                 <button className={LectureItemButtonCss.button} type="button" onClick={(e) => { clickGradeHandler(lecture); e.stopPropagation(); }}>성적</button>
             </td>
 

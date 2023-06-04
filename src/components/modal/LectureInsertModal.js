@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { callLectureInsertAPI, callSubjectInsertAPI, callSubjectListAPI } from "../../apis/LectureAPICalls";
 import { toast } from "react-hot-toast";
 import styles from '../../css/ReactDatePicker.module.css';
+import { initRegist } from '../../modules/LectureModule';
 
 
 function LectureInsertModal({ setIsInsertModalOpen }) {
@@ -16,6 +17,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
             if (regist?.status === 200) {
                 toast.success('강의등록이 완료되었습니다.');
                 setIsInsertModalOpen(false);
+                // dispatch(initRegist());
             }
         },
         [subjectInfo, regist]
@@ -50,14 +52,17 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
 
 
 
-    const onChangeHandler = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
+
+
+    /*개설학과에 따른 교수와 교과목불러오는 핸들러*/
+    const onChangeHandler3 = (e) => {
+
+
+        dispatch(callSubjectListAPI(e.target.value));
+
     };
 
-
+    /*선택된 교과목에 따른 학점과 이수구분을 불러오는 핸들러 */
     const onChangeHandler2 = (e) => {
         console.log("과목명 => ", e.target.name);
         onChangeHandler(e);
@@ -65,17 +70,15 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
         setSubject(subjectInfo.subjectNameList.find(subject => subject.sbjCode == e.target.value));
 
 
-        console.log('subjectInfo.subjectNameList', subjectInfo.subjectNameList);
-        console.log('subjectInfo.subject.sbjCode', subjectInfo.subjectNameList.sbjCode);
+
 
     };
-
-    const onChangeHandler3 = (e) => {
-        console.log("얍")
-        console.log(e.target.value);
-
-        dispatch(callSubjectListAPI(e.target.value));
-
+    /*각 입력정보를 form의 형태로 담는 핸들러 */
+    const onChangeHandler = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
     };
 
     /*저장 핸들러  */
@@ -95,30 +98,6 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
         setEndDate(date);
         // 종료일 선택에 대한 추가 로직을 수행할 수 있습니다.
     };
-
-
-    // const { deptCode } = form;
-    console.log('subjectInfo', subjectInfo);
-    console.log('form', form);
-    console.log('subject', subject);
-
-
-
-
-    // useEffect(
-    //     () => {
-    //         dispatch(callSubjectListAPI({ deptCode }));
-    //     },
-    //     [deptCode]
-    // )
-
-
-
-
-
-
-
-
 
 
     return (

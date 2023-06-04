@@ -24,9 +24,7 @@ function AttendanceItem({ attendance }) {
     width: 12px;
     height: 12px;
   `;
-    console.log("newAttendance", newAttendance)
-    console.log("attendanceITem 배열이 객체로잘 변환 되었는가", attendance)
-    console.log("attendanceITem 배열이 객체로잘 변환 되었는가", attendance.courseCode)
+
 
     const navigate = useNavigate();
     const handleSelectChange = (event) => {
@@ -73,24 +71,6 @@ function AttendanceItem({ attendance }) {
                     </>
 
                 )}
-                {/* ) :
-                    <>
-                        <td>가나</td>
-                        <td>가나</td>
-                        <td>가나</td>
-
-                    </>} */}
-
-                {/* <td>
-                <>
-                    <select onChange={handleSelectChange}>
-                        <option value="출석">출석</option>
-                        <option value="결석">결석</option>
-                        <option value="지각">지각</option>
-                    </select>
-                </>
-            </td> */}
-
 
 
             </motion.tr>
