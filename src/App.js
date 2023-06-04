@@ -106,11 +106,10 @@ function App() {
               <Route path='search' element={<SubjectList />} />
             </Route>
 
-
             <Route path="lecture-student-admin" element={<ProtectedRoute adminCheck={true}><StudentAttendanceForAdmin /></ProtectedRoute>} >
-            <Route path=":lecCode" element={<AttendanceDetailList />} />
               <Route path='search' element={<StudentAttendanceForAdmin />} />
             </Route>
+            <Route path="lecture-student-admin/:lecCode" element={<ProtectedRoute adminCheck={true}><AttendanceDetailList /></ProtectedRoute>} />
             <Route path="lecture-regist-admin" element={<ProtectedRoute adminCheck={true}><RegistLectureForAdmin /></ProtectedRoute>} >
               <Route path='search' element={<RegistLectureForAdmin />} />
             </Route> 
