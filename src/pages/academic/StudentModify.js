@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { callStudentDetailAPI, callStudentUpdateAPI } from "../../apis/AcademicAPICalls";
 import CommonCSS from "../../css/common/Common.module.css";
-import StudentRegistCSS from "../../css/StudentRegist.module.css";
+import StudentModifyCSS from "../../css/StudentModify.module.css";
 import DaumPostcode from "react-daum-postcode";
 
 function StudentModify() {
@@ -170,11 +170,11 @@ function StudentModify() {
   }
 
   return (
-    <div className={StudentRegistCSS.studentContainer}>
+    <div className={StudentModifyCSS.studentContainer}>
 
-      <div className={StudentRegistCSS.studentClass}>
+      <div className={StudentModifyCSS.studentClass}>
         {Student &&
-          <div className={StudentRegistCSS.studentHeader}>
+          <div className={StudentModifyCSS.studentHeader}>
             {!modifyMode && <p className={CommonCSS.pageDirection}>학사관리 ▸ 학생 ▸ 상세 조회</p>}
             {modifyMode && <p className={CommonCSS.pageDirection}>학사관리 ▸ 학생 ▸ 수정</p>}
 
@@ -186,25 +186,25 @@ function StudentModify() {
               ref={imageInput}
               onChange={onChangeImageUpload}
             />
-            <button className={StudentRegistCSS.ImageUploadBtn}
+            <button className={StudentModifyCSS.ImageUploadBtn}
               onClick={onClickImageUpload}
               disabled={!modifyMode}
             >
               <img
-                className={StudentRegistCSS.studentImageAfter}
+                className={StudentModifyCSS.studentImageAfter}
                 src={(!imageUrl || imageUrl === 'null') ? "/images/person.png" : imageUrl}
                 alt="preview"
               />
             </button>
 
-            <div className={StudentRegistCSS.studentRegistInformation}>
-              <div className={StudentRegistCSS.studentRegistFormFirst}>
+            <div className={StudentModifyCSS.studentModifyInformation}>
+              <div className={StudentModifyCSS.studentModifyFormFirst}>
                 이름
                 <input
                   type="text"
                   name="stdName"
                   readOnly={!modifyMode}
-                  className={StudentRegistCSS.studentRegistName}
+                  className={StudentModifyCSS.studentModifyName}
                   value={!modifyMode ? Student.stdName : form.stdName}
                   onChange={onChangeHandler}
                 />
@@ -213,35 +213,35 @@ function StudentModify() {
                   type="text"
                   name="stdNameEn"
                   readOnly={!modifyMode}
-                  className={StudentRegistCSS.studentRegistNameEn}
+                  className={StudentModifyCSS.studentModifyNameEn}
                   value={!modifyMode ? Student.stdNameEn : form.stdNameEn}
                   onChange={onChangeHandler}
                 />
-                연차
+                학년
                 <input
                   type="number"
                   name="stdLevel"
                   readOnly={!modifyMode}
-                  className={StudentRegistCSS.studentRegistLevel}
+                  className={StudentModifyCSS.studentModifyLevel}
                   value={!modifyMode ? Student.stdLevel : form.stdLevel}
                   onChange={onChangeHandler}
                 />
-                소속
+                학과
                 <input
-                  className={StudentRegistCSS.studentRegistDeptCode}
+                  className={StudentModifyCSS.studentModifyDeptCode}
                   name="deptCode"
                   readOnly={!modifyMode}
                   value={!modifyMode ? Student.department.deptName : form.deptName}
                   onChange={onChangeHandler}
                 />
               </div>
-              <div className={StudentRegistCSS.studentRegistFormSecond}>
+              <div className={StudentModifyCSS.studentModifyFormSecond}>
                 이메일
                 <input
                   type="text"
                   name="stdEmail"
                   readOnly={!modifyMode}
-                  className={StudentRegistCSS.studentRegistEmail}
+                  className={StudentModifyCSS.studentModifyEmail}
                   value={!modifyMode ? Student.stdEmail : form.stdEmail}
                   onChange={onChangeHandler}
                 />
@@ -251,22 +251,22 @@ function StudentModify() {
                   name="stdPwd"
                   readOnly
                   placeholder="마이페이지에서 확인해주세요"
-                  className={StudentRegistCSS.studentRegistPwd}
+                  className={StudentModifyCSS.studentModifyPwd}
                 />
               </div>
-              <div className={StudentRegistCSS.studentRegistFormThird}>
+              <div className={StudentModifyCSS.studentModifyFormThird}>
                 휴대전화
                 <input
                   type="text"
                   name="stdPhone"
                   readOnly={!modifyMode}
-                  className={StudentRegistCSS.studentRegistPhone}
+                  className={StudentModifyCSS.studentModifyPhone}
                   value={!modifyMode ? Student.stdPhone : form.stdPhone}
                   onChange={onChangeHandler}
                 />
                 상태
                 <input
-                  className={StudentRegistCSS.studentRegistStatus}
+                  className={StudentModifyCSS.studentModifyStatus}
                   name="stdStatus"
                   readOnly={!modifyMode}
                   value={!modifyMode ? Student.stdStatus : form.stdStatus}
@@ -276,62 +276,73 @@ function StudentModify() {
                 <input
                   type="text"
                   name="stdSsn"
-                  className={StudentRegistCSS.studentRegistSsn}
+                  className={StudentModifyCSS.studentModifySsn}
                   readOnly={!modifyMode}
                   value={!modifyMode ? Student.stdSsn : form.stdSsn}
                   onChange={onChangeHandler}
                 />
               </div>
 
-              <div className={StudentRegistCSS.studentRegistFormFourth}>
+              <div className={StudentModifyCSS.studentModifyFormFourth}>
                 주소
                 <input
                   type="text"
                   name="stdAddress"
-                  className={StudentRegistCSS.studentRegistAddress}
+                  className={StudentModifyCSS.studentModifyAddress}
                   value={!modifyMode ? Student.stdAddress : form.stdAddress}
                   onClick={!modifyMode ? () => { } : onChangeOpenPost}
                   readOnly={!modifyMode}
                   onChange={onChangeHandler}
                 />
                 {isOpenPost ? (
-                  <div className={StudentRegistCSS.postCodeStyle}><DaumPostcode autoClose onComplete={onCompletePost} /></div>
+                  <div className={StudentModifyCSS.postCodeStyle}><DaumPostcode autoClose onComplete={onCompletePost} /></div>
                 ) : null}
               </div>
 
-              <div className={StudentRegistCSS.studentRegistFormFifth}>
-                입사일
+              <div className={StudentModifyCSS.studentModifyFormFifth}>
+                입학일
                 <input
                   type={!modifyMode ? "text" : "date"}
                   name="stdEntDate"
                   readOnly={!modifyMode}
                   onChange={onChangeHandler}
-                  className={StudentRegistCSS.studentRegistEntDate}
+                  className={StudentModifyCSS.studentModifyEntDate}
                   value={!modifyMode ? Student.stdEntDate : form.stdEntDate}
                 />
-                휴직일
+                휴학일
                 <input
                   type={!modifyMode ? "text" : "date"}
                   name="stdAbDate"
                   readOnly={!modifyMode}
                   onChange={onChangeHandler}
-                  className={StudentRegistCSS.studentRegistAbDate}
+                  className={StudentModifyCSS.studentModifyAbDate}
                   value={!modifyMode ? Student.stdAbDate : form.stdAbDate}
                 />
-                퇴사일
+              </div>
+              <div className={StudentModifyCSS.studentModifyFormSixth}>
+                자퇴일
                 <input
                   type={!modifyMode ? "text" : "date"}
                   name="stdDropDate"
                   readOnly={!modifyMode}
                   onChange={onChangeHandler}
-                  className={StudentRegistCSS.studentRegistDropDate}
+                  className={StudentModifyCSS.studentModifyDropDate}
                   value={!modifyMode ? Student.stdDropDate : form.stdDropDate}
                 />
+                졸업일
+                <input
+                  type="date"
+                  name="stdLeaveDate"
+                  readOnly={!modifyMode}
+                  className={StudentModifyCSS.studentModifyLeaveDate}
+                  onChange={onChangeHandler}
+                  value={!modifyMode ? Student.stdLeaveDate : form.stdLeaveDate}
+                />
               </div>
-              <div className={StudentRegistCSS.buttonContainer}>
-                {!modifyMode && <button onClick={onClickEditButtonHandler} className={StudentRegistCSS.studentRegistBtn}>수정</button>}
-                {modifyMode && <button onClick={onClickStudentUpdateHandler} className={StudentRegistCSS.studentRegistBtn}>완료</button>}
-                <button onClick={() => navigate(-1)} className={StudentRegistCSS.studentCancelBtn}>취소</button>
+              <div className={StudentModifyCSS.buttonContainer}>
+                {!modifyMode && <button onClick={onClickEditButtonHandler} className={StudentModifyCSS.studentModifyBtn}>수정</button>}
+                {modifyMode && <button onClick={onClickStudentUpdateHandler} className={StudentModifyCSS.studentModifyBtn}>완료</button>}
+                <button onClick={() => navigate(-1)} className={StudentModifyCSS.studentCancelBtn}>취소</button>
               </div>
             </div>
           </div>

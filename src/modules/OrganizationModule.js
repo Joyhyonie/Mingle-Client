@@ -13,14 +13,14 @@ export const { organization: { getList,
 } } = createActions
 
     ({
-      [GET_LIST]: res => res.data,
-      [GET_SEARCH_NAME]: res => res.data,
+      [GET_LIST]: (res) => res.data,
+      [GET_SEARCH_NAME]: (res) => res,
     });
 
 /* 리듀서 */
 const OrganizationReducer = handleActions({
-  [GET_LIST]: (state, { payload }) => ({ ...state, employeeList: payload }),
-  [GET_SEARCH_NAME]: (state, { payload }) => ({ ...state, searchName: payload }),
+  [GET_LIST]: (state, { payload }) => ({ employeeList: payload }),
+  [GET_SEARCH_NAME]: (state, { payload }) => ({ ...state, search: payload }),
 
 }, initialState);
 

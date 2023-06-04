@@ -4,7 +4,6 @@
     display: flex;
     width: 100%;
     height: 100%;
-
 }
 
 .myPageLayoutDiv h1{
@@ -20,21 +19,21 @@
 /* .myPageLayoutDiv main {
     margin-top: 10px;
 } */
-.myPageLayoutDiv .button {
 
-    margin-top: 30px;
-    margin-bottom: 5px;
-    width: 150px;
-    height: 50px;
-    border-radius: 12px;
-    background-color: #999999;
-    font-weight: bold;
-    border: solid #999999;
-    color: white;
-    font-family: 'Paytone One';
-    font-style: normal;
-    font-size: 20px;
-    margin-left: 24px;
+.buttonContainer {
+  position: absolute;
+  right: 70px;
+}
+
+.buttonContainer button {
+  margin-left: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color:#343434;
+  color: white;
+  padding: 8px 30px;
+  font-size: 16px;
 }
 
 .myPageLayoutDiv span 

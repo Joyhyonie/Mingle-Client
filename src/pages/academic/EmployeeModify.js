@@ -213,7 +213,7 @@ function EmployeeModify() {
                   type="text"
                   name="empName"
                   readOnly={!modifyMode}
-                  className={EmployeeModifyCSS.employeeRegistName}
+                  className={EmployeeModifyCSS.employeeModifyName}
                   value={!modifyMode ? Employee.empName : form.empName}
                   onChange={onChangeHandler}
                 />
@@ -222,7 +222,7 @@ function EmployeeModify() {
                   type="text"
                   name="empNameEn"
                   readOnly={!modifyMode}
-                  className={EmployeeModifyCSS.employeeRegistNameEn}
+                  className={EmployeeModifyCSS.employeeModifyNameEn}
                   value={!modifyMode ? Employee.empNameEn : form.empNameEn}
                   onChange={onChangeHandler}
                 />
@@ -231,26 +231,26 @@ function EmployeeModify() {
                   type="number"
                   name="empAnnual"
                   readOnly={!modifyMode}
-                  className={EmployeeModifyCSS.employeeRegistLevel}
+                  className={EmployeeModifyCSS.employeeModifyLevel}
                   value={!modifyMode ? Employee.empAnnual : form.empAnnual}
                   onChange={onChangeHandler}
                 />
                 소속
                 <input
-                  className={EmployeeModifyCSS.employeeRegistDeptCode}
+                  className={EmployeeModifyCSS.employeeModifyDeptCode}
                   name="deptCode"
                   readOnly={!modifyMode}
                   value={!modifyMode ? Employee.department.deptName : form.deptName}
                   onChange={onChangeHandler}
                 />
               </div>
-              <div className={EmployeeModifyCSS.employeeRegistFormSecond}>
+              <div className={EmployeeModifyCSS.employeeModifyFormSecond}>
                 이메일
                 <input
                   type="text"
                   name="empEmail"
                   readOnly={!modifyMode}
-                  className={EmployeeModifyCSS.employeeRegistEmail}
+                  className={EmployeeModifyCSS.employeeModifyEmail}
                   value={!modifyMode ? Employee.empEmail : form.empEmail}
                   onChange={onChangeHandler}
                 />
@@ -259,7 +259,7 @@ function EmployeeModify() {
                   type="text"
                   name="empId"
                   readOnly={!modifyMode}
-                  className={EmployeeModifyCSS.employeeRegistId}
+                  className={EmployeeModifyCSS.employeeModifyId}
                   value={!modifyMode ? Employee.empId : form.empId}
                   onChange={onChangeHandler}
                 />
@@ -269,7 +269,7 @@ function EmployeeModify() {
                   name="empPwd"
                   readOnly
                   placeholder="마이페이지에서 확인해주세요"
-                  className={EmployeeModifyCSS.employeeRegistPwd}
+                  className={EmployeeModifyCSS.employeeModifyPwd}
                 />
               </div>
               <div className={EmployeeModifyCSS.employeeRegistFormThird}>
@@ -278,13 +278,13 @@ function EmployeeModify() {
                   type="text"
                   name="empPhone"
                   readOnly={!modifyMode}
-                  className={EmployeeModifyCSS.employeeRegistPhone}
+                  className={EmployeeModifyCSS.employeeModifyPhone}
                   value={!modifyMode ? Employee.empPhone : form.empPhone}
                   onChange={onChangeHandler}
                 />
                 상태
                 <input
-                  className={EmployeeModifyCSS.employeeRegistStatus}
+                  className={EmployeeModifyCSS.employeeModifyStatus}
                   name="empStatus"
                   readOnly={!modifyMode}
                   value={!modifyMode ? Employee.empStatus : form.empStatus}
@@ -294,19 +294,19 @@ function EmployeeModify() {
                 <input
                   type="text"
                   name="empSsn"
-                  className={EmployeeModifyCSS.employeeRegistSsd}
+                  className={EmployeeModifyCSS.employeeModifySsd}
                   readOnly={!modifyMode}
                   value={!modifyMode ? Employee.empSsn : form.empSsn}
                   onChange={onChangeHandler}
                 />
               </div>
 
-              <div className={EmployeeModifyCSS.employeeRegistFormFourth}>
+              <div className={EmployeeModifyCSS.employeeModifyFormFourth}>
                 주소
                 <input
                   type="text"
                   name="empAddress"
-                  className={EmployeeModifyCSS.employeeRegistAddress}
+                  className={EmployeeModifyCSS.employeeModifyAddress}
                   value={!modifyMode ? Employee.empAddress : form.empAddress}
                   onClick={!modifyMode ? () => { } : onChangeOpenPost}
                   readOnly={!modifyMode}
@@ -317,14 +317,14 @@ function EmployeeModify() {
                 ) : null}
               </div>
 
-              <div className={EmployeeModifyCSS.employeeRegistFormFifth}>
+              <div className={EmployeeModifyCSS.employeeModifyFormFifth}>
                 입사일
                 <input
                   type={!modifyMode ? "text" : "date"}
                   name="empEntDate"
                   readOnly={!modifyMode}
                   onChange={onChangeHandler}
-                  className={EmployeeModifyCSS.employeeRegistEntDate}
+                  className={EmployeeModifyCSS.employeeModifyEntDate}
                   value={!modifyMode ? Employee.empEntDate : form.empEntDate}
                 />
                 휴직일
@@ -333,7 +333,7 @@ function EmployeeModify() {
                   name="empAbDate"
                   readOnly={!modifyMode}
                   onChange={onChangeHandler}
-                  className={EmployeeModifyCSS.employeeRegistAbDate}
+                  className={EmployeeModifyCSS.employeeModifyAbDate}
                   value={!modifyMode ? Employee.empAbDate : form.empAbDate}
                 />
                 퇴사일
@@ -342,13 +342,13 @@ function EmployeeModify() {
                   name="empDropDate"
                   readOnly={!modifyMode}
                   onChange={onChangeHandler}
-                  className={EmployeeModifyCSS.employeeRegistDropDate}
+                  className={EmployeeModifyCSS.employeeModifyDropDate}
                   value={!modifyMode ? Employee.empDropDate : form.empDropDate}
                 />
               </div>
               <div className={EmployeeModifyCSS.buttonContainer}>
-                {!modifyMode && <button onClick={onClickEditButtonHandler} className={EmployeeModifyCSS.employeeRegistBtn}>수정</button>}
-                {modifyMode && <button onClick={onClickEmployeeUpdateHandler} className={EmployeeModifyCSS.employeeRegistBtn}>완료</button>}
+                {!modifyMode && <button onClick={onClickEditButtonHandler} className={EmployeeModifyCSS.employeeModifyBtn}>수정</button>}
+                {modifyMode && <button onClick={onClickEmployeeUpdateHandler} className={EmployeeModifyCSS.employeeModifyBtn}>완료</button>}
                 <button onClick={() => navigate(-1)} className={EmployeeModifyCSS.employeeCancelBtn}>취소</button>
               </div>
             </div>

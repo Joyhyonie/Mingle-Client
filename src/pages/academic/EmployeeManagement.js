@@ -33,7 +33,7 @@ function EmployeeManagement() {
   const condition = params.get('condition');
   const name = params.get('search');
   const type = "employee";
-  
+
 
   useEffect(
     () => {
@@ -190,28 +190,28 @@ function EmployeeManagement() {
             :
             (Employees && Employees.data) &&
             Employees.data.map((staff) => (
-                <tr
-                  key={staff.empCode}
-                  onClick={() => onEmployeeItemClickHandler(staff.empCode)}
-                >
-                  <td>
-                    <input
-                      type="checkbox"
-                      value={staff.empCode}
-                      checked={checkboxes[staff.empCode] || false}
-                      onChange={(e) => handleCheckboxChange(e, staff.empCode)}
-                      onClick={handleCheckboxClick}
-                    />
-                  </td>
-                  <td>{staff.empId}</td>
-                  <td>{staff.empName}</td>
-                  <td>{staff.department.deptName}</td>
-                  <td>{staff.empEmail}</td>
-                  <td>{staff.empPhone}</td>
-                  <td>{new Date(staff.empEntDate).toISOString().split('T')[0]}</td>
-                  <td>{staff.empStatus}</td>
-                </tr>
-              ))
+              <tr
+                key={staff.empCode}
+                onClick={() => onEmployeeItemClickHandler(staff.empCode)}
+              >
+                <td>
+                  <input
+                    type="checkbox"
+                    value={staff.empCode}
+                    checked={checkboxes[staff.empCode] || false}
+                    onChange={(e) => handleCheckboxChange(e, staff.empCode)}
+                    onClick={handleCheckboxClick}
+                  />
+                </td>
+                <td>{staff.empId}</td>
+                <td>{staff.empName}</td>
+                <td>{staff.department.deptName}</td>
+                <td>{staff.empEmail}</td>
+                <td>{staff.empPhone}</td>
+                <td>{new Date(staff.empEntDate).toISOString().split('T')[0]}</td>
+                <td>{staff.empStatus}</td>
+              </tr>
+            ))
           }
         </tbody>
       </table>

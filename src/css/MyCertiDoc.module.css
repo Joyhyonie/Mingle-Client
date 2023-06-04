@@ -13,11 +13,10 @@
 
 .MyCertiDocCSSTable button {
     width: 50px;
-    background-color: #dadada;
+    background-color: #343434;
     margin-top: 5px;
     border-radius: 20px;
-    font-family: 'Do Hyeon', sans-serif;
-    color: #4D4D4D;
+    color: white;
     font-size: 18px;
     cursor: pointer;
     border: none;
@@ -36,9 +35,8 @@
 .MyCertiDocCSSTable select {
     text-align: center;
     width: 70%;
-    border: 1px solid #FF9797;
-    font-family: 'Do Hyeon', sans-serif;
-    font-size: 17px;
+    border: 1px solid #343434;
+    font-size: 16px;
     outline: none;
 }
 

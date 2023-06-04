@@ -21,7 +21,8 @@
   height: 200px;
   border-radius: 70%;
   overflow: hidden;
-  margin-left: 70px;
+  margin-left: 140px;
+  margin-top: 130px;
 }
 
 .ImageUploadBtn {
@@ -29,6 +30,7 @@
   background-color: white;
   margin-left: 140px;
   margin-right: 140px;
+  margin-top: 130px;
 }
 
 .buttonContainer {
@@ -39,12 +41,11 @@
 }
 
 .employeeRegistBtn {
-  
   width: 150px;
   height: 40px;
   font-size: 18px;
   border: none;
-  background-color: #66D2B3;
+  background-color: #343434;
   border-radius: 10px;
   color: white;
 }
@@ -54,7 +55,7 @@
   height: 40px;
   margin-left: 20px;
   font-size: 18px;
-  border: 1px solid #66D2B3;
+  border: 1px solid #343434;
   background-color: white;
   border-radius: 10px;
   color: #666666;
@@ -62,6 +63,7 @@
 
 .employeeRegistInformation {
   margin-right: 100px;
+  margin-top: 50px;
 }
 
 .employeeRegistName {
@@ -198,19 +200,6 @@
   width: 876px;
   height: 50px;
   margin: 0 0 20px 44px;
-  font-size: 20px;
-  border: 1px solid #666666;
-  background-color: white;
-  border-radius: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  outline: none;
-}
-
-.employeeRegistAddressDetail {
-  width: 876px;
-  height: 50px;
-  margin: 0 0 20px 78px;
   font-size: 20px;
   border: 1px solid #666666;
   background-color: white;

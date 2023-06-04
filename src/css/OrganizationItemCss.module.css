@@ -1,4 +1,3 @@
-
 .div {
   overflow: scroll;
   height: 650px;
@@ -10,7 +9,7 @@
 
 .organizationBox {
   border-bottom: 1px solid #666666;
-  margin: 20px 30px 20px 30px; /* 상우하좌 */
+  margin: 20px 30px 20px 30px;
   padding-bottom: 20px;
   display: flex;
   justify-content: space-between;

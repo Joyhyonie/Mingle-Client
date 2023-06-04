@@ -1,0 +1,231 @@
+.employeeContainer {
+  margin-top: 100px;
+  width: 100%;
+  font-size: 18px;
+}
+
+.employeeHeader {
+  display: flex;
+  align-items: center;
+}
+
+.employeeModifyInformation {
+  margin-top: 50px;
+}
+
+.employeeClass {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: right;
+  margin-top: 45px;
+  margin-right: 22px;
+}
+
+.employeeModifyBtn {
+  width: 150px;
+  height: 40px;
+  font-size: 18px;
+  border: none;
+  background-color: #343434;
+  border-radius: 10px;
+  color: white;
+}
+
+.employeeCancelBtn {
+  width: 150px;
+  height: 40px;
+  margin-left: 20px;
+  font-size: 18px;
+  border: 1px solid #343434;
+  background-color: white;
+  border-radius: 10px;
+  color: #666666;
+}
+
+.employeeImageAfter {
+  width: 200px;
+  height: 200px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.ImageUploadBtn {
+  border: none;
+  background-color: white;
+  margin-left: 140px;
+  margin-right: 140px;
+}
+
+.employeeModifyName {
+  width: 200px;
+  height: 50px;
+  margin: 0 20px 20px 46px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyNameEn {
+  width: 214px;
+  height: 50px;
+  margin: 0 20px 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border-radius: 10px;
+}
+
+.employeeModifyLevel {
+  width: 40px;
+  height: 50px;
+  margin: 0 20px 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border-radius: 10px;
+}
+
+.employeeModifyDeptCode {
+  width: 144px;
+  height: 50px;
+  margin: 0 0 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border-radius: 10px;
+}
+
+.employeeModifyEmail {
+  width: 304px;
+  height: 50px;
+  margin: 0 20px 20px 28px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyId {
+  width: 150px;
+  height: 50px;
+  margin: 0 20px 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyPwd {
+  width: 224px;
+  height: 50px;
+  margin: 0 0 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyPhone {
+  width: 234px;
+  height: 50px;
+  margin: 0 20px 20px 12px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyStatus {
+  width: 100px;
+  height: 50px;
+  margin: 0 20px 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifySsd {
+  width: 310px;
+  height: 50px;
+  margin: 0 0 20px 20px;
+  font-size: 20px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyAddress {
+  width: 900px;
+  height: 50px;
+  margin: 0 0 20px 44px;
+  font-size: 20px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyEntDate {
+  margin-left: 26px;
+  margin-right: 20px;
+  width: 226px;
+  height: 50px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyAbDate, .employeeModifyDropDate {
+  width: 226px;
+  height: 50px;
+  margin: 0 20px 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}

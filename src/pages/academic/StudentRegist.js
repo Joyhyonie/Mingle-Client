@@ -175,7 +175,7 @@ function StudentRegist() {
     <div className={StudentRegistCSS.studentContainer}>
       <div className={StudentRegistCSS.studentClass}>
         <div className={StudentRegistCSS.studentHeader}>
-          <p className={CommonCSS.pageDirection}>학사관리 ▸ 교직원 ▸ 등록</p>
+          <p className={CommonCSS.pageDirection}>학사관리 ▸ 학생 ▸ 등록</p>
           {imageUrl && (
             <img
               className={StudentRegistCSS.studentImageAfter}
@@ -217,7 +217,7 @@ function StudentRegist() {
               className={StudentRegistCSS.studentRegistNameEn}
               onChange={onChangeHandler}
             />
-            연차
+            학년
             <input
               type="number"
               name="stdLevel"
@@ -225,7 +225,7 @@ function StudentRegist() {
               className={StudentRegistCSS.studentRegistLevel}
               value={form.stdLevel}
             />
-            소속
+            학과
             <select className={StudentRegistCSS.studentRegistDeptCode} name="deptCode" onChange={onChangeDeptCodeHandler} value={deptCode}>
               <option value="선택">선택</option>
               <option value="13" onChange={onChangeDeptCodeHandler}>IT공학과</option>
@@ -246,14 +246,14 @@ function StudentRegist() {
               className={StudentRegistCSS.studentRegistEmail}
               onChange={onChangeHandler}
             />
-            {/* 비밀번호
+            비밀번호
             <input
               type="text"
               name="stdPwd"
               readOnly
               className={StudentRegistCSS.studentRegistPwd}
               placeholder='자동기입! 추후 수정 가능'>
-            </input> */}
+            </input>
           </div>
           <div className={StudentRegistCSS.studentRegistFormThird}>
             휴대전화
@@ -297,25 +297,34 @@ function StudentRegist() {
           </div>
 
           <div className={StudentRegistCSS.studentRegistFormFifth}>
-            입사일
+            입학일
             <input
               type="date"
               name="stdEntDate"
               className={StudentRegistCSS.studentRegistEntDate}
               onChange={onChangeHandler}
             />
-            휴직일
+            휴학일
             <input
               type="date"
               name="stdAbDate"
               className={StudentRegistCSS.studentRegistAbDate}
               onChange={onChangeHandler}
             />
-            퇴사일
+            </div>
+            <div className={StudentRegistCSS.studentRegistFormSixth}>
+            자퇴일
             <input
               type="date"
               name="stdDropDate"
               className={StudentRegistCSS.studentRegistDropDate}
+              onChange={onChangeHandler}
+            />
+            졸업일
+            <input
+              type="date"
+              name="stdLeaveDate"
+              className={StudentRegistCSS.studentRegistLeaveDate}
               onChange={onChangeHandler}
             />
           </div>

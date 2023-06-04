@@ -25,6 +25,24 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
   }
 }
 
+// 조직도 전체 조회
+export const callAllEmployeesAPI = ({ currentPage = 1 }) => {
+
+  const requestURL = `${EMPLOYEE_URL}/organization?page=${currentPage}`;
+
+  return async (dispatch, getState) => {
+
+    const result = await fetch(requestURL).then(response => response.json());
+    console.log(result);
+
+    if (result.status === 200) {
+      dispatch(getList(result));
+      console.log(result);
+    }
+  }
+}
+
+
 // 교직원 서치
 export const callEmployeeSearchListAPI = ({ search, condition, currentPage = 1 }) => {
   const requestURL = `${EMPLOYEE_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
@@ -35,6 +53,20 @@ export const callEmployeeSearchListAPI = ({ search, condition, currentPage = 1 }
     if (result.status === 200) {
       console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
       dispatch(getSearch(result.data));
+    }
+  }
+}
+
+// 조직도 서치
+export const callOrganizationSearchListAPI = ({ search, condition, currentPage = 1 }) => {
+  const requestURL = `${EMPLOYEE_URL}/organization/search?condition=${condition}&search=${search}&page=${currentPage}`;
+
+  return async (dispatch, getState) => {
+    const result = await fetch(requestURL).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
+      dispatch(getSearchName(result.data));
     }
   }
 }
@@ -250,36 +282,3 @@ export const callStudentsDeleteAPI = (stdCodes) => {
     }
   }
 }
-
-
-// 조직도 전체 조회
-export const callAllEmployeesAPI = ({ currentPage = 1 }) => {
-
-  const requestURL = `${EMPLOYEE_URL}/organization?page=${currentPage}`;
-
-  return async (dispatch, getState) => {
-
-    const result = await fetch(requestURL).then(response => response.json());
-    console.log(result);
-
-    if (result.status === 200) {
-      dispatch(getList(result));
-      console.log(result);
-    }
-  }
-}
-
-// 조직도 서치
-export const callEmployeeOrgSearchListAPI = ({ search, condition, currentPage = 1 }) => {
-  const requestURL = `${EMPLOYEE_URL}/organization?condition=${condition}&search=${search}&page=${currentPage}`;
-
-  return async (dispatch, getState) => {
-    const result = await fetch(requestURL).then(response => response.json());
-
-    if (result.status === 200) {
-      console.log("[EmployeeAPICalls] callEmployeeOrgSearchListAPI result : ", result);
-      dispatch(getSearchName(result));
-    }
-  }
-}
-

@@ -126,7 +126,7 @@ function StudentManagement() {
         삭제
       </motion.button>
 
-      <p className={CommonCSS.pageDirection}>학사관리 ▸ 교직원</p>
+      <p className={CommonCSS.pageDirection}>학사관리 ▸ 학생</p>
 
 
       <div className={SearchBarCss.basic}>
