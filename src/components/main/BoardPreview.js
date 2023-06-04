@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import MainCSS from "../../css/Main.module.css"
 import { useEffect } from "react";
-import { callBoardPreviewAPI } from "../../apis/BoardAPICalls";
+import { callBoardCountUpAPI, callBoardPreviewAPI } from "../../apis/BoardAPICalls";
 import { useNavigate } from "react-router-dom";
 
 function BoardPreview () {
@@ -25,6 +25,14 @@ function BoardPreview () {
         return `${month < 10 ? '0' : ''}${month}/${day < 10 ? '0' : ''}${day}`;
     }
 
+    const clickBoardHandler = (boardCode) => {
+
+        /* 해당 공지사항을 클릭 시, 조회수를 업데이트 해주는 API 호출 */
+        dispatch(callBoardCountUpAPI(boardCode));
+        navigate(`/board/${boardCode}`);
+        
+    }
+
     return (
         <div className={ MainCSS.boardBox }>
             <div className={ MainCSS.boardTitleBox }>
@@ -35,7 +43,7 @@ function BoardPreview () {
                     <div 
                         key={board.boardCode}
                         className={ MainCSS.boardItemBox }
-                        onClick={ () => navigate(`/board/${board.boardCode}`) }
+                        onClick={ () => clickBoardHandler(board.boardCode) }
                     >
                         <p>{board.boardCode}</p>
                         <p style={{fontWeight:'bold'}}>{board.boardType}</p>
