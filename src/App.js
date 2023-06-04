@@ -36,6 +36,7 @@ import StudentModify from './pages/academic/StudentModify';
 import StudentRegist from './pages/academic/StudentRegist';
 import EmployeeModify from './pages/academic/EmployeeModify';
 import EmployeeRegist from './pages/academic/EmployeeRegist';
+import EmployeeDetail from './pages/academic/EmployeeModify';
 import MyLeave from './components/lists/MyLeaveDoc';
 import AttendanceDetailList from './components/lists/AttendanceDetailList';
 import Error from './pages/error/Error';
@@ -124,14 +125,17 @@ function App() {
 
             <Route path="management-employee" element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>} />
             <Route path="regist-employee" element={<ProtectedRoute adminCheck={true}><EmployeeRegist /></ProtectedRoute>} />
-            <Route path="modify-employee/:empCode" element={<ProtectedRoute adminCheck={true}><EmployeeModify /></ProtectedRoute>} />
-            <Route path="search-employee" element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>} />
+            <Route path="modify-employee/:empCode" element={<ProtectedRoute adminCheck={true}><EmployeeModify /></ProtectedRoute>}/>
+            <Route path='search' element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>} />
+              
             <Route path="management-student" element={<ProtectedRoute adminCheck={true}><StudentManagement /></ProtectedRoute>} />
             <Route path="regist-student" element={<ProtectedRoute adminCheck={true}><StudentRegist /></ProtectedRoute>} />
             <Route path="modify-student/:stdCode" element={<ProtectedRoute adminCheck={true}><StudentModify /></ProtectedRoute>} />
-            <Route path="search-student" element={<ProtectedRoute adminCheck={true}><StudentManagement /></ProtectedRoute>} />
+            <Route path='search' element={<ProtectedRoute adminCheck={true}><StudentManagement /></ProtectedRoute>} />
+              
             <Route path="schedule-academic" element={<ProtectedRoute adminCheck={true}><AcademicSchedule /></ProtectedRoute>} />
           </Route>
+
           {/* <Layout/>의 Route */}
           <Route path="/login" element={<ProtectedRoute loginCheck={false}><Login /></ProtectedRoute>} />
           <Route path="/idsearch" element={<ProtectedRoute loginCheck={false}><IdSearch /></ProtectedRoute>} />

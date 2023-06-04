@@ -54,13 +54,13 @@ function AppliedCertidocs () {
             <div className={SearchBarCss.basic}>
             {<SearchBar options={options} type={type}/>}
            </div>
-             <div className={ApplideCertidocCSS.ApplyCertiDocCSS}>
+             <div className={ApplideCertidocCSS.AppliedCertiDocCSS}>
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
                     <col width="10%"/>
-                    <col width="20%"/>
+                    <col width="12%"/>
                     <col width="10%"/>
-                    <col width="10%"/>
+                    <col width="12%"/>
                     <col width="10%"/>
                     <col width="25%"/>
                     <col width="10%"/>

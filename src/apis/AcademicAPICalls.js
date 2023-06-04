@@ -1,6 +1,6 @@
-import { getList, getSearch } from '../modules/OrganizationModule';
-import { getStudents, getStudent, postStudent, putStudent, deleteStudent } from '../modules/StudentModule';
-import { getStaffs, getStaff, postStaff, putStaff, deleteStaff, getSearchName } from '../modules/StaffModule';
+import { getList, getSearchName } from '../modules/OrganizationModule';
+import { getStudents, getStudent, postStudent, putStudent, deleteStudent, getSearchStudent } from '../modules/StudentModule';
+import { getStaffs, getStaff, postStaff, putStaff, deleteStaff, getSearch } from '../modules/StaffModule';
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -26,7 +26,7 @@ export const callEmployeesAPI = ({ currentPage = 1 }) => {
 }
 
 // 조직도 전체 조회
-export const callAllEmployeesAPI = ({ currentPage = 1}) => {
+export const callAllEmployeesAPI = ({ currentPage = 1 }) => {
 
   const requestURL = `${EMPLOYEE_URL}/organization?page=${currentPage}`;
 
@@ -42,38 +42,37 @@ export const callAllEmployeesAPI = ({ currentPage = 1}) => {
   }
 }
 
+
 // 교직원 서치
-export const callEmployeeSearchListAPI = ({ search, currentPage = 1 }) => {
-  // const encodedSearch = encodeURIComponent(search);  // URL에 안전하게 포함될 수 있도록 검색어를 인코딩합니다.
-  const requestURL = `${EMPLOYEE_URL}/employees/search?search=${search}&page=${currentPage}`;
+export const callEmployeeSearchListAPI = ({ search, condition, currentPage = 1 }) => {
+  const requestURL = `${EMPLOYEE_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
 
   return async (dispatch, getState) => {
     const result = await fetch(requestURL).then(response => response.json());
 
     if (result.status === 200) {
       console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
-      dispatch(getStaffs(result));
+      dispatch(getSearch(result.data));
     }
   }
 }
 
 // 조직도 서치
-export const callEmployeeOrgSearchListAPI = ({ search, condition, currentPage = 1 }) => {
-  const requestURL = `${EMPLOYEE_URL}/organization?condition=${condition}&search=${search}&page=${currentPage}`;
+export const callOrganizationSearchListAPI = ({ search, condition, currentPage = 1 }) => {
+  const requestURL = `${EMPLOYEE_URL}/organization/search?condition=${condition}&search=${search}&page=${currentPage}`;
 
   return async (dispatch, getState) => {
     const result = await fetch(requestURL).then(response => response.json());
 
     if (result.status === 200) {
-      console.log("[EmployeeAPICalls] callEmployeeOrgSearchListAPI result : ", result);
-      dispatch(getSearch(result));
+      console.log("[EmployeeAPICalls] callEmployeeSearchListAPI result : ", result);
+      dispatch(getSearchName(result.data));
     }
   }
 }
 
-
 // 교직원 상세 조회
-export const callEmployeeDetailAPI = ({ empCode }) => {
+export const callEmployeeDetailAPI = (empCode) => {
 
   const requestURL = `${EMPLOYEE_URL}/employees/${empCode}`;
 
@@ -180,19 +179,34 @@ export const callStudentsAPI = ({ currentPage = 1 }) => {
   }
 }
 
-// 학생 상세 조회
-export const callStudentDetailAPI = ({ stdCode }) => {
+// 학생 검색
+export const callStudentSearchListAPI = ({ search, condition, currentPage = 1 }) => {
+  const requestURL = `${STUDENT_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
+
+  return async (dispatch, getState) => {
+    const result = await fetch(requestURL).then(response => response.json());
+
+    if (result.status === 200) {
+      console.log("[AcademicAPICalls] callStudentSearchListAPI result : ", result);
+      dispatch(getSearchStudent(result.data));
+    }
+  }
+}
+
+// 교직원 상세 조회
+export const callStudentDetailAPI = (stdCode) => {
 
   const requestURL = `${STUDENT_URL}/students/${stdCode}`;
 
   return async (dispatch, getState) => {
 
     const result = await fetch(requestURL, {
-        method : 'GET',
-        headers : {
-          "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
-        }
-      }).then(response => response.json());
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
+      },
+    }).then(response => response.json());
 
     if (result.status === 200) {
       console.log("[AcademicAPICalls] callStudentDetailAPI result : ", result);
@@ -203,6 +217,7 @@ export const callStudentDetailAPI = ({ stdCode }) => {
   }
 
 }
+
 
 // 학생 신규 등록
 export const callStudentInsertAPI = (formData) => {
@@ -267,4 +282,3 @@ export const callStudentsDeleteAPI = (stdCodes) => {
     }
   }
 }
-

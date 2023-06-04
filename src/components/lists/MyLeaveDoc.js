@@ -40,7 +40,7 @@ function MyLeave(){
         >
            
     <div>
-      <p className={ CommonCSS.pageDirection }>마이페이지 ▸ 휴가신청서</p>
+      <p className={ CommonCSS.pageDirection }>마이페이지 ▸ 서류신청목록</p>
       </div>
       <div className={SearchBarCss.basic}>
             {<SearchBar options={options} type={type}/>}

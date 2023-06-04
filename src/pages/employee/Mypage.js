@@ -23,6 +23,7 @@ function Mypage() {
                 <input type="text" readOnly value={employee.empName} />
               </div>
               <div className={MypageCSS.Enamebar}>
+                <label>영문명</label>
                 <input type="text" readOnly value={employee.empNameEn} />
               </div>
             </div>

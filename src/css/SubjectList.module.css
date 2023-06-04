@@ -1,59 +1,62 @@
 .SubjectList {
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    height: 850px;
-    margin: 10px;
-    margin-top: -40px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  height: 850px;
+  margin: 10px;
+  margin-top: -40px;
 }
 
-.SubjectListTable{
+.SubjectListTable {
   margin-top: 20px;
 }
 
-.container {    
-    display: flex;
-    justify-content: flex-end;
+.container {
+  display: flex;
+  justify-content: flex-end;
 }
 
-  .insertButton {
-    margin-left: 10px; /* 버튼 사이의 간격 조정 */
-    cursor: pointer;
-    padding: 10px;
-    margin-right: 10px;
-    width: 120px;
-    background-color: #999;
-    border-radius: 7px;
-    border: none;
-    color: white;
-  }
-  
-  .deleteButton {
-    margin-left: 10px; /* 버튼 사이의 간격 조정 */
-    width: 120px;
-    cursor: pointer;
-    color: white;
-    padding: 10px;
-    background-color: #999;
-    border-radius: 7px;
-    border: none;
-  }
+.insertButton {
+  margin-left: 10px;
+  /* 버튼 사이의 간격 조정 */
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 10px;
+  width: 120px;
+  background-color: #343434;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-size: 16px;
+}
+
+.deleteButton {
+  margin-left: 10px;
+  /* 버튼 사이의 간격 조정 */
+  width: 120px;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+  background-color: #343434;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+}
 
 
 .SubjectListTable button {
-    width: 50px;
-    text-align: center;
-    background-color: #dadada;
-    margin-top: 10px;
-    border-radius: 20px;
-    font-family: 'Do Hyeon', sans-serif;
-    color: #4D4D4D;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
+  width: 70px;
+  height: 30px;
+  text-align: center;
+  background-color: #dadada;
+  border-radius: 20px;
+  color: #343434;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
 }
 
-.SubjectListTable button:hover{
-    color: white;
-    background-color: #343434;
+.SubjectListTable button:hover {
+  color: white;
+  background-color: #343434;
 }

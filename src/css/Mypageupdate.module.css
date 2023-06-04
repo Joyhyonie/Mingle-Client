@@ -1,114 +1,107 @@
 .registerDiv {
-    position: absolute;
-    top: 15%;
-    left: 22%;
+  position: absolute;
+  top: 15%;
+  left: 22%;
   width: 990px;
   height: 400px;
   padding: 10px;
-    background-color: white;
-    border: 1px solid #343434;
-    border-radius: 20px;
-    padding: 50px;
-    font-family: 'Noto Sans KR', sans-serif;
-    margin: 0px 0px 30px 0px;
-    display: flex;
-    
-}
-.modal{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    background-color: rgba(0, 0, 0, 0.3);
+  background-color: white;
+  border: 1px solid #343434;
+  border-radius: 20px;
+  padding: 50px;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0px 0px 30px 0px;
+  display: flex;
 }
 
-
-
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.3);
+}
 
 .registerDiv input {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 206px;
-    height: 70px;   
-    border-radius: 10px;
-    text-indent: 16px;
-    background: #FFFFFF;
-    border: 1px solid #343434;
-    font-weight: 500;
-    font-size: 24px;    
-    font-family: 'Noto Sans KR', sans-serif;
-    margin-left: 20px;
-    margin-right: 20px;
-    font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 206px;
+  height: 60px;
+  border-radius: 10px;
+  text-indent: 16px;
+  background: #FFFFFF;
+  border: 1px solid #343434;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-left: 20px;
+  margin-right: 20px;
+  outline: none;
+}
 
+.buttonContainer {
+  margin-right: 50px;
+  margin-top: 30px;
 }
 
 .registerDiv button {
-    border: none;
-    border-radius: 20px;
-    background-color: #999;
-    font-family: 'Do Hyeon', sans-serif;
-    font-size: 35px;
-    color: white;
-    padding: 5px 40px;
-    margin-right: 45px;
-    float: right;
+  border: none;
+  border-radius: 10px;
+  background-color: #343434;
+  font-size: 14px;
+  color: white;
+  float: right;
+  width: 100px;
+  height: 30px;
+  margin-left: 10px;
 }
-
 
 .registerDiv h1 {
-
-    float: left;
-    
+  float: left;
 }
+
 .registerDiv img {
-
-
-    width: 300px;
-    height: 302px;
-    border-radius: 200px;
-    margin-top:10px;
-    margin-left: 45px;
-    border: 4px solid #343434;
-    
-
+  width: 300px;
+  height: 302px;
+  border-radius: 200px;
+  margin-top: 10px;
+  margin-left: 45px;
+  border: 1px solid #343434;
 }
 
-
-.row input{
-    width: 500px;
-    height: 50px;
-    font-size: 20px;
+.row input {
+  width: 500px;
+  height: 50px;
+  font-size: 16px;
 }
 
 .row1 input {
-    width:  400px;
-    height: 50px;
-    font-size: 20px;
-
+  width: 400px;
+  height: 50px;
+  font-size: 20px;
 }
 
 .column {
-    flex-direction: column;
-    align-items: center;
-    margin: 0 30px;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 30px;
 }
 
 .column2 {
-    display: flex;
-    margin-left: 30px;
+  display: flex;
+  margin-left: 30px;
 }
 
 .namebar input {
-    width: 170px;
-
+  width: 170px;
 }
 
-.Enamebar input{
-    width: 284px;
+.Enamebar input {
+  width: 284px;
 }
-.column3{
-    margin-left: 59px;
+
+.column3 {
+  margin-left: 59px;
 }

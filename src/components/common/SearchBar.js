@@ -17,9 +17,10 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
   const handleSearch = () => {
 
     // 구분 해주세용 :)
-    if (type == "employee") {
-      dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
-    } else if (type == "board") {
+    if(type == "employee") {
+      // dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
+      navigate(`/management-employee?condition=${selectedOption}&search=${inputValue}`);
+    } else if(type == "board") {
       navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
     } else if (type == "attendance") {
       navigate(`/attendance-employee?condition=${selectedOption}&search=${inputValue}`);
@@ -39,6 +40,8 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
       navigate(`/lecture-regist-prof?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "studentAttendance") {
       navigate(`/lecture-student-prof?condition=${selectedOption}&search=${inputValue}`);
+    } else if(type == "student") {
+      navigate(`/management-student?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "lectureStudentAdmin") {
       navigate(`/lecture-student-admin?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "registLectureForAdmin") {

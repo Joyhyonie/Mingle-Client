@@ -1,38 +1,15 @@
-
 .EmployeeList {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   margin: 10px;
-  font-size: 18px;
-  
-}
-
-.employeeListTable {
-  border-collapse: collapse;
-  table-layout: fixed;
-  
-}
-
-.employeeListTable th,
-td {
-  height: 10px;
-  text-align: center;
-  word-break: break-all;
-  table-layout: fixed;
-  flex-direction: column;
-  align-items: center;
-  font-size: 18px;
-  
+  font-size: 16px;
 }
 
 .employeeTable {
-  margin-top: 30px;
-  border-collapse: collapse;
+  margin-top: 10px;
   overflow: scroll;
-  height: 650px;
-  
 }
 
 .employeeTable th {
@@ -41,8 +18,8 @@ td {
   padding: 20px;
 }
 
-.employeeTable td {
-  padding: 20px;
+.employeeTable tr {
+  height: 52px;
 }
 
 .EmployeeRegistButton {
@@ -50,12 +27,14 @@ td {
   right: 170px;
   border-radius: 10px;
   border: none;
-  background-color: #999;
+  background-color:#343434;
   color: white;
   padding: 8px 30px;
-  font-size: 18px;
-  font-weight: 900;
-  transition: transform 0.2s ease-in-out;
+  font-size: 16px;
+}
+
+.EmployeeRegistButton:hover {
+  cursor: pointer;
 }
 
 .EmployeeDeleteButton {
@@ -63,10 +42,12 @@ td {
   right: 70px;
   border-radius: 10px;
   border: none;
-  background-color: #999;
+  background-color:#343434;
   color: white;
   padding: 8px 30px;
-  font-size: 18px;
-  font-weight: 900;
-  transition: transform 0.2s ease-in-out;
+  font-size: 16px;
+}
+
+.EmployeeDeleteButton:hover {
+  cursor: pointer;
 }
