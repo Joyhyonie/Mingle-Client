@@ -223,7 +223,13 @@
 
 .gradeTable {
     width: 1600px;
+    height: 625px;
     margin: 0 auto;
+    overflow: scroll;
+}
+
+.gradeTable::-webkit-scrollbar {
+    display: none;
 }
 
 .gradeTable th {
@@ -240,7 +246,7 @@
 .gradeTable td input {
     font-size: 15px;
     font-weight: 600;
-    width: 17px;
+    width: 23px;
     border: none;
     text-align: center;
 }
