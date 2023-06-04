@@ -38,17 +38,12 @@ const AteendanceSearchBar = ({ options, type }) => { // options은 배열 형태
 
   useEffect(
     () => {
-      // if (selectedOption) {
-      //   console.log("모디파1", modify);
-      //   console.log("selectedOption1", selectedOption)
+
 
       const stdAtdDate = selectedOption
       dispatch(callNewAttendanceListAPI({ lecCode, stdAtdDate }))
 
 
-      // }
-      // console.log("모디파2", modify);
-      // console.log("selectedOption2 ", selectedOption)
 
     }
 

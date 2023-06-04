@@ -15,30 +15,34 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
   const [selectedOption, setSelectedOption] = useState('');
   const [inputValue, setInputValue] = useState('');
   const handleSearch = () => {
-    
+
     // 구분 해주세용 :)
-    if(type == "employee") {
+    if (type == "employee") {
       dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
-    } else if(type == "board") {
+    } else if (type == "board") {
       navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
-    } else if(type == "attendance") {
-        navigate(`/attendance-employee?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "subject"){
-        navigate(`/subject?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "certiDoc"){
-       navigate(`/certi-doc-applied?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "leaveDoc"){
+    } else if (type == "attendance") {
+      navigate(`/attendance-employee?condition=${selectedOption}&search=${inputValue}`);
+    } else if (type == "subject") {
+      navigate(`/subject?condition=${selectedOption}&search=${inputValue}`);
+    } else if (type == "certiDoc") {
+      navigate(`/certi-doc-applied?condition=${selectedOption}&search=${inputValue}`);
+    } else if (type == "leaveDoc") {
       navigate(`/leave-doc-applied?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "MyLeaveDoc"){
+    } else if (type == "MyLeaveDoc") {
       navigate(`/Myleave?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "myCertiDoc"){
+    } else if (type == "myCertiDoc") {
       navigate(`/certi-doc-mine?condtion=${selectedOption}&search=${inputValue}`);
-    } else if(type == "organization") {
+    } else if (type == "organization") {
       navigate(`/organization?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "registLecture"){
+    } else if (type == "registLecture") {
       navigate(`/lecture-regist-prof?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "studentAttendance"){
+    } else if (type == "studentAttendance") {
       navigate(`/lecture-student-prof?condition=${selectedOption}&search=${inputValue}`);
+    } else if (type == "lectureStudentAdmin") {
+      navigate(`/lecture-student-admin?condition=${selectedOption}&search=${inputValue}`);
+    } else if (type == "registLectureForAdmin") {
+      navigate(`/lecture-regist-admin?condition=${selectedOption}&search=${inputValue}`);
     }
 
   };

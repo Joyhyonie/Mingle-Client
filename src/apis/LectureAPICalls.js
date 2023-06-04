@@ -1,7 +1,7 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
 
-import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName,  patchLecPlan  } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo, getOpenLectureSearch, getOpenLectureInfo, patchStdattendanceModify, getLectureSearch, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName, patchLecPlan } from "../modules/LectureModule";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -30,7 +30,7 @@ export const callSubjectSearchName = ({ search, condition, currentPage = 1 }) =>
         const result = await fetch(requestURL).then(response => response.json());
 
         if (result.status === 200) {
-            console.log(result);
+            console.log("진호검색", result);
             dispatch(getSearch(result));
         }
     }
@@ -197,7 +197,7 @@ export const callLectureInsertAPI = (form) => {
         }
     }
 }
-
+/*행정직원의 출결 및 성적관리의 강의리스트 */
 export const callLectureListAPI = ({ currentPage = 1 }) => {
 
     const requestURL = `${LECTURE_URL}/adminLectureList?page=${currentPage}`;
@@ -209,6 +209,23 @@ export const callLectureListAPI = ({ currentPage = 1 }) => {
         /*dispatch의 매개변수로 action 객체를 전달하여 store에 state를 저장하게 한다. */
         if (result.status === 200) {
             dispatch(getLectureInfo(result));
+            console.log(result);
+        }
+    }
+}
+
+/*강의 개설에 대한 강의리스트 */
+export const callOpenLectureListAPI = ({ currentPage = 1 }) => {
+
+    const requestURL = `${LECTURE_URL}/adminOpenLectureList?page=${currentPage}`;
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL, {
+            method: 'GET'
+        }).then(response => response.json());
+
+        /*dispatch의 매개변수로 action 객체를 전달하여 store에 state를 저장하게 한다. */
+        if (result.status === 200) {
+            dispatch(getOpenLectureInfo(result));
             console.log(result);
         }
     }
@@ -256,8 +273,7 @@ export const callNewAttendanceListAPI = ({ lecCode, stdAtdDate }) => {
         if (result.status === 200) {
 
 
-            //api를 통해 데이터를 꺼내와서 store에 저장하자(내가 원하는값을 액션과 페이로드 )
-            //store에 있는 값들을 다루는것은 action이라는 
+
             dispatch(getNewAttendancelistInfo(result));
             console.log(result);
 
@@ -308,22 +324,6 @@ export const callSubjectUpdateAPI = (formData) => {
 }
 
 
-// export const callLectureCountAPI = ({ lecCode }) => {
-
-//     const requestURL = `${LECTURE_URL}/lectureCount/${lecCode}`;
-//     return async (dispatch, getState) => {
-//         const result = await fetch(requestURL, {
-//             method: 'GET'
-//         }).then(response => response.json());
-//         console.log('lecCount를 위한 api calssLectureCountAPI', result);
-//         if (result.status === 200) {
-
-//             dispatch(getLectureCount(result));
-
-
-//         }
-//     }
-// }
 
 export const callLecPlanInsertAPI = (formData) => {
 
@@ -332,47 +332,53 @@ export const callLecPlanInsertAPI = (formData) => {
 
     return async (dispatch, getstate) => {
 
-        const result = await fetch(requestURL,{
-            method : 'PATCH',
-            headers : {
-                "Authorization" : "Bearer " + window.localStorage.getItem('accessToken')
+        const result = await fetch(requestURL, {
+            method: 'PATCH',
+            headers: {
+                "Authorization": "Bearer " + window.localStorage.getItem('accessToken')
             },
-            body : formData
+            body: formData
         }).then(response => response.json());
 
-        if(result.status === 200){
+        if (result.status === 200) {
             dispatch(patchLecPlan(result));
         }
     }
 
-    
-} 
 
-// /*행정직원의 강의 등록 페이지 */
-// export const callLectureInsertAPI = (form) => {
+}
 
-//     const requestURL = `${LECTURE_URL}/officerregistration`;
+export const callLectureSearchNameAPI = ({ search, condition, currentPage = 1 }) => {
+    console.log("search2", search)
+    console.log("condition2", condition)
+    console.log("currentPage2", currentPage)
 
-//     form = {
-//         ...form,
-//         employee: { empCode: form.empCode },
-//         subject: { sbjCode: form.sbjCode }
+    const requestURL = `${LECTURE_URL}/listSearch?condition=${condition}&search=${search}&page=${currentPage}`;
+    console.log("requestURL", requestURL);
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL).then(response => response.json());
+        console.log("callLectureSearchNameAPIresult1", result);
+        if (result.status === 200) {
+            console.log("현재검색", result);
+            dispatch(getLectureSearch(result));
 
-//     }
+        }
+    }
+}
 
-//     return async (dispatch, getState) => {
-//         const result = await fetch(requestURL, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(form)
-//         }).then(response => response.json());
+export const callOpenLectureSearchNameAPI = ({ search, condition, currentPage = 1 }) => {
 
-//         if (result.status === 200) {
-//             dispatch(postSubjects(result));
-//         }
-//     }
-// }
 
+    const requestURL = `${LECTURE_URL}/OpenListSearch?condition=${condition}&search=${search}&page=${currentPage}`;
+    console.log("requestURL", requestURL);
+    return async (dispatch, getState) => {
+        const result = await fetch(requestURL).then(response => response.json());
+        console.log("callLectureSearchNameAPIresult1", result);
+        if (result.status === 200) {
+            console.log("현재검색2", result);
+            dispatch(getOpenLectureSearch(result));
+
+        }
+    }
+}
 

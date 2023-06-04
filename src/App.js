@@ -136,15 +136,22 @@ function App() {
               <Route path='search' element={<SubjectList />} />
             </Route>
 
-            <Route path="lecture-student-admin" element={<StudentAttendanceForAdmin />} />
+            <Route path="lecture-student-admin" element={<StudentAttendanceForAdmin />}>
+              <Route path='search' element={<StudentAttendanceForAdmin />} />
+            </Route>
             <Route path="/attendance/:lecCode" element={<AttendanceDetailList />} />
             <Route path="/attendanceDetail/:attendance" element={<AttendanceStdDetail />} />
-            <Route path="lecture-regist-admin" element={<RegistLectureForAdmin />} />
+
+            <Route path="lecture-regist-admin" element={<RegistLectureForAdmin />} >
+              <Route path='search' element={<RegistLectureForAdmin />} />
+            </Route>
+
+
             <Route path="lecture-student-prof" element={<StudentAttendanceForProf />}>
-              <Route path='search' element={<StudentAttendanceForProf/>}/>
+              <Route path='search' element={<StudentAttendanceForProf />} />
             </Route>
             <Route path="lecture-regist-prof" element={<RegistLectureForProf />}>
-              <Route path='search' element={<RegistLectureForProf/>}/>
+              <Route path='search' element={<RegistLectureForProf />} />
             </Route>
 
             <Route
@@ -169,7 +176,7 @@ function App() {
           <Route path="/pwdsearch" element={<ProtectedRoute loginCheck={false}><PwdSearch /></ProtectedRoute>} />
 
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter >
     </>
   );
 }
