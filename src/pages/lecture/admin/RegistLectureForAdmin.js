@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast";
 import PagingBar from "../../../components/common/PagingBar";
 import SubjectUpdateModal from "../../../components/modal/SubjectUpdateModal";
 import LectureInsertModal from "../../../components/modal/LectureInsertModal";
-import SearchBar from "../../../components/common/SearchBar";
+import OpenLectureSearchBar from "../../../components/common/OpenLectureSearchBar ";
 import SearchBarCSS from '../../../css/common/SearchBar.module.css';
 import { useSearchParams } from "react-router-dom";
 
@@ -28,8 +28,6 @@ function RegistLectureForAdmin() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInsertModalOpen, setIsInsertModalOpen] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState(null);
-  const [checkedItems, setCheckedItems] = useState([]);
   const condition = params.get('condition');
   const name = params.get('search');
   const type = "registLectureForAdmin";
@@ -81,13 +79,9 @@ function RegistLectureForAdmin() {
       </div>
       <div className={LectureListCSS.lectureList}>
         <div className={SearchBarCSS.basic}>
-          {<SearchBar options={options} type={type} />}
+          {<OpenLectureSearchBar options={options} type={type} />}
         </div>
 
-        {/* <div className={LectureRegist.lecturesearchbar}>
-          <LectureRegistSearchbar></LectureRegistSearchbar>
-          <button className={SearchBarCss.searchBarBtn}>검색</button>
-        </div> */}
         <table className={LectureListCSS.SubjectListTable}>
           <colgroup>
             <col width="10%" />

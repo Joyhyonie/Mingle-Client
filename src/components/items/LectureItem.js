@@ -32,12 +32,12 @@ function LectureItem({ lecture }) {
 
 
     }
-    
+
     /* '성적' 버튼을 클릭 시, 실행되는 함수 */
     const clickGradeHandler = (lecture) => {
-        setSelectedLecCode(lecture.lecCode); 
+        setSelectedLecCode(lecture.lecCode);
         setSelectedLecName(lecture.lecName);
-        setGradeModal(true); 
+        setGradeModal(true);
     }
 
     return (
@@ -47,7 +47,7 @@ function LectureItem({ lecture }) {
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
             onClick={() => clickBoardHandler(lecture)}
         >
-            { gradeModal ? <GradeModal setGradeModal={setGradeModal} lecCode={selectedLecCode} lecName={selectedLecName} /> : null}
+            {gradeModal ? <GradeModal setGradeModal={setGradeModal} lecCode={selectedLecCode} lecName={selectedLecName} /> : null}
 
             <td>{lecture.lecCode}</td>
             <td>{lecture.lecName}</td>
