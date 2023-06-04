@@ -106,14 +106,19 @@ function App() {
               <Route path='search' element={<SubjectList />} />
             </Route>
 
-            <Route path="lecture-student-admin" element={<ProtectedRoute adminCheck={true}><StudentAttendanceForAdmin /></ProtectedRoute>}/>
-            <Route path="lecture-student-admin/:lecCode" element={<AttendanceDetailList />} />
-            <Route path="lecture-regist-admin" element={<ProtectedRoute adminCheck={true}><RegistLectureForAdmin /></ProtectedRoute>} />
+            <Route path="lecture-student-admin" element={<ProtectedRoute adminCheck={true}><StudentAttendanceForAdmin /></ProtectedRoute>} >
+              <Route path='search' element={<StudentAttendanceForAdmin />} />
+            </Route>
+            <Route path="lecture-student-admin/:lecCode" element={<ProtectedRoute adminCheck={true}><AttendanceDetailList /></ProtectedRoute>} />
+            <Route path="lecture-regist-admin" element={<ProtectedRoute adminCheck={true}><RegistLectureForAdmin /></ProtectedRoute>} >
+              <Route path='search' element={<RegistLectureForAdmin />} />
+            </Route> 
             <Route path="lecture-student-prof" element={<ProtectedRoute profCheck={true}><StudentAttendanceForProf /></ProtectedRoute>}>
               <Route path='search' element={<StudentAttendanceForProf/>}/>
             </Route>
             <Route path="lecture-regist-prof" element={<ProtectedRoute profCheck={true}><RegistLectureForProf /></ProtectedRoute>}>
               <Route path='search' element={<RegistLectureForProf/>}/>
+
             </Route>
 
             <Route path="management-employee" element={<ProtectedRoute adminCheck={true}><EmployeeManagement /></ProtectedRoute>}/>
@@ -134,7 +139,7 @@ function App() {
           {/* 설정해둔 path가 아닐 경우 모두 Error 페이지로 이동 */}
           <Route path="*" element={ <Error/>}/>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter >
     </>
   );
 }
