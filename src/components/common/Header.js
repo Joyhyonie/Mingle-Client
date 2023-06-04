@@ -19,7 +19,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, updateNoti,
     const location = useLocation();
     const { employee } = useSelector(state => state.EmployeeReducer);
     const { notifications } = useSelector(state => state.NotificationReducer);
-    const { countMsg } = useSelector(state => state.MessageReducer);
+    const { countMsg, readMsg } = useSelector(state => state.MessageReducer);
 
     console.log("countMsg =>", countMsg);
 
@@ -43,7 +43,7 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, updateNoti,
     /* 읽지 않은 쪽지 및 알림 갯수를 노출시키기 위한 API 호출 */
     useEffect(() => {
         dispatch(callUnreadMsgCountAPI());
-    }, [updateMsg]);
+    }, [updateMsg, readMsg]);
 
     useEffect(() => {
         dispatch(callNotificationListAPI());

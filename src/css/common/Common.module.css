@@ -45,6 +45,26 @@ tbody tr:hover {
     cursor: pointer;
 }
 /* -------------------------------------- */
+.back {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+.back button {
+    border: none;
+    padding: 10px 50px;
+    background-color: #66D2B3;
+    border-radius: 15px;
+    color: white;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.back button:hover {
+    background-color: #343434;
+}
 
 .msgModalDiv {
     position: relative;

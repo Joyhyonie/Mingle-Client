@@ -13,9 +13,9 @@
 
 .EmployeeInsertModalContainer {
   position: absolute;
-  width: 1100px;
+  width: 1000px;
   height: 920px;
-  padding: 10px;
+  padding: 14px;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
@@ -23,94 +23,301 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  overflow: scroll;
 }
 
-
-.EmployeeInsertModalContainer div {
- 
-  margin-top: 30px;
-}
-.EmployeeInsertModalContainer input {
- 
-  margin-left: 20px;
-  margin-top: 10px;
-  align-items: center;
+/* 타이틀 크기 지정 ~! */
+.EmployeeInsertModalTitle {
   font-size: 20px;
-  width: 250px;
-  height: 25px;
-  border: 0.69px solid ;
-  font-size: 17px;  
+  margin-left: 20px;
+  font-weight: bolder;
 }
 
-
-
-.EmployeeInsertModalBtn {
-  display: flex; /* 추가: 버튼 수평 배치를 위한 스타일 */
-  justify-content: center; /* 추가: 버튼 사이에 공간을 만들기 위한 스타일 */
-  width: 100%; /* 추가: 버튼이 부모의 너비를 차지하도록 설정 */
-  margin: 50px 0 0 10px; /* 상 우 하 좌 */
+/* inputbox Title */
+.EmployeeInsertModalFirst {
+  border: 1px solid #DADADA;
+  background-color: #DADADA;
+  border-radius: 5px;
+  width: 1000px;
+  height: 60px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.EmployeeInsertModalBtn button {
-  margin-left: 10px;
+.EmployeeInsertModalFirst span {
+  display: flex;
+  align-items: center;
+}
+
+.EmployeeModalMain {
+  display: flex;
+  width: 300px;
+  height: 30px;
   font-size: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+  align-items: center;
+  margin-top: 12px;
+  outline: none;
+}
+
+.EmployeeInsertModalYear {
+  margin-left: 20px;
+}
+
+.EmployeeModalButtonContainer {
+  margin-top: 12px;
 }
 
 .EmployeeBtnFirst {
-  border: none;
-  border-radius: 5px;
-  background-color: #FF9797;
+  width: 70px;
+  height: 35px;
+  margin-right: 10px;
+  font-size: 16px;
+  background-color: #343434;
+  border: 1px solid #343434;
   color: white;
-  width: 100px;
-  height: 40px;
 }
 
-
-
-
-
-
-.EmployeeInsertModalInput {
-  margin: 40px 0 60px 50px; /* 상 우 하 좌 */
-  width: 950px;
-  height: 416px;
+.EmployeeBtnSecond {
+  width: 70px;
+  height: 35px;
+  margin-right: 20px;
+  font-size: 16px;
+  background-color: #343434;
+  border: 1px solid #343434;
+  color: white;
 }
 
-.EmployeeInsertModalFirst {
+/* inputbox Professor Inform */
+.EmployeeInsertModalSecond {
   display: flex;
-
-  justify-content: flex-start;
-  margin-left: 20px;
-  margin-top: 20px;
+  justify-content: space-between;
+  margin: 20px 20px 0 20px;
   align-items: center;
-  font-size: 20px;
-  width: 1000px;
-  background: #dadada;
-  opacity: 0.8;
-  border-radius: 6px;
-  height: 70px;
-  
+  height: 40px;
+  width: 960px;
 }
 
-
-
-.EmployeeInsertModalFirst input {
-  margin-left: 20px;
-  margin-top: 2px;
-  align-items: center;
-  font-size: 20px;
-  width: 280px;
-  height: 32px;
-  border: 0.69px solid ;
-  font-size: 17px;  
-  border-radius: 6px;
-
+.EmployeeInsertModalSecond span {
+  font-size: 16px;
 }
-
-
 
 .EmployeeInsertModalSecond input {
-  width: 240px;
+  width: 220px;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  border: 1px solid #343434;
+  border-radius: 10px;
+  outline: none;
+}
+
+.EmployeeInsertModalThird {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 20px 20px;
+  align-items: center;
+  height: 40px;
+  width: 960px;
+}
+
+.EmployeeInsertModalThird input {
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  border: 1px solid #343434;
+  border-radius: 10px;
+  outline: none;
+}
+
+.EmployeeInsertModalThird .EmployeeInsertEmail {
+  width: 474px;
+}
+
+.EmployeeInsertModalThird .EmployeeInsertPhone {
+  width: 300px;
+}
+
+.EmployeeInsertModalMiddle {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-left: 10px;
+}
+
+.EmployeeInsertModalFourth {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 0 20px;
+  align-items: center;
+  height: 40px;
+  width: 960px;
+}
+
+.EmployeeInsertModalFourth input {
+  width: 190px;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  border: 1px solid #343434;
+  border-radius: 10px;
+  outline: none;
+}
+
+.EmployeeInsertModalFifth {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 20px 20px;
+  align-items: center;
+  height: 40px;
+  width: 960px;
+}
+
+.EmployeeInsertModalFifth input {
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  border: 1px solid #343434;
+  border-radius: 10px;
+  outline: none;
+}
+
+.EmployeeInsertModalFifth .EmployeeModalLecture {
+  width: 430px;
+  margin-left: 26px;
+}
+
+.EmployeeInsertModalFifth .EmployeeModalSubject {
+  width: 300px;
+}
+
+.EmployeeInsertModalSixth {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 20px 20px;
+  width: 960px;
+}
+
+.EmployeeInsertModalSixth textarea {
+  width: 844px;
+  height: 150px;
+  resize: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #343434;
+  font-size: 16px;
+}
+
+.EmployeeInsertModalSeven {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 20px 20px;
+  width: 960px;
+}
+
+.EmployeeInsertModalSeven textarea {
+  width: 844px;
+  height: 150px;
+  resize: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #343434;
+  font-size: 16px;
+}
+
+.EmployeeInsertModalEight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.EmployeeInsertGradeContainer {
+  border: 1px solid #DADADA;
+  background-color: #DADADA;
   border-radius: 5px;
-  margin-right: 10px;
+  width: 828px;
+  height: 60px;
+  margin-top: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.EmployeeInsertGradeContainer input {
+  border: 1px solid #343434;
+  border-radius: 10px;
+  height: 36px;
+  width: 90px;
+  font-size: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.EmployeeInsertModalBase {
+  margin-left: 20px;
+}
+
+.EmployeeInsertModalNine {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 20px 20px;
+  width: 960px;
+}
+
+.EmployeeInsertModalNine textarea {
+  width: 844px;
+  height: 150px;
+  resize: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #343434;
+  font-size: 16px;
+}
+
+.EmployeeInsertModalTen {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 20px 20px 20px;
+  width: 960px;
+}
+
+.EmployeeInsertModalTable {
+  width: 868px;
+  border: 1px solid #343434;
+}
+
+/* .EmployeeInsertModalTable th, tr, td {
+  border: 1px solid #343434;
+  font-size: 16px;
+} */
+
+.EmployeeInsertModalTableTitle {
+  background-color: #DADADA;
+  border: 1px solid #343434;
+  font-size: 16px;
+}
+
+.EmployeeInsertModalTable input {
+  width: 700px;
+  height: 30px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  text-align: center;
+}
+
+.EmployeeInsertModalTableTr {
+  border: 1px solid #343434;
 }

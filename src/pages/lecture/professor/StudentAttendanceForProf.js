@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { callLecNameMyLecture, callSearchName } from "../../../apis/LectureAPICalls";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import GradeModal from "../../../components/modal/GradeModal";
 
 function StudentAttendanceForProf () {
 
@@ -18,6 +19,7 @@ function StudentAttendanceForProf () {
   const dispatch = useDispatch();
   const type = "studentAttendance";
   const [currentPage, setCurrentPage] = useState(1);
+  const [gradeModal, setGradeModal] = useState(false);
   const {lecName, searchName} = useSelector(state => state.SubjectInfoReducer);
   const [params] = useSearchParams();
   const condition = params.get('condition');
@@ -42,8 +44,11 @@ function StudentAttendanceForProf () {
       
       return (
         <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeOut", duration: 0.5 }}
         >
+          { gradeModal ? <GradeModal setGradeModal={setGradeModal}/> : null}
+
+          <button onClick={ () => setGradeModal(true) }>성적Test</button>
           <div className={LectureCSS.container}>
           <div>
           <p className={ CommonCSS.pageDirection }>강의관리 ▸ 출결 및 성적관리</p>

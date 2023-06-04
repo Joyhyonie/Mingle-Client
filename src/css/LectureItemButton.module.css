@@ -1,0 +1,22 @@
+
+
+.button {
+    width: 60px;
+    height: 45px;
+    text-align: center;
+    background-color: #dadada;
+    margin: 0px 6px;
+    border-radius:30%;
+    
+    font-family: 'Do Hyeon', sans-serif;
+    
+    color: #4D4D4D;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+}
+
+.button:hover{
+    color: white;
+    background-color: #343434;
+}

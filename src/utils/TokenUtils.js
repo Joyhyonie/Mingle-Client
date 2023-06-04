@@ -19,6 +19,12 @@ export function isAdmin() {
     return (token && token.exp * 1000 > Date.now() && token.auth[0] === 'ROLE_ADMIN');
 }
 
+/* 교수인지 확인 */
+export function isProf() {
+    const token = decodeJwt();
+    return (token && token.exp * 1000 > Date.now() && token.auth[0] === 'ROLE_PROF');
+}
+
 /* 로그인 된 유저의 id 가져오기 */
 export function getMemberId() {
     const token = decodeJwt();
