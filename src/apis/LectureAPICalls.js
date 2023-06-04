@@ -1,7 +1,8 @@
 import { deleteSubject, getSearch, getSubjects, postSubjects, putSubjects } from "../modules/SubjectModule";
 
 
-import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName,  patchLecPlan  } from "../modules/LectureModule";
+import { getSubjectInfo, getLectureInfo,patchStdattendanceModify, getAttendanceListInfo, getMylecture, getNewAttendancelistInfo, getLecnameMylecture, getMylectureCerti, getSearchName,  patchLecPlan, getStudentAttendance  } from "../modules/LectureModule";
+import { request } from "./Api";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
@@ -371,3 +372,17 @@ export const callLecPlanInsertAPI = (formData ,lecCode) => {
 // }
 
 
+/* 수강코드로 해당 강의를 수강하는 학생들의 출결 조회 (성적표 조회를 위함) */
+export function callStudentAttendanceGetAPI(courseCode) {
+
+    return async (dispatch, getState) => {
+
+        const result = await request('GET', `/attendance/std-attendance/${courseCode}`);
+
+        if(result.status == 200) {
+            dispatch(getStudentAttendance(result));
+        }
+
+    }
+
+}
