@@ -23,35 +23,12 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
         [subjectInfo, regist]
     )
 
-
-
-
-
     /*이벤트를 관리하는 상태값 관리  state*/
-    const [form, setForm] = useState({
-
-    });
-
-    const [form2, setForm2] = useState({
-
-
-
-    });
+    const [form, setForm] = useState({});
     const [subject, setSubject] = useState({});
-
     const [classType, setClassType] = useState('');
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-
-
-
-
-    /*수업회차, 수업시작일, 수업종료일의 (input)입력 값 상태 저장 */
-
-
-
-
-
 
 
     /*개설학과에 따른 교수와 교과목불러오는 핸들러*/
@@ -69,10 +46,9 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
         console.log('e.target.value', e.target.value)
         setSubject(subjectInfo.subjectNameList.find(subject => subject.sbjCode == e.target.value));
 
-
-
-
     };
+
+    /*수업회차, 수업시작일, 수업종료일의 (input)입력 값 상태 저장 */
     /*각 입력정보를 form의 형태로 담는 핸들러 */
     const onChangeHandler = (e) => {
         setForm({
