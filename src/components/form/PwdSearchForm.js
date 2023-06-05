@@ -30,8 +30,9 @@ function PwdSearchForm(){
         empEmail:''
     });
     useEffect(() => {
-      if (pwdsearch && pwdsearch.status === 500) {
-        toast.error(pwdsearch.message);
+      if (pwdsearch && pwdsearch.status === 200) {
+        toast.success(pwdsearch.message);
+        navigate("")
       }
     }, [pwdsearch]);
 
@@ -51,23 +52,15 @@ function PwdSearchForm(){
     
       const onClickHandler = async () => {
         const result = await dispatch(callPwdAPI(form));     
-        if (result && result.data) { // result가 유효하고 data가 있는지 확인
-          navigate("/")
-          setSelectedId(result.data);
-          setIsModalOpen(true);
-          console.log("아아ㅏ : ", result);
-      }
-    }
      
-  
-    console.log("? :" ,selectedId);
-    const closeModal = () => {
-        setSelectedId(null);
-        setIsModalOpen(false);
-        navigate("/");
-      };
-    
+        if(result?.status === 200){
+          navigate("/");
+        }
 
+          console.log("아아ㅏ : ", result);
+     
+    }
+  
       const onKeyPressHandler = (e) => {
         if (e.key === "Enter") {
           onClickHandler();
@@ -114,16 +107,6 @@ function PwdSearchForm(){
         </div>
         </div>
         
- {/* 모달 창 */}
-        {isModalOpen && (
-                        <SearchIdModal
-                   
-                        selectedId={selectedId}
-                        closeModal={closeModal}
-                        />
-            )}
-
-
 
     </>
     )

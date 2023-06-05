@@ -7,9 +7,18 @@ function Mypage() {
   const dispatch = useDispatch();
   const { employee } = useSelector(state => state.EmployeeReducer);
 
+
+
+
   useEffect(() => {
     dispatch(callGetEmployeeAPI());
   }, [dispatch]);
+
+  
+
+  
+
+
 
   return (
     <div className={MypageCSS.backgroundDiv} style={{ backgroundColor: 'white' }}>
