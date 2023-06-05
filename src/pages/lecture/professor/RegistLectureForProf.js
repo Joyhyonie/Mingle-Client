@@ -107,8 +107,8 @@ function RegistLectureForProf () {
                                 <td>{lecture.lecYear}</td>
                                 <td>{lecture.employee.empName}</td>
                                 {lecture.lecName == null ? (
-                                <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서작성</button></td>
-                                ): <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서보기</button></td> }
+                                <td><button className={LectureCSS.longButton} onClick={()=> openModal(lecture)}>강의계획서작성</button></td>
+                                ): <td><button className={LectureCSS.longButton} onClick={()=> openModal(lecture)}>강의계획서보기</button></td> }
 
                     </tr>
                             ))
@@ -125,8 +125,8 @@ function RegistLectureForProf () {
                                 <td>{lecture.lecYear}</td>
                                 <td>{lecture.employee.empName}</td>
                                 {lecture.lecName == null ? (
-                                <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서작성</button></td>
-                                ): <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서보기</button></td> }
+                                <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서 작성</button></td>
+                                ): <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서 조회</button></td> }
                               </tr>
                             ))
                             )

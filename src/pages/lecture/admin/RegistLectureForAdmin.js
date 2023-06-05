@@ -80,14 +80,13 @@ function RegistLectureForAdmin() {
 
         <table className={LectureListCSS.SubjectListTable}>
           <colgroup>
-            <col width="10%" />
-            <col width="10%" />
+            <col width="5%" />
+            <col width="13%" />
+            <col width="5%" />
             <col width="10%" />
             <col width="20%" />
-            <col width="10%" />
-            <col width="10%" />
-            <col width="10%" />
-            <col width="10%" />
+            <col width="5%" />
+            <col width="5%" />
             <col width="10%" />
           </colgroup>
           <thead>
@@ -100,8 +99,6 @@ function RegistLectureForAdmin() {
               <th>학점</th>
               <th>담당교수</th>
               <th>상태</th>
-              <th></th> <br />
-              <br></br>
             </tr>
           </thead>
           <tbody>

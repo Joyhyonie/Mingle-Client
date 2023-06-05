@@ -14,7 +14,7 @@
 }
 
 .insertButton {
-  margin-left: 10px;
+  /* margin-left: 10px; */
   /* 버튼 사이의 간격 조정 */
   margin-right: 0px;
   cursor: pointer;
@@ -24,6 +24,7 @@
   border-radius: 7px;
   border: none;
   color: white;
+  font-size: 15px;
 }
 
 .deleteButton {
