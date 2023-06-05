@@ -44,12 +44,8 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
       navigate(`/management-student?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "lectureStudentAdmin") {
       navigate(`/lecture-student-admin?condition=${selectedOption}&search=${inputValue}`);
-<<<<<<< HEAD
     } 
 
-=======
-    }
->>>>>>> 7847b932e11afc84620144873c7174dc53d0ee03
   };
 
   const handleEnterKey = (e) => {
