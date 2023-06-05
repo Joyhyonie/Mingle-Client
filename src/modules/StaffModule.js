@@ -9,7 +9,7 @@ const GET_STAFF = 'staff/GET_STAFF';
 const POST_STAFF = 'staff/POST_STAFF';
 const PUT_STAFF = 'staff/PUT_STAFF';
 const DELETE_STAFF = 'staff/DELETE_STAFF';
-const GET_SEARCH_NAME = 'staff/GET_SEARCH_NAME';
+const GET_SEARCH = 'staff/GET_SEARCH';
 
 export const { staff : { 
                             getStaffs,
@@ -17,7 +17,7 @@ export const { staff : {
                             postStaff,
                             putStaff,
                             deleteStaff,
-                            getSearchName,
+                            getSearch,
                           }} = createActions
     ({
       [GET_STAFFS]: (res) => res.data,
@@ -25,17 +25,17 @@ export const { staff : {
       [POST_STAFF]: (res) => res,
       [PUT_STAFF]: (res) => res,
       [DELETE_STAFF]: (res) => res,
-      [GET_SEARCH_NAME]: (res) => res,
+      [GET_SEARCH]: (res) => res,
     });
 
 /* 리듀서 */
 const StaffReducer = handleActions({
   [GET_STAFFS]: (state, { payload }) => ({ Employees: payload}),
-  [GET_STAFF]: (state, { payload }) => ({ ...state, acEmployee: payload }),
+  [GET_STAFF]: (state, { payload }) => ({ ...state, Employee: payload }),
   [POST_STAFF]: (state, { payload }) => ({ ...state, regist: payload }),
   [PUT_STAFF]: (state, { payload }) => ({ ...state, modify: payload }),
   [DELETE_STAFF] : (state, {payload}) => ({ ...state, delete : payload }),
-  [GET_SEARCH_NAME] : (state, { payload }) => ({ nameSearch : payload }),
+  [GET_SEARCH] : (state, { payload }) => ({ search : payload }),
 }, initialState); 
 
 

@@ -13,7 +13,6 @@ function ProtectedRoute({ loginCheck, adminCheck, profCheck, children }) {
     }
 
     if(profCheck) {
-        console.log("props 잘 받아옴")
         return isProf() ? children : <Navigate to="/error"/>
     }
 

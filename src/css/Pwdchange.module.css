@@ -1,88 +1,78 @@
-.backgroundDiv{
-    height: 60vh;
-    display: flex;
-    flex-direction: column; /*수평 정렬*/
-    /* align-items: center; */
-    justify-content: center;
-    margin: 0 23%;
-    padding: 0;
-    
+.backgroundDiv {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 23%;
+  padding: 0;
 }
 
-.loginDiv{    
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column; /*수평 정렬*/
-    align-items: center;
-    justify-content: center;
-    margin: 0 13px;
-    padding: 0;
-    background-color: white;
+.loginDiv {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  /*수평 정렬*/
+  align-items: center;
+  justify-content: center;
+  margin: 0 13px;
+  padding: 0;
+  background-color: white;
+  border-radius: 25px;
+  position: relative;
+}
 
+.pwdContainer {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  align-items: center;
+  transform: translate(0%, -50%);
+}
 
-    border-radius: 25px ;    
+.pwdTitle {
+  font-size: 36px;
+  font-weight: bold;
 }
 
 .loginDiv input {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    height: 50px;
-    width: 436px;
-    border: 3px solid  #343434;
-    text-indent: 20px;
-    border-radius: 31px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    
+  margin-top: 5px;
+  margin-bottom: 10px;
+  height: 50px;
+  width: 436px;
+  border: 1px solid #343434;
+  text-indent: 20px;
+  border-radius: 31px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 14px;
 }
 
 .loginDiv button {
-    margin-top: 20px;
-    margin-bottom: 5px;
-    width: 154px;
-    height: 49px;
-    border-radius: 50px;
-    background-color: #999;
-    font-weight: bold;
-    border: solid #343434;
-    color: #343434;
-    font-family: 'Paytone One';
-    font-style: normal;
-    font-size: 20px;
-    align-items: center;
- }
-.loginDiv span  {
-    color: #666666;;
-    text-align: center;
-    font-family: 'Do Hyeon', sans-serif;
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 25px;
-align-items: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  width: 154px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: #343434;
+  border: 1px solid #343434;
+  color: white;
+  font-style: normal;
+  font-size: 16px;
+  align-items: center;
 }
 
-.loginDiv h1{
-    font-family: 'Do Hyeon', sans-serif;
-    color: #343434;
-font-style: normal;
-font-weight: 400;
-font-size: 57px;
+.loginDiv span {
+  color: #666666;
+  ;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  align-items: center;
 }
 
-.sky{
-text-align: center;
-
-}
-.sky1{
-    margin-left: 10px;
-}
-
-
-.loginDiv h2{
-    font-family: 'Do Hyeon', sans-serif;
-    color: #343434;
-font-style: normal;
-font-weight: 400;
-font-size: 57px;
-
+.pwdInformation {
+  width: 700px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }

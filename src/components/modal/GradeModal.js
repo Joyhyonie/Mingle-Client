@@ -1,7 +1,21 @@
+import { useEffect } from "react";
 import LectureCSS from "../../css/LectureInsertModal.module.css";
 import GradeList from "../lists/GradeList";
+import { useDispatch, useSelector } from "react-redux";
+import { callCourceStdListAPI } from "../../apis/LectureAPICalls";
 
-function GradeModal ({setGradeModal}) {
+function GradeModal ({setGradeModal, lecCode, lecName}) {
+
+    const dispatch = useDispatch();
+    const { attendance } = useSelector(state => state.SubjectInfoReducer);
+
+    console.log("attendance => ", attendance && attendance.courseStudentList);
+
+    useEffect(
+        () => {
+            dispatch(callCourceStdListAPI({lecCode}))
+        },[]
+    );
 
     return (
         <div className={ LectureCSS.modal } onClick={ () => setGradeModal(false) }>
@@ -9,16 +23,16 @@ function GradeModal ({setGradeModal}) {
                 <div className={ LectureCSS.gradeHeader }> 
                     <div>
                         <sub>강의번호</sub>
-                        <p>87585</p>
+                        <p>{lecCode}</p>
                     </div>
                     <div>
                         <sub>강의명</sub>
-                        <p>자바의 방석</p>
+                        <p>{lecName}</p>
                     </div>
                     <button>저장</button>
                 </div>
                 <div>
-                    { <GradeList/> }
+                    { <GradeList courseList={ attendance && attendance.courseStudentList }/> }
                 </div>
             </div>
         </div>

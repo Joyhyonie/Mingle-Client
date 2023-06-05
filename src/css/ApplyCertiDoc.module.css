@@ -1,21 +1,23 @@
-.ApplyCertiDocCSS {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
-    margin-top: 20px;
+/* AppliedCertidocs */
+.AppliedCertiDocCSS {
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.ApplyCertiDocCSSTable {
+  margin-top: 30px;
 }
 
 .ApplyCertiDocCSSTable button {
-    width: 50px;
-    background-color: #dadada;
-    margin-top: 5px;
-    border-radius: 20px;
-    color: #4D4D4D;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
+  width: 100px;
+  height: 40px;
+  background-color: #343434;
+  border-radius: 20px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
 }
 
 .ApplyCertiDocCSSTable input {
@@ -49,19 +51,47 @@
     border-radius: 4px;
 }
 
+/* ApplyCertiDoc */
+.ApplyCertiDocCSS {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.ApplyTitle {
+  margin-top: 60px;
+  border: 1px solid #DADADA;
+  background-color: #DADADA;
+  border-radius: 10px;
+  height: 80px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 .ApplyTable{
     border-collapse: collapse;
     table-layout: fixed;
     margin-top: 20px;
 }
 
+.ApplyTable tbody > tr {
+  height: 80px;
+}
+
 .ApplyTable button {
-    width: 50px;
-    background-color: #dadada;
-    margin-top: 9px;
+    width: 100px;
+    height: 40px;
+    background-color: #343434;
+    margin-top: 18px;
     border-radius: 20px;
-    color: #4D4D4D;
-    font-size: 18px;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
     border: none;
 }
@@ -69,8 +99,11 @@
 .ApplyTable input {
     width: 80%;
     border: 1px solid #343434;
-    height: 20px;
+    height: 40px;
     border-radius: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 16px;
 }
 
 .ApplyTable input:focus {
@@ -78,16 +111,33 @@
     outline: none;
 }
 
+.ApplyTable tbody {
+  font-size: 18px;
+}
+
 .ApplyTable select {
     text-align: center;
-    width: 70%;
     border-radius: 2px;
     border: 1px solid #343434;
-    font-size: 17px;
+    font-size: 16px;
     outline: none;
+    height: 40px;
+    width: 150px;
 }
 
 .ApplyTable button:hover{
     color: white;
     background-color: #343434;
+}
+
+.NumberingOne span {
+  border: 1px solid #343434;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  border-radius: 100px;
+  background-color: #343434;
+  color: white;
+  font-size: 16px;
 }

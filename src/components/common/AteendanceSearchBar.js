@@ -12,43 +12,29 @@ const AteendanceSearchBar = ({ options, type }) => { // options은 배열 형태
   const { lecCode } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState('');
   const [inputValue, setInputValue] = useState('');
-
   const { newAttendance, modify } = useSelector(state => state.SubjectInfoReducer);
-  const [readOnlyValue, setReadOnlyValue] = useState('읽기 전용 값');
-  const handleEnterKey = (e) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  };
-  console.log("제발나와라", options && options.lecCount);
-
 
 
   const handleSearch = (e) => {
-
-
     const stdAtdDate = selectedOption
     dispatch(callNewAttendanceListAPI({ lecCode, stdAtdDate }))
+
+  };
+
+  const onChangeHandler = (e) => {
+
+    setSelectedOption(e.target.value);
 
 
   };
 
   useEffect(
     () => {
-      // if (selectedOption) {
-      //   console.log("모디파1", modify);
-      //   console.log("selectedOption1", selectedOption)
 
       const stdAtdDate = selectedOption
       dispatch(callNewAttendanceListAPI({ lecCode, stdAtdDate }))
-
-
-      // }
-      // console.log("모디파2", modify);
-      // console.log("selectedOption2 ", selectedOption)
 
     }
 
@@ -56,20 +42,11 @@ const AteendanceSearchBar = ({ options, type }) => { // options은 배열 형태
   );
 
 
-  const onChangeHandler = (e) => {
-
-    setSelectedOption(e.target.value);
-
-
-
-    console.log("제발나와라3", e.target.value);
-  }
 
 
 
 
 
-  console.log("option강의명", options);
   return (
     <div className={StdAttendanceSearchBar.searchBarWhole}>
 

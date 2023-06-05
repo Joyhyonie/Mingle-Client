@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { callRegistCertiDoc } from "../../apis/CertiDocAPICalls";
 
-
 /* 모든 교직원의 '증명서 발급 신청' */
 
 function ApplyCertiDoc () {
@@ -54,10 +53,10 @@ function ApplyCertiDoc () {
 
         if(DocType == "재직"){
             if(form1.certiUse == undefined || form1.certiUse == "용도 선택"){
-                toast.error("양식을 재대로 입력해주세요")
+                toast.error("양식을 제대로 입력해주세요")
                 return;
             } else if(form1.reason == undefined || null ){
-                toast.error("양식을 재대로 입력해주세요")
+                toast.error("양식을 제대로 입력해주세요")
                 return;
             }
         const formData = new FormData();
@@ -69,10 +68,10 @@ function ApplyCertiDoc () {
         }
         if(DocType == "경력"){
             if(form2.certiUse == undefined || form2.certiUse == "용도 선택"){
-                toast.error("양식을 재대로 입력해주세요")
+                toast.error("양식을 제대로 입력해주세요")
                 return;
             } else if(form2.reason == undefined || null ){
-                toast.error("양식을 재대로 입력해주세요")
+                toast.error("양식을 제대로 입력해주세요")
                 return;
             }
             const formData = new FormData();
@@ -84,10 +83,10 @@ function ApplyCertiDoc () {
         }
         if(DocType == "경력증명"){
             if(form3.certiUse == undefined || form3.certiUse == "용도 선택"){
-                toast.error("양식을 재대로 입력해주세요")
+                toast.error("양식을 제대로 입력해주세요")
                 return;
             } else if(form3.reason == undefined || null ){
-                toast.error("양식을 재대로 입력해주세요")
+                toast.error("양식을 제대로 입력해주세요")
                 return;
             }
             const formData = new FormData();
@@ -107,13 +106,17 @@ function ApplyCertiDoc () {
             <div>
                 <p className={ CommonCSS.pageDirection }>증명서 ▸ 증명서 발급 신청</p>
             </div>
+
+            <div className={ApplyCertiDocCSS.ApplyTitle}>
+              <p>뭘 좀 넣고 싶은디?</p>
+            </div>
             <div className={ApplyCertiDocCSS.ApplyCertiDocCSS}>
                 <table className={ApplyCertiDocCSS.ApplyTable}>
                     <colgroup>
-                    <col width="10%"/>
                     <col width="20%"/>
                     <col width="20%"/>
-                    <col width="40%"/>
+                    <col width="20%"/>
+                    <col width="70%"/>
                     <col width="20%"/>
                     <col width="20%"/>                    
                     </colgroup>
@@ -130,7 +133,7 @@ function ApplyCertiDoc () {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>3</td>
+                            <td className={ApplyCertiDocCSS.NumberingOne}><span>1</span></td>
                             <td>재직증명서</td>
                             <td><select onChange={(e)=> onChangeHandler(e,"재직증명서")} name="certiUse">
                                 <option value="용도 선택">용도 선택</option> 
@@ -143,7 +146,7 @@ function ApplyCertiDoc () {
                             <button onClick={()=>onClickHandler({DocType : "재직"})}>신청</button>                            
                         </tr>
                         <tr>
-                            <td>2</td>
+                            <td className={ApplyCertiDocCSS.NumberingOne}><span>2</span></td>
                             <td>경력증명서</td>
                             <td><select onChange={(e)=> onChangeHandler(e,"경력증명서")} name="certiUse">
                                 <option value="용도 선택">용도 선택</option> 
@@ -156,7 +159,7 @@ function ApplyCertiDoc () {
                             <button onClick={()=>onClickHandler({DocType : "경력"})}>신청</button>                            
                         </tr>
                         <tr>
-                            <td>1</td>
+                            <td className={ApplyCertiDocCSS.NumberingOne}><span>3</span></td>
                             <td>강의경력증명서</td>
                             <td><select onChange={(e)=> onChangeHandler(e,"강의경력증명서")}  name="certiUse">
                                 <option value="용도 선택">용도 선택</option> 

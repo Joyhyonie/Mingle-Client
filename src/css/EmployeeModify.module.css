@@ -1,15 +1,19 @@
-.studentContainer {
+.employeeContainer {
   margin-top: 100px;
   width: 100%;
   font-size: 18px;
 }
 
-.studentHeader {
+.employeeHeader {
   display: flex;
   align-items: center;
 }
 
-.studentClass {
+.employeeModifyInformation {
+  margin-top: 50px;
+}
+
+.employeeClass {
   display: flex;
   justify-content: space-between;
 }
@@ -21,7 +25,7 @@
   margin-right: 22px;
 }
 
-.studentModifyBtn {
+.employeeModifyBtn {
   width: 150px;
   height: 40px;
   font-size: 18px;
@@ -31,7 +35,7 @@
   color: white;
 }
 
-.studentCancelBtn {
+.employeeCancelBtn {
   width: 150px;
   height: 40px;
   margin-left: 20px;
@@ -42,15 +46,11 @@
   color: #666666;
 }
 
-.studentImageAfter {
+.employeeImageAfter {
   width: 200px;
   height: 200px;
   border-radius: 70%;
   overflow: hidden;
-}
-
-.studentModifyInformation {
-  margin-top: 50px;
 }
 
 .ImageUploadBtn {
@@ -60,7 +60,7 @@
   margin-right: 140px;
 }
 
-.studentModifyName {
+.employeeModifyName {
   width: 200px;
   height: 50px;
   margin: 0 20px 20px 46px;
@@ -73,7 +73,7 @@
   outline: none;
 }
 
-.studentModifyNameEn {
+.employeeModifyNameEn {
   width: 214px;
   height: 50px;
   margin: 0 20px 20px 20px;
@@ -86,7 +86,7 @@
   border-radius: 10px;
 }
 
-.studentModifyLevel {
+.employeeModifyLevel {
   width: 40px;
   height: 50px;
   margin: 0 20px 20px 20px;
@@ -99,7 +99,7 @@
   border-radius: 10px;
 }
 
-.studentModifyDeptCode {
+.employeeModifyDeptCode {
   width: 144px;
   height: 50px;
   margin: 0 0 20px 20px;
@@ -112,8 +112,8 @@
   border-radius: 10px;
 }
 
-.studentModifyEmail {
-  width: 400px;
+.employeeModifyEmail {
+  width: 304px;
   height: 50px;
   margin: 0 20px 20px 28px;
   font-size: 18px;
@@ -125,8 +125,21 @@
   outline: none;
 }
 
-.studentModifyPwd {
-  width: 350px;
+.employeeModifyId {
+  width: 150px;
+  height: 50px;
+  margin: 0 20px 20px 20px;
+  font-size: 18px;
+  border: 1px solid #666666;
+  background-color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+}
+
+.employeeModifyPwd {
+  width: 224px;
   height: 50px;
   margin: 0 0 20px 20px;
   font-size: 18px;
@@ -138,7 +151,7 @@
   outline: none;
 }
 
-.studentModifyPhone {
+.employeeModifyPhone {
   width: 234px;
   height: 50px;
   margin: 0 20px 20px 12px;
@@ -151,7 +164,7 @@
   outline: none;
 }
 
-.studentModifyStatus {
+.employeeModifyStatus {
   width: 100px;
   height: 50px;
   margin: 0 20px 20px 20px;
@@ -164,8 +177,8 @@
   outline: none;
 }
 
-.studentModifySsn {
-  width: 308px;
+.employeeModifySsd {
+  width: 310px;
   height: 50px;
   margin: 0 0 20px 20px;
   font-size: 20px;
@@ -177,8 +190,8 @@
   outline: none;
 }
 
-.studentModifyAddress {
-  width: 876px;
+.employeeModifyAddress {
+  width: 900px;
   height: 50px;
   margin: 0 0 20px 44px;
   font-size: 20px;
@@ -190,10 +203,10 @@
   outline: none;
 }
 
-.studentModifyEntDate, .studentModifyDropDate {
+.employeeModifyEntDate {
   margin-left: 26px;
   margin-right: 20px;
-  width: 383px;
+  width: 226px;
   height: 50px;
   font-size: 18px;
   border: 1px solid #666666;
@@ -204,8 +217,8 @@
   outline: none;
 }
 
-.studentModifyAbDate, .studentModifyLeaveDate {
-  width: 383px;
+.employeeModifyAbDate, .employeeModifyDropDate {
+  width: 226px;
   height: 50px;
   margin: 0 20px 20px 20px;
   font-size: 18px;
@@ -215,18 +228,4 @@
   padding-left: 10px;
   padding-right: 10px;
   outline: none;
-}
-
-.postCodeStyle {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
-  padding: 7px;
-  z-index: 100;
-  border: 1px solid;
-  background-color: white;
 }
