@@ -33,8 +33,12 @@ export const callSubjectsAPI = ({ currentPage = 1 }) => {
 export const callSubjectSearchName = ({ search, condition, currentPage = 1 }) => {
     const requestURL = `${SUBJECT_URL}/search?condition=${condition}&search=${search}&page=${currentPage}`;
 
-    return async (dispatch, getState) => {
-        const result = await fetch(requestURL).then(response => response.json());
+    return async (dispatch, getState) => {        
+        const result = await fetch(requestURL,{
+            headers: {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
 
         if (result.status === 200) {
 
@@ -53,6 +57,9 @@ export const callSubjectInsertAPI = (formData) => {
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method: 'POST',
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            },
             body: formData
         }).then(response => response.json());
 
@@ -70,7 +77,8 @@ export const callSubjectDelete = (checkedItems) => {
         const result = await fetch(requestURL, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
             },
             body: JSON.stringify(checkedItems)
         }).then(response => response.json());
@@ -316,6 +324,9 @@ export const callSubjectUpdateAPI = (formData) => {
     return async (dispatch, getState) => {
         const result = await fetch(requestURL, {
             method: 'PUT',
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            },
             body: formData
         }).then(response => response.json());
 
@@ -335,6 +346,9 @@ export const callLecPlanInsertAPI = (formData, lecCode) => {
 
         const result = await fetch(requestURL, {
             method: 'PATCH',
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            },
             body: formData
         }).then(response => response.json());
 

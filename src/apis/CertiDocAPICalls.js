@@ -68,9 +68,9 @@ export const callMyCertiDocSearchName = ({search, condition ,currentPage = 1}) =
     }
 }
 
-export const callMyCertiDocListAPI = () => {
+export const callMyCertiDocListAPI = ({currentPage = 1}) => {
 
-    const requestURL = `${CERTI_URL}/myCerti`;
+    const requestURL = `${CERTI_URL}/myCerti?page=${currentPage}`;
 
     return async (dispatch,getState) => {
         const result = await fetch(requestURL,{

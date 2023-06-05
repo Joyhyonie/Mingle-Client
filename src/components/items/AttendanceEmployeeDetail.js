@@ -8,7 +8,7 @@ import CommonCSS from "../../css/common/Common.module.css";
 import PagingBar from "../common/PagingBar";
 import { toast } from "react-hot-toast";
 
-function AttendanceDetail(){
+function AttendanceEmployeeDetail(){
 
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
@@ -105,4 +105,4 @@ function AttendanceDetail(){
     )
 }
 
-export default AttendanceDetail;
+export default AttendanceEmployeeDetail;
