@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { callLectureInsertAPI, callSubjectInsertAPI, callSubjectListAPI } from "../../apis/LectureAPICalls";
 import { toast } from "react-hot-toast";
 import styles from '../../css/ReactDatePicker.module.css';
-import { initRegist } from '../../modules/LectureModule';
+import { initRegist } from '../../modules/SubjectModule';
 
 
 function LectureInsertModal({ setIsInsertModalOpen }) {
@@ -17,7 +17,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
             if (regist?.status === 200) {
                 toast.success('강의등록이 완료되었습니다.');
                 setIsInsertModalOpen(false);
-                // dispatch(initRegist());
+                dispatch(initRegist());
             }
         },
         [subjectInfo, regist]
