@@ -350,9 +350,6 @@ export const callLecPlanInsertAPI = (formData, lecCode) => {
     }
 }
 
-<<<<<<< HEAD
-=======
-
 
 
 export const callLectureSearchNameAPI = ({ search, condition, currentPage = 1 }) => {
@@ -401,4 +398,3 @@ export function callStudentAttendanceGetAPI(courseCode) {
     }
 
 }
->>>>>>> ae50121d497e9942e5602167bf43f4f74bf456f0

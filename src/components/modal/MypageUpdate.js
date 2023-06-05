@@ -27,7 +27,7 @@ function MypageUpdate({ closeModal, modifyMode }) {
       toast.success('마이페이지 수정이 완료되었습니다.');
       closeModal(false);
     }
-  }, [modify]);
+  }, [modify, closeModal]); 
 
   const onChangeHandler = (e) => {
     setForm({
@@ -35,6 +35,8 @@ function MypageUpdate({ closeModal, modifyMode }) {
       [e.target.name]: e.target.value,
     });
   };
+
+  
 
   /* 파일 첨부 시 동작하는 이벤트 */
   const onChangeImageUpload = (e) => {
@@ -52,7 +54,7 @@ function MypageUpdate({ closeModal, modifyMode }) {
   };
 
 
-  const onClickMyPageUpdateHandler = () => {
+  const onClickMyPageUpdateHandler = async () => {
     const formData = new FormData();
     console.log('image', image);
     console.log('form', form);
@@ -67,12 +69,17 @@ function MypageUpdate({ closeModal, modifyMode }) {
     if (image) {
       formData.append('myPageImage', image);
     }
-    dispatch(callPatchEmployeeAPI(formData));
+    await dispatch(callPatchEmployeeAPI(formData));
+    closeModal(false);
+     navigate('/mypage');
   };
 
   const onClickFileInput = () => {
     imageInput.current.click();
   };
+
+
+
   return (
     <div className={MypageCSS.modal} >
       <div
