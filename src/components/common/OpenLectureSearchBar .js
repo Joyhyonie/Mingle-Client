@@ -17,31 +17,7 @@ const OpenLectureSearchBar = ({ options, type }) => { // options은 배열 형�
   const handleSearch = () => {
 
     // 구분 해주세용 :)
-    if (type == "employee") {
-      dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
-    } else if (type == "board") {
-      navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
-    } else if (type == "attendance") {
-      navigate(`/attendance-employee?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "subject") {
-      navigate(`/subject?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "certiDoc") {
-      navigate(`/certi-doc-applied?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "leaveDoc") {
-      navigate(`/leave-doc-applied?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "MyLeaveDoc") {
-      navigate(`/Myleave?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "myCertiDoc") {
-      navigate(`/certi-doc-mine?condtion=${selectedOption}&search=${inputValue}`);
-    } else if (type == "organization") {
-      navigate(`/organization?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "registLecture") {
-      navigate(`/lecture-regist-prof?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "studentAttendance") {
-      navigate(`/lecture-student-prof?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "lectureStudentAdmin") {
-      navigate(`/lecture-student-admin?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "registLectureForAdmin") {
+    if (type == "registLectureForAdmin") {
       navigate(`/lecture-regist-admin?condition=${selectedOption}&search=${inputValue}`);
     }
 
