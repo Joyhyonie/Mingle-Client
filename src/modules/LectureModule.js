@@ -18,7 +18,6 @@ const GET_LECTURE_COUNT = "lecture/GET_LECTURE_COUNT"
 const PATCH_LEC_PLAN = "lecture/PATCH_LEC_PLAN";
 const PATCH_ATTENDANCELIST_MODIFY = "lecture/PATCH_STDATTENDANCE_MODIFY"
 const INIT_MODIFY = "lecture/INIT_MODIFY"
-const INIT_REGIST = "lecture/INIT_REGIST"
 const GET_LECTURE_SEARCH = "lecture/GET_LECTURE_SEARCH"
 const GET_OPEN_LECTURE_SEARCH = "lecture/GET_OPEN_LECTURE_SEARCH"
 
@@ -37,7 +36,6 @@ export const { lecture: { getSubjectInfo,
     patchStdattendanceModify,
     getNewAttendancelistInfo,
     initModify,
-    initRegist,
     getLectureCount,
     getLecnameMylecture,
     getMylectureCerti,
@@ -61,7 +59,7 @@ export const { lecture: { getSubjectInfo,
         [GET_OPEN_LECTURE_SEARCH]: res => res.data,
 
         [INIT_MODIFY]: () => { },
-        [INIT_REGIST]: () => { },
+
         [PATCH_LEC_PLAN]: res => res,
         [PATCH_ATTENDANCELIST_MODIFY]: (res) => res,
 
@@ -85,7 +83,6 @@ const SubjectInfoReducer = handleActions({
 
 
     [INIT_MODIFY]: (state, { payload }) => ({ ...state, modify: null }),
-    [INIT_REGIST]: (state, { payload }) => ({ ...state, regist: null }),
     [GET_LECTURE_SEARCH]: (state, { payload }) => ({ ...state, search: payload }),
     [GET_OPEN_LECTURE_INFO]: (state, { payload }) => payload,
     [GET_OPEN_LECTURE_SEARCH]: (state, { payload }) => ({ openSearch: payload }),

@@ -37,9 +37,10 @@ function StudentAttendanceForAdmin() {
 
                 dispatch(callLectureSearchNameAPI({ search: name, condition: condition, currentPage: currentPage }))
 
-            }
+            } else {
 
-            dispatch(callLectureListAPI({ currentPage }))
+                dispatch(callLectureListAPI({ currentPage }))
+            }
         },
         [currentPage, condition, name]
     );
