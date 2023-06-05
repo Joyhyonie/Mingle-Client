@@ -171,7 +171,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
 
