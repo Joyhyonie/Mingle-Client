@@ -133,7 +133,9 @@ function RegistLectureForAdmin() {
           </tbody>
         </table>
         <div>
-          {pageInfo && <PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />}
+        {(openSearch && openSearch.pageInfo) ? (<PagingBar pageInfo={openSearch.pageInfo} setCurrentPage={setCurrentPage} />)
+            : (pageInfo && pageInfo) ? (<PagingBar pageInfo={pageInfo} setCurrentPage={setCurrentPage} />)
+              : null}
         </div>
 
         {isInsertModalOpen && (

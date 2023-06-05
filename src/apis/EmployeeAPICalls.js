@@ -161,7 +161,6 @@ export const callPwdChangeAPI = (form) => {
           console.log('[EmployeeCalls] callPwdChangeAPI result : ', result);
           // 성공 메시지 처리
           toast.success(result.message); // 또는 다른 방식으로 메시지 표시
-          dispatch(resetEmployee());
         } else {
           // 실패 메시지 처리
           toast.error(result.message); // 또는 다른 방식으로 메시지 표시

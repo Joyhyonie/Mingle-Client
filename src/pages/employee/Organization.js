@@ -32,6 +32,7 @@ function Organization() {
     () => {
       if (name) {
         /* 검색어에 해당하는 직원에 대한 요청 */
+        setCurrentPage(1);
         dispatch(callOrganizationSearchListAPI({ search: name, condition: condition, currentPage: currentPage }))
         return;
       }

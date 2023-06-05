@@ -43,7 +43,7 @@ function LecPlanModal({ lecture, closeModal }) {
 )
 
   return (
-    <div onClick={() => closeModal()}
+    <div
          className={EmployeeInsertModalCSS.EmployeeInsertModal}>
       <div className={EmployeeInsertModalCSS.EmployeeInsertModalContainer}>
         <div className={EmployeeInsertModalCSS.EmployeeInsertModalInput}>
@@ -66,8 +66,8 @@ function LecPlanModal({ lecture, closeModal }) {
               value={lecture.lecSeason}
             />
             <div className={EmployeeInsertModalCSS.EmployeeModalButtonContainer}>
-              <button className={EmployeeInsertModalCSS.EmployeeBtnFirst} onClick={onClickLecPlanInsertHandler}>등록</button>
-              <button className={EmployeeInsertModalCSS.EmployeeBtnSecond} onClick={() => closeModal()}>취소</button>
+              { employee.empId.startsWith("PF") && <button className={EmployeeInsertModalCSS.EmployeeBtnFirst} onClick={onClickLecPlanInsertHandler}>등록</button>}
+              {<button className={EmployeeInsertModalCSS.EmployeeBtnSecond} onClick={() => closeModal()}>취소</button>}
             </div>
           </div>
           <div className={EmployeeInsertModalCSS.EmployeeInsertModalSecond}>

@@ -6,6 +6,7 @@
   display: flex;
   align-items: center; 
   margin-top: 60px;
+  
 }
 
 .searchBarSelect {
@@ -40,7 +41,8 @@
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-
+  margin-right: 750px;
+  margin-left: 50px;
 }
 
 .searchBar:focus {
