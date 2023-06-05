@@ -31,7 +31,7 @@ import PwdSearch from './pages/login/PwdSearch';
 import MyPageLayout from './layouts/MypageLayout';
 import PwdChange from './pages/login/Pwdchange';
 
-import AttendanceDetail from './components/items/AttendanceDetail';
+import AttendanceDetail from './components/items/AttendanceEmployeeDetail';
 import StudentModify from './pages/academic/StudentModify';
 import StudentRegist from './pages/academic/StudentRegist';
 import EmployeeModify from './pages/academic/EmployeeModify';
@@ -40,6 +40,7 @@ import EmployeeDetail from './pages/academic/EmployeeModify';
 import MyLeave from './components/lists/MyLeaveDoc';
 import AttendanceDetailList from './components/lists/AttendanceDetailList';
 import Error from './pages/error/Error';
+import AttendanceEmployeeDetail from './components/items/AttendanceEmployeeDetail';
 
 
 function App() {
@@ -95,9 +96,9 @@ function App() {
             </Route>
 
             <Route path="attendance-employee" element={<ProtectedRoute adminCheck={true}><EmployeeAttendance /></ProtectedRoute>}>
-              <Route path='search' element={<EmployeeAttendance />} />
-              <Route path=":empCode" element={<AttendanceDetail />} />
+              <Route path='search' element={<EmployeeAttendance />} />              
             </Route>
+            <Route path="attendance-employee/:empCode" element={<AttendanceEmployeeDetail />} />
 
             <Route path="leave-doc-applied" element={<ProtectedRoute adminCheck={true}><AppliedLeaveList /></ProtectedRoute>}>
               <Route path='search' element={<AppliedLeaveList />} />

@@ -9,10 +9,12 @@ function SubjectInsertModal({setIsInsertModalOpen}){
     const dispatch = useDispatch();
     const [form, setForm] = useState({});
     const {regist} = useSelector((state) =>state.SubjectReducer);
+    console.log(regist);
 
     useEffect(
         ()=>{
             if(regist?.status === 200){
+                console.log(regist);
                 setIsInsertModalOpen(false);
                 toast.success("과목 등록이 완료 되었습니다.");
             }
