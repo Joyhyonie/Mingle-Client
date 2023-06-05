@@ -135,6 +135,7 @@
     border-radius: 12px;
     font-family: 'Paytone One', sans-serif;
     margin-top: -50px;
+    cursor: pointer;
 }
 
 .modalContainer span  {
