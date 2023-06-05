@@ -9,7 +9,7 @@ import { initRegist } from '../../modules/SubjectModule';
 
 function LectureInsertModal({ setIsInsertModalOpen }) {
     const dispatch = useDispatch();
-    const subjectInfo = useSelector(state => state.SubjectInfoReducer);
+    const { subjectInfo } = useSelector(state => state.SubjectInfoReducer);
     const { regist } = useSelector(state => state.SubjectReducer);
 
     useEffect(
@@ -33,7 +33,6 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
 
     /*개설학과에 따른 교수와 교과목불러오는 핸들러*/
     const onChangeHandler3 = (e) => {
-
 
         dispatch(callSubjectListAPI(e.target.value));
 

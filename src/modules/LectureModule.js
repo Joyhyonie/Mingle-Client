@@ -71,7 +71,7 @@ export const { lecture: { getSubjectInfo,
 /*리듀서  res.data 이값이 payload로 있는것 */
 const SubjectInfoReducer = handleActions({
 
-    [GET_SUBJECT_INFO]: (state, { payload }) => payload,
+    [GET_SUBJECT_INFO]: (state, { payload }) => ({ ...state, subjectInfo : payload}),
     [GET_MYLECTURE_CERTI]: (state, { payload }) => ({ myLectureCerti: payload }),
     [GET_LECTURE_INFO]: (state, { payload }) => payload,
     [GET_ATTENDANCELIST_INFO]: (state, { payload }) => ({ ...state, attendance: payload }),

@@ -60,7 +60,7 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
         className={SearchBarCss.searchBarSelect}>
-        <option value="">화 이 팅 ୧( "̮ )୨✧</option> {/* default option */}
+        <option value="">선택</option> {/* default option */}
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

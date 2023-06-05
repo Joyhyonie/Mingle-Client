@@ -26,6 +26,10 @@
   overflow: scroll;
 }
 
+.EmployeeInsertModalContainer::-webkit-scrollbar {
+  display: none;
+}
+
 /* 타이틀 크기 지정 ~! */
 .EmployeeInsertModalTitle {
   font-size: 20px;

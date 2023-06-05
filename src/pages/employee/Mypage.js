@@ -2,22 +2,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import MypageCSS from '../../css/Mypage.module.css';
 import { useEffect } from 'react';
 import { callGetEmployeeAPI } from '../../apis/EmployeeAPICalls';
+import { toast } from 'react-hot-toast';
 
 function Mypage() {
   const dispatch = useDispatch();
   const { employee } = useSelector(state => state.EmployeeReducer);
 
-
-
-
   useEffect(() => {
     dispatch(callGetEmployeeAPI());
   }, [dispatch]);
-
-  
-
-  
-
 
 
   return (

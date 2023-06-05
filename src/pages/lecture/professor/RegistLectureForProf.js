@@ -5,7 +5,6 @@ import CommonCSS from '../../../css/common/Common.module.css';
 import SearchBarCss from "../../../css/common/SearchBar.module.css";
 import SearchBar from "../../../components/common/SearchBar";
 import LectureCSS from '../../../css/ProfessorLecture.module.css'
-import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyLectureCallAPI, callSearchName } from "../../../apis/LectureAPICalls";
@@ -31,7 +30,7 @@ function RegistLectureForProf () {
         { value: "lecName", label: "강의명" }
       ];
     
-      const openModal = (lecture) => {
+    const openModal = (lecture) => {
         setSelectLecture(lecture);
         setIsModalOpen(true);
     }
@@ -39,7 +38,7 @@ function RegistLectureForProf () {
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectLecture(null);
-      };
+    };
 
 
     useEffect(
