@@ -64,14 +64,20 @@
 .ApplyTitle {
   margin-top: 60px;
   border: 1px solid #DADADA;
-  background-color: #DADADA;
+  background-color: #f1f1f1;
   border-radius: 10px;
-  height: 80px;
+  height: 244px;
   align-items: center;
-  display: flex;
-  justify-content: center;
   margin-left: 50px;
   margin-right: 50px;
+  text-indent: 40px;
+  font-size: 16px;
+  padding-top: 20px;
+}
+
+.ApplyTitle span {
+  color: #4fcaa7;
+  font-size: 18px;
 }
 
 .ApplyTable{
