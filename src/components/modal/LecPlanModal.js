@@ -36,15 +36,15 @@ function LecPlanModal({ lecture, closeModal }) {
     ()=>{
         if(lecplan?.status === 200){
             closeModal();
-            toast.success("강의등록성공");               
+            toast.success("강의가 성공적으로 등록되었습니다 :)");               
         }
     },
     [lecplan]
 )
 
   return (
-    <div className={EmployeeInsertModalCSS.EmployeeInsertModal}>
-
+    <div onClick={() => closeModal()}
+         className={EmployeeInsertModalCSS.EmployeeInsertModal}>
       <div className={EmployeeInsertModalCSS.EmployeeInsertModalContainer}>
         <div className={EmployeeInsertModalCSS.EmployeeInsertModalInput}>
           <span className={EmployeeInsertModalCSS.EmployeeInsertModalTitle}>

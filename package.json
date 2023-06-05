@@ -13,7 +13,7 @@
     "ag-grid-community": "^29.3.4",
     "ag-grid-react": "^29.3.4",
     "axios": "^1.4.0",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "downshift": "^7.6.0",
     "framer-motion": "^10.12.11",
     "jwt-decode": "^3.1.2",
