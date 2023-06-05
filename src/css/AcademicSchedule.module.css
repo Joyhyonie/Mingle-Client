@@ -208,7 +208,7 @@
   margin-right: 10px;
   border: none;
   border-radius: 10px;
-  width: 200px;
+  width: 150px;
   height: 46px;
   align-items: center;
   justify-content: center;
@@ -216,6 +216,7 @@
   margin-top: 10px;
   background-color: #343434;
   color: white;
+  cursor: pointer;
 }
 
 /* 행에 마우스 올렸을 때 (hover) */

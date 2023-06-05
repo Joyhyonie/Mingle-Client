@@ -29,6 +29,7 @@
   border-radius: 25px;
   background-color: white;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .registerDiv h1 {
