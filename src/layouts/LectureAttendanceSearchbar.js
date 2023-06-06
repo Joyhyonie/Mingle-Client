@@ -1,13 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import LectureSelectBox from '../components/common/LectureSelectBox';
 
 
 function LectureRegistSearchbar({ listData, renderListItem }) {
   const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearch = event => {
-    setSearchTerm(event.target.value);
-  };
 
   const filteredList = listData ? listData.filter(item =>
     item.toLowerCase().includes(searchTerm.toLowerCase())

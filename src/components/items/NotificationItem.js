@@ -1,9 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import notiCSS from "../../css/Notification.module.css";
 import dayjs from 'dayjs';
-import { toast } from "react-hot-toast";
 import { callNotificationRemoveAPI } from "../../apis/NotificationAPICalls";
-import { useEffect } from "react";
 
 function NotificationItem ({noti}) {
 

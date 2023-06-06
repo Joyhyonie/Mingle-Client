@@ -1,15 +1,10 @@
-import { motion } from "framer-motion"
 import BoardCSS from '../../css/Board.module.css';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { callBoardRemoveAPI } from "../../apis/BoardAPICalls";
 
 function BoardDeleteModal ({setBoardDeleteModal, boardCode}) {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     /* '삭제' 클릭 시, 해당 공지를 삭제하는 API 호출 */
     const deleteBoardHandler = () => {

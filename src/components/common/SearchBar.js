@@ -1,24 +1,16 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
-import { callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
-import { callAttendanceSearchName, callLeaveDocSearchName, callMyLeaveDocSearchName } from '../../apis/AttendanceAPICalls';
 import { useNavigate } from 'react-router-dom';
-import { callCertiDocSearchName, callMyCertiDocSearchName } from '../../apis/CertiDocAPICalls';
-import { callSubjectSearchName } from '../../apis/LectureAPICalls';
 
 const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState('');
   const [inputValue, setInputValue] = useState('');
+  
   const handleSearch = () => {
 
-    // 구분 해주세용 :)
     if (type == "employee") {
-      // dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
       navigate(`/management-employee?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "board") {
       navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)

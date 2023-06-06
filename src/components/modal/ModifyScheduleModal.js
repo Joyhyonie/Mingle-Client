@@ -49,12 +49,6 @@ function ModifyScheduleModal ({selectedSchedule, setModifyScheduleModal}) {
     /* 나의 일정을 수정하는 이벤트 함수 */
     const modifyMySchedule = (scheCode) => {
 
-        console.log(form.scheCode);
-        console.log(form.scheName);
-        console.log(form.scheStartDate);
-        console.log(form.scheEndDate);
-        console.log(form.colorCode);
-
         // 변동 사항이 있고, 정확한 값들이 입력되었는지 검증하는 로직
         if (form.scheName === selectedSchedule.scheName && 
             form.scheStartDate === selectedSchedule.scheStartDate && 

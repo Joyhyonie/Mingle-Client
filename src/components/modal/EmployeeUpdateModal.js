@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EmployeeInsertModalCSS from '../../css/EmployeeInsertModal.module.css';
 import { toast } from "react-hot-toast";
-import { callEmployeeUpdateAPI, callEmployeeInsertAPI, callEmployeeDetailAPI } from "../../apis/AcademicAPICalls";
-import { useNavigate, useParams } from 'react-router-dom';
+import { callEmployeeUpdateAPI, callEmployeeDetailAPI } from "../../apis/AcademicAPICalls";
+import { useParams } from 'react-router-dom';
 
 function EmployeeUpdateModal({ setIsEmployeeUpdateModalOpen }) {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [form, setForm] = useState({});
   const data = useSelector((state) => state.EmployeeReducer);
   const { empCode } = useParams();
@@ -74,9 +73,6 @@ function EmployeeUpdateModal({ setIsEmployeeUpdateModalOpen }) {
     if(form.empLeaveDate) {
       formData.append("empLeaveDate", formatDate(form.empLeaveDate));
     }
-
-    console.log('modal form ', form)
-    console.log('modal formdata ', formData)
 
     dispatch(callEmployeeUpdateAPI(formData));
   };
