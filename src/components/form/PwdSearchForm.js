@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router';
 import IdsearchCSS from '../../css/Idsearch.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { callIdAPI, callPwdAPI } from "../../apis/EmployeeAPICalls";
-import SearchIdModal from '../modal/SearchIdModal';
+import { callPwdAPI } from "../../apis/EmployeeAPICalls";
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -12,9 +11,7 @@ import { toast } from 'react-hot-toast';
 function PwdSearchForm(){
     
     const dispatch = useDispatch();
-    const {pwdsearch } = useSelector(state => state.EmployeeReducer);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedId, setSelectedId] = useState(null);
+    const { pwdsearch } = useSelector(state => state.EmployeeReducer);
     const navigate = useNavigate();
     const style = {
         story:{
@@ -36,7 +33,6 @@ function PwdSearchForm(){
       }
     }, [pwdsearch]);
 
-    console.log("왓더 헬  :", form)
     useEffect(() => {
         if (pwdsearch && pwdsearch.status === 500) {
           toast.error(pwdsearch.message);
@@ -56,8 +52,6 @@ function PwdSearchForm(){
         if(result?.status === 200){
           navigate("/");
         }
-
-          console.log("아아ㅏ : ", result);
      
     }
   

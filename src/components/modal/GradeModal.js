@@ -9,8 +9,6 @@ function GradeModal ({setGradeModal, lecCode, lecName}) {
     const dispatch = useDispatch();
     const { attendance } = useSelector(state => state.SubjectInfoReducer);
 
-    console.log("attendance => ", attendance && attendance.courseStudentList);
-
     useEffect(
         () => {
             dispatch(callCourceStdListAPI({lecCode}))

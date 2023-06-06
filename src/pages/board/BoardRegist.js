@@ -54,7 +54,6 @@ function BoardRegist () {
     const changeEditorHandler = () => {
         const editorInstance = textRef.current.getInstance();
         setEditorValue(editorInstance.getHTML());
-        console.log(editorValue);
         setForm({
             ...form,
             boardContent: editorInstance.getHTML()
@@ -91,10 +90,6 @@ function BoardRegist () {
             formData.append("boardTitle", form.boardTitle);
             formData.append("boardType", form.boardType);
             formData.append("boardContent", form.boardContent);
-
-            console.log(form.boardTitle);
-            console.log(form.boardType);
-            console.log(form.boardContent);
 
             dispatch(callBoardRegistAPI(formData));
         }

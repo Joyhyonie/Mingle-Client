@@ -94,7 +94,6 @@ export const callSubjectListAPI = (deptCode) => {
     console.log("")
 
     const requestURL = `${LECTURE_URL}/professorsAndLectures/${deptCode}`
-    /*필요한값 생각해보자  */
 
     //요청 url 이 안에서 비동기적으로 호출된다.. 
     return async (dispatch, getState) => {

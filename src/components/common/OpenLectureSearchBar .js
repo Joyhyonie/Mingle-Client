@@ -9,14 +9,11 @@ import { callSubjectSearchName } from '../../apis/LectureAPICalls';
 
 const OpenLectureSearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState('');
   const [inputValue, setInputValue] = useState('');
   const handleSearch = () => {
 
-    // 구분 해주세용 :)
     if (type == "registLectureForAdmin") {
       navigate(`/lecture-regist-admin?condition=${selectedOption}&search=${inputValue}`);
     }

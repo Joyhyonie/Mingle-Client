@@ -4,8 +4,6 @@ import SearchIDCSS from "../../css/SearchID.module.css"
 
 function SearchIdModal({ selectedId, closeModal }){
 
-    const {search} = useSelector((state) => state.EmployeeReducer);
-
     const empId = selectedId.empId;
     const maskedEmpId = empId ? empId[0] + '*' + '*'.repeat(empId.length - 4) + empId.slice(-2) : '';
 
@@ -34,11 +32,6 @@ function SearchIdModal({ selectedId, closeModal }){
     </div>
     )
 }
-
-
-
-
-
 
 
 export default SearchIdModal;

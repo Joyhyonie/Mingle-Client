@@ -38,20 +38,10 @@ function AttendanceItem({ attendance }) {
     const matchingAttendance = Array.isArray(newAttendance) && newAttendance.find(item => item.course.student.stdCode === attendance.student.stdCode);
     console.log("matchingAttendance", matchingAttendance);
 
-
-
-
     const openModal = () => {
 
         setIsModalOpen(true);
     };
-    // const closeModal = () => {
-    //     setSelectedSubject(null);
-    //     setIsModalOpen(false);
-    // };
-
-
-
 
     console.log(attendance);
     return (

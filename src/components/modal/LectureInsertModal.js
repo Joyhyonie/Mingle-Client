@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import LectureInsertModalCSS from "../../css/LectureInsertModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { callLectureInsertAPI, callSubjectInsertAPI, callSubjectListAPI } from "../../apis/LectureAPICalls";
+import { callLectureInsertAPI, callSubjectListAPI } from "../../apis/LectureAPICalls";
 import { toast } from "react-hot-toast";
 import styles from '../../css/ReactDatePicker.module.css';
 import { initRegist } from '../../modules/SubjectModule';
@@ -15,7 +15,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
     useEffect(
         () => {
             if (regist?.status === 200) {
-                toast.success('강의등록이 완료되었습니다.');
+                toast.success('강의등록이 완료되었습니다 :)');
                 setIsInsertModalOpen(false);
                 dispatch(initRegist());
             }
@@ -26,7 +26,6 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
     /*이벤트를 관리하는 상태값 관리  state*/
     const [form, setForm] = useState({});
     const [subject, setSubject] = useState({});
-    const [classType, setClassType] = useState('');
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
@@ -40,9 +39,7 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
 
     /*선택된 교과목에 따른 학점과 이수구분을 불러오는 핸들러 */
     const onChangeHandler2 = (e) => {
-        console.log("과목명 => ", e.target.name);
         onChangeHandler(e);
-        console.log('e.target.value', e.target.value)
         setSubject(subjectInfo.subjectNameList.find(subject => subject.sbjCode == e.target.value));
 
     };
@@ -59,21 +56,9 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
     /*저장 핸들러  */
     const onClickInsertSubjectHandler = (form) => {
 
-        console.log('formdata:', form)
         dispatch(callLectureInsertAPI(form));
 
     }
-
-    const handleStartDateChange = (date) => {
-        setStartDate(date);
-        // 시작일 선택에 대한 추가 로직을 수행할 수 있습니다.
-    };
-
-    const handleEndDateChange = (date) => {
-        setEndDate(date);
-        // 종료일 선택에 대한 추가 로직을 수행할 수 있습니다.
-    };
-
 
     return (
 

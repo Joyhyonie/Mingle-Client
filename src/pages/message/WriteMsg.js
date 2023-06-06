@@ -52,11 +52,6 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
         setPickedEmpId(e.target.id);
     }
 
-    /* 입력된 쪽지 내용을 확인하기 위한 이벤트 함수 */
-    const textChangeHandler = (e) => {
-        console.log(e.target.value);
-    }
-
     /* 쪽지 전송을 위한 함수 */
     const sendMessageHandler = () => {
 
@@ -69,7 +64,7 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
             toast.error('내용을 입력해주세요 !');
             return;
         } else if (employee.empCode == pickedEmpCode) {
-            toast.error('나에게 쪽지를 보낼 수 없습니다 !');
+            toast.error('자신에게 쪽지를 보낼 수 없습니다 !');
             return;
         } else {
             /* FormData 객체 설정 */
@@ -134,7 +129,6 @@ function WriteMsg ({replyContent, selectedDeptCode, selectedEmpCode, selectedEmp
                 className={ MessageCSS.textBox }
                 placeholder="내용을 입력해주세요 :)"
                 ref={textareaRef}
-                onChange={ textChangeHandler }
             >
                 {replyContent ? '[답장] ' + replyContent + '\n\n\n\n' : null}
             </textarea>

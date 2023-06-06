@@ -4,11 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { callIdAPI } from "../../apis/EmployeeAPICalls";
 import SearchIdModal from '../modal/SearchIdModal';
-import { async } from 'q';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-
-
 
 function IdSearchForm(){
     
@@ -22,8 +19,6 @@ function IdSearchForm(){
             "margin-top":"20px"
         }
     };
-
-
 
     // 폼데이터 저장
     const[form, setForm] = useState({
@@ -66,9 +61,6 @@ function IdSearchForm(){
           onClickHandler();
         }
       };
-
-
-
 
 
     return (
