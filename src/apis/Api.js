@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const DOMAIN = 'http://localhost:8001';
+const DOMAIN = 'http://3.35.186.184:8001';
 
 export const request = async (method, url, headers, data) => {
     

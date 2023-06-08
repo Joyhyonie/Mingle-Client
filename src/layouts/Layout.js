@@ -30,7 +30,7 @@ function Layout () {
     useEffect(
         () => {
             
-            const url = "http://localhost:8001";
+            const url = "http://3.35.186.184:8001";
             const token = window.localStorage.getItem('accessToken');
 
             if (token != null) {

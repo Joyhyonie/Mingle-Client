@@ -1,11 +1,10 @@
 import { toast } from "react-hot-toast";
 import { getEmployee, postLogin, patchEmployee, postId, postPwd, postPwdchange, resetEmployee } from "../modules/EmployeeModule";
-import { useNavigate } from "react-router-dom";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
-const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`;
+const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`; 
 
 
 /* 로그인 API 호출 */
