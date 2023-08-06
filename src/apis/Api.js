@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const DOMAIN = 'http://3.35.186.184:8001';
+const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
+const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
+const DOMAIN = `http://${SERVER_IP}:${SERVER_PORT}`; 
 
 export const request = async (method, url, headers, data) => {
     

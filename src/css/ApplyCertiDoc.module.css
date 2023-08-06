@@ -59,6 +59,16 @@
   align-items: center;
   margin-left: 50px;
   margin-right: 50px;
+  
+}
+
+.ApplyCertiDocBox {
+  height: 350px;
+  overflow: scroll;
+}
+
+.ApplyCertiDocBox::-webkit-scrollbar {
+  display: none;
 }
 
 .ApplyTitle {
@@ -66,7 +76,6 @@
   border: 1px solid #DADADA;
   background-color: #f1f1f1;
   border-radius: 10px;
-  height: 244px;
   align-items: center;
   margin-left: 50px;
   margin-right: 50px;
@@ -92,20 +101,20 @@
   margin-top: 70px;
 }
 
-.ApplyTable tbody > tr {
-  height: 80px;
-}
-
 .ApplyTable button,
 .AttendanceTable button {
     width: 100px;
     height: 40px;
     background-color: #343434;
-    border-radius: 20px;
+    border-radius: 10px;
     color: white;
     font-size: 16px;
     cursor: pointer;
     border: none;
+}
+
+.ApplyTable button {
+  margin-top: 20px;
 }
 
 .ApplyTable input,

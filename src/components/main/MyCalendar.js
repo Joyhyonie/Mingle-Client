@@ -45,7 +45,6 @@ function MyCalendar () {
     const dateSelectHanlder = (selectInfo) => {
 
         const clickedDate = selectInfo.startStr;
-        console.log(`현재 나의 일정 날짜 ? ${clickedDate}`)
         // 선택한 날짜 set
         dispatch(setDateInMyCal(clickedDate));
         // 선택한 날짜의 정보 set (MyCalendarInfo 컴포넌트도 리렌더링 시키기 위해)
