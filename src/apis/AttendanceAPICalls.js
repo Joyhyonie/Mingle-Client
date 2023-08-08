@@ -12,7 +12,10 @@ export const callEmployeeList = ({currentPage = 1}) => {
 
     return async (dispatch, getState) => {
         const result = await fetch(requestURL,{
-            method:'GET'
+            method:'GET',
+            headers: {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
         }).then(response => response.json());
         if(result.status ===200){
             dispatch(getEmployeelist(result));
@@ -47,7 +50,10 @@ export const callLeaveDoc = ({currentPage = 1}) => {
 
     return async (dispatch,getState) => {
         const result = await fetch(requestURL,{
-            method : "GET"
+            method : "GET",
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
+            }
         }).then(response => response.json());
         if(result.status === 200){
             dispatch(getAttendance(result));
@@ -64,7 +70,7 @@ export const callLeaveUpdateAPI = (leave) => {
             method : 'PATCH',
             headers : {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
             },
             body: JSON.stringify(leave)
         }).then(response => response.json());
@@ -83,7 +89,7 @@ export const callLeaveNoUpdateAPI = (leave) => {
             method : 'PATCH',
             headers : {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
             },
             body: JSON.stringify(leave)
         }).then(response => response.json());
@@ -102,7 +108,7 @@ export const callMyLeave = ({currentPage = 1}) => {
             method : "GET",
             headers : {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
             }
         }).then(response => response.json());
 
@@ -122,7 +128,7 @@ export const callMyAttendance = ({currentPage = 1}) => {
             method : "GET",
             headers : {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
             }
         }).then(response => response.json())
 
@@ -139,6 +145,9 @@ export const updateAttendanceAPI = (atdCode, formData) => {
     return async(dispatch,getState) => {
         const result = await fetch(requestURL,{
             method : "PATCH",
+            headers: {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            },
             body : formData
         }).then(response => response.json());
 
@@ -155,7 +164,7 @@ export const callLeaveRegist = (formData) => {
         const result = await fetch(requestURL,{
             method : "POST",
             headers : {
-                Authorization: "Bearer " + window.localStorage.getItem("accessToken"),
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
             },
             body: formData
         }).then((response) => response.json())
@@ -171,7 +180,11 @@ export const callAttendanceSearchName = ({search, condition ,currentPage = 1}) =
     console.log(requestURL);
 
     return async (dispatch,getState) => {
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL,{
+            headers: {
+                Authorization: "Bearer " + window.localStorage.getItem('accessToken')
+            }
+        }).then(response => response.json());
 
         if(result.status === 200){
             console.log(result);
@@ -184,7 +197,12 @@ export const callLeaveDocSearchName = ({search, condition ,currentPage = 1}) => 
     const requestURL = `${ATTEN_DANCE}/leaveDocSearch?condition=${condition}&search=${search}&page=${currentPage}`;
 
     return async (dispatch,getState) => {
-        const result = await fetch(requestURL).then(response => response.json());
+        const result = await fetch(requestURL,{
+            method : "GET",
+            headers : {
+                Authorization: "Bearer " + window.localStorage.getItem("accessToken")
+            }
+        }).then(response => response.json());
 
         if(result.status === 200){
             console.log(result);

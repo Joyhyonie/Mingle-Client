@@ -9,25 +9,10 @@ function MypageUpdate({ closeModal, modifyMode }) {
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const { employee } = useSelector(state => state.EmployeeReducer);
-  const { modify } = useSelector(state => state.EmployeeReducer);
   const navigate = useNavigate();
   const imageInput = useRef();
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
-
-
-
-  const fileInputRef = useRef(null);
-  useEffect(() => {
-    dispatch(callGetEmployeeAPI());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (modify?.status === 200) {
-      toast.success('마이페이지 수정이 완료되었습니다.');
-      closeModal(false);
-    }
-  }, [modify]);
 
   const onChangeHandler = (e) => {
     setForm({
@@ -52,7 +37,7 @@ function MypageUpdate({ closeModal, modifyMode }) {
   };
 
 
-  const onClickMyPageUpdateHandler = () => {
+  const onClickMyPageUpdateHandler = async () => {
     const formData = new FormData();
     console.log('image', image);
     console.log('form', form);
@@ -68,11 +53,16 @@ function MypageUpdate({ closeModal, modifyMode }) {
       formData.append('myPageImage', image);
     }
     dispatch(callPatchEmployeeAPI(formData));
+    closeModal(false);
+     navigate('/mypage');
   };
 
   const onClickFileInput = () => {
     imageInput.current.click();
   };
+
+
+
   return (
     <div className={MypageCSS.modal} >
       <div

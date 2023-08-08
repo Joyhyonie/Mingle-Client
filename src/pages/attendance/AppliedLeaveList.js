@@ -63,15 +63,15 @@ function AppliedLeaveList () {
                 <table className={ApplideCertidocCSS.ApplyCertiDocCSSTable}>
                     <colgroup>
                     <col width="5%"/>
+                    <col width="6%"/>
+                    <col width="6%"/>
+                    <col width="6%"/>
+                    <col width="6%"/>
+                    <col width="20%"/>
                     <col width="5%"/>
-                    <col width="5%"/>
-                    <col width="5%"/>
-                    <col width="5%"/>
-                    <col width="10%"/>
-                    <col width="10%"/>
                     <col width="5%"/>                    
-                    <col width="2%"/>  
-                    <col width="2%"/>  
+                    <col width="1%"/>  
+                    <col width="1%"/>  
                     </colgroup>
                     <thead>
                         <tr>

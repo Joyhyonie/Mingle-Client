@@ -11,6 +11,7 @@ function Mypage() {
     dispatch(callGetEmployeeAPI());
   }, [dispatch]);
 
+
   return (
     <div className={MypageCSS.backgroundDiv} style={{ backgroundColor: 'white' }}>
       {employee && (

@@ -1,11 +1,10 @@
 import { toast } from "react-hot-toast";
 import { getEmployee, postLogin, patchEmployee, postId, postPwd, postPwdchange, resetEmployee } from "../modules/EmployeeModule";
-import { useNavigate } from "react-router-dom";
 
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
-const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`;
+const PRE_URL = `http://${SERVER_IP}:${SERVER_PORT}`; 
 
 
 /* 로그인 API 호출 */
@@ -161,7 +160,6 @@ export const callPwdChangeAPI = (form) => {
           console.log('[EmployeeCalls] callPwdChangeAPI result : ', result);
           // 성공 메시지 처리
           toast.success(result.message); // 또는 다른 방식으로 메시지 표시
-          dispatch(resetEmployee());
         } else {
           // 실패 메시지 처리
           toast.error(result.message); // 또는 다른 방식으로 메시지 표시

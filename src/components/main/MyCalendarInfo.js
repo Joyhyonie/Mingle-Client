@@ -14,8 +14,6 @@ function MyCalendarInfo () {
     const [modifyScheduleModal, setModifyScheduleModal] = useState(false);  // 나의 일정 수정 modal관리용 state
     const [selectedSchedule, setSelectedSchedule] = useState(null);         // 일정 수정 모달창에 클릭된 일정의 정보를 담아 보내기 위한 state
 
-    console.log("필터된 스케줄... => ", filteredMySchedule);
-
     /* 클릭된 날짜의 월/일/요일을 변경시키는 이벤트 함수 */
     const clickedDateHandler = () => {
         const clickedDate = new Date(dateInMyCal);

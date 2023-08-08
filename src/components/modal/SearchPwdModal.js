@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import SearchIDCSS from "../../css/SearchID.module.css"
 
 function SearchPwdModal({ selectedId, closeModal }) {
-  const { search } = useSelector((state) => state.EmployeeReducer);
 
   return (
     <div className={SearchIDCSS.modal}>

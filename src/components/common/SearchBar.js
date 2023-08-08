@@ -1,26 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import SearchBarCss from '../../css/common/SearchBar.module.css';
-import { callEmployeeSearchListAPI } from '../../apis/AcademicAPICalls';
-import { callAttendanceSearchName, callLeaveDocSearchName, callMyLeaveDocSearchName } from '../../apis/AttendanceAPICalls';
 import { useNavigate } from 'react-router-dom';
-import { callCertiDocSearchName, callMyCertiDocSearchName } from '../../apis/CertiDocAPICalls';
-import { callSubjectSearchName } from '../../apis/LectureAPICalls';
 
 const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색 기준을 의미, type은 API 호출 시 구분하기 위한 String 
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedOption, setSelectedOption] = useState('');
   const [inputValue, setInputValue] = useState('');
+  
   const handleSearch = () => {
 
-    // 구분 해주세용 :)
-    if(type == "employee") {
-      // dispatch(callEmployeeSearchListAPI({ search: inputValue, selectedOption }));
+    if (type == "employee") {
       navigate(`/management-employee?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "board") {
+    } else if (type == "board") {
       navigate(`/board/main?condition=${selectedOption}&word=${inputValue}`)
     } else if (type == "attendance") {
       navigate(`/attendance-employee?condition=${selectedOption}&search=${inputValue}`);
@@ -40,13 +32,11 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
       navigate(`/lecture-regist-prof?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "studentAttendance") {
       navigate(`/lecture-student-prof?condition=${selectedOption}&search=${inputValue}`);
-    } else if(type == "student") {
+    } else if (type == "student") {
       navigate(`/management-student?condition=${selectedOption}&search=${inputValue}`);
     } else if (type == "lectureStudentAdmin") {
       navigate(`/lecture-student-admin?condition=${selectedOption}&search=${inputValue}`);
-    } else if (type == "registLectureForAdmin") {
-      navigate(`/lecture-regist-admin?condition=${selectedOption}&search=${inputValue}`);
-    }
+    } 
 
   };
 
@@ -62,7 +52,7 @@ const SearchBar = ({ options, type }) => { // options은 배열 형태로 검색
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
         className={SearchBarCss.searchBarSelect}>
-        <option value="">화 이 팅 ୧( "̮ )୨✧</option> {/* default option */}
+        <option value="">선택</option> {/* default option */}
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

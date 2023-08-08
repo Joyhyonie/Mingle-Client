@@ -9,10 +9,12 @@ function SubjectInsertModal({setIsInsertModalOpen}){
     const dispatch = useDispatch();
     const [form, setForm] = useState({});
     const {regist} = useSelector((state) =>state.SubjectReducer);
+    console.log(regist);
 
     useEffect(
         ()=>{
             if(regist?.status === 200){
+                console.log(regist);
                 setIsInsertModalOpen(false);
                 toast.success("과목 등록이 완료 되었습니다.");
             }
@@ -48,6 +50,7 @@ function SubjectInsertModal({setIsInsertModalOpen}){
                 <div className={SubjectUpdateModalCSS.SubjectModalDiv}>
                     <label className={SubjectUpdateModalCSS.label}>이수구분</label>
                     <select className={SubjectUpdateModalCSS.classType} name="classType" onChange={onChangeHandler}>
+                        <option value="">선택</option>
                         <option value="전공필수">전공필수</option>
                         <option value="전공선택">전공선택</option>
                         <option value="교양필수">교양필수</option>
@@ -58,6 +61,7 @@ function SubjectInsertModal({setIsInsertModalOpen}){
                     className={SubjectUpdateModalCSS.score}/>
                     <label className={SubjectUpdateModalCSS.label}>학과명</label>
                     <select className={SubjectUpdateModalCSS.deptCode} name="deptCode" onChange={onChangeHandler}>
+                        <option value="">학과선택</option>
                         <option value="13">IT공학과</option>
                         <option value="14">간호학과</option>
                         <option value="15">경제학과</option>

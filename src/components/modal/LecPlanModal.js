@@ -36,15 +36,15 @@ function LecPlanModal({ lecture, closeModal }) {
     ()=>{
         if(lecplan?.status === 200){
             closeModal();
-            toast.success("강의등록성공");               
+            toast.success("강의가 성공적으로 등록되었습니다 :)");               
         }
     },
     [lecplan]
 )
 
   return (
-    <div className={EmployeeInsertModalCSS.EmployeeInsertModal}>
-
+    <div
+         className={EmployeeInsertModalCSS.EmployeeInsertModal}>
       <div className={EmployeeInsertModalCSS.EmployeeInsertModalContainer}>
         <div className={EmployeeInsertModalCSS.EmployeeInsertModalInput}>
           <span className={EmployeeInsertModalCSS.EmployeeInsertModalTitle}>
@@ -66,8 +66,8 @@ function LecPlanModal({ lecture, closeModal }) {
               value={lecture.lecSeason}
             />
             <div className={EmployeeInsertModalCSS.EmployeeModalButtonContainer}>
-              <button className={EmployeeInsertModalCSS.EmployeeBtnFirst} onClick={onClickLecPlanInsertHandler}>등록</button>
-              <button className={EmployeeInsertModalCSS.EmployeeBtnSecond} onClick={() => closeModal()}>취소</button>
+              { employee.empId.startsWith("PF") && <button className={EmployeeInsertModalCSS.EmployeeBtnFirst} onClick={onClickLecPlanInsertHandler}>등록</button>}
+              {<button className={EmployeeInsertModalCSS.EmployeeBtnSecond} onClick={() => closeModal()}>취소</button>}
             </div>
           </div>
           <div className={EmployeeInsertModalCSS.EmployeeInsertModalSecond}>

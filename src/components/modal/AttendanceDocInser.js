@@ -15,7 +15,7 @@ function AttendanceDocInsert({ closeModal, employee }) {
   useEffect(
     () => {
       if (regist?.status === 200) {
-        toast.success("신청서가 등록되었습니다.");
+        toast.success("신청서가 등록되었습니다 :)");
         closeModal();
       }
     }
@@ -31,7 +31,7 @@ function AttendanceDocInsert({ closeModal, employee }) {
 
   const onClickHandler = () => {
     if (form.applyFormCode == null || undefined) {
-      toast.error("종류를 선택하세요");
+      toast.error("종류를 선택하세요!");
       return;
     }
 
@@ -44,7 +44,7 @@ function AttendanceDocInsert({ closeModal, employee }) {
     formData.append("reason", form.reason);
     formData.append("applyForm.applyFormCode", form.applyFormCode);
     if (startDate > endDate) {
-      toast.error("시작 날짜가 마감 날짜 이전이어야 합니다 ☠️");
+      toast.error("시작 날짜가 마감 날짜 이전이어야 합니다", { icon: "☠️" });
       return;
     };
 

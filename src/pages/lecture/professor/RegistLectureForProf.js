@@ -5,7 +5,6 @@ import CommonCSS from '../../../css/common/Common.module.css';
 import SearchBarCss from "../../../css/common/SearchBar.module.css";
 import SearchBar from "../../../components/common/SearchBar";
 import LectureCSS from '../../../css/ProfessorLecture.module.css'
-import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callMyLectureCallAPI, callSearchName } from "../../../apis/LectureAPICalls";
@@ -31,7 +30,7 @@ function RegistLectureForProf () {
         { value: "lecName", label: "강의명" }
       ];
     
-      const openModal = (lecture) => {
+    const openModal = (lecture) => {
         setSelectLecture(lecture);
         setIsModalOpen(true);
     }
@@ -39,7 +38,7 @@ function RegistLectureForProf () {
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectLecture(null);
-      };
+    };
 
 
     useEffect(
@@ -107,8 +106,8 @@ function RegistLectureForProf () {
                                 <td>{lecture.lecYear}</td>
                                 <td>{lecture.employee.empName}</td>
                                 {lecture.lecName == null ? (
-                                <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서작성</button></td>
-                                ): <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서보기</button></td> }
+                                <td><button className={LectureCSS.longButton} onClick={()=> openModal(lecture)}>강의계획서작성</button></td>
+                                ): <td><button className={LectureCSS.longButton} onClick={()=> openModal(lecture)}>강의계획서보기</button></td> }
 
                     </tr>
                             ))
@@ -125,8 +124,8 @@ function RegistLectureForProf () {
                                 <td>{lecture.lecYear}</td>
                                 <td>{lecture.employee.empName}</td>
                                 {lecture.lecName == null ? (
-                                <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서작성</button></td>
-                                ): <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서보기</button></td> }
+                                <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서 작성</button></td>
+                                ): <td><button className={LectureCSS.button} onClick={()=> openModal(lecture)}>강의계획서 조회</button></td> }
                               </tr>
                             ))
                             )

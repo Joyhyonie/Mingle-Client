@@ -12,12 +12,13 @@
 }
 
 .MyCertiDocCSSTable button {
-    width: 50px;
-    background-color: #343434;
+    width: 80px;
+    height: 33px;
+    background-color: #e9e9e9;
     margin-top: 5px;
-    border-radius: 20px;
-    color: white;
-    font-size: 18px;
+    border-radius: 10px;
+    color: #343434;
+    font-size: 16px;
     cursor: pointer;
     border: none;
 }

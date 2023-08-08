@@ -108,7 +108,11 @@ function ApplyCertiDoc () {
             </div>
 
             <div className={ApplyCertiDocCSS.ApplyTitle}>
-              <p>뭘 좀 넣고 싶은디?</p>
+              <p><span>서류 선택</span> : 먼저, 재직증명서, 경력증명서, 강의경력증명서 중 필요한 서류를 고르세요.</p>
+              <p><span>제출용도 선택</span> : 금융기관, 관공서, 회사 중에서 적절한 항목을 선택해 주세요.</p>
+              <p><span>사유 입력</span> : 서류 발급에 대한 이유를 명확하게 입력해 주시는 것이 필요합니다. 이 사유는 추후 서류 처리에 필요한 중요한 정보가 될 수 있으므로 가능한 한 상세하게 작성해 주시는 것이 좋습니다.</p>
+              <p><span>발급 소요시간 확인</span> : 서류 발급에는 일정한 시간이 소요됩니다. 서류 발급에 필요한 소요시간은 발급 신청 버튼 옆에 위치해 있으니, 이를 확인하고 여유있는 시간에 신청하시는 것이 좋습니다.</p>
+              <p><span>신청 버튼 클릭</span> : 마지막으로, 모든 정보를 확인하신 후 신청 버튼을 클릭하시면 서류 발급 신청이 완료됩니다. 신청 서류는 좌측의 메뉴에서 <span>{'증명서 발급 신청 / 증명서 발급 이력'}</span>에서 확인하실 수 있습니다.</p>
             </div>
             <div className={ApplyCertiDocCSS.ApplyCertiDocCSS}>
                 <table className={ApplyCertiDocCSS.ApplyTable}>

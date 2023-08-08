@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 
 const AddressItem = () => {
@@ -7,10 +7,6 @@ const AddressItem = () => {
   const [addressDetail, setAddressDetail] = useState('');
 
   const [isOpenPost, setIsOpenPost] = useState(false);
-
-  const onChangeOpenPost = () => {
-    setIsOpenPost(!isOpenPost);
-  };
 
   const onCompletePost = (data) => {
     let fullAddr = data.address;

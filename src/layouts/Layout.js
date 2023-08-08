@@ -35,7 +35,6 @@ function Layout () {
 
             if (token != null) {
                 const eventSource = new EventSource(`${url}/noti?token=${token}`);
-                console.log("서버로 이벤트 구독 완🥳")
 
                 eventSource.addEventListener("receivedMsg", (e) => {
                     const data = JSON.parse(e.data);
@@ -56,8 +55,6 @@ function Layout () {
 
                 eventSource.addEventListener("error", (e) => {
                     eventSource.close();
-                    console.error("SSE 연결 오류 원인 => ", e);
-                    console.log("🔥🔥🔥 구독 ... 취소 ... 🔥🔥🔥");
                 });
             }
 

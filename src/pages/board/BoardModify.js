@@ -45,14 +45,6 @@ function BoardModify () {
         },[modify]
     );
 
-    useEffect(
-        () => {
-            console.log("form.boardTitle => ", form.boardTitle);
-            console.log("form.boardType => ", form.boardType);
-            console.log("form.boardContent => ", form.boardContent);
-        },[form]
-    );
-
     function EditorBox() {
 
         return (
@@ -110,10 +102,6 @@ function BoardModify () {
             formData.append("boardTitle", form.boardTitle);
             formData.append("boardType", form.boardType);
             formData.append("boardContent", form.boardContent);
-
-            console.log(form.boardTitle);
-            console.log(form.boardType);
-            console.log(form.boardContent);
 
             dispatch(callBoardModifyAPI(formData));
 

@@ -1,9 +1,8 @@
 import { motion } from "framer-motion"
 import MainCSS from "../../css/Main.module.css"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import AcScheduleDetailModal from "../modal/AcScheduleDetailModal";
-import { useDispatch, useSelector } from "react-redux";
-import { callAcScheduleByDateAPI } from "../../apis/ScheduleAPICalls";
+import { useSelector } from "react-redux";
 
 function AcademicCalendarInfo () {
 

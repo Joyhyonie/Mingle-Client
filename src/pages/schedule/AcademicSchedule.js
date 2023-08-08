@@ -28,7 +28,7 @@ function AcademicSchedule() {
   useEffect(() => {
     dispatch(callAcScheduleListAPI());
   },
-    [dispatch]
+    [dispatch, registAcSche]
   );
 
   /* 학사 일정 항목 클릭 이벤트 */
