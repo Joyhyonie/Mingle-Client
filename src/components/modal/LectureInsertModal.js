@@ -3,7 +3,6 @@ import LectureInsertModalCSS from "../../css/LectureInsertModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { callLectureInsertAPI, callSubjectListAPI } from "../../apis/LectureAPICalls";
 import { toast } from "react-hot-toast";
-import styles from '../../css/ReactDatePicker.module.css';
 import { initRegist } from '../../modules/SubjectModule';
 
 
@@ -132,7 +131,6 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
                                 onChange={onChangeHandler}
                                 dateFormat="yyyy-MM-dd"
                                 name="lecStartDate"
-                                wrapperClassName={styles.customButton} // 커스텀 CSS 클래스 이름을 여기에 사용합니다.
                             />
                         </label>
 
@@ -142,10 +140,6 @@ function LectureInsertModal({ setIsInsertModalOpen }) {
                                 onChange={onChangeHandler}
                                 dateFormat="yyyy-MM-dd"
                                 name="lecEndDate"
-                                wrapperClassName={styles.customButton} // 커스텀 CSS 클래스 이름을 여기에 사용합니다.
-
-
-                            // 필요한 추가 옵션들을 설정할 수 있습니다.
                             />
                         </label>
                     </div>

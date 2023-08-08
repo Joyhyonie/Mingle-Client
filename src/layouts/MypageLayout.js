@@ -20,8 +20,7 @@ function MyPageLayout() {
 
   useEffect(() => {
     if (patch?.status === 200) {
-      toast.success('마이페이지 수정이 완료되었습니다 :)');
-     
+      toast.success('마이페이지 수정이 완료되었습니다 :3');
     }
   }, [patch]); 
 
