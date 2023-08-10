@@ -29,12 +29,14 @@ function Layout () {
     // 클라이언트의 SSE 이벤트 구독!
     useEffect(
         () => {
-            
-            const url = "http://localhost:8001";
+
+            const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
+            const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
+            const DOMAIN = `http://${SERVER_IP}:${SERVER_PORT}`; 
             const token = window.localStorage.getItem('accessToken');
 
             if (token != null) {
-                const eventSource = new EventSource(`${url}/noti?token=${token}`);
+                const eventSource = new EventSource(`${DOMAIN}/noti?token=${token}`);
 
                 eventSource.addEventListener("receivedMsg", (e) => {
                     const data = JSON.parse(e.data);
