@@ -24,3 +24,6 @@ EXPOSE 3000
 
 # container 실행 시 자동으로 실행할 command. nginx 시작
 CMD ["nginx", "-g", "daemon off;"]
+
+# Docker timezone 설정
+RUN ln -snf /usr/share/zoneinfo/Asia/Seoul /etc/localtime && echo Asia/Seoul > /etc/timezone
