@@ -203,6 +203,9 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, updateNoti,
                             whileHover={{ scale: 1.05 }}
                         />
                     )}
+                    
+                </div>
+                <div className={ CommonCSS.countBox }>
                     {notifications && notifications.length > 0 ? <div className={ CommonCSS.notiCount }>{notifications.length}</div> : null}
                     {countMsg && countMsg.unreadMsgs > 0 ? <div className={ CommonCSS.msgCount }>{countMsg.unreadMsgs}</div> : null}
                 </div>
