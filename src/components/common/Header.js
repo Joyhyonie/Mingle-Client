@@ -206,8 +206,8 @@ function Header ({ setActiveIndex, isDark, setIsDark, logoutHandler, updateNoti,
                     
                 </div>
                 <div className={ CommonCSS.countBox }>
-                    {notifications && notifications.length > 0 ? <div className={ CommonCSS.notiCount }>{notifications.length}</div> : null}
-                    {countMsg && countMsg.unreadMsgs > 0 ? <div className={ CommonCSS.msgCount }>{countMsg.unreadMsgs}</div> : null}
+                    {notifications && notifications.length > 0 ? <div className={ CommonCSS.notiCount }>{notifications.length}</div> : <div style={{backgroundColor: 'rgba(0, 0, 0, 0)'}} className={ CommonCSS.notiCount}/>}
+                    {countMsg && countMsg.unreadMsgs > 0 ? <div className={ CommonCSS.msgCount }>{countMsg.unreadMsgs}</div> : <div style={{backgroundColor: 'rgba(0, 0, 0, 0)'}} className={ CommonCSS.msgCount}/>}
                 </div>
             </motion.div>
         </>
